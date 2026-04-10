@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Quick Task Creation - Sunday</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-overlay {
+            backdrop-filter: blur(20px);
+            background-color: rgba(247, 249, 251, 0.8);
+        }
+        .indigo-slate-gradient {
+            background: linear-gradient(135deg, #4d556a 0%, #656d84 100%);
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-container-low": "#f2f4f6",
+                        "on-primary-fixed": "#131b2e",
+                        "surface-container-highest": "#e0e3e5",
+                        "surface": "#f7f9fb",
+                        "inverse-primary": "#bec6df",
+                        "surface-container-high": "#e6e8ea",
+                        "on-tertiary-fixed": "#211a15",
+                        "tertiary-fixed": "#eee0d7",
+                        "error-container": "#ffdad6",
+                        "primary-container": "#4d556a",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#c2cae3",
+                        "surface-container": "#eceef0",
+                        "on-error-container": "#93000a",
+                        "outline": "#76777d",
+                        "secondary-fixed": "#dae2fd",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-tertiary": "#ffffff",
+                        "on-surface": "#191c1e",
+                        "surface-dim": "#d8dadc",
+                        "surface-bright": "#f7f9fb",
+                        "on-secondary-fixed-variant": "#3e465c",
+                        "secondary-fixed-dim": "#bec6e0",
+                        "on-tertiary-container": "#d6c9bf",
+                        "on-primary-fixed-variant": "#3e465b",
+                        "tertiary-container": "#5d544d",
+                        "secondary-container": "#dae2fd",
+                        "background": "#f7f9fb",
+                        "surface-tint": "#565e73",
+                        "on-primary": "#ffffff",
+                        "surface-variant": "#e0e3e5",
+                        "outline-variant": "#c6c6cd",
+                        "primary-fixed": "#dae2fc",
+                        "on-secondary-container": "#5c647b",
+                        "primary-fixed-dim": "#bec6df",
+                        "tertiary": "#453d36",
+                        "secondary": "#565e74",
+                        "on-background": "#191c1e",
+                        "on-tertiary-fixed-variant": "#4e453e",
+                        "on-secondary-fixed": "#131b2e",
+                        "tertiary-fixed-dim": "#d1c4bb",
+                        "primary": "#363e52",
+                        "on-error": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-surface": "#2d3133",
+                        "on-surface-variant": "#45464c",
+                        "error": "#ba1a1a"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface min-h-screen flex items-center justify-center p-4">
+<!-- Background Content Mock (The Dashboard) -->
+<div class="fixed inset-0 z-0 flex overflow-hidden">
+<!-- SideNavBar Simulation -->
+<aside class="h-full w-72 hidden md:flex flex-col bg-slate-50 dark:bg-slate-900 shadow-[0px_24px_48px_rgba(77,85,106,0.06)] z-40">
+<div class="p-8">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 indigo-slate-gradient rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">dataset</span>
+</div>
+<div>
+<h1 class="text-xl font-bold tracking-tighter text-slate-700">Sunday</h1>
+<p class="text-[10px] uppercase tracking-widest text-slate-400 font-bold">The Digital Atrium</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 px-4 space-y-2 mt-4">
+<div class="flex items-center gap-3 px-4 py-3 text-slate-900 font-semibold border-r-2 border-slate-700 bg-white shadow-sm rounded-r-none rounded-l-xl">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm">Dashboard</span>
+</div>
+<div class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-100 transition-colors rounded-xl">
+<span class="material-symbols-outlined">groups</span>
+<span class="text-sm">Directory</span>
+</div>
+<div class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-100 transition-colors rounded-xl">
+<span class="material-symbols-outlined">hub</span>
+<span class="text-sm">Teams</span>
+</div>
+</nav>
+</aside>
+<!-- Main Content Simulation -->
+<main class="flex-1 p-10 bg-surface">
+<div class="max-w-5xl mx-auto">
+<header class="mb-12">
+<h2 class="text-3xl font-bold tracking-tight text-on-surface mb-2">Team Velocity</h2>
+<p class="text-on-surface-variant">Monitoring operational flow and architectural milestones.</p>
+</header>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="h-64 bg-surface-container-lowest rounded-lg shadow-[0px_2px_15px_rgba(77,85,106,0.04)]"></div>
+<div class="h-64 bg-surface-container-lowest rounded-lg shadow-[0px_2px_15px_rgba(77,85,106,0.04)]"></div>
+<div class="h-64 bg-surface-container-lowest rounded-lg shadow-[0px_2px_15px_rgba(77,85,106,0.04)]"></div>
+</div>
+</div>
+</main>
+</div>
+<!-- Quick Task Creation Modal Overlay -->
+<div class="fixed inset-0 z-50 glass-overlay flex items-center justify-center p-6 sm:p-12 overflow-y-auto no-scrollbar">
+<!-- Modal Card -->
+<div class="w-full max-w-[640px] bg-surface-container-lowest rounded-lg shadow-[0px_24px_48px_rgba(77,85,106,0.06)] overflow-hidden flex flex-col">
+<!-- Modal Header -->
+<div class="px-8 pt-8 pb-4">
+<div class="flex justify-between items-start">
+<div>
+<span class="text-[10px] font-bold uppercase tracking-[0.2em] text-on-surface-variant mb-1 block">New Entry</span>
+<h3 class="text-2xl font-bold tracking-tight text-on-surface">Quick Task Creation</h3>
+</div>
+<button class="p-2 hover:bg-surface-container-low rounded-full transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">close</span>
+</button>
+</div>
+</div>
+<!-- Modal Content (Scrollable Area) -->
+<form class="px-8 pb-8 space-y-8">
+<!-- Section: Core Details -->
+<div class="space-y-4">
+<div class="relative">
+<label class="absolute left-4 top-3 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Task Title</label>
+<input class="w-full pt-8 pb-3 px-4 bg-surface-container-low border-none rounded-md focus:ring-2 focus:ring-primary-container text-on-surface placeholder:text-outline-variant font-medium" placeholder="e.g., Finalize Architectural Review" type="text"/>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="relative">
+<label class="absolute left-4 top-3 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Assignee</label>
+<select class="w-full pt-8 pb-3 px-4 bg-surface-container-low border-none rounded-md focus:ring-2 focus:ring-primary-container text-on-surface appearance-none cursor-pointer">
+<option>Select team member</option>
+<option>Marcus Thorne</option>
+<option>Elena Vance</option>
+<option>Julian Rossi</option>
+</select>
+</div>
+<div class="relative">
+<label class="absolute left-4 top-3 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Due Date</label>
+<input class="w-full pt-8 pb-3 px-4 bg-surface-container-low border-none rounded-md focus:ring-2 focus:ring-primary-container text-on-surface" type="date"/>
+</div>
+</div>
+</div>
+<!-- Section: Logistics -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+<div class="space-y-3">
+<label class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest px-1">Priority</label>
+<div class="flex p-1 bg-surface-container-low rounded-full">
+<button class="flex-1 py-2 text-xs font-bold rounded-full transition-all text-on-surface-variant hover:text-on-surface" type="button">Low</button>
+<button class="flex-1 py-2 text-xs font-bold rounded-full transition-all bg-white shadow-sm text-on-surface" type="button">Med</button>
+<button class="flex-1 py-2 text-xs font-bold rounded-full transition-all text-on-surface-variant hover:text-on-surface" type="button">High</button>
+</div>
+</div>
+<div class="space-y-3">
+<label class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest px-1">Est. Hours</label>
+<div class="flex items-center bg-surface-container-low rounded-full p-1">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-highest transition-colors" type="button">
+<span class="material-symbols-outlined text-sm">remove</span>
+</button>
+<input class="flex-1 bg-transparent border-none text-center font-bold text-on-surface focus:ring-0" type="text" value="04.00"/>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-highest transition-colors" type="button">
+<span class="material-symbols-outlined text-sm">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Section: Categorization -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="relative">
+<label class="absolute left-4 top-3 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Type</label>
+<select class="w-full pt-8 pb-3 px-4 bg-surface-container-low border-none rounded-md focus:ring-2 focus:ring-primary-container text-on-surface text-sm">
+<option>Internal</option>
+<option>Client</option>
+</select>
+</div>
+<div class="relative">
+<label class="absolute left-4 top-3 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Nature</label>
+<select class="w-full pt-8 pb-3 px-4 bg-surface-container-low border-none rounded-md focus:ring-2 focus:ring-primary-container text-on-surface text-sm">
+<option>Consulting</option>
+<option>Production</option>
+<option>Research</option>
+</select>
+</div>
+<div class="relative">
+<label class="absolute left-4 top-3 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Project</label>
+<select class="w-full pt-8 pb-3 px-4 bg-surface-container-low border-none rounded-md focus:ring-2 focus:ring-primary-container text-on-surface text-sm">
+<option>Atrium V2</option>
+<option>Sunday Brand</option>
+</select>
+</div>
+</div>
+<!-- Section: Toggles -->
+<div class="space-y-4 pt-4 border-t border-surface-container">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-tertiary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-on-tertiary-fixed-variant text-base">payments</span>
+</div>
+<span class="text-sm font-semibold text-on-surface">Billable task</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant text-base">task_alt</span>
+</div>
+<span class="text-sm font-semibold text-on-surface">Mark as already completed</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" id="completedToggle" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+<!-- Hidden Fields: Completed State -->
+<div class="space-y-4 pt-4 animate-in fade-in slide-in-from-top-2">
+<div class="relative">
+<label class="absolute left-4 top-3 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Actual Hours Spent</label>
+<input class="w-full pt-8 pb-3 px-4 bg-surface-container-low border-none rounded-md focus:ring-2 focus:ring-primary-container text-on-surface font-medium" placeholder="00.00" type="text"/>
+</div>
+<div class="relative">
+<label class="absolute left-4 top-3 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Completion Report</label>
+<textarea class="w-full pt-8 pb-3 px-4 bg-surface-container-low border-none rounded-md focus:ring-2 focus:ring-primary-container text-on-surface text-sm" placeholder="Summary of outcomes and deliverables..." rows="3"></textarea>
+</div>
+</div>
+</div>
+<!-- Footer Actions -->
+<div class="flex items-center justify-end gap-4 pt-8">
+<button class="px-8 py-3 rounded-full text-sm font-bold text-on-tertiary bg-tertiary hover:opacity-90 transition-opacity active:scale-95" type="button">
+                        Cancel
+                    </button>
+<button class="px-10 py-3 rounded-full text-sm font-bold text-white indigo-slate-gradient shadow-lg hover:shadow-xl transition-all active:scale-95" type="submit">
+                        Create Task
+                    </button>
+</div>
+</form>
+</div>
+</div>
+<!-- Background Decorative Elements -->
+<div class="fixed top-20 right-20 w-96 h-96 bg-primary-fixed-dim/20 blur-[120px] -z-10 rounded-full"></div>
+<div class="fixed bottom-20 left-20 w-80 h-80 bg-tertiary-fixed/30 blur-[100px] -z-10 rounded-full"></div>
+</body></html>

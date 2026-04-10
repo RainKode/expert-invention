@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Teams &amp; Departments | Sunday HR</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary": "#453d36",
+                    "on-error-container": "#93000a",
+                    "on-surface": "#191c1e",
+                    "on-tertiary": "#ffffff",
+                    "inverse-primary": "#bec6df",
+                    "surface-bright": "#f7f9fb",
+                    "on-primary-fixed": "#131b2e",
+                    "on-primary-fixed-variant": "#3e465b",
+                    "primary-fixed": "#dae2fc",
+                    "on-secondary-fixed-variant": "#3e465c",
+                    "secondary-fixed": "#dae2fd",
+                    "surface-container-low": "#f2f4f6",
+                    "on-primary": "#ffffff",
+                    "primary": "#363e52",
+                    "surface-container-lowest": "#ffffff",
+                    "outline-variant": "#c6c6cd",
+                    "surface-tint": "#565e73",
+                    "on-tertiary-fixed-variant": "#4e453e",
+                    "on-secondary-container": "#5c647b",
+                    "inverse-surface": "#2d3133",
+                    "tertiary-fixed": "#eee0d7",
+                    "error-container": "#ffdad6",
+                    "error": "#ba1a1a",
+                    "on-secondary": "#ffffff",
+                    "inverse-on-surface": "#eff1f3",
+                    "on-tertiary-container": "#d6c9bf",
+                    "surface": "#f7f9fb",
+                    "background": "#f7f9fb",
+                    "on-tertiary-fixed": "#211a15",
+                    "on-background": "#191c1e",
+                    "primary-container": "#4d556a",
+                    "on-surface-variant": "#45464c",
+                    "tertiary-fixed-dim": "#d1c4bb",
+                    "secondary-fixed-dim": "#bec6e0",
+                    "outline": "#76777d",
+                    "on-error": "#ffffff",
+                    "surface-variant": "#e0e3e5",
+                    "on-primary-container": "#c2cae3",
+                    "tertiary-container": "#5d544d",
+                    "surface-container": "#eceef0",
+                    "surface-container-highest": "#e0e3e5",
+                    "surface-container-high": "#e6e8ea",
+                    "on-secondary-fixed": "#131b2e",
+                    "surface-dim": "#d8dadc",
+                    "secondary": "#565e74",
+                    "secondary-container": "#dae2fd",
+                    "primary-fixed-dim": "#bec6df"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Plus Jakarta Sans"],
+                    "label": ["Plus Jakarta Sans"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface selection:bg-primary-container selection:text-on-primary-container">
+<!-- SideNavBar (Shell) -->
+<aside class="fixed left-0 top-0 bottom-0 z-40 h-full w-72 hidden md:flex flex-col border-none bg-slate-50 dark:bg-slate-900 font-plus-jakarta text-sm tracking-tight shadow-[0px_24px_48px_rgba(77,85,106,0.06)]">
+<div class="p-8 flex flex-col gap-1">
+<h1 class="text-xl font-bold tracking-tighter text-slate-700 dark:text-slate-100">Sunday</h1>
+<p class="text-[10px] uppercase tracking-widest text-slate-400">The Digital Atrium</p>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<div class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer group">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-medium">Dashboard</span>
+</div>
+<div class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer group">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+<span class="font-medium">Directory</span>
+</div>
+<!-- Teams is active -->
+<div class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-900 dark:text-white font-semibold border-r-2 border-slate-700 dark:border-slate-300 bg-slate-100/50 transition-colors cursor-pointer">
+<span class="material-symbols-outlined" data-icon="hub">hub</span>
+<span class="font-medium">Teams</span>
+</div>
+<div class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+<span class="font-medium">Time Off</span>
+</div>
+<div class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer">
+<span class="material-symbols-outlined" data-icon="folder_shared">folder_shared</span>
+<span class="font-medium">Documents</span>
+</div>
+<div class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-medium">Settings</span>
+</div>
+</nav>
+<div class="p-6 mt-auto">
+<button class="w-full py-3 px-4 rounded-full bg-primary-container text-white text-xs font-bold uppercase tracking-widest hover:opacity-90 transition-all active:scale-95">
+                Admin View
+            </button>
+<div class="mt-6 space-y-1">
+<div class="flex items-center gap-3 px-4 py-2 text-slate-500 hover:text-slate-700 cursor-pointer text-xs">
+<span class="material-symbols-outlined text-lg" data-icon="help_outline">help_outline</span>
+<span>Help</span>
+</div>
+<div class="flex items-center gap-3 px-4 py-2 text-slate-500 hover:text-slate-700 cursor-pointer text-xs">
+<span class="material-symbols-outlined text-lg" data-icon="logout">logout</span>
+<span>Logout</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- TopNavBar (Shell) -->
+<header class="fixed top-0 right-0 left-0 md:left-72 z-30 h-16 bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl px-6 flex items-center justify-between shadow-[0px_2px_15px_rgba(77,85,106,0.04)]">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl" data-icon="search">search</span>
+<input class="w-full bg-surface-container-low border-none rounded-full py-2 pl-11 pr-4 text-sm focus:ring-2 focus:ring-primary/20 placeholder:text-slate-400 transition-all" placeholder="Search people or teams..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<span class="text-xs font-bold text-slate-500 hover:text-slate-800 cursor-pointer transition-colors">Manager Mode</span>
+<div class="flex items-center gap-4 text-slate-500">
+<span class="material-symbols-outlined cursor-pointer hover:opacity-70" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined cursor-pointer hover:opacity-70" data-icon="help">help</span>
+</div>
+<div class="w-8 h-8 rounded-full overflow-hidden bg-slate-200">
+<img class="w-full h-full object-cover" data-alt="close-up portrait of a professional woman with a calm and confident expression in a bright office setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4z0WJ0ysjEZzgU3cGz8XVhjPpBb_ANAyjVzzU7CF9LQXQmRxkW_dKYlWOkwp2y-hq2yjgMJ0jco6JcOxDjMgJ2-EhevFNCIvRsLrw7RkwrDgDyvO12tU8tRlWnAuVFwbxoUj8AZz2E17aE5phzyQBxXN7RP0qAY6FPOIbGQhYwzCFpah_YYsAHL3U0yEh_vvQ4V8Yn8dCI6JIFhE0vuMyhUFYNqhKVoeKpw8P_0jeQ-ABzqeADwV5IPbXRhxu1pr4apy2UvNndgU"/>
+</div>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="md:ml-72 pt-24 pb-20 px-8 min-h-screen">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+<div class="space-y-1">
+<h2 class="text-[2.5rem] font-bold tracking-[-0.03em] leading-tight text-on-surface">Teams &amp; Departments</h2>
+<p class="text-on-surface-variant max-w-xl">Configure the organizational architecture, manage cross-functional teams, and set visibility permissions.</p>
+</div>
+<div class="flex items-center gap-3">
+<button class="px-6 py-3 rounded-full bg-tertiary-fixed text-on-tertiary-fixed text-sm font-semibold hover:bg-tertiary-fixed-dim transition-all active:scale-95 flex items-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="add_business">add_business</span>
+                    Add Department
+                </button>
+<button class="px-6 py-3 rounded-full bg-gradient-to-br from-primary-container to-secondary text-on-primary text-sm font-semibold hover:opacity-90 shadow-lg shadow-primary/10 transition-all active:scale-95 flex items-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="group_add">group_add</span>
+                    Add Team
+                </button>
+</div>
+</div>
+<!-- Hierarchy Content (Tree Table) -->
+<div class="flex flex-col gap-1">
+<!-- Department Row (Engineering) -->
+<div class="group flex items-center justify-between p-5 bg-surface-container rounded-lg border-l-[3px] border-primary-container shadow-sm transition-all hover:bg-surface-container-high">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary-container cursor-pointer transition-transform group-hover:scale-110" data-icon="keyboard_arrow_down">keyboard_arrow_down</span>
+<div>
+<h3 class="text-base font-bold text-on-surface">Engineering &amp; Product</h3>
+<p class="text-xs text-on-surface-variant uppercase tracking-wider font-medium">4 Teams • 52 Members</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex -space-x-2">
+<img class="w-8 h-8 rounded-full border-2 border-surface-container object-cover" data-alt="professional male portrait with warm smile and soft lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDp_nA6FASD0oPCyOK-Mql2t4F1VmNE4kL8Vuae6vu-8KUNryQuruix1AJVbg2fiLr_NHtLIWWpW2W6w0nbn0RTijTzINkaHuO-X2SpTzvLG_PtOcirKdrZq4D_Y-k00WOZV0nlyAd0usvdqGgTPrv36r1uUNKDR-62Y3tZ0zap0hSgBsNZOJ9mnesR5d20X4GlaP5fl0FxR1P759ccBfcvO8h6cTDN5PVDQHTKic_8arirIB5op0gmBjn1VzI5gJB7WH51NnfcHUQ"/>
+<img class="w-8 h-8 rounded-full border-2 border-surface-container object-cover" data-alt="confident woman in business attire looking at camera" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCj3SRpB-UCLqrJMYO5Q9Yr7MoiIYy77bfCZ4Z-tJP5EhqtiGvE1F9EgcNsyS3dURknjxJnpS4u-99Y8R3TtuaW39yWppZseVLaHRkluPoctiYXVjtJeHmT2_4bnyymAknyK5aKc2MojH0D_rzi9LWK2gF5Z8TL5HFlMjhtMQmoI7-SJvKeAD_iFJ1CUc5oIf7fejgthKJ-ZWiD10zM0UAPUdYoyXS2Qw7QNUfZWBU6SwrVrncTqPCrwjDsvmNEjkv1ySKGESaK8lY"/>
+<div class="w-8 h-8 rounded-full bg-primary text-[10px] text-white flex items-center justify-center border-2 border-surface-container">+48</div>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors" data-icon="edit_square">edit_square</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-error transition-colors" data-icon="delete">delete</span>
+</div>
+</div>
+</div>
+<!-- Team Child Rows (Engineering) -->
+<div class="ml-8 flex flex-col gap-1">
+<!-- Team Card -->
+<div class="flex items-center justify-between p-4 bg-surface-container-lowest rounded-xl shadow-[0px_4px_12px_rgba(77,85,106,0.03)] hover:shadow-md transition-all">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="code">code</span>
+</div>
+<div>
+<h4 class="text-sm font-semibold text-on-surface">Core Infrastructure</h4>
+<p class="text-xs text-on-surface-variant">Lead: Alex Rivera</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="px-3 py-1 rounded-full bg-green-50 text-green-700 text-[10px] font-bold uppercase tracking-widest border border-green-100">Flexible</span>
+<div class="flex items-center gap-2 text-outline">
+<span class="material-symbols-outlined text-lg cursor-pointer hover:text-primary" data-icon="edit">edit</span>
+<span class="material-symbols-outlined text-lg cursor-pointer hover:text-error" data-icon="close">close</span>
+</div>
+</div>
+</div>
+<!-- Team Card -->
+<div class="flex items-center justify-between p-4 bg-surface-container-lowest rounded-xl shadow-[0px_4px_12px_rgba(77,85,106,0.03)] hover:shadow-md transition-all">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" data-icon="brush">brush</span>
+</div>
+<div>
+<h4 class="text-sm font-semibold text-on-surface">Design Systems</h4>
+<p class="text-xs text-on-surface-variant">Lead: Sarah Chen</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="px-3 py-1 rounded-full bg-slate-100 text-slate-600 text-[10px] font-bold uppercase tracking-widest border border-slate-200">Locked</span>
+<div class="flex items-center gap-2 text-outline">
+<span class="material-symbols-outlined text-lg cursor-pointer hover:text-primary" data-icon="edit">edit</span>
+<span class="material-symbols-outlined text-lg cursor-pointer hover:text-error" data-icon="close">close</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Spacer -->
+<div class="h-4"></div>
+<!-- Department Row (Growth) -->
+<div class="group flex items-center justify-between p-5 bg-surface-container rounded-lg border-l-[3px] border-primary-container shadow-sm transition-all hover:bg-surface-container-high">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary-container cursor-pointer transition-transform group-hover:scale-110" data-icon="keyboard_arrow_right">keyboard_arrow_right</span>
+<div>
+<h3 class="text-base font-bold text-on-surface">Growth &amp; Marketing</h3>
+<p class="text-xs text-on-surface-variant uppercase tracking-wider font-medium">3 Teams • 28 Members</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex -space-x-2">
+<img class="w-8 h-8 rounded-full border-2 border-surface-container object-cover" data-alt="professional headshot of creative woman with natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3uk8Bxi8HtRHJnb7wcjMMrAhgQLqO3CQpqR2GrUQmiGmoKBNR_F-jss6bpoot_-uKc5DPOLQhVi-SWtQfqcNHfuUyBiEMU2j2636Re8warK9avDx8DCoNj7mq4K_CuZVWqrLjho1h1DkEhYmXxda03KFbT4o6wMaBGQvFwbHmhOmCd_qy6BRUDAdipVd8VgVdb4_bxDSrVH8P7b5SQr7wRyNbzVd_puC66-om7BKFo1-DrV58yJbV0NX8M7F38KQ4VpRS29ja2Yw"/>
+<div class="w-8 h-8 rounded-full bg-primary text-[10px] text-white flex items-center justify-center border-2 border-surface-container">+27</div>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors" data-icon="edit_square">edit_square</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-error transition-colors" data-icon="delete">delete</span>
+</div>
+</div>
+</div>
+<!-- Spacer -->
+<div class="h-4"></div>
+<!-- Department Row (People) -->
+<div class="group flex items-center justify-between p-5 bg-surface-container rounded-lg border-l-[3px] border-primary-container shadow-sm transition-all hover:bg-surface-container-high">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary-container cursor-pointer transition-transform group-hover:scale-110" data-icon="keyboard_arrow_down">keyboard_arrow_down</span>
+<div>
+<h3 class="text-base font-bold text-on-surface">People &amp; Culture</h3>
+<p class="text-xs text-on-surface-variant uppercase tracking-wider font-medium">2 Teams • 12 Members</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex -space-x-2">
+<img class="w-8 h-8 rounded-full border-2 border-surface-container object-cover" data-alt="man in executive attire looking directly into camera" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAB2JB17CamF_tuETVLN_zR0cLcPK3aih4k8G2SG0HFSeVMS97MNIwDllm2YyBwORczBoVTEZz69oNKp1wwU_BLiivDlFESUXTncTVRvaJbmLQeHN81h6XezXJlbXNdESJAq40nZsJLqAxdJMkbrEs0AnIlWxbEdLpeKtqIs812rg3tlIO8lRPBXDKgTOpGraAGNA_aEqWenauz6FcjtKaCebka14JNiRhnAvUidUhU_6pxosRiDFhFDt0BLJkoz5TPwu6XKZoN780"/>
+<div class="w-8 h-8 rounded-full bg-primary text-[10px] text-white flex items-center justify-center border-2 border-surface-container">+11</div>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors" data-icon="edit_square">edit_square</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-error transition-colors" data-icon="delete">delete</span>
+</div>
+</div>
+</div>
+<!-- Team Child Rows (People) -->
+<div class="ml-8 flex flex-col gap-1">
+<div class="flex items-center justify-between p-4 bg-surface-container-lowest rounded-xl shadow-[0px_4px_12px_rgba(77,85,106,0.03)] hover:shadow-md transition-all">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-tertiary-fixed flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined" data-icon="diversity_3">diversity_3</span>
+</div>
+<div>
+<h4 class="text-sm font-semibold text-on-surface">Talent Acquisition</h4>
+<p class="text-xs text-on-surface-variant">Lead: Jordan Smith</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="px-3 py-1 rounded-full bg-green-50 text-green-700 text-[10px] font-bold uppercase tracking-widest border border-green-100">Flexible</span>
+<div class="flex items-center gap-2 text-outline">
+<span class="material-symbols-outlined text-lg cursor-pointer hover:text-primary" data-icon="edit">edit</span>
+<span class="material-symbols-outlined text-lg cursor-pointer hover:text-error" data-icon="close">close</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Quick Stats Bento Grid -->
+<div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="p-8 bg-surface-container-low rounded-xl shadow-sm space-y-4">
+<span class="material-symbols-outlined text-primary-container p-3 bg-white rounded-2xl shadow-sm" data-icon="corporate_fare">corporate_fare</span>
+<div>
+<p class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Total Departments</p>
+<p class="text-4xl font-bold tracking-tight mt-1">12</p>
+</div>
+<div class="h-1 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="w-2/3 h-full bg-primary-container"></div>
+</div>
+</div>
+<div class="p-8 bg-surface-container-low rounded-xl shadow-sm space-y-4">
+<span class="material-symbols-outlined text-primary-container p-3 bg-white rounded-2xl shadow-sm" data-icon="groups_2">groups_2</span>
+<div>
+<p class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Active Teams</p>
+<p class="text-4xl font-bold tracking-tight mt-1">48</p>
+</div>
+<p class="text-xs text-green-600 font-semibold">+4 added this month</p>
+</div>
+<div class="p-8 bg-surface-container-low rounded-xl shadow-sm flex flex-col justify-between">
+<div>
+<p class="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-4">Architecture Health</p>
+<div class="flex items-baseline gap-2">
+<p class="text-4xl font-bold tracking-tight">94%</p>
+<p class="text-xs text-on-surface-variant">Optimum</p>
+</div>
+</div>
+<div class="flex items-center gap-2 mt-4">
+<div class="w-2 h-2 rounded-full bg-green-500"></div>
+<p class="text-xs font-medium">All teams assigned to parents</p>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 md:hidden flex justify-around items-center px-4 pb-6 pt-3 bg-white dark:bg-slate-900 rounded-t-[32px] border-t border-slate-100 dark:border-slate-800 shadow-[0_-8px_24px_rgba(77,85,106,0.08)]">
+<div class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="text-[10px] font-medium uppercase tracking-widest">Home</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="text-[10px] font-medium uppercase tracking-widest">People</span>
+</div>
+<div class="flex flex-col items-center gap-1 bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white rounded-full px-4 py-1">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="text-[10px] font-medium uppercase tracking-widest">Teams</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+<span class="text-[10px] font-medium uppercase tracking-widest">Menu</span>
+</div>
+</nav>
+</body></html>

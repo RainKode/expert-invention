@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>My Tasks - Sunday</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .active-tab-underline {
+            background: linear-gradient(135deg, #4d556a 0%, #656d84 100%);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-low": "#f2f4f6",
+                      "on-primary-fixed": "#131b2e",
+                      "surface-container-highest": "#e0e3e5",
+                      "surface": "#f7f9fb",
+                      "inverse-primary": "#bec6df",
+                      "surface-container-high": "#e6e8ea",
+                      "on-tertiary-fixed": "#211a15",
+                      "tertiary-fixed": "#eee0d7",
+                      "error-container": "#ffdad6",
+                      "primary-container": "#4d556a",
+                      "on-secondary": "#ffffff",
+                      "on-primary-container": "#c2cae3",
+                      "surface-container": "#eceef0",
+                      "on-error-container": "#93000a",
+                      "outline": "#76777d",
+                      "secondary-fixed": "#dae2fd",
+                      "inverse-on-surface": "#eff1f3",
+                      "on-tertiary": "#ffffff",
+                      "on-surface": "#191c1e",
+                      "surface-dim": "#d8dadc",
+                      "surface-bright": "#f7f9fb",
+                      "on-secondary-fixed-variant": "#3e465c",
+                      "secondary-fixed-dim": "#bec6e0",
+                      "on-tertiary-container": "#d6c9bf",
+                      "on-primary-fixed-variant": "#3e465b",
+                      "tertiary-container": "#5d544d",
+                      "secondary-container": "#dae2fd",
+                      "background": "#f7f9fb",
+                      "surface-tint": "#565e73",
+                      "on-primary": "#ffffff",
+                      "surface-variant": "#e0e3e5",
+                      "outline-variant": "#c6c6cd",
+                      "primary-fixed": "#dae2fc",
+                      "on-secondary-container": "#5c647b",
+                      "primary-fixed-dim": "#bec6df",
+                      "tertiary": "#453d36",
+                      "secondary": "#565e74",
+                      "on-background": "#191c1e",
+                      "on-tertiary-fixed-variant": "#4e453e",
+                      "on-secondary-fixed": "#131b2e",
+                      "tertiary-fixed-dim": "#d1c4bb",
+                      "primary": "#363e52",
+                      "on-error": "#ffffff",
+                      "surface-container-lowest": "#ffffff",
+                      "inverse-surface": "#2d3133",
+                      "on-surface-variant": "#45464c",
+                      "error": "#ba1a1a"
+              },
+              "borderRadius": {
+                      "DEFAULT": "1rem",
+                      "lg": "2rem",
+                      "xl": "3rem",
+                      "full": "9999px"
+              },
+              "fontFamily": {
+                      "headline": ["Plus Jakarta Sans"],
+                      "body": ["Plus Jakarta Sans"],
+                      "label": ["Plus Jakarta Sans"]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface min-h-screen">
+<!-- SideNavBar (Execution from JSON) -->
+<aside class="fixed left-0 top-0 bottom-0 z-40 h-full w-72 hidden md:flex flex-col border-none bg-slate-50 shadow-[0px_24px_48px_rgba(77,85,106,0.06)] font-plus-jakarta text-sm tracking-tight">
+<div class="p-8 flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-container to-secondary flex items-center justify-center text-white">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">hub</span>
+</div>
+<div>
+<h1 class="text-xl font-bold tracking-tighter text-slate-700">Sunday</h1>
+<p class="text-[10px] text-slate-400 uppercase tracking-widest">The Digital Atrium</p>
+</div>
+</div>
+<nav class="flex-1 px-4 mt-4 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded-2xl text-slate-500 hover:bg-slate-100 transition-colors scale-98 active:opacity-80" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Dashboard</span>
+</a>
+<!-- Active State: Directory/People usually houses tasks in HR context, or we can assume it's custom. For this route, we remain in context -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-2xl text-slate-900 font-semibold border-r-2 border-slate-700 hover:bg-slate-100 transition-colors scale-98 active:opacity-80" href="#">
+<span class="material-symbols-outlined">assignment_turned_in</span>
+<span>My Tasks</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-2xl text-slate-500 hover:bg-slate-100 transition-colors scale-98 active:opacity-80" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span>Directory</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-2xl text-slate-500 hover:bg-slate-100 transition-colors scale-98 active:opacity-80" href="#">
+<span class="material-symbols-outlined">hub</span>
+<span>Teams</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-2xl text-slate-500 hover:bg-slate-100 transition-colors scale-98 active:opacity-80" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span>Time Off</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-2xl text-slate-500 hover:bg-slate-100 transition-colors scale-98 active:opacity-80" href="#">
+<span class="material-symbols-outlined">folder_shared</span>
+<span>Documents</span>
+</a>
+</nav>
+<div class="p-4 mt-auto space-y-1 border-t border-slate-100/50">
+<button class="w-full mb-4 px-4 py-3 rounded-full bg-slate-100 text-slate-700 font-semibold text-xs tracking-wide uppercase hover:bg-slate-200 transition-all">
+                Admin View
+            </button>
+<a class="flex items-center gap-3 px-4 py-3 rounded-2xl text-slate-500 hover:bg-slate-100 transition-colors" href="#">
+<span class="material-symbols-outlined">help_outline</span>
+<span>Help</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-2xl text-slate-500 hover:bg-slate-100 transition-colors" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span>Logout</span>
+</a>
+</div>
+</aside>
+<!-- TopNavBar (Execution from JSON) -->
+<header class="fixed top-0 right-0 left-0 md:left-72 z-30 h-16 bg-white/80 backdrop-blur-xl px-6 flex items-center justify-between shadow-[0px_2px_15px_rgba(77,85,106,0.04)]">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-full max-w-md">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 material-symbols-outlined">search</span>
+<input class="w-full bg-surface-container-low border-none rounded-full py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary-container/20" placeholder="Search tasks, people..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<button class="text-xs font-semibold text-slate-500 hover:opacity-70 transition-opacity">Manager Mode</button>
+<div class="flex items-center gap-4 text-slate-400">
+<span class="material-symbols-outlined cursor-pointer hover:opacity-70">notifications</span>
+<span class="material-symbols-outlined cursor-pointer hover:opacity-70">help</span>
+</div>
+<div class="h-8 w-8 rounded-full bg-slate-200 overflow-hidden cursor-pointer active:scale-95 transition-all">
+<img alt="User Profile" data-alt="professional portrait of a smiling woman in a neutral colored sweater against a soft office background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUHJKjcsYUEnkyT3RrkEQ9eJf0FVqOQ_Ps6nTjzj531xGIpEhSGcL1XTdaN2jXqdEMNfiRFUC-jrLh8HVA6HvEfEQaMvXTR04sBuespCWYr0FJoVoSitsPy3-siqFB0nqZ6tTPG68lcX-KVuiTeJaY8I9RT1HTbggy3tGx4_9zph7rdqm9ExB3DRmSYfOEMOYFcay4Uet9lmV3z5ojzJd9nRJvqYy-ibUy_GQRDa8FWfJCKz8FEypvNbQv2kLTKrPOwE8EnmK_-1s"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-24 pb-20 md:pb-8 pl-0 md:pl-72 min-h-screen">
+<div class="max-w-6xl mx-auto px-6 md:px-10">
+<!-- Page Header -->
+<div class="mb-10">
+<h1 class="text-3xl font-bold tracking-tight text-on-surface mb-1">My Tasks</h1>
+<p class="text-on-surface-variant text-sm">Tasks assigned to you.</p>
+</div>
+<!-- Status Filter Tabs -->
+<div class="flex items-center gap-8 mb-8 border-none overflow-x-auto whitespace-nowrap scrollbar-hide">
+<div class="relative py-2">
+<button class="text-sm font-semibold text-on-surface">All</button>
+<div class="absolute bottom-0 left-0 right-0 h-1 rounded-full active-tab-underline"></div>
+</div>
+<button class="text-sm font-medium text-on-surface-variant hover:text-on-surface transition-colors">To Do</button>
+<button class="text-sm font-medium text-on-surface-variant hover:text-on-surface transition-colors">In Progress</button>
+<button class="text-sm font-medium text-on-surface-variant hover:text-on-surface transition-colors">In Review</button>
+<button class="text-sm font-medium text-on-surface-variant hover:text-on-surface transition-colors">Done</button>
+</div>
+<!-- Toolbar -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-8">
+<div class="flex flex-wrap items-center gap-2">
+<button class="px-4 py-2 rounded-full bg-surface-container-lowest text-xs font-medium text-on-surface-variant flex items-center gap-2 hover:bg-surface-container transition-colors">
+                        Priority <span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+<button class="px-4 py-2 rounded-full bg-surface-container-lowest text-xs font-medium text-on-surface-variant flex items-center gap-2 hover:bg-surface-container transition-colors">
+                        Type <span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+<button class="px-4 py-2 rounded-full bg-surface-container-lowest text-xs font-medium text-on-surface-variant flex items-center gap-2 hover:bg-surface-container transition-colors">
+                        Nature <span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+<button class="px-4 py-2 rounded-full bg-surface-container-lowest text-xs font-medium text-on-surface-variant flex items-center gap-2 hover:bg-surface-container transition-colors">
+                        Project <span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+<button class="px-4 py-2 rounded-full bg-surface-container-lowest text-xs font-medium text-on-surface-variant flex items-center gap-2 hover:bg-surface-container transition-colors">
+                        Billable <span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+</div>
+<div class="flex items-center gap-4 ml-auto lg:ml-0">
+<div class="flex items-center gap-2 bg-surface-container-lowest px-4 py-2 rounded-full text-xs font-medium text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">calendar_month</span>
+<span>Oct 1 - Oct 31</span>
+</div>
+<button class="flex items-center gap-2 text-xs font-semibold text-primary-container">
+<span class="material-symbols-outlined text-sm">sort</span>
+                        Sort
+                    </button>
+</div>
+</div>
+<!-- Task List -->
+<div class="space-y-3">
+<!-- Task Card 1: High Priority / Overdue -->
+<div class="group flex items-center bg-surface-container-lowest rounded-[8px] overflow-hidden shadow-[0px_2px_15px_rgba(77,85,106,0.04)] hover:shadow-md transition-shadow">
+<div class="w-[3px] self-stretch bg-red-400"></div>
+<div class="flex-1 flex flex-col md:flex-row md:items-center justify-between p-4 gap-4">
+<div class="flex items-center gap-4 flex-1">
+<button class="w-5 h-5 rounded-md border-2 border-outline-variant hover:border-primary-container transition-colors"></button>
+<div>
+<h3 class="text-sm font-semibold text-on-surface">Finalize Q4 Hiring Budget for Product Team</h3>
+<div class="flex items-center gap-3 mt-1">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-red-50 text-red-700">To Do</span>
+<span class="text-[11px] text-on-surface-variant">Sunday Project X</span>
+<span class="w-4 h-4 rounded-full bg-tertiary-fixed flex items-center justify-center text-[10px] font-bold text-on-tertiary-fixed-variant">$</span>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between md:justify-end gap-6">
+<div class="flex flex-col items-end">
+<span class="text-[11px] font-semibold text-red-600">Yesterday</span>
+<span class="text-[10px] text-outline uppercase tracking-tighter">Due Date</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-slate-200 border-2 border-white overflow-hidden shadow-sm">
+<img alt="Assignee Avatar" data-alt="close-up of a diverse professional person with a friendly expression in a soft studio environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuACYmAFrTRGbs7YuIx3oIDw-rR7nFPgoMp7O4Qr2YF6IBPJWYA_kMUc7LiIcdfiMDeGrzeCPOIMax9N4xMkQniy9dkxmKgpe0Wtu_ARJ4w8UBTLqudfsJZLHRnc3ZJz1-n532zwGIK-qqOzGJGM4umGodZEm6AZyUHzwb66ZhnS2riTCVbOBpQcU_a_mxk9608HFynHJYJHpvrC4GOC6NM_zry8IdK-sNSviMrGRhrwtLkqdAYOhmNeSt5pb8wrZTQMMkssIUDvmxU"/>
+</div>
+<button class="text-outline hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined">expand_more</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Task Card 2: Medium Priority / In Progress -->
+<div class="group flex items-center bg-surface-container-lowest rounded-[8px] overflow-hidden shadow-[0px_2px_15px_rgba(77,85,106,0.04)] hover:shadow-md transition-shadow">
+<div class="w-[3px] self-stretch bg-amber-400"></div>
+<div class="flex-1 flex flex-col md:flex-row md:items-center justify-between p-4 gap-4">
+<div class="flex items-center gap-4 flex-1">
+<button class="w-5 h-5 rounded-md border-2 border-outline-variant flex items-center justify-center"><span class="material-symbols-outlined text-[16px] text-primary-container" style="font-variation-settings: 'FILL' 1;">play_arrow</span></button>
+<div>
+<h3 class="text-sm font-semibold text-on-surface">Employee Onboarding Feedback Analysis</h3>
+<div class="flex items-center gap-3 mt-1">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-blue-50 text-blue-700">In Progress</span>
+<span class="text-[11px] text-on-surface-variant">Cultural Excellence</span>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between md:justify-end gap-6">
+<div class="flex flex-col items-end">
+<span class="text-[11px] font-semibold text-on-surface">Oct 24</span>
+<span class="text-[10px] text-outline uppercase tracking-tighter">Due Date</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-slate-200 border-2 border-white overflow-hidden shadow-sm">
+<img alt="Assignee Avatar" data-alt="portrait of a focused young man wearing modern eyeglasses in a bright professional setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpZsI1MIZOdJAWh_x17bZ3rOAC1G_5Qm-8mky7k1YiyHTPZqgddBY1PxHmsTiM_EKPP3Rv3RWPcCBCjALJrf_Ta6hDuTUXJwoXdfMiBg4PJVdm3Vwnl-f5nBUul5-81ysRUIQ3zmmnnTcsa13OGIDlk8SphYtDp7yKiytOKfdvgPqqoYy5DC2dX4zHrdyUebvQsqY9PMEZjI-YGNOgj1vqgX-VEorPVxwDCTvb6mAOO8wRECG7FBVzTxh9cU4un8QF4_gS0KSAeOk"/>
+</div>
+<button class="text-outline hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined">expand_more</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Task Card 3: Neutral Priority / In Review -->
+<div class="group flex items-center bg-surface-container-lowest rounded-[8px] overflow-hidden shadow-[0px_2px_15px_rgba(77,85,106,0.04)] hover:shadow-md transition-shadow">
+<div class="w-[3px] self-stretch bg-slate-200"></div>
+<div class="flex-1 flex flex-col md:flex-row md:items-center justify-between p-4 gap-4">
+<div class="flex items-center gap-4 flex-1">
+<button class="w-5 h-5 rounded-md border-2 border-outline-variant"></button>
+<div>
+<h3 class="text-sm font-semibold text-on-surface">Annual Benefits Brochure Review</h3>
+<div class="flex items-center gap-3 mt-1">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-purple-50 text-purple-700">In Review</span>
+<span class="text-[11px] text-on-surface-variant">Internal Comms</span>
+<span class="w-4 h-4 rounded-full bg-tertiary-fixed flex items-center justify-center text-[10px] font-bold text-on-tertiary-fixed-variant">$</span>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between md:justify-end gap-6">
+<div class="flex flex-col items-end">
+<span class="text-[11px] font-semibold text-on-surface">Oct 28</span>
+<span class="text-[10px] text-outline uppercase tracking-tighter">Due Date</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-slate-200 border-2 border-white overflow-hidden shadow-sm">
+<img alt="Assignee Avatar" data-alt="close-up profile of an older woman with silver hair and a sharp business blazer in soft light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyc-NB1Hk7_uv2zbaaynnjSb_4izeAUGuszLXuSEykmsOm88pLOcRdgr4to1cjG8-PSrme4hHvldGdZsXNlz8iWO4ZNaxRLMWgSAPZbWCEUFB5tqC5d-4v258wY_0C9242tz-PQASOdVwJRGujQgLu72oCMR7-Uw76tFpl1EtcJ4RvinGvw1WijhNpJN4Py3G5g4tXkiXlXPP8J_doYT93cgc8DldKiADF7NgIvswIgbNm47AhA0fQRrPHAgSTd9WiifrOP8I2PYQ"/>
+</div>
+<button class="text-outline hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined">expand_more</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Task Card 4: Medium Priority / To Do -->
+<div class="group flex items-center bg-surface-container-lowest rounded-[8px] overflow-hidden shadow-[0px_2px_15px_rgba(77,85,106,0.04)] hover:shadow-md transition-shadow">
+<div class="w-[3px] self-stretch bg-amber-400"></div>
+<div class="flex-1 flex flex-col md:flex-row md:items-center justify-between p-4 gap-4">
+<div class="flex items-center gap-4 flex-1">
+<button class="w-5 h-5 rounded-md border-2 border-outline-variant"></button>
+<div>
+<h3 class="text-sm font-semibold text-on-surface">Update Remote Work Policy v2.0</h3>
+<div class="flex items-center gap-3 mt-1">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-red-50 text-red-700">To Do</span>
+<span class="text-[11px] text-on-surface-variant">Compliance</span>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between md:justify-end gap-6">
+<div class="flex flex-col items-end">
+<span class="text-[11px] font-semibold text-on-surface">Oct 30</span>
+<span class="text-[10px] text-outline uppercase tracking-tighter">Due Date</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-slate-200 border-2 border-white overflow-hidden shadow-sm">
+<img alt="Assignee Avatar" data-alt="confident professional woman in business casual attire sitting in a brightly lit modern office" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDs-XqdJTCquN83upyQvqvtOCvCwSN5oyMTtX9rUPNIPUu-Og_mYdeBaJaeGbDQibIHWnvrl534qMXRTXDMK7aRzngmgqpzlKv9eVw5xD-vDON8CETkAz6BcHIu0hE3Za3HW_i_pLJUZNAZsgpTG9-Co7ypYaN5nupb-fWz9PfF_oWm0lKNlj5nCY6MTTGW94aRmItDlMOuZB97ZpHgse4SJ6w9IrpIof-FEw0vxodK5QM7eIazvGmqI5l2LsSdg_3NDMaZxXk6iPw"/>
+</div>
+<button class="text-outline hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined">expand_more</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Empty State Illustration Placeholder (Subtle) -->
+<div class="mt-20 text-center opacity-40">
+<span class="material-symbols-outlined text-6xl text-slate-300">task_alt</span>
+<p class="text-sm mt-4 text-slate-400">No more high priority tasks left for today.</p>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Execution from JSON) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 md:hidden flex justify-around items-center px-4 pb-6 pt-3 bg-white rounded-t-[32px] border-t border-slate-100 shadow-[0_-8px_24px_rgba(77,85,106,0.08)]">
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="text-[10px] font-medium uppercase tracking-widest">Home</span>
+</a>
+<a class="flex flex-col items-center gap-1 bg-slate-100 text-slate-900 rounded-full px-4 py-1" href="#">
+<span class="material-symbols-outlined">assignment_turned_in</span>
+<span class="text-[10px] font-medium uppercase tracking-widest">Tasks</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px] font-medium uppercase tracking-widest">People</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">menu</span>
+<span class="text-[10px] font-medium uppercase tracking-widest">Menu</span>
+</a>
+</nav>
+<!-- Contextual FAB (Task specific) -->
+<button class="fixed bottom-24 right-8 z-50 w-14 h-14 rounded-full bg-gradient-to-br from-primary-container to-secondary text-white shadow-xl flex items-center justify-center active:scale-90 transition-transform md:bottom-10">
+<span class="material-symbols-outlined text-3xl">add</span>
+</button>
+</body></html>

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sunday | Create New User</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "tertiary": "#453d36",
+                "on-error-container": "#93000a",
+                "on-surface": "#191c1e",
+                "on-tertiary": "#ffffff",
+                "inverse-primary": "#bec6df",
+                "surface-bright": "#f7f9fb",
+                "on-primary-fixed": "#131b2e",
+                "on-primary-fixed-variant": "#3e465b",
+                "primary-fixed": "#dae2fc",
+                "on-secondary-fixed-variant": "#3e465c",
+                "secondary-fixed": "#dae2fd",
+                "surface-container-low": "#f2f4f6",
+                "on-primary": "#ffffff",
+                "primary": "#363e52",
+                "surface-container-lowest": "#ffffff",
+                "outline-variant": "#c6c6cd",
+                "surface-tint": "#565e73",
+                "on-tertiary-fixed-variant": "#4e453e",
+                "on-secondary-container": "#5c647b",
+                "inverse-surface": "#2d3133",
+                "tertiary-fixed": "#eee0d7",
+                "error-container": "#ffdad6",
+                "error": "#ba1a1a",
+                "on-secondary": "#ffffff",
+                "inverse-on-surface": "#eff1f3",
+                "on-tertiary-container": "#d6c9bf",
+                "surface": "#f7f9fb",
+                "background": "#f7f9fb",
+                "on-tertiary-fixed": "#211a15",
+                "on-background": "#191c1e",
+                "primary-container": "#4d556a",
+                "on-surface-variant": "#434655",
+                "tertiary-fixed-dim": "#d1c4bb",
+                "secondary-fixed-dim": "#bec6e0",
+                "outline": "#76777d",
+                "on-error": "#ffffff",
+                "surface-variant": "#e0e3e5",
+                "on-primary-container": "#c2cae3",
+                "tertiary-container": "#5d544d",
+                "surface-container": "#eceef0",
+                "surface-container-highest": "#e0e3e5",
+                "surface-container-high": "#e6e8ea",
+                "on-secondary-fixed": "#131b2e",
+                "surface-dim": "#d8dadc",
+                "secondary": "#565e74",
+                "secondary-container": "#dae2fd",
+                "primary-fixed-dim": "#bec6df"
+            },
+            "borderRadius": {
+                "DEFAULT": "1rem",
+                "lg": "2rem",
+                "xl": "3rem",
+                "full": "9999px"
+            },
+            "fontFamily": {
+                "headline": ["Plus Jakarta Sans"],
+                "body": ["Plus Jakarta Sans"],
+                "label": ["Plus Jakarta Sans"]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .signature-gradient {
+            background: linear-gradient(135deg, #4d556a 0%, #656d84 100%);
+        }
+        .tap-highlight-transparent { -webkit-tap-highlight-color: transparent; }
+    </style>
+</head>
+<body class="bg-background text-on-surface antialiased">
+<!-- SideNavBar (Shared Component) -->
+<aside class="fixed left-0 top-0 bottom-0 z-40 h-full w-72 hidden md:flex flex-col border-none bg-slate-50 dark:bg-slate-900 shadow-[0px_24px_48px_rgba(77,85,106,0.06)] font-plus-jakarta text-sm tracking-tight">
+<div class="p-8 flex flex-col h-full">
+<div class="flex items-center gap-3 mb-12">
+<div class="w-10 h-10 rounded-xl signature-gradient flex items-center justify-center text-white">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">spa</span>
+</div>
+<div>
+<h1 class="text-xl font-bold tracking-tighter text-slate-700 dark:text-slate-100">Sunday</h1>
+<p class="text-[10px] text-slate-400 uppercase tracking-[0.2em]">The Digital Atrium</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-4 px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors rounded-xl" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-slate-900 dark:text-white font-semibold border-r-2 border-slate-700 dark:border-slate-300 bg-slate-100/50 dark:bg-slate-800/50 rounded-l-xl" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span>Directory</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors rounded-xl" href="#">
+<span class="material-symbols-outlined">hub</span>
+<span>Teams</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors rounded-xl" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span>Time Off</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors rounded-xl" href="#">
+<span class="material-symbols-outlined">folder_shared</span>
+<span>Documents</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors rounded-xl" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</a>
+</nav>
+<div class="pt-8 border-t border-slate-200/50 space-y-1">
+<div class="px-4 py-2 mb-2">
+<span class="px-3 py-1 bg-slate-200/50 text-[10px] font-bold rounded-full text-slate-600 uppercase tracking-wider">Admin View</span>
+</div>
+<a class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:bg-slate-100 transition-colors rounded-xl" href="#">
+<span class="material-symbols-outlined">help_outline</span>
+<span>Help</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:bg-slate-100 transition-colors rounded-xl" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span>Logout</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- TopNavBar (Shared Component) -->
+<header class="fixed top-0 right-0 left-0 md:left-72 z-30 h-16 bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl px-6 flex items-center justify-between shadow-[0px_2px_15px_rgba(77,85,106,0.04)] font-plus-jakarta text-sm">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-full max-w-md group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+<input class="w-full bg-slate-100/50 border-none rounded-full py-2 pl-12 pr-4 text-slate-700 focus:ring-2 focus:ring-primary-container/20 transition-all" placeholder="Search people, teams, or documents..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<button class="text-slate-500 hover:opacity-70 transition-opacity font-medium hidden lg:block">Manager Mode</button>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-500 cursor-pointer hover:opacity-70">notifications</span>
+<span class="material-symbols-outlined text-slate-500 cursor-pointer hover:opacity-70">help</span>
+</div>
+<div class="w-8 h-8 rounded-full bg-surface-container-high overflow-hidden">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="Close-up professional headshot of a female hr administrator with a warm and welcoming smile in a bright airy studio" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOi0b3TWXq2BBC6gVE-WjRkWWNxyk4n7PslfXktD0mDu0ELa3-2brcGm22VHesokzEw_AyaFdO3t0Ho4G3yu8xDJNMoJP1b8mNkdm3ttfmdSq1rSOt5bpaAr2LsakjP0-iFLmo7wzJQH7rNSaeg3lrhYsIZYx67LqeB5A-NXo0GoWK_fxyUlKuilETIhxuplc4eBGQZQlQGm9ynbxGydfrSUFqiXlQ5RWiHRrlus5nrUU-OrUpnLygCakITZD-jXE1H6c5zjkcuw8"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="md:ml-72 pt-24 pb-32 px-6 min-h-screen bg-surface">
+<div class="max-w-[720px] mx-auto">
+<!-- Header Section -->
+<header class="mb-12">
+<div class="flex items-center gap-2 text-slate-400 mb-4">
+<a class="hover:text-primary transition-colors" href="#">Directory</a>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<span class="text-slate-600 font-medium">New User</span>
+</div>
+<h1 class="text-[2.5rem] font-extrabold tracking-[-0.03em] leading-tight text-on-surface">Add New Member</h1>
+<p class="text-on-surface-variant mt-2 text-lg">Onboard a new employee to the Digital Atrium workspace.</p>
+</header>
+<form class="space-y-16">
+<!-- Section: Personal Information -->
+<section class="space-y-8">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+</div>
+<h2 class="text-xl font-bold tracking-tight text-on-surface">Personal Information</h2>
+</div>
+<div class="grid grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="text-sm font-semibold text-on-surface-variant ml-4">First Name</label>
+<input class="w-full h-14 bg-surface-container-lowest border-none rounded-full px-6 focus:ring-2 focus:ring-primary-container/10 shadow-sm text-on-surface placeholder:text-slate-300" placeholder="e.g. Julian" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-semibold text-on-surface-variant ml-4">Last Name</label>
+<input class="w-full h-14 bg-surface-container-lowest border-none rounded-full px-6 focus:ring-2 focus:ring-primary-container/10 shadow-sm text-on-surface placeholder:text-slate-300" placeholder="e.g. Amari" type="text"/>
+</div>
+<div class="col-span-2 space-y-2">
+<label class="text-sm font-semibold text-on-surface-variant ml-4">Work Email Address</label>
+<input class="w-full h-14 bg-surface-container-lowest border-none rounded-full px-6 focus:ring-2 focus:ring-primary-container/10 shadow-sm text-on-surface placeholder:text-slate-300" placeholder="julian.amari@company.com" type="email"/>
+</div>
+</div>
+</section>
+<!-- Section: Role & Team -->
+<section class="space-y-8">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">work</span>
+</div>
+<h2 class="text-xl font-bold tracking-tight text-on-surface">Role &amp; Organization</h2>
+</div>
+<div class="space-y-6">
+<div class="space-y-2">
+<label class="text-sm font-semibold text-on-surface-variant ml-4">Job Title / Role</label>
+<div class="relative">
+<select class="w-full h-14 bg-surface-container-lowest border-none rounded-full px-6 appearance-none focus:ring-2 focus:ring-primary-container/10 shadow-sm text-on-surface">
+<option disabled="" selected="">Select a role...</option>
+<option>Senior Product Designer</option>
+<option>HR Business Partner</option>
+<option>Software Engineer</option>
+<option>Account Executive</option>
+</select>
+<span class="material-symbols-outlined absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">expand_more</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="text-sm font-semibold text-on-surface-variant ml-4">Department / Team</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-6 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+<input class="w-full h-14 bg-surface-container-lowest border-none rounded-full pl-14 pr-6 focus:ring-2 focus:ring-primary-container/10 shadow-sm text-on-surface" placeholder="Search teams..." type="text"/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-semibold text-on-surface-variant ml-4">Reporting Manager</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-6 top-1/2 -translate-y-1/2 text-slate-400">person_search</span>
+<input class="w-full h-14 bg-surface-container-lowest border-none rounded-full pl-14 pr-6 focus:ring-2 focus:ring-primary-container/10 shadow-sm text-on-surface" placeholder="Search managers..." type="text"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section: Schedule -->
+<section class="space-y-8">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">schedule</span>
+</div>
+<h2 class="text-xl font-bold tracking-tight text-on-surface">Working Schedule</h2>
+</div>
+<div class="p-8 bg-surface-container-low rounded-lg space-y-8">
+<div class="space-y-4">
+<label class="text-sm font-bold text-on-surface-variant">Working Days</label>
+<div class="flex gap-2 flex-wrap">
+<button class="px-6 py-3 rounded-full bg-primary-container text-white text-sm font-medium transition-all shadow-md" type="button">M</button>
+<button class="px-6 py-3 rounded-full bg-primary-container text-white text-sm font-medium transition-all shadow-md" type="button">T</button>
+<button class="px-6 py-3 rounded-full bg-primary-container text-white text-sm font-medium transition-all shadow-md" type="button">W</button>
+<button class="px-6 py-3 rounded-full bg-primary-container text-white text-sm font-medium transition-all shadow-md" type="button">T</button>
+<button class="px-6 py-3 rounded-full bg-primary-container text-white text-sm font-medium transition-all shadow-md" type="button">F</button>
+<button class="px-6 py-3 rounded-full bg-surface-container-lowest text-slate-400 text-sm font-medium transition-all hover:bg-slate-200" type="button">S</button>
+<button class="px-6 py-3 rounded-full bg-surface-container-lowest text-slate-400 text-sm font-medium transition-all hover:bg-slate-200" type="button">S</button>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-8">
+<div class="space-y-2">
+<label class="text-sm font-bold text-on-surface-variant">Local Timezone</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-6 top-1/2 -translate-y-1/2 text-slate-400">public</span>
+<input class="w-full h-14 bg-surface-container-lowest border-none rounded-full pl-14 pr-6 focus:ring-2 focus:ring-primary-container/10 shadow-sm text-on-surface" placeholder="Search timezones..." type="text" value="Europe/London (GMT +1)"/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-bold text-on-surface-variant">Weekly Hours</label>
+<div class="flex h-14 bg-surface-container-lowest rounded-full items-center px-2 shadow-sm">
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-slate-400 hover:bg-slate-50 transition-colors" type="button">
+<span class="material-symbols-outlined">remove</span>
+</button>
+<input class="flex-1 text-center bg-transparent border-none focus:ring-0 font-bold text-on-surface" type="number" value="40"/>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-slate-400 hover:bg-slate-50 transition-colors" type="button">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section: Permissions -->
+<section class="space-y-8">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">lock</span>
+</div>
+<h2 class="text-xl font-bold tracking-tight text-on-surface">Access Permissions</h2>
+</div>
+<div class="flex p-1.5 bg-surface-container-low rounded-full w-full max-w-lg">
+<label class="flex-1 cursor-pointer">
+<input class="sr-only peer" name="perm" type="radio"/>
+<div class="h-12 flex items-center justify-center rounded-full text-sm font-semibold text-slate-500 peer-checked:bg-white peer-checked:text-primary peer-checked:shadow-sm transition-all">
+                                None
+                            </div>
+</label>
+<label class="flex-1 cursor-pointer">
+<input checked="" class="sr-only peer" name="perm" type="radio"/>
+<div class="h-12 flex items-center justify-center rounded-full text-sm font-semibold text-slate-500 peer-checked:bg-white peer-checked:text-primary peer-checked:shadow-sm transition-all">
+                                Standard
+                            </div>
+</label>
+<label class="flex-1 cursor-pointer">
+<input class="sr-only peer" name="perm" type="radio"/>
+<div class="h-12 flex items-center justify-center rounded-full text-sm font-semibold text-slate-500 peer-checked:bg-white peer-checked:text-primary peer-checked:shadow-sm transition-all">
+                                Full Admin
+                            </div>
+</label>
+</div>
+<p class="text-sm text-slate-400 ml-4">Standard users can view their team documents and request time off.</p>
+</section>
+</form>
+</div>
+</main>
+<!-- Sticky Footer Actions -->
+<footer class="fixed bottom-0 right-0 left-0 md:left-72 z-50 bg-white/90 backdrop-blur-2xl px-12 py-6 flex items-center justify-between shadow-[0_-8px_24px_rgba(77,85,106,0.08)]">
+<div class="flex items-center gap-3 text-slate-400">
+<span class="material-symbols-outlined text-sm">info</span>
+<p class="text-xs font-medium uppercase tracking-widest">Unsaved changes will be lost</p>
+</div>
+<div class="flex items-center gap-4">
+<button class="px-8 py-3.5 rounded-full text-tertiary font-bold hover:bg-slate-50 transition-colors">Cancel</button>
+<button class="px-10 py-3.5 rounded-full signature-gradient text-white font-bold shadow-lg shadow-primary-container/20 active:scale-95 transition-all">Save &amp; Send Invite</button>
+</div>
+</footer>
+<!-- BottomNavBar (Mobile Shared Component) -->
+<nav class="fixed bottom-0 left-0 w-full z-[60] md:hidden bg-white dark:bg-slate-900 flex justify-around items-center px-4 pb-6 pt-3 rounded-t-[32px] border-t border-slate-100 dark:border-slate-800 shadow-[0_-8px_24px_rgba(77,85,106,0.08)]">
+<div class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined">home</span>
+<span class="text-[10px] font-medium uppercase tracking-widest">Home</span>
+</div>
+<div class="flex flex-col items-center gap-1 bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white rounded-full px-6 py-2">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px] font-medium uppercase tracking-widest">People</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined">group</span>
+<span class="text-[10px] font-medium uppercase tracking-widest">Teams</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined">menu</span>
+<span class="text-[10px] font-medium uppercase tracking-widest">Menu</span>
+</div>
+</nav>
+</body></html>

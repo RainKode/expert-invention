@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sunday - End of Day Wrap-up</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed": "#211a15",
+                        "surface-container-low": "#f2f4f6",
+                        "surface": "#f7f9fb",
+                        "surface-container-high": "#e6e8ea",
+                        "inverse-surface": "#2d3133",
+                        "outline": "#76777d",
+                        "on-primary-fixed-variant": "#3e465b",
+                        "error": "#ba1a1a",
+                        "secondary-fixed-dim": "#bec6e0",
+                        "surface-tint": "#565e73",
+                        "error-container": "#ffdad6",
+                        "background": "#f7f9fb",
+                        "tertiary-fixed": "#eee0d7",
+                        "on-primary-fixed": "#131b2e",
+                        "surface-bright": "#f7f9fb",
+                        "on-primary": "#ffffff",
+                        "surface-variant": "#e0e3e5",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-container": "#4d556a",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed": "#dae2fd",
+                        "on-surface-variant": "#45464c",
+                        "primary-fixed-dim": "#bec6df",
+                        "on-error": "#ffffff",
+                        "surface-container": "#eceef0",
+                        "on-secondary-fixed": "#131b2e",
+                        "on-surface": "#191c1e",
+                        "secondary-container": "#dae2fd",
+                        "surface-dim": "#d8dadc",
+                        "inverse-primary": "#bec6df",
+                        "tertiary-fixed-dim": "#d1c4bb",
+                        "on-background": "#191c1e",
+                        "tertiary": "#453d36",
+                        "on-primary-container": "#c2cae3",
+                        "on-tertiary-fixed-variant": "#4e453e",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-secondary-container": "#5c647b",
+                        "on-error-container": "#93000a",
+                        "primary-fixed": "#dae2fc",
+                        "primary": "#363e52",
+                        "on-tertiary-container": "#d6c9bf",
+                        "tertiary-container": "#5d544d",
+                        "secondary": "#565e74",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-secondary-fixed-variant": "#3e465c",
+                        "outline-variant": "#c6c6cd"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Plus Jakarta Sans"],
+                        "label": ["Plus Jakarta Sans"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f7f9fb;
+        }
+        .glass-overlay {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+        }
+        .shadow-soft {
+            shadow-color: #4d556a;
+            box-shadow: 0px 24px 48px rgba(77, 85, 106, 0.06);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface antialiased overflow-x-hidden">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full flex flex-col p-8 gap-8 bg-[#f7f9fb] dark:bg-[#191c1e] shadow-[24px_0_48px_rgba(77,85,106,0.04)] h-screen w-72 rounded-r-[48px] font-['Plus_Jakarta_Sans'] tracking-[-0.02em] z-50">
+<div class="flex items-center gap-4 px-2">
+<div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#4d556a] to-[#656d84] flex items-center justify-center text-white font-bold">S</div>
+<div>
+<h1 class="text-2xl font-bold text-[#4d556a] dark:text-[#f7f9fb]">Sunday</h1>
+<p class="text-xs text-on-surface-variant opacity-60">HR SaaS</p>
+</div>
+</div>
+<nav class="flex flex-col gap-2 mt-4">
+<a class="text-[#656d84] dark:text-[#c6c6cd] hover:bg-[#ffffff]/50 dark:hover:bg-[#434655]/20 rounded-full px-6 py-3 transition-all hover:translate-x-1 duration-300 flex items-center gap-3" href="#">
+<span class="material-symbols-outlined">calendar_view_week</span>
+<span>Weekly Plan</span>
+</a>
+<a class="text-[#656d84] dark:text-[#c6c6cd] hover:bg-[#ffffff]/50 dark:hover:bg-[#434655]/20 rounded-full px-6 py-3 transition-all hover:translate-x-1 duration-300 flex items-center gap-3" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span>Team Plans</span>
+</a>
+<a class="text-[#656d84] dark:text-[#c6c6cd] hover:bg-[#ffffff]/50 dark:hover:bg-[#434655]/20 rounded-full px-6 py-3 transition-all hover:translate-x-1 duration-300 flex items-center gap-3" href="#">
+<span class="material-symbols-outlined">assignment_turned_in</span>
+<span>Daily Check-in</span>
+</a>
+<a class="bg-gradient-to-br from-[#4d556a] to-[#656d84] text-white rounded-full px-6 py-3 shadow-lg shadow-[#4d556a]/20 flex items-center gap-3" href="#">
+<span class="material-symbols-outlined">history_edu</span>
+<span>EOD Wrap-up</span>
+</a>
+<a class="text-[#656d84] dark:text-[#c6c6cd] hover:bg-[#ffffff]/50 dark:hover:bg-[#434655]/20 rounded-full px-6 py-3 transition-all hover:translate-x-1 duration-300 flex items-center gap-3" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</a>
+</nav>
+<div class="mt-auto">
+<button class="w-full bg-tertiary-fixed text-on-tertiary-fixed font-semibold py-4 rounded-full flex items-center justify-center gap-2 scale-95 active:scale-90 transition-all shadow-soft">
+<span class="material-symbols-outlined">add</span>
+                New Task
+            </button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<div class="ml-72 min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="flex items-center justify-between px-12 h-20 bg-transparent backdrop-blur-xl sticky top-0 z-40">
+<div class="flex items-center bg-surface-container-low px-6 py-2.5 rounded-full w-96">
+<span class="material-symbols-outlined text-outline mr-3">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-full font-medium" placeholder="Search tasks or documents..." type="text"/>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4 text-[#656d84]">
+<span class="material-symbols-outlined cursor-pointer hover:opacity-100 transition-opacity opacity-60">notifications</span>
+<span class="material-symbols-outlined cursor-pointer hover:opacity-100 transition-opacity opacity-60">help</span>
+<span class="material-symbols-outlined cursor-pointer hover:opacity-100 transition-opacity opacity-60">grid_view</span>
+</div>
+<div class="h-10 w-10 rounded-full overflow-hidden border-2 border-white shadow-sm">
+<img class="w-full h-full object-cover" data-alt="professional headshot of a smiling female employee with creative lighting in a modern office background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBD-eyuRnCbi_0duHR8Svs9gf0frNw47XBMm9PVRJgxISev7MZV4LCYDLYJAf_5JWYHTf6Y3sjkZdq3m46Kqjc41apQMEFsV3pN-KcJdyFcudkrvANZmCgawwECh3SWE2soue8t0ROw_fg5bHrzfp1X0fHx8kPB9j8lCiFlLPWW7wCtSjtBDlrzg21UZNCJnSasq1CRQmKSYhRHjSnoCD08_KTQ-Czgfw3XtVFV1U5rKd3lkJq_vxOY1UeodaOa-n6zqq3ma9ua6Ng"/>
+</div>
+</div>
+</header>
+<!-- Canvas Area -->
+<main class="flex-1 px-12 py-12 flex flex-col max-w-6xl">
+<!-- Page Header -->
+<header class="mb-12">
+<h2 class="text-4xl font-extrabold text-primary-container tracking-[-0.04em] mb-2">End of Day Wrap-up</h2>
+<p class="text-on-surface-variant font-medium opacity-70">Review your progress and log your daily achievements for Friday, Oct 27.</p>
+</header>
+<!-- Wrap-up Table Section -->
+<section class="mb-12">
+<div class="grid grid-cols-12 px-6 py-4 mb-4 text-xs font-bold uppercase tracking-widest text-outline">
+<div class="col-span-5">Tasks</div>
+<div class="col-span-2 text-center">Planned Hours</div>
+<div class="col-span-2 text-center">Actual Hours</div>
+<div class="col-span-2 text-center">Status</div>
+<div class="col-span-1 text-right">Match</div>
+</div>
+<div class="flex flex-col gap-4">
+<!-- Row 1 -->
+<div class="grid grid-cols-12 items-center bg-surface-container-lowest p-6 rounded-lg shadow-soft group hover:translate-y-[-2px] transition-all">
+<div class="col-span-5 flex items-center gap-4">
+<div class="w-2 h-10 bg-primary-container rounded-full"></div>
+<div>
+<h4 class="font-bold text-on-surface">Quarterly Performance Review Design</h4>
+<p class="text-xs text-on-surface-variant opacity-60">HR Strategy • #4920</p>
+</div>
+</div>
+<div class="col-span-2 text-center font-medium text-on-surface-variant">4.0h</div>
+<div class="col-span-2 flex justify-center">
+<input class="w-16 h-10 bg-surface-container-low border-none rounded-xl text-center font-bold focus:ring-2 focus:ring-primary-container/20" type="text" value="4.0"/>
+</div>
+<div class="col-span-2 flex justify-center">
+<span class="px-4 py-1.5 bg-surface-container-high text-on-surface-variant text-[10px] font-extrabold uppercase tracking-wider rounded-full">Completed</span>
+</div>
+<div class="col-span-1 flex justify-end">
+<span class="material-symbols-outlined text-emerald-500" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+<!-- Row 2 -->
+<div class="grid grid-cols-12 items-center bg-surface-container-lowest p-6 rounded-lg shadow-soft group hover:translate-y-[-2px] transition-all">
+<div class="col-span-5 flex items-center gap-4">
+<div class="w-2 h-10 bg-tertiary rounded-full"></div>
+<div>
+<h4 class="font-bold text-on-surface">Candidate Screening Call - Engineering</h4>
+<p class="text-xs text-on-surface-variant opacity-60">Recruitment • #4811</p>
+</div>
+</div>
+<div class="col-span-2 text-center font-medium text-on-surface-variant">1.5h</div>
+<div class="col-span-2 flex justify-center">
+<input class="w-16 h-10 bg-surface-container-low border-none rounded-xl text-center font-bold text-error focus:ring-2 focus:ring-error/20" type="text" value="2.5"/>
+</div>
+<div class="col-span-2 flex justify-center">
+<span class="px-4 py-1.5 bg-surface-container-high text-on-surface-variant text-[10px] font-extrabold uppercase tracking-wider rounded-full">Completed</span>
+</div>
+<div class="col-span-1 flex justify-end">
+<span class="material-symbols-outlined text-amber-500" style="font-variation-settings: 'FILL' 1;">warning</span>
+</div>
+</div>
+<!-- Row 3 -->
+<div class="grid grid-cols-12 items-center bg-surface-container-lowest p-6 rounded-lg shadow-soft group hover:translate-y-[-2px] transition-all">
+<div class="col-span-5 flex items-center gap-4">
+<div class="w-2 h-10 bg-secondary rounded-full"></div>
+<div>
+<h4 class="font-bold text-on-surface">Update Employee Handbook - V2.4</h4>
+<p class="text-xs text-on-surface-variant opacity-60">Policy • #4933</p>
+</div>
+</div>
+<div class="col-span-2 text-center font-medium text-on-surface-variant">2.0h</div>
+<div class="col-span-2 flex justify-center">
+<input class="w-16 h-10 bg-surface-container-low border-none rounded-xl text-center font-bold focus:ring-2 focus:ring-primary-container/20" type="text" value="1.0"/>
+</div>
+<div class="col-span-2 flex justify-center">
+<span class="px-4 py-1.5 bg-secondary-container text-on-secondary-container text-[10px] font-extrabold uppercase tracking-wider rounded-full">In Progress</span>
+</div>
+<div class="col-span-1 flex justify-end">
+<span class="material-symbols-outlined text-amber-500" style="font-variation-settings: 'FILL' 1;">warning</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Bottom Section: Notes & Upload -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
+<div class="flex flex-col gap-4">
+<label class="text-sm font-bold text-primary-container ml-2">Wrap-up Notes</label>
+<textarea class="w-full h-44 bg-surface-container-lowest border-none rounded-lg p-6 shadow-soft focus:ring-2 focus:ring-primary-container/20 resize-none text-on-surface placeholder:opacity-40" placeholder="Summarize your key wins, blockers, or items carried over to tomorrow..."></textarea>
+</div>
+<div class="flex flex-col gap-4">
+<label class="text-sm font-bold text-primary-container ml-2">Attachments</label>
+<div class="flex-1 border-2 border-dashed border-outline-variant/30 rounded-lg bg-surface-container-lowest flex flex-col items-center justify-center p-8 transition-colors hover:bg-white cursor-pointer group">
+<span class="material-symbols-outlined text-4xl text-outline mb-4 group-hover:scale-110 transition-transform">cloud_upload</span>
+<p class="text-sm font-bold text-on-surface mb-1">Upload progress files</p>
+<p class="text-xs text-on-surface-variant opacity-60 text-center">Drag and drop or click to browse. Support PDF, PNG, JPG.</p>
+<button class="mt-6 px-6 py-2 bg-surface-container-low text-on-surface-variant text-xs font-bold rounded-full hover:bg-surface-container-high transition-colors">Select Files</button>
+</div>
+</div>
+</section>
+<!-- Final Submission -->
+<div class="flex flex-col items-center justify-center gap-6 pb-20">
+<div class="flex items-center gap-2 text-sm font-medium text-on-surface-variant">
+<span class="material-symbols-outlined text-emerald-500 text-lg">verified</span>
+                    All hours logged and discrepancies noted.
+                </div>
+<button class="bg-gradient-to-br from-[#4d556a] to-[#656d84] text-white font-extrabold text-lg px-16 py-6 rounded-full shadow-2xl shadow-[#4d556a]/30 hover:scale-[1.02] active:scale-95 transition-all">
+                    Submit Wrap-up
+                </button>
+</div>
+</main>
+</div>
+<!-- Background Decorative Elements -->
+<div class="fixed top-[-10%] right-[-5%] w-[40vw] h-[40vw] rounded-full bg-tertiary-fixed/20 blur-[120px] -z-10 pointer-events-none"></div>
+<div class="fixed bottom-[-5%] left-[20%] w-[30vw] h-[30vw] rounded-full bg-secondary-fixed/30 blur-[100px] -z-10 pointer-events-none"></div>
+</body></html>

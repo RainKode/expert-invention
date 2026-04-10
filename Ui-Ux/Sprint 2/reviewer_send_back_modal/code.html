@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#f2f4f6",
+                        "on-primary-fixed": "#131b2e",
+                        "surface-container-highest": "#e0e3e5",
+                        "surface": "#f7f9fb",
+                        "inverse-primary": "#bec6df",
+                        "surface-container-high": "#e6e8ea",
+                        "on-tertiary-fixed": "#211a15",
+                        "tertiary-fixed": "#eee0d7",
+                        "error-container": "#ffdad6",
+                        "primary-container": "#4d556a",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#c2cae3",
+                        "surface-container": "#eceef0",
+                        "on-error-container": "#93000a",
+                        "outline": "#76777d",
+                        "secondary-fixed": "#dae2fd",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-tertiary": "#ffffff",
+                        "on-surface": "#191c1e",
+                        "surface-dim": "#d8dadc",
+                        "surface-bright": "#f7f9fb",
+                        "on-secondary-fixed-variant": "#3e465c",
+                        "secondary-fixed-dim": "#bec6e0",
+                        "on-tertiary-container": "#d6c9bf",
+                        "on-primary-fixed-variant": "#3e465b",
+                        "tertiary-container": "#5d544d",
+                        "secondary-container": "#dae2fd",
+                        "background": "#f7f9fb",
+                        "surface-tint": "#565e73",
+                        "on-primary": "#ffffff",
+                        "surface-variant": "#e0e3e5",
+                        "outline-variant": "#c6c6cd",
+                        "primary-fixed": "#dae2fc",
+                        "on-secondary-container": "#5c647b",
+                        "primary-fixed-dim": "#bec6df",
+                        "tertiary": "#453d36",
+                        "secondary": "#565e74",
+                        "on-background": "#191c1e",
+                        "on-tertiary-fixed-variant": "#4e453e",
+                        "on-secondary-fixed": "#131b2e",
+                        "tertiary-fixed-dim": "#d1c4bb",
+                        "primary": "#363e52",
+                        "on-error": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-surface": "#2d3133",
+                        "on-surface-variant": "#45464c",
+                        "error": "#ba1a1a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Plus Jakarta Sans"],
+                        "label": ["Plus Jakarta Sans"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-overlay {
+            background: rgba(247, 249, 251, 0.8);
+            backdrop-filter: blur(20px);
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen">
+<!-- Mock Background for Context -->
+<div class="fixed inset-0 z-0 p-8 md:pl-80 pt-20">
+<div class="max-w-4xl mx-auto space-y-6">
+<div class="h-8 w-48 bg-surface-container-high rounded-full"></div>
+<div class="grid grid-cols-3 gap-6">
+<div class="h-64 bg-surface-container-lowest rounded-lg shadow-sm"></div>
+<div class="h-64 bg-surface-container-lowest rounded-lg shadow-sm"></div>
+<div class="h-64 bg-surface-container-lowest rounded-lg shadow-sm"></div>
+</div>
+<div class="h-96 bg-surface-container-lowest rounded-lg shadow-sm"></div>
+</div>
+</div>
+<!-- Modal Backdrop -->
+<div class="fixed inset-0 z-50 glass-overlay flex items-center justify-center p-4">
+<!-- Modal Card -->
+<div class="w-full max-w-[480px] bg-surface-container-lowest shadow-[0px_24px_48px_rgba(77,85,106,0.06)] rounded-lg overflow-hidden flex flex-col">
+<!-- Header Section -->
+<div class="px-8 pt-8 pb-6">
+<div class="flex items-center justify-between mb-2">
+<span class="text-xs font-bold tracking-widest text-on-surface-variant uppercase">Action Required</span>
+<button class="text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-lg">close</span>
+</button>
+</div>
+<h2 class="text-2xl font-bold tracking-tight text-on-surface leading-tight mb-4">Send back for review</h2>
+<!-- Task Context Area -->
+<div class="bg-surface-container-low rounded-md p-4 flex items-center gap-4">
+<div class="flex-shrink-0">
+<img alt="Current Assignee" class="h-10 w-10 rounded-full object-cover grayscale opacity-80" data-alt="Close up portrait of a young professional woman with a friendly expression in a brightly lit modern office setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDL8XQ_f7KdM68y74iUrpFBCbBW4l1FHSQrf73tr0JBFj3GnNQTfmM1ChDpFbtsOliNbcIGykpyg70gjZicCO8K21lYKqOV4Kudhxmoxttpsn-s6ZOz4IWJ1RH3l369objbZv0pPrWLuQnl0r1j1bAunS3kG2OI6ddmyDKfrPoRORB3ao_JRu0DPsKEmr-OQmZpr_xfJR_2ato0UTsHPX_0J6CBO3yYS3FFNUe_xKaI20S_A3P7vsGf0rHJeuo0q2jt6oOTSXiJrCQ"/>
+</div>
+<div class="flex-grow min-w-0">
+<p class="text-xs font-semibold text-on-surface-variant mb-0.5">Quarterly Performance Framework</p>
+<p class="text-sm text-on-surface truncate">Assignee: <span class="font-medium">Sarah Jenkins</span></p>
+</div>
+<div class="flex-shrink-0">
+<span class="material-symbols-outlined text-on-surface-variant/40">assignment_return</span>
+</div>
+</div>
+</div>
+<!-- Form Body -->
+<div class="px-8 pb-8 space-y-6">
+<div class="space-y-2">
+<div class="flex justify-between items-end">
+<label class="text-sm font-semibold text-on-surface" for="reason">Reason for send-back</label>
+<span class="text-[10px] font-medium text-on-surface-variant/60 tracking-wider">REQUIRED</span>
+</div>
+<div class="relative">
+<textarea class="w-full bg-surface-container-low border-none focus:ring-2 focus:ring-primary-container rounded-md p-4 text-sm text-on-surface placeholder:text-on-surface-variant/40 resize-none transition-all" id="reason" placeholder="Please provide clear instructions on what needs to be adjusted..." rows="5"></textarea>
+<div class="absolute bottom-3 right-3 text-[10px] font-bold text-on-surface-variant/50 tracking-tighter">
+                            0 / 500
+                        </div>
+</div>
+</div>
+<!-- Soft Alert -->
+<div class="flex gap-3 items-start px-1">
+<span class="material-symbols-outlined text-tertiary text-sm mt-0.5">info</span>
+<p class="text-xs text-on-surface-variant leading-relaxed">
+                        Sarah will receive a notification and this task will be moved back to her active queue for revision.
+                    </p>
+</div>
+</div>
+<!-- Action Footer -->
+<div class="px-8 pb-8 flex gap-3">
+<button class="flex-1 h-12 rounded-full font-semibold text-sm text-on-surface hover:bg-surface-container-high transition-all active:scale-[0.98]">
+                    Cancel
+                </button>
+<button class="flex-[1.5] h-12 bg-surface-container-high hover:bg-surface-container-highest rounded-full font-bold text-sm text-primary transition-all active:scale-[0.98] flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">send</span>
+                    Send Back
+                </button>
+</div>
+</div>
+</div>
+<!-- Background Navigation Anchor (Implicit Presence) -->
+<nav class="fixed left-0 top-0 bottom-0 w-72 bg-slate-50 hidden md:flex flex-col z-40 border-none shadow-[0px_24px_48px_rgba(77,85,106,0.06)]">
+<div class="p-8">
+<div class="flex items-center gap-3 mb-10">
+<div class="h-8 w-8 bg-primary-container rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-lg" data-weight="fill">hub</span>
+</div>
+<span class="text-xl font-bold tracking-tighter text-slate-700">Sunday</span>
+</div>
+<div class="space-y-1">
+<div class="flex items-center gap-4 px-4 py-3 text-slate-500 rounded-md">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</div>
+<div class="flex items-center gap-4 px-4 py-3 text-slate-900 font-semibold border-r-2 border-slate-700 bg-slate-100/50">
+<span class="material-symbols-outlined">groups</span>
+<span class="text-sm">Directory</span>
+</div>
+<div class="flex items-center gap-4 px-4 py-3 text-slate-500">
+<span class="material-symbols-outlined">hub</span>
+<span class="text-sm font-medium">Teams</span>
+</div>
+</div>
+</div>
+</nav>
+</body></html>

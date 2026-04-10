@@ -1,0 +1,160 @@
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface": "#f7f9fb",
+            "on-tertiary-fixed": "#211a15",
+            "surface-container-high": "#e6e8ea",
+            "primary-fixed-dim": "#bec6df",
+            "on-tertiary-fixed-variant": "#4e453e",
+            "on-tertiary": "#ffffff",
+            "surface-tint": "#565e73",
+            "secondary": "#565e74",
+            "on-primary-container": "#c2cae3",
+            "surface-container-low": "#f2f4f6",
+            "secondary-container": "#dae2fd",
+            "on-primary-fixed-variant": "#3e465b",
+            "on-surface": "#191c1e",
+            "surface-container": "#eceef0",
+            "tertiary-fixed": "#eee0d7",
+            "on-tertiary-container": "#d6c9bf",
+            "inverse-surface": "#2d3133",
+            "primary-fixed": "#dae2fc",
+            "on-secondary-container": "#5c647b",
+            "surface-container-highest": "#e0e3e5",
+            "background": "#f7f9fb",
+            "on-secondary-fixed-variant": "#3e465c",
+            "on-error": "#ffffff",
+            "outline-variant": "#c6c6cd",
+            "surface-container-lowest": "#ffffff",
+            "surface-dim": "#d8dadc",
+            "tertiary-container": "#5d544d",
+            "inverse-primary": "#bec6df",
+            "outline": "#76777d",
+            "error-container": "#ffdad6",
+            "on-secondary": "#ffffff",
+            "on-error-container": "#93000a",
+            "on-primary": "#ffffff",
+            "primary": "#363e52",
+            "secondary-fixed": "#dae2fd",
+            "primary-container": "#4d556a",
+            "surface-bright": "#f7f9fb",
+            "on-background": "#191c1e",
+            "on-secondary-fixed": "#131b2e",
+            "tertiary": "#453d36",
+            "on-primary-fixed": "#131b2e",
+            "surface-variant": "#e0e3e5",
+            "tertiary-fixed-dim": "#d1c4bb",
+            "on-surface-variant": "#45464c",
+            "secondary-fixed-dim": "#bec6e0",
+            "error": "#ba1a1a",
+            "inverse-on-surface": "#eff1f3"
+          },
+          "borderRadius": {
+            "DEFAULT": "1rem",
+            "lg": "2rem",
+            "xl": "3rem",
+            "full": "9999px"
+          },
+          "fontFamily": {
+            "headline": ["Plus Jakarta Sans"],
+            "body": ["Plus Jakarta Sans"],
+            "label": ["Plus Jakarta Sans"]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen">
+<!-- Main Workspace Background (Mock Dashboard) -->
+<main class="fixed inset-0 p-12 flex flex-col gap-8 overflow-hidden opacity-40 grayscale-[0.5]">
+<header class="flex justify-between items-center h-20">
+<div class="text-2xl font-bold tracking-tighter bg-gradient-to-br from-[#4d556a] to-[#656d84] bg-clip-text text-transparent">Sunday HR</div>
+<div class="flex gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container-high"></div>
+<div class="w-10 h-10 rounded-full bg-surface-container-high"></div>
+</div>
+</header>
+<div class="grid grid-cols-3 gap-6">
+<div class="h-64 bg-surface-container-lowest rounded-lg shadow-[0px_24px_48px_rgba(77,85,106,0.06)]"></div>
+<div class="h-64 bg-surface-container-lowest rounded-lg shadow-[0px_24px_48px_rgba(77,85,106,0.06)]"></div>
+<div class="h-64 bg-surface-container-lowest rounded-lg shadow-[0px_24px_48px_rgba(77,85,106,0.06)]"></div>
+</div>
+</main>
+<!-- M16 Modal Overlay: Glassmorphism 80% opacity surface, 20px blur -->
+<div class="fixed inset-0 z-[100] flex items-center justify-center bg-surface/80 backdrop-blur-[20px] p-6">
+<!-- Modal Card: surface_container_lowest, 24px radius, 480px width -->
+<div class="bg-surface-container-lowest w-full max-w-[480px] rounded-[24px] shadow-[0px_24px_48px_rgba(77,85,106,0.06)] overflow-hidden flex flex-col">
+<!-- Header -->
+<div class="pt-10 px-8 pb-6">
+<h2 class="text-xl font-bold tracking-[-0.02em] text-on-surface">Acknowledge Unplanned Days</h2>
+</div>
+<!-- Body -->
+<div class="px-8 pb-8 flex flex-col gap-6">
+<!-- Employee Profile Section -->
+<div class="flex items-center gap-4">
+<img class="w-12 h-12 rounded-full object-cover shadow-sm" data-alt="Professional portrait of a middle-aged man with short hair and a kind expression in a soft-lit office environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIFIY2sUDIv9APVFqpIquqE7Lx2MA7B0m3D6yPMRSgCkC8MtyimIt4m8omRJMDiE_FtBJQELfOR0aEuz2YUn190m1CeKgHvL66FaqTY21DNiDw2-UjGhaTc-UMYRSO2IGGz9wvzKZHdveZVprpbUxGK9kZ2H1lxOZFGqJg9noxMlHubqx7i1ygkf-L1CYFagWQ6vBnTiawCG4CCBIoe_NpoMN_OcG3YaQ8pEZtH8NDg7xO0PTbnbWso4uL1GPdSZ9apaUEliePjKM"/>
+<div class="flex flex-col">
+<span class="text-sm font-semibold text-on-surface">Marcus Holloway</span>
+<span class="text-xs text-on-surface-variant">Senior Product Designer</span>
+</div>
+</div>
+<!-- Warning Description -->
+<div class="flex flex-col gap-3">
+<p class="text-[14px] leading-relaxed text-on-surface-variant">
+            Activity detected outside of scheduled working hours. Please acknowledge the following unplanned days:
+          </p>
+<div class="flex gap-2">
+<span class="px-4 py-1.5 bg-surface-container-high rounded-full text-xs font-semibold text-primary">Mon</span>
+<span class="px-4 py-1.5 bg-surface-container-high rounded-full text-xs font-semibold text-primary">Wed</span>
+</div>
+</div>
+<!-- Amber Tonal Info Note -->
+<div class="bg-[#fef9f0] p-4 rounded-[20px] flex gap-3">
+<span class="material-symbols-outlined text-[#b47c00] text-xl">history_edu</span>
+<p class="text-xs leading-relaxed text-[#7a5300] font-medium">
+            Acknowledging creates an audit log entry for compliance review. This action cannot be undone once submitted.
+          </p>
+</div>
+<!-- Textarea Field -->
+<div class="flex flex-col gap-2">
+<label class="text-[13px] font-semibold text-on-surface-variant px-1">Add a note (optional)</label>
+<div class="relative">
+<textarea class="w-full bg-surface-container-low border-none rounded-[20px] p-4 text-sm text-on-surface placeholder-on-surface-variant/50 focus:ring-2 focus:ring-primary/10 transition-all resize-none" maxlength="500" placeholder="Provide context for these unplanned days..." rows="4"></textarea>
+<div class="absolute bottom-4 right-4 text-[10px] font-bold text-on-surface-variant/40 tracking-wider">
+              0 / 500
+            </div>
+</div>
+</div>
+</div>
+<!-- Footer: No horizontal divider, spacing and subtle tonal shift -->
+<div class="px-8 pb-10 flex gap-3">
+<button class="flex-1 py-3.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed-variant text-sm font-bold hover:bg-tertiary-fixed-dim transition-all active:scale-[0.98]">
+          Cancel
+        </button>
+<button class="flex-[2] py-3.5 rounded-full bg-gradient-to-br from-[#4d556a] to-[#656d84] text-white text-sm font-bold shadow-lg shadow-[#4d556a]/20 hover:opacity-90 transition-all active:scale-[0.98]">
+          Acknowledge
+        </button>
+</div>
+</div>
+</div>
+<!-- Decorative Background Elements for Depth -->
+<div class="fixed top-[-10%] right-[-5%] w-[400px] h-[400px] bg-primary/5 blur-[120px] rounded-full pointer-events-none"></div>
+<div class="fixed bottom-[-10%] left-[-5%] w-[400px] h-[400px] bg-tertiary/5 blur-[120px] rounded-full pointer-events-none"></div>
+</body></html>

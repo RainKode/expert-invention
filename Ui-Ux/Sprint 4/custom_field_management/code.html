@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Custom Fields | Atrium Boards</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline-variant": "#c6c6cd",
+                        "on-primary-fixed": "#131b2e",
+                        "surface-tint": "#565e73",
+                        "outline": "#76777d",
+                        "secondary-container": "#dae2fd",
+                        "on-background": "#191c1e",
+                        "error-container": "#ffdad6",
+                        "error": "#ba1a1a",
+                        "on-secondary-fixed-variant": "#3e465c",
+                        "surface-container-low": "#f2f4f6",
+                        "tertiary-fixed-dim": "#d1c4bb",
+                        "on-surface": "#191c1e",
+                        "surface-bright": "#f7f9fb",
+                        "on-error-container": "#93000a",
+                        "primary-fixed": "#dae2fc",
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#d8dadc",
+                        "primary-fixed-dim": "#bec6df",
+                        "secondary-fixed-dim": "#bec6e0",
+                        "on-secondary-container": "#5c647b",
+                        "on-primary-fixed-variant": "#3e465b",
+                        "secondary-fixed": "#dae2fd",
+                        "on-secondary-fixed": "#131b2e",
+                        "tertiary": "#453d36",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#4e453e",
+                        "surface-container-lowest": "#ffffff",
+                        "surface": "#f7f9fb",
+                        "background": "#f7f9fb",
+                        "secondary": "#565e74",
+                        "on-surface-variant": "#45464c",
+                        "surface-container-highest": "#e0e3e5",
+                        "inverse-surface": "#2d3133",
+                        "inverse-on-surface": "#eff1f3",
+                        "inverse-primary": "#bec6df",
+                        "tertiary-fixed": "#eee0d7",
+                        "tertiary-container": "#5d544d",
+                        "on-primary-container": "#c2cae3",
+                        "on-tertiary-fixed": "#211a15",
+                        "on-secondary": "#ffffff",
+                        "surface-variant": "#e0e3e5",
+                        "surface-container-high": "#e6e8ea",
+                        "primary-container": "#4d556a",
+                        "on-tertiary-container": "#d6c9bf",
+                        "on-error": "#ffffff",
+                        "surface-container": "#eceef0",
+                        "primary": "#363e52"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Plus Jakarta Sans"],
+                        "label": ["Plus Jakarta Sans"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bg-indigo-gradient {
+            background: linear-gradient(135deg, #4d556a 0%, #656d84 100%);
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen">
+<!-- TopNavBar from JSON Shell -->
+<header class="w-full top-0 sticky z-50 bg-slate-50/80 dark:bg-slate-900/80 backdrop-blur-xl shadow-[0px_24px_48px_rgba(77,85,106,0.06)]">
+<div class="flex justify-between items-center px-8 py-4 w-full max-w-[1440px] mx-auto">
+<div class="flex items-center gap-12">
+<span class="text-xl font-bold text-slate-700 dark:text-slate-100 font-plus-jakarta tracking-tight">Atrium Boards</span>
+<nav class="hidden md:flex items-center gap-8 text-slate-500 dark:text-slate-400 font-plus-jakarta tracking-tight font-semibold">
+<a class="hover:text-slate-700 dark:hover:text-slate-200 transition-colors" href="#">My Tasks</a>
+<a class="hover:text-slate-700 dark:hover:text-slate-200 transition-colors" href="#">Views</a>
+<a class="text-slate-900 dark:text-white border-b-2 border-slate-700 dark:border-slate-300 pb-1" href="#">Custom Fields</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-slate-100/50 transition-colors">
+<span class="material-symbols-outlined text-slate-600">notifications</span>
+</button>
+<button class="p-2 rounded-full hover:bg-slate-100/50 transition-colors">
+<span class="material-symbols-outlined text-slate-600">settings</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-container overflow-hidden">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="professional portrait of a creative director in a minimalist studio environment with soft architectural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCyvz-H9igdLypOuax6H9azGsKsfpw41khrCP4d1o-mghR3wXYljgkTmacMMu6S3I4nCKeCorSS2SY1t3HXOVEo_oLCEASOFcv5PiB0f8pAPG93ceLm76FZ8FROFyCA0PR_fbYIVnYg2Z8ZqfUMfMclXUX6hgMWRMxU_iou7N9khXc_WzYyZFLuSgOlIAP2PtbGVhz1-fxRtD6RMQG1PIGlUKKt9NZZB73fJB-DxFWW3_8FfMCf6d2pf2NV4xwCYIFaBuHes9NoGg"/>
+</div>
+</div>
+</div>
+</header>
+<div class="flex max-w-[1440px] mx-auto">
+<!-- SideNavBar from JSON Shell -->
+<aside class="hidden lg:flex flex-col w-64 h-[calc(100vh-72px)] p-4 sticky top-[72px] bg-slate-100 dark:bg-slate-950">
+<div class="flex items-center gap-3 mb-8 px-2">
+<div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center text-white">
+<span class="material-symbols-outlined">architecture</span>
+</div>
+<div>
+<h2 class="text-lg font-black text-slate-800 dark:text-slate-100 leading-tight">Architectural Quietude</h2>
+<p class="text-xs text-slate-500 font-medium">Workspace</p>
+</div>
+</div>
+<nav class="space-y-1 flex-1">
+<a class="text-slate-500 dark:text-slate-400 px-4 py-3 flex items-center gap-3 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-[24px] transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-plus-jakarta text-sm">Dashboard</span>
+</a>
+<a class="text-slate-500 dark:text-slate-400 px-4 py-3 flex items-center gap-3 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-[24px] transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="trello">pinboard</span>
+<span class="font-plus-jakarta text-sm">Boards</span>
+</a>
+<a class="text-slate-500 dark:text-slate-400 px-4 py-3 flex items-center gap-3 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-[24px] transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-plus-jakarta text-sm">Teams</span>
+</a>
+<a class="text-slate-500 dark:text-slate-400 px-4 py-3 flex items-center gap-3 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-[24px] transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-plus-jakarta text-sm">Reports</span>
+</a>
+<a class="bg-white dark:bg-slate-800 text-slate-900 dark:text-white px-4 py-3 flex items-center gap-3 rounded-[24px] font-bold shadow-sm transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-plus-jakarta text-sm">Settings</span>
+</a>
+</nav>
+<button class="mt-auto bg-indigo-gradient text-white px-6 py-4 rounded-full font-bold shadow-lg hover:scale-[0.98] transition-transform">
+                New Project
+            </button>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 px-8 py-12">
+<!-- Editorial Header -->
+<div class="flex justify-between items-end mb-12">
+<div class="space-y-2">
+<h1 class="text-4xl font-headline font-extrabold tracking-tight text-on-surface">Custom Fields</h1>
+<p class="text-on-surface-variant max-w-lg leading-relaxed">
+                        Define and manage metadata structures for your organizational workflows. Enhance data granularity across boards and teams.
+                    </p>
+</div>
+<button class="bg-indigo-gradient text-white px-8 py-3.5 rounded-full font-semibold flex items-center gap-2 shadow-xl shadow-primary-container/20 hover:scale-95 transition-all duration-200">
+<span class="material-symbols-outlined">add</span>
+                    Add Field
+                </button>
+</div>
+<!-- Filter Tabs -->
+<div class="flex items-center gap-8 mb-8 border-none">
+<button class="pb-4 px-2 border-b-4 border-primary-container text-primary-container font-bold transition-all">All Fields</button>
+<button class="pb-4 px-2 border-b-4 border-transparent text-on-surface-variant hover:text-on-surface transition-all">Active</button>
+<button class="pb-4 px-2 border-b-4 border-transparent text-on-surface-variant hover:text-on-surface transition-all">Archived</button>
+</div>
+<!-- Custom Fields List -->
+<div class="space-y-3">
+<!-- Header row for context (minimalist) -->
+<div class="grid grid-cols-12 px-6 py-2 text-xs font-bold uppercase tracking-widest text-on-surface-variant/60">
+<div class="col-span-5">Field Name &amp; Type</div>
+<div class="col-span-2 text-center">Scope</div>
+<div class="col-span-2 text-center">Usage</div>
+<div class="col-span-2 text-center">Status</div>
+<div class="col-span-1"></div>
+</div>
+<!-- Field Card 1 -->
+<div class="grid grid-cols-12 items-center bg-surface-container-lowest p-6 rounded-xl shadow-[0px_4px_24px_rgba(77,85,106,0.04)] hover:bg-surface-container-low transition-colors duration-200 group">
+<div class="col-span-5 flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+</div>
+<div>
+<h3 class="font-bold text-on-surface">Target Deadline</h3>
+<p class="text-sm text-on-surface-variant">Date Selector</p>
+</div>
+</div>
+<div class="col-span-2 flex justify-center">
+<span class="px-3 py-1 bg-surface-container-high rounded-full text-xs font-bold text-on-surface-variant">Global</span>
+</div>
+<div class="col-span-2 text-center">
+<span class="text-sm font-medium text-on-surface">142 Boards</span>
+</div>
+<div class="col-span-2 flex justify-center">
+<div class="flex items-center gap-2 px-3 py-1 bg-emerald-50 text-emerald-700 rounded-full text-xs font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                            Active
+                        </div>
+</div>
+<div class="col-span-1 flex justify-end">
+<button class="p-2 opacity-0 group-hover:opacity-100 hover:bg-surface-container rounded-full transition-all">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Field Card 2 -->
+<div class="grid grid-cols-12 items-center bg-surface-container-lowest p-6 rounded-xl shadow-[0px_4px_24px_rgba(77,85,106,0.04)] hover:bg-surface-container-low transition-colors duration-200 group">
+<div class="col-span-5 flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+</div>
+<div>
+<h3 class="font-bold text-on-surface">Project Budget</h3>
+<p class="text-sm text-on-surface-variant">Currency (USD)</p>
+</div>
+</div>
+<div class="col-span-2 flex justify-center">
+<span class="px-3 py-1 bg-surface-container-high rounded-full text-xs font-bold text-on-surface-variant">Finance Team</span>
+</div>
+<div class="col-span-2 text-center">
+<span class="text-sm font-medium text-on-surface">28 Boards</span>
+</div>
+<div class="col-span-2 flex justify-center">
+<div class="flex items-center gap-2 px-3 py-1 bg-emerald-50 text-emerald-700 rounded-full text-xs font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                            Active
+                        </div>
+</div>
+<div class="col-span-1 flex justify-end">
+<button class="p-2 opacity-0 group-hover:opacity-100 hover:bg-surface-container rounded-full transition-all">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Field Card 3 -->
+<div class="grid grid-cols-12 items-center bg-surface-container-lowest p-6 rounded-xl shadow-[0px_4px_24px_rgba(77,85,106,0.04)] hover:bg-surface-container-low transition-colors duration-200 group">
+<div class="col-span-5 flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+</div>
+<div>
+<h3 class="font-bold text-on-surface">Lead Stakeholder</h3>
+<p class="text-sm text-on-surface-variant">User Multi-select</p>
+</div>
+</div>
+<div class="col-span-2 flex justify-center">
+<span class="px-3 py-1 bg-surface-container-high rounded-full text-xs font-bold text-on-surface-variant">Global</span>
+</div>
+<div class="col-span-2 text-center">
+<span class="text-sm font-medium text-on-surface">310 Boards</span>
+</div>
+<div class="col-span-2 flex justify-center">
+<div class="flex items-center gap-2 px-3 py-1 bg-emerald-50 text-emerald-700 rounded-full text-xs font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                            Active
+                        </div>
+</div>
+<div class="col-span-1 flex justify-end">
+<button class="p-2 opacity-0 group-hover:opacity-100 hover:bg-surface-container rounded-full transition-all">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Field Card 4 (Archived Example) -->
+<div class="grid grid-cols-12 items-center bg-surface-container-lowest/60 p-6 rounded-xl shadow-[0px_4px_24px_rgba(77,85,106,0.02)] hover:bg-surface-container-low transition-colors duration-200 group">
+<div class="col-span-5 flex items-center gap-4 opacity-60">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+</div>
+<div>
+<h3 class="font-bold text-on-surface">Legacy PO Number</h3>
+<p class="text-sm text-on-surface-variant">Text Input</p>
+</div>
+</div>
+<div class="col-span-2 flex justify-center opacity-60">
+<span class="px-3 py-1 bg-surface-container-high rounded-full text-xs font-bold text-on-surface-variant">Archived</span>
+</div>
+<div class="col-span-2 text-center opacity-60">
+<span class="text-sm font-medium text-on-surface">0 Boards</span>
+</div>
+<div class="col-span-2 flex justify-center">
+<div class="flex items-center gap-2 px-3 py-1 bg-surface-container text-on-surface-variant rounded-full text-xs font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span>
+                            Archived
+                        </div>
+</div>
+<div class="col-span-1 flex justify-end">
+<button class="p-2 opacity-0 group-hover:opacity-100 hover:bg-surface-container rounded-full transition-all">
+<span class="material-symbols-outlined">settings_backup_restore</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Subtle Tonal Section for Contextual Help -->
+<section class="mt-20 p-10 bg-surface-container-low rounded-[2rem] flex items-center gap-10">
+<div class="flex-1 space-y-4">
+<div class="w-12 h-12 rounded-full bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed">
+<span class="material-symbols-outlined">lightbulb</span>
+</div>
+<h2 class="text-2xl font-headline font-bold text-on-surface">Architectural Tip</h2>
+<p class="text-on-surface-variant leading-relaxed">
+                        Custom fields allow you to create a structured data layer above your visual boards. Use "Global" scope for fields that should be available across the entire workspace, or restrict them to specific teams to reduce clutter.
+                    </p>
+<button class="text-primary-container font-bold flex items-center gap-2 group">
+                        Read the Field Documentation
+                        <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+<div class="hidden md:block w-72 h-48 rounded-2xl overflow-hidden shadow-2xl relative">
+<img alt="Workspace aesthetic" class="w-full h-full object-cover" data-alt="clean minimalist corporate boardroom with floor to ceiling windows and soft diffused natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6Xz8kt1u65iRH4AtMU2RT9D8MDTFYNXHRViYnXiyR-ANyyH7ogK8MbFx4hBYvTItvCE0KDUCeZ9_udESw4peQoLs7EpksgLYmfcKRJ4fI0W198fBNq3ZtUFd-FnMTeiIosBrypQwMYD4IoNhoC-Lf779uCFuVc-24i7fYJ0SIzmHqhs9T3tb719rlcPayNS3Vk0OmhsdX_T7QEJ0MAc5kPfKkPA3uUCpt8ljQE3YtTGCsaWx3-cjd237jYLL5g6Oev78_CaJrBAY"/>
+<div class="absolute inset-0 bg-primary-container/20 backdrop-overlay"></div>
+</div>
+</section>
+</main>
+</div>
+<!-- Mobile Navigation Shell -->
+<footer class="md:hidden fixed bottom-0 left-0 right-0 glass-panel border-none shadow-[0px_-8px_24px_rgba(77,85,106,0.06)] px-6 py-4">
+<div class="flex justify-around items-center">
+<button class="flex flex-col items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[10px] font-bold">Home</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined">pinboard</span>
+<span class="text-[10px] font-bold">Boards</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-primary-container">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">settings</span>
+<span class="text-[10px] font-bold">Settings</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined">analytics</span>
+<span class="text-[10px] font-bold">Stats</span>
+</button>
+</div>
+</footer>
+</body></html>
