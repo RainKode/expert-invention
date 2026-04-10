@@ -49,17 +49,17 @@ function nextMonday(weekStartISO: string) {
 function capacityColor(planned: number, available: number) {
   if (available === 0) return 'bg-surface-container-high'
   const pct = (planned / available) * 100
-  if (pct >= 80 && pct <= 100) return 'bg-emerald-500'
-  if (pct > 100) return 'bg-amber-400'
-  if (pct >= 50) return 'bg-amber-400'
+  if (pct >= 80 && pct <= 100) return 'bg-primary'
+  if (pct > 100) return 'bg-tertiary'
+  if (pct >= 50) return 'bg-tertiary'
   return 'bg-error'
 }
 
 function capacityTextColor(planned: number, available: number) {
   if (available === 0) return 'text-outline'
   const pct = (planned / available) * 100
-  if (pct >= 80 && pct <= 100) return 'text-emerald-600'
-  if (pct > 100 || pct > 0) return 'text-amber-600'
+  if (pct >= 80 && pct <= 100) return 'text-primary'
+  if (pct > 100 || pct > 0) return 'text-tertiary'
   return 'text-error'
 }
 
@@ -91,7 +91,7 @@ function PoolPill({ task }: { task: TaskInfo }) {
       ref={setNodeRef}
       {...listeners}
       {...attributes}
-      className={`bg-surface-container-lowest px-5 py-3 rounded-full flex items-center gap-3 shadow-sm border border-white hover:border-[#4d556a]/20 transition-all cursor-grab active:cursor-grabbing group select-none ${isDragging ? 'opacity-40' : ''}`}
+      className={`bg-surface-container-lowest px-5 py-3 rounded-full flex items-center gap-3 shadow-ambient-sm hover:shadow-ambient transition-all cursor-grab active:cursor-grabbing group select-none ${isDragging ? 'opacity-40' : ''}`}
     >
       <span className="text-sm font-semibold text-on-surface truncate max-w-[160px]">{task.title}</span>
       {task.project?.name && (
@@ -137,7 +137,7 @@ function TaskCard({
         </span>
         <div className="flex items-center gap-1">
           {entry.is_carryover && (
-            <span className="material-symbols-outlined text-sm text-amber-500" title="Carried over">
+            <span className="material-symbols-outlined text-sm text-tertiary" title="Carried over">
               autorenew
             </span>
           )}
@@ -342,7 +342,7 @@ function CommentsSection({
                     {new Date(comment.created_at).toLocaleString()}
                   </span>
                 </div>
-                <div className="bg-surface-container-highest/30 p-5 rounded-3xl rounded-tl-none border border-white/50">
+                <div className="bg-surface-container-highest/30 p-5 rounded-3xl rounded-tl-none">
                   <p className="text-sm text-on-surface-variant leading-relaxed italic">"{comment.text}"</p>
                 </div>
               </div>
@@ -587,7 +587,7 @@ export default function WeeklyPlanClient({
     if (!plan) return null
     const { submission_status } = plan
     if (submission_status === 'submitted')
-      return <span className="bg-emerald-100 text-emerald-700 px-4 py-1.5 rounded-full text-xs font-bold tracking-wide">Submitted</span>
+      return <span className="bg-primary-container/20 text-primary px-4 py-1.5 rounded-full text-xs font-bold tracking-wide">Submitted</span>
     if (submission_status === 'fluid')
       return <span className="bg-secondary-container text-on-secondary-container px-4 py-1.5 rounded-full text-xs font-bold tracking-wide">Fluid Mode</span>
     return <span className="bg-[#fff4e5] text-[#b45309] px-4 py-1.5 rounded-full text-xs font-bold tracking-wide">Not Submitted</span>
@@ -652,7 +652,7 @@ export default function WeeklyPlanClient({
 
             {locked && (
               <div className="flex gap-3">
-                <span className="px-6 py-2.5 rounded-full bg-emerald-100 text-emerald-700 font-bold text-sm">
+                <span className="px-6 py-2.5 rounded-full bg-primary-container/20 text-primary font-bold text-sm">
                   Plan Submitted ✓
                 </span>
                 {canComment && (
@@ -735,7 +735,7 @@ export default function WeeklyPlanClient({
       {/* Drag Overlay */}
       <DragOverlay>
         {activeDragData ? (
-          <div className="bg-surface-container-lowest px-5 py-3 rounded-full shadow-xl border border-[#4d556a]/20 text-sm font-semibold text-on-surface opacity-90">
+          <div className="bg-surface-container-lowest px-5 py-3 rounded-full shadow-xl text-sm font-semibold text-on-surface opacity-90">
             {activeDragData.title}
           </div>
         ) : null}

@@ -11,16 +11,16 @@ import {
   useSensors,
   closestCenter,
 } from '@dnd-kit/core'
-import { TaskWithRelations as Task, SavedView } from '@/types'
+import { TaskWithRelations as Task, SavedView, CustomFieldDefinition, CustomFieldType } from '@/types'
 import KanbanColumn from '@/components/board/KanbanColumn'
 import KanbanCard from '@/components/board/KanbanCard'
 import CompletionReportModal from '@/components/tasks/CompletionReportModal'
 
 const COLUMNS = [
-  { id: 'todo', label: 'To Do', color: 'bg-slate-400' },
-  { id: 'in_progress', label: 'In Progress', color: 'bg-blue-500' },
-  { id: 'in_review', label: 'In Review', color: 'bg-purple-500' },
-  { id: 'done', label: 'Done', color: 'bg-green-500' },
+  { id: 'todo', label: 'To Do', color: 'bg-outline' },
+  { id: 'in_progress', label: 'In Progress', color: 'bg-secondary' },
+  { id: 'in_review', label: 'In Review', color: 'bg-tertiary' },
+  { id: 'done', label: 'Done', color: 'bg-primary' },
 ] as const
 
 type ColumnId = typeof COLUMNS[number]['id']
@@ -33,6 +33,7 @@ interface Filters {
   project_id: string
   billable: string
   assignee_id: string
+  [key: string]: string
 }
 
 interface Props {
@@ -42,11 +43,12 @@ interface Props {
   projects: { id: string; name: string }[]
   teamMembers: { id: string; name: string }[]
   initialSavedViews: SavedView[]
+  customFields: Pick<CustomFieldDefinition, 'id' | 'name' | 'field_type' | 'options' | 'scope_type' | 'scope_id' | 'status'>[]
 }
 
 const MANAGER_ROLES = ['assistant_manager', 'manager', 'senior_manager', 'admin']
 
-export default function BoardClient({ userId, userRole, teamId, projects, teamMembers, initialSavedViews }: Props) {
+export default function BoardClient({ userId, userRole, teamId, projects, teamMembers, initialSavedViews, customFields }: Props) {
   const isManager = MANAGER_ROLES.includes(userRole)
 
   const [tasks, setTasks] = useState<Task[]>([])
@@ -82,6 +84,10 @@ export default function BoardClient({ userId, userRole, teamId, projects, teamMe
     if (filters.project_id) params.set('project_id', filters.project_id)
     if (filters.billable) params.set('billable', filters.billable)
     if (filters.assignee_id) params.set('assignee_id', filters.assignee_id)
+    // Custom field filters
+    Object.entries(filters).forEach(([key, val]) => {
+      if (key.startsWith('cf_') && val) params.set(key, val)
+    })
     if (isManager) params.set('team', 'true')
     const res = await fetch(`/api/tasks?${params}&page_size=200`)
     if (res.ok) {
@@ -162,46 +168,50 @@ export default function BoardClient({ userId, userRole, teamId, projects, teamMe
   }
 
   function applyView(view: SavedView) {
-    const f = view.filters as Partial<Filters>
-    setFilters(prev => ({ ...prev, ...f }))
+    const f = view.filters as Record<string, string>
+    setFilters(prev => {
+      const next = { ...prev }
+      Object.entries(f).forEach(([k, v]) => { if (v !== undefined) next[k] = v })
+      return next
+    })
     setSavedViewsOpen(false)
   }
 
-  function setFilter(key: keyof Filters, value: string) {
+  function setFilter(key: string, value: string) {
     setFilters(prev => ({ ...prev, [key]: value }))
   }
 
   return (
-    <div className="flex flex-col h-full min-h-screen bg-[#f7f9fb]">
+    <div className="flex flex-col h-full min-h-screen bg-surface">
       {/* Page header */}
       <div className="px-6 pt-6 pb-4 flex items-center justify-between gap-4 flex-wrap">
         <div>
-          <p className="text-sm text-[#434655]">Workspace / Q4</p>
-          <h1 className="text-3xl font-extrabold tracking-tight text-[#191c1e]">Board</h1>
+          <p className="text-sm text-on-surface-variant">Workspace / Q4</p>
+          <h1 className="text-3xl font-extrabold tracking-tight text-on-surface">Board</h1>
         </div>
         <div className="flex items-center gap-3">
           {/* Saved Views */}
           <div className="relative" ref={savedViewsRef}>
             <button
               onClick={() => setSavedViewsOpen(o => !o)}
-              className="flex items-center gap-2 px-4 py-2 rounded-full bg-white shadow-[0_2px_8px_rgba(77,85,106,0.08)] text-sm font-medium text-[#434655] hover:bg-[#f7f9fb] transition-colors"
+              className="flex items-center gap-2 px-4 py-2 rounded-full bg-surface-container-lowest shadow-ambient-sm text-sm font-medium text-on-surface-variant hover:bg-surface-container-low transition-colors"
             >
               <span className="material-symbols-outlined text-[16px]">bookmark</span>
               Saved Views
               <span className="material-symbols-outlined text-[14px]">expand_more</span>
             </button>
             {savedViewsOpen && (
-              <div className="absolute right-0 mt-2 w-56 bg-white/90 backdrop-blur-[20px] rounded-2xl shadow-[0_24px_48px_rgba(77,85,106,0.12)] py-2 z-50">
+              <div className="absolute right-0 mt-2 w-56 bg-surface-container-lowest/90 backdrop-blur-[20px] rounded-2xl shadow-ambient py-2 z-50">
                 {savedViews.length === 0 ? (
-                  <p className="text-xs text-[#434655] px-4 py-3">No saved views yet</p>
+                  <p className="text-xs text-on-surface-variant px-4 py-3">No saved views yet</p>
                 ) : (
                   savedViews.map(v => (
                     <button
                       key={v.id}
                       onClick={() => applyView(v)}
-                      className="w-full flex items-center gap-2 px-4 py-2.5 text-sm text-[#191c1e] hover:bg-[#f7f9fb] text-left transition-colors"
+                      className="w-full flex items-center gap-2 px-4 py-2.5 text-sm text-on-surface hover:bg-surface-container-high text-left transition-colors"
                     >
-                      <span className="material-symbols-outlined text-[14px] text-[#4d556a]">
+                      <span className="material-symbols-outlined text-[14px] text-primary-container">
                         {v.scope === 'shared' ? 'group' : 'person'}
                       </span>
                       {v.name}
@@ -224,16 +234,16 @@ export default function BoardClient({ userId, userRole, teamId, projects, teamMe
 
       {/* Filter bar */}
       <div className="px-6 pb-4">
-        <div className="flex flex-wrap items-center gap-3 bg-white/80 backdrop-blur-[20px] rounded-2xl p-4 shadow-[0_4px_24px_rgba(77,85,106,0.06)]">
+        <div className="flex flex-wrap items-center gap-3 bg-surface-container-lowest/80 backdrop-blur-[20px] rounded-2xl p-4 shadow-ambient-sm">
           {/* Search */}
-          <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-[#f7f9fb] flex-1 min-w-[180px] max-w-[260px]">
-            <span className="material-symbols-outlined text-[16px] text-[#434655]">search</span>
+          <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-surface flex-1 min-w-[180px] max-w-[260px]">
+            <span className="material-symbols-outlined text-[16px] text-on-surface-variant">search</span>
             <input
               type="text"
               placeholder="Search tasks…"
               value={filters.search}
               onChange={e => setFilter('search', e.target.value)}
-              className="bg-transparent text-sm text-[#191c1e] placeholder:text-[#434655]/50 outline-none flex-1"
+              className="bg-transparent text-sm text-on-surface placeholder:text-on-surface-variant/50 outline-none flex-1"
             />
           </div>
           {/* Priority */}
@@ -273,16 +283,109 @@ export default function BoardClient({ userId, userRole, teamId, projects, teamMe
               {teamMembers.map(m => <option key={m.id} value={m.id}>{m.name}</option>)}
             </FilterSelect>
           )}
+
+          {/* Separator before custom fields */}
+          {customFields.length > 0 && (
+            <div className="h-6 w-px bg-outline-variant/20 mx-1" />
+          )}
+
+          {/* Dynamic Custom Field Filters */}
+          {customFields.map(cf => (
+            <CustomFieldFilter
+              key={cf.id}
+              field={cf}
+              value={filters[`cf_${cf.id}` as keyof Filters] ?? ''}
+              minValue={filters[`cf_${cf.id}_min` as keyof Filters] ?? ''}
+              maxValue={filters[`cf_${cf.id}_max` as keyof Filters] ?? ''}
+              onChange={(val) => setFilter(`cf_${cf.id}`, val)}
+              onRangeChange={(min, max) => {
+                setFilters(prev => ({
+                  ...prev,
+                  [`cf_${cf.id}_min`]: min,
+                  [`cf_${cf.id}_max`]: max,
+                }))
+              }}
+            />
+          ))}
+
           {/* Clear filters */}
           {Object.values(filters).some(Boolean) && (
             <button
-              onClick={() => setFilters({ search: '', priority: '', task_type: '', task_nature: '', project_id: '', billable: '', assignee_id: '' })}
-              className="text-xs text-[#434655] hover:text-[#191c1e] px-3 py-2 rounded-full hover:bg-[#f7f9fb] transition-colors"
+              onClick={() => {
+                const cleared: Filters = { search: '', priority: '', task_type: '', task_nature: '', project_id: '', billable: '', assignee_id: '' }
+                customFields.forEach(cf => {
+                  cleared[`cf_${cf.id}`] = ''
+                  cleared[`cf_${cf.id}_min`] = ''
+                  cleared[`cf_${cf.id}_max`] = ''
+                })
+                setFilters(cleared)
+              }}
+              className="text-xs text-on-surface-variant hover:text-on-surface px-3 py-2 rounded-full hover:bg-surface transition-colors"
             >
               Clear
             </button>
           )}
         </div>
+
+        {/* Active Filter Chips */}
+        {Object.entries(filters).some(([_, v]) => Boolean(v)) && (
+          <div className="flex flex-wrap items-center gap-2 pt-3 mt-3 border-t border-outline-variant/10">
+            <span className="text-[10px] font-bold text-outline uppercase tracking-widest mr-2">Active Filters:</span>
+            {filters.priority && (
+              <FilterChip label={`Priority: ${filters.priority}`} onRemove={() => setFilter('priority', '')} />
+            )}
+            {filters.task_type && (
+              <FilterChip label={`Type: ${filters.task_type}`} onRemove={() => setFilter('task_type', '')} />
+            )}
+            {filters.task_nature && (
+              <FilterChip label={`Nature: ${filters.task_nature}`} onRemove={() => setFilter('task_nature', '')} />
+            )}
+            {filters.project_id && (
+              <FilterChip label={`Project: ${projects.find(p => p.id === filters.project_id)?.name ?? filters.project_id}`} onRemove={() => setFilter('project_id', '')} />
+            )}
+            {filters.billable && (
+              <FilterChip label={`Billable: ${filters.billable === 'true' ? 'Yes' : 'No'}`} onRemove={() => setFilter('billable', '')} />
+            )}
+            {filters.assignee_id && (
+              <FilterChip label={`Assignee: ${teamMembers.find(m => m.id === filters.assignee_id)?.name ?? 'Selected'}`} onRemove={() => setFilter('assignee_id', '')} />
+            )}
+            {customFields.map(cf => {
+              const val = filters[`cf_${cf.id}` as keyof Filters]
+              const minVal = filters[`cf_${cf.id}_min` as keyof Filters]
+              const maxVal = filters[`cf_${cf.id}_max` as keyof Filters]
+              if (!val && !minVal && !maxVal) return null
+              const display = val
+                ? `${cf.name}: ${val}`
+                : `${cf.name}: ${minVal || '*'} – ${maxVal || '*'}`
+              return (
+                <FilterChip
+                  key={cf.id}
+                  label={display}
+                  onRemove={() => setFilters(prev => ({
+                    ...prev,
+                    [`cf_${cf.id}`]: '',
+                    [`cf_${cf.id}_min`]: '',
+                    [`cf_${cf.id}_max`]: '',
+                  }))}
+                />
+              )
+            })}
+            <button
+              onClick={() => {
+                const cleared: Filters = { search: '', priority: '', task_type: '', task_nature: '', project_id: '', billable: '', assignee_id: '' }
+                customFields.forEach(cf => {
+                  cleared[`cf_${cf.id}`] = ''
+                  cleared[`cf_${cf.id}_min`] = ''
+                  cleared[`cf_${cf.id}_max`] = ''
+                })
+                setFilters(cleared)
+              }}
+              className="text-[10px] font-bold text-error/60 hover:text-error transition-colors px-2 underline underline-offset-2"
+            >
+              Clear all
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Kanban columns */}
@@ -355,11 +458,11 @@ function FilterSelect({ label, value, onChange, children }: {
       <select
         value={value}
         onChange={e => onChange(e.target.value)}
-        className="appearance-none pl-4 pr-8 py-2 rounded-full bg-[#f7f9fb] text-sm text-[#434655] font-medium focus:outline-none focus:ring-2 focus:ring-[#4d556a]/20 cursor-pointer"
+        className="appearance-none pl-4 pr-8 py-2 rounded-full bg-surface text-sm text-on-surface-variant font-medium focus:outline-none focus:ring-2 focus:ring-primary/20 cursor-pointer"
       >
         {children}
       </select>
-      <span className="absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none text-[#434655]">
+      <span className="absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">
         <span className="material-symbols-outlined text-[14px]">expand_more</span>
       </span>
     </div>
@@ -393,22 +496,22 @@ function SaveViewModal({ isManager, filters, onClose, onSaved }: {
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ background: 'rgba(77,85,106,0.3)', backdropFilter: 'blur(4px)' }}>
-      <div className="bg-white rounded-2xl shadow-[0_24px_48px_rgba(77,85,106,0.12)] w-full max-w-sm p-8">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-on-surface/30 backdrop-blur-[20px]">
+      <div className="bg-surface-container-lowest rounded-2xl shadow-ambient w-full max-w-sm p-8">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-lg font-bold text-[#191c1e]">Save Current View</h2>
-          <button onClick={onClose} className="p-2 rounded-lg hover:bg-[#f7f9fb]">
-            <span className="material-symbols-outlined text-[18px] text-[#434655]">close</span>
+          <h2 className="text-lg font-bold text-on-surface">Save Current View</h2>
+          <button onClick={onClose} className="p-2 rounded-full hover:bg-surface-container-high">
+            <span className="material-symbols-outlined text-[18px] text-on-surface-variant">close</span>
           </button>
         </div>
-        {error && <p className="text-sm text-red-600 mb-4">{error}</p>}
+        {error && <p className="text-sm text-error mb-4">{error}</p>}
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
             value={name}
             onChange={e => setName(e.target.value)}
             required
             placeholder="View name…"
-            className="w-full px-4 py-2.5 rounded-full bg-[#f7f9fb] text-sm text-[#191c1e] outline-none focus:ring-2 focus:ring-[#4d556a]/30"
+            className="w-full px-4 py-2.5 rounded-full bg-surface text-sm text-on-surface outline-none focus:ring-2 focus:ring-primary/30"
           />
           {isManager && (
             <div className="flex gap-2">
@@ -416,7 +519,8 @@ function SaveViewModal({ isManager, filters, onClose, onSaved }: {
                 <button
                   key={s} type="button"
                   onClick={() => setScope(s)}
-                  className={`flex-1 py-2 rounded-full text-sm font-medium capitalize transition-colors ${scope === s ? 'bg-[#4d556a] text-white' : 'bg-[#f7f9fb] text-[#434655] hover:bg-[#eef0f4]'}`}
+                  className={`flex-1 py-2 rounded-full text-sm font-medium capitalize transition-colors ${scope === s ? 'text-on-primary' : 'bg-surface text-on-surface-variant hover:bg-surface-container-high'}`}
+                  style={scope === s ? { background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' } : undefined}
                 >
                   {s}
                 </button>
@@ -424,7 +528,7 @@ function SaveViewModal({ isManager, filters, onClose, onSaved }: {
             </div>
           )}
           <div className="flex gap-3 pt-1">
-            <button type="button" onClick={onClose} className="flex-1 py-2.5 rounded-full bg-[#f7f9fb] text-[#434655] text-sm font-medium">Cancel</button>
+            <button type="button" onClick={onClose} className="flex-1 py-2.5 rounded-full bg-surface text-on-surface-variant text-sm font-medium">Cancel</button>
             <button type="submit" disabled={loading} className="flex-1 py-2.5 rounded-full text-white text-sm font-medium" style={{ background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }}>
               {loading ? 'Saving…' : 'Save View'}
             </button>
@@ -433,4 +537,137 @@ function SaveViewModal({ isManager, filters, onClose, onSaved }: {
       </div>
     </div>
   )
+}
+
+function FilterChip({ label, onRemove }: { label: string; onRemove: () => void }) {
+  return (
+    <div className="flex items-center gap-2 px-3 py-1 bg-primary/5 rounded-full cursor-default">
+      <span className="text-[10px] font-semibold text-primary/80">{label}</span>
+      <button onClick={onRemove} className="hover:text-error transition-colors">
+        <span className="material-symbols-outlined text-[14px]">close</span>
+      </button>
+    </div>
+  )
+}
+
+function CustomFieldFilter({ field, value, minValue, maxValue, onChange, onRangeChange }: {
+  field: Pick<CustomFieldDefinition, 'id' | 'name' | 'field_type' | 'options'>
+  value: string
+  minValue: string
+  maxValue: string
+  onChange: (v: string) => void
+  onRangeChange: (min: string, max: string) => void
+}) {
+  const fieldType = field.field_type as CustomFieldType
+
+  // Text field — compact search input
+  if (fieldType === 'text') {
+    return (
+      <div className="bg-surface-container-low px-3 py-2 rounded-full flex items-center gap-2">
+        <span className="text-[10px] font-black text-outline uppercase tracking-tighter">{field.name}</span>
+        <input
+          type="text"
+          value={value}
+          onChange={e => onChange(e.target.value)}
+          placeholder="Search…"
+          className="bg-transparent border-none focus:ring-0 p-0 text-xs w-20 placeholder:text-outline/50 outline-none"
+        />
+      </div>
+    )
+  }
+
+  // Number field — min/max range
+  if (fieldType === 'number') {
+    return (
+      <div className="bg-surface-container-low px-3 py-2 rounded-full flex items-center gap-2">
+        <span className="text-[10px] font-black text-outline uppercase tracking-tighter">{field.name}</span>
+        <div className="flex items-center gap-1">
+          <input
+            type="number"
+            value={minValue}
+            onChange={e => onRangeChange(e.target.value, maxValue)}
+            placeholder="Min"
+            className="bg-surface-container-lowest/50 border-none rounded-md px-1.5 py-0.5 text-[10px] w-12 focus:ring-1 focus:ring-primary-container outline-none"
+          />
+          <span className="text-[10px] text-outline opacity-50">–</span>
+          <input
+            type="number"
+            value={maxValue}
+            onChange={e => onRangeChange(minValue, e.target.value)}
+            placeholder="Max"
+            className="bg-surface-container-lowest/50 border-none rounded-md px-1.5 py-0.5 text-[10px] w-12 focus:ring-1 focus:ring-primary-container outline-none"
+          />
+        </div>
+      </div>
+    )
+  }
+
+  // Date field — date range with native pickers
+  if (fieldType === 'date') {
+    return (
+      <div className="bg-surface-container-low px-3 py-2 rounded-full flex items-center gap-2">
+        <span className="text-[10px] font-black text-outline uppercase tracking-tighter">{field.name}</span>
+        <span className="material-symbols-outlined text-[16px] text-outline">calendar_today</span>
+        <input
+          type="date"
+          value={minValue}
+          onChange={e => onRangeChange(e.target.value, maxValue)}
+          className="bg-transparent border-none focus:ring-0 p-0 text-[10px] outline-none"
+        />
+        <span className="text-[10px] text-outline opacity-50">–</span>
+        <input
+          type="date"
+          value={maxValue}
+          onChange={e => onRangeChange(minValue, e.target.value)}
+          className="bg-transparent border-none focus:ring-0 p-0 text-[10px] outline-none"
+        />
+      </div>
+    )
+  }
+
+  // Dropdown field — select with options
+  if (fieldType === 'dropdown') {
+    const options = (field.options ?? []) as string[]
+    return (
+      <div className="relative">
+        <select
+          value={value}
+          onChange={e => onChange(e.target.value)}
+          className="appearance-none bg-surface-container-low/80 backdrop-blur-md pl-3 pr-7 py-2 rounded-full text-xs font-bold text-on-surface-variant focus:outline-none focus:ring-1 focus:ring-primary-container cursor-pointer"
+        >
+          <option value="">{field.name}: All</option>
+          {options.map(opt => (
+            <option key={opt} value={opt}>{opt}</option>
+          ))}
+        </select>
+        <span className="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none">
+          <span className="material-symbols-outlined text-[14px] text-on-surface-variant">expand_more</span>
+        </span>
+      </div>
+    )
+  }
+
+  // Checkbox field — 3-state toggle (Any / Yes / No)
+  if (fieldType === 'checkbox') {
+    return (
+      <div className="flex items-center bg-surface-container-low rounded-full p-1">
+        {['', 'true', 'false'].map(v => (
+          <button
+            key={v}
+            onClick={() => onChange(v)}
+            className={`px-3 py-1 text-[10px] font-bold rounded-full transition-colors ${
+              value === v
+                ? 'bg-surface-container-lowest shadow-sm text-primary'
+                : 'text-outline hover:text-on-surface'
+            }`}
+          >
+            {v === '' ? 'Any' : v === 'true' ? 'Yes' : 'No'}
+          </button>
+        ))}
+        <span className="ml-2 mr-3 text-[10px] font-black text-outline uppercase tracking-tighter">{field.name}</span>
+      </div>
+    )
+  }
+
+  return null
 }

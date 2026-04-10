@@ -92,7 +92,7 @@ export default function LoginPage() {
                 autoComplete="email"
                 placeholder="name@company.com"
                 {...register('email')}
-                className="w-full bg-surface-container-low border-none rounded-xl px-5 py-3.5 text-on-surface placeholder:text-outline focus:ring-2 focus:ring-primary-container focus:outline-none transition-all"
+                className="w-full bg-surface-container-low border-none rounded-full px-5 py-3.5 text-on-surface placeholder:text-outline focus:ring-2 focus:ring-primary-container focus:outline-none transition-all"
               />
               {errors.email && (
                 <p className="text-xs text-error px-1">{errors.email.message}</p>
@@ -122,7 +122,7 @@ export default function LoginPage() {
                   autoComplete="current-password"
                   placeholder="••••••••"
                   {...register('password')}
-                  className="w-full bg-surface-container-low border-none rounded-xl px-5 py-3.5 text-on-surface placeholder:text-outline focus:ring-2 focus:ring-primary-container focus:outline-none transition-all"
+                  className="w-full bg-surface-container-low border-none rounded-full px-5 py-3.5 text-on-surface placeholder:text-outline focus:ring-2 focus:ring-primary-container focus:outline-none transition-all"
                 />
                 <button
                   type="button"
@@ -144,7 +144,7 @@ export default function LoginPage() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full text-white font-semibold py-4 rounded-xl shadow-ambient hover:opacity-90 active:scale-[0.98] transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
+                className="w-full text-white font-semibold py-4 rounded-full shadow-ambient hover:opacity-90 active:scale-[0.98] transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
                 style={{ background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }}
               >
                 {isSubmitting ? (

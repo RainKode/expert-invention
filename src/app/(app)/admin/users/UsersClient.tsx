@@ -7,6 +7,7 @@ import { z } from 'zod'
 import { ROLE_LABELS, ROLE_OPTIONS } from '@/lib/permissions'
 import { type Role, type UserStatus } from '@/types'
 import Link from 'next/link'
+import DeactivationModal from '@/components/admin/DeactivationModal'
 
 // Minimal type for display
 interface UserRow {
@@ -282,6 +283,7 @@ export default function UsersClient({ teams, managers }: { teams: Team[]; manage
   const [modalOpen, setModalOpen] = useState(false)
   const [editUser, setEditUser] = useState<UserRow | null>(null)
   const [actionLoading, setActionLoading] = useState<string | null>(null)
+  const [deactivateUser, setDeactivateUser] = useState<UserRow | null>(null)
 
   const fetchUsers = useCallback(async () => {
     setLoading(true)
@@ -298,13 +300,14 @@ export default function UsersClient({ teams, managers }: { teams: Team[]; manage
   useEffect(() => { fetchUsers() }, [fetchUsers])
 
   async function handleDeactivate(user: UserRow) {
-    if (!confirm(`${user.status === 'active' ? 'Deactivate' : 'Reactivate'} ${user.name}?`)) return
+    if (user.status === 'active') {
+      setDeactivateUser(user)
+      return
+    }
+    // Reactivate directly
+    if (!confirm(`Reactivate ${user.name}?`)) return
     setActionLoading(user.id)
-    const method = user.status === 'active' ? 'DELETE' : 'DELETE'
-    const url = user.status === 'active'
-      ? `/api/admin/users/${user.id}`
-      : `/api/admin/users/${user.id}?reactivate=true`
-    await fetch(url, { method })
+    await fetch(`/api/admin/users/${user.id}?reactivate=true`, { method: 'DELETE' })
     await fetchUsers()
     setActionLoading(null)
   }
@@ -347,7 +350,7 @@ export default function UsersClient({ teams, managers }: { teams: Team[]; manage
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Filter by name or email..."
-              className="w-full bg-surface-container-high border-none rounded-2xl py-4 pl-12 pr-4 focus:ring-2 focus:ring-primary/20 focus:outline-none text-sm"
+              className="w-full bg-surface-container-high border-none rounded-full py-4 pl-12 pr-4 focus:ring-2 focus:ring-primary/20 focus:outline-none text-sm"
             />
           </div>
 
@@ -398,7 +401,7 @@ export default function UsersClient({ teams, managers }: { teams: Team[]; manage
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-surface-container-high">
+                <tr className="bg-surface-container-low/50">
                   <th className="text-left px-6 py-4 text-xs font-semibold uppercase tracking-widest text-on-surface-variant">Employee</th>
                   <th className="text-left px-4 py-4 text-xs font-semibold uppercase tracking-widest text-on-surface-variant">Role</th>
                   <th className="text-left px-4 py-4 text-xs font-semibold uppercase tracking-widest text-on-surface-variant hidden lg:table-cell">Team</th>
@@ -438,7 +441,7 @@ export default function UsersClient({ teams, managers }: { teams: Team[]; manage
                       {u.timezone}
                     </td>
                     <td className="px-4 py-4">
-                      <span className={`badge ${u.status === 'active' ? 'bg-green-100 text-green-700' : 'bg-surface-container text-outline'}`}>
+                      <span className={`badge ${u.status === 'active' ? 'bg-primary-container/20 text-primary' : 'bg-surface-container text-outline'}`}>
                         {u.status === 'active' ? 'Active' : 'Deactivated'}
                       </span>
                     </td>
@@ -481,6 +484,14 @@ export default function UsersClient({ teams, managers }: { teams: Team[]; manage
         editUser={editUser}
         teams={teams}
         managers={managers}
+      />
+
+      {/* Deactivation Modal */}
+      <DeactivationModal
+        open={!!deactivateUser}
+        userId={deactivateUser?.id ?? ''}
+        onClose={() => setDeactivateUser(null)}
+        onDeactivated={() => { setDeactivateUser(null); fetchUsers() }}
       />
     </div>
   )

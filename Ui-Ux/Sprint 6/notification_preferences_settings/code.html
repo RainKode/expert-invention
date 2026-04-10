@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Notification Preferences | Sunday HR</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#e0e3e5",
+                        "outline": "#76777d",
+                        "tertiary": "#453d36",
+                        "on-error": "#ffffff",
+                        "surface-bright": "#f7f9fb",
+                        "on-primary-fixed-variant": "#3e465b",
+                        "on-primary": "#ffffff",
+                        "on-secondary-container": "#5c647b",
+                        "surface": "#f7f9fb",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-surface-variant": "#45464c",
+                        "secondary": "#565e74",
+                        "surface-container-high": "#e6e8ea",
+                        "inverse-on-surface": "#eff1f3",
+                        "primary-fixed": "#dae2fc",
+                        "on-secondary": "#ffffff",
+                        "primary-container": "#4d556a",
+                        "on-tertiary": "#ffffff",
+                        "inverse-surface": "#2d3133",
+                        "primary-fixed-dim": "#bec6df",
+                        "on-primary-container": "#c2cae3",
+                        "surface-tint": "#565e73",
+                        "surface-container-highest": "#e0e3e5",
+                        "inverse-primary": "#bec6df",
+                        "on-tertiary-fixed-variant": "#4e453e",
+                        "on-tertiary-container": "#d6c9bf",
+                        "surface-dim": "#d8dadc",
+                        "surface-container-low": "#f2f4f6",
+                        "on-surface": "#191c1e",
+                        "tertiary-container": "#5d544d",
+                        "secondary-fixed": "#dae2fd",
+                        "outline-variant": "#c6c6cd",
+                        "on-primary-fixed": "#131b2e",
+                        "primary": "#363e52",
+                        "error-container": "#ffdad6",
+                        "surface-container": "#eceef0",
+                        "background": "#f7f9fb",
+                        "tertiary-fixed-dim": "#d1c4bb",
+                        "secondary-container": "#dae2fd",
+                        "on-tertiary-fixed": "#211a15",
+                        "on-secondary-fixed": "#131b2e",
+                        "error": "#ba1a1a",
+                        "secondary-fixed-dim": "#bec6e0",
+                        "tertiary-fixed": "#eee0d7",
+                        "on-secondary-fixed-variant": "#3e465c",
+                        "on-background": "#191c1e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Plus Jakarta Sans"],
+                        "label": ["Plus Jakarta Sans"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined { font-size: 20px; }
+        .glass-panel {
+            backdrop-filter: blur(20px);
+            background: rgba(247, 249, 251, 0.8);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen">
+<!-- TopNavBar Component -->
+<nav class="fixed top-0 w-full z-50 bg-[#f7f9fb]/80 dark:bg-[#191c1e]/80 backdrop-blur-xl flex justify-between items-center px-8 py-4 w-full shadow-[0px_24px_48px_rgba(77,85,106,0.06)] font-['Plus_Jakarta_Sans'] tracking-tight font-medium">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold tracking-tighter text-[#4d556a] dark:text-[#f7f9fb]">Sunday HR</span>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-[#434655] hover:text-[#4d556a] transition-colors" href="#">Dashboard</a>
+<a class="text-[#434655] hover:text-[#4d556a] transition-colors" href="#">Team</a>
+<a class="text-[#434655] hover:text-[#4d556a] transition-colors" href="#">Payroll</a>
+<a class="text-[#434655] hover:text-[#4d556a] transition-colors" href="#">Directory</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-[#4d556a] hover:bg-[#4d556a]/5 rounded-full transition-all scale-95 active:scale-90">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-[#4d556a] font-bold border-b-2 border-[#4d556a] pb-1 scale-95 active:scale-90">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<img alt="User profile" class="w-8 h-8 rounded-full ml-2 border-2 border-surface-container-high" data-alt="professional headshot of a smiling employee in a light blue shirt, clean white background, soft studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfag5gHXu6KW5ylQSPeaCtVHHCvHD2k3MTrRAor10KjYZv2BabTE91MSwAhmsDwixwCnHoOVbZljUbg1kwINNcP_KiBGlgcvIqzVc8zNsACeKSiT6Jp-qKxyNw5dQNyZhKxDLyqvhfuvmDMwYR3gosOm5m7QnLYFSuDnJ5LgubqDv4t-r-ROVqZBseONnMTI14xbmYngiXBnESyWyqa5QTtrvJOsJyETdo9E9OYMwMQUbgbMuDXcqEBZfNeN5GMJKeYjoJhGwHrOU"/>
+</div>
+</nav>
+<!-- SideNavBar (Notifications Drawer) - Initially Hidden state implied by structure -->
+<aside class="fixed right-0 top-0 h-full w-80 z-[60] rounded-l-[32px] bg-[#ffffff]/80 dark:bg-[#191c1e]/90 backdrop-blur-2xl flex flex-col p-6 gap-4 shadow-2xl shadow-[#4d556a]/10 translate-x-full lg:hidden">
+<div class="flex items-center justify-between mb-2">
+<div>
+<h3 class="text-lg font-semibold text-[#4d556a]">Notifications</h3>
+<p class="text-xs text-on-surface-variant">Manage your alerts</p>
+</div>
+<button class="text-xs font-bold text-primary-container">Mark all as read</button>
+</div>
+<div class="flex flex-col gap-2">
+<div class="text-[#434655] px-4 py-2 hover:bg-[#4d556a]/5 rounded-full flex items-center gap-3">
+<span class="material-symbols-outlined" data-icon="notifications_active">notifications_active</span>
+<span class="font-['Plus_Jakarta_Sans'] text-sm">Activity</span>
+</div>
+<div class="bg-gradient-to-br from-[#4d556a] to-[#656d84] text-white rounded-full px-4 py-2 flex items-center gap-3">
+<span class="material-symbols-outlined" data-icon="tune">tune</span>
+<span class="font-['Plus_Jakarta_Sans'] text-sm">Preferences</span>
+</div>
+</div>
+</aside>
+<!-- Main Content Shell -->
+<main class="pt-32 pb-20 px-6 md:px-12 lg:px-24 max-w-7xl mx-auto">
+<header class="mb-12">
+<h1 class="text-3xl font-extrabold tracking-tight text-on-surface mb-2 font-headline">Notification Preferences</h1>
+<p class="text-on-surface-variant font-medium">Manage which notifications you receive</p>
+</header>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Navigation Sidebar (Internal Settings) -->
+<aside class="lg:col-span-3 space-y-2">
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-5 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-semibold text-sm">Profile Details</span>
+</a>
+<a class="flex items-center gap-3 px-5 py-3 rounded-xl bg-surface-container-highest text-on-surface transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">notifications</span>
+<span class="font-bold text-sm">Notification Preferences</span>
+</a>
+<a class="flex items-center gap-3 px-5 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined">security</span>
+<span class="font-semibold text-sm">Security &amp; Privacy</span>
+</a>
+<a class="flex items-center gap-3 px-5 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-semibold text-sm">Tax Documents</span>
+</a>
+</nav>
+</aside>
+<!-- Settings Content -->
+<section class="lg:col-span-9 space-y-10">
+<!-- Group 1: Required Notifications -->
+<div class="space-y-4">
+<div class="flex items-center gap-3 px-2">
+<span class="material-symbols-outlined text-tertiary">lock</span>
+<h2 class="text-lg font-bold tracking-tight text-on-surface">Required Notifications</h2>
+</div>
+<div class="grid gap-3">
+<!-- Item 1 -->
+<div class="flex items-center justify-between p-6 bg-surface-container-lowest rounded-[8px] shadow-[0px_8px_24px_rgba(77,85,106,0.03)] border border-outline-variant/10">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant">receipt_long</span>
+</div>
+<div>
+<h3 class="font-bold text-on-surface">Payroll &amp; Tax Compliance</h3>
+<p class="text-sm text-on-surface-variant">Essential alerts regarding your paystubs and year-end tax forms.</p>
+</div>
+</div>
+<span class="px-3 py-1 bg-surface-container text-on-surface-variant text-[10px] font-bold uppercase tracking-widest rounded-full">Required</span>
+</div>
+<!-- Item 2 -->
+<div class="flex items-center justify-between p-6 bg-surface-container-lowest rounded-[8px] shadow-[0px_8px_24px_rgba(77,85,106,0.03)] border border-outline-variant/10">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant">gavel</span>
+</div>
+<div>
+<h3 class="font-bold text-on-surface">Legal &amp; Policy Updates</h3>
+<p class="text-sm text-on-surface-variant">Notifications about changes to company policies or legal requirements.</p>
+</div>
+</div>
+<span class="px-3 py-1 bg-surface-container text-on-surface-variant text-[10px] font-bold uppercase tracking-widest rounded-full">Required</span>
+</div>
+</div>
+</div>
+<!-- Group 2: Optional Notifications -->
+<div class="space-y-4">
+<div class="flex items-center gap-3 px-2">
+<span class="material-symbols-outlined text-tertiary">settings_suggest</span>
+<h2 class="text-lg font-bold tracking-tight text-on-surface">Optional Notifications</h2>
+</div>
+<div class="grid gap-4">
+<!-- Bento-ish Grid for Optional Controls -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Toggle Card 1 -->
+<div class="p-6 bg-surface-container-lowest rounded-lg shadow-[0px_24px_48px_rgba(77,85,106,0.06)] border border-outline-variant/5 flex flex-col justify-between group hover:shadow-xl transition-shadow">
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 rounded-2xl bg-primary-container/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary-container">groups</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-surface-container rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+<div>
+<h3 class="font-bold text-on-surface mb-1">Team Activities</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed">Receive updates on team celebrations, birthdays, and anniversaries.</p>
+</div>
+</div>
+<!-- Toggle Card 2 -->
+<div class="p-6 bg-surface-container-lowest rounded-lg shadow-[0px_24px_48px_rgba(77,85,106,0.06)] border border-outline-variant/5 flex flex-col justify-between group hover:shadow-xl transition-shadow">
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 rounded-2xl bg-tertiary-container/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-tertiary-container">school</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-surface-container rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+<div>
+<h3 class="font-bold text-on-surface mb-1">Learning &amp; Development</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed">Alerts for new training modules, mentorship opportunities, and workshops.</p>
+</div>
+</div>
+<!-- Toggle Card 3 (Wide Span) -->
+<div class="md:col-span-2 p-6 bg-surface-container-lowest rounded-lg shadow-[0px_24px_48px_rgba(77,85,106,0.06)] border border-outline-variant/5 flex items-center justify-between group hover:shadow-xl transition-shadow">
+<div class="flex items-center gap-6">
+<div class="w-12 h-12 rounded-2xl bg-secondary-container/20 flex items-center justify-center group-hover:rotate-12 transition-transform">
+<span class="material-symbols-outlined text-secondary">campaign</span>
+</div>
+<div>
+<h3 class="font-bold text-on-surface mb-1">Company Newsletters</h3>
+<p class="text-sm text-on-surface-variant max-w-md">Bi-weekly digest of company-wide highlights, executive messages, and project launches.</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-14 h-7 bg-surface-container rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Footer -->
+<footer class="pt-8 flex items-center justify-end gap-4 border-t border-outline-variant/10">
+<button class="px-8 py-3 rounded-full text-sm font-bold text-on-surface-variant hover:bg-surface-container transition-all">Discard Changes</button>
+<button class="px-10 py-3 rounded-full text-sm font-bold text-white bg-gradient-to-br from-[#4d556a] to-[#656d84] shadow-lg shadow-primary-container/20 hover:scale-[1.02] active:scale-95 transition-all">Save Preferences</button>
+</footer>
+</section>
+</div>
+</main>
+<!-- Floating Help Button (Contextual FAB Suppression would hide this on settings, but kept for general app utility if required by brand, here we keep it subtle) -->
+<div class="fixed bottom-8 right-8">
+<button class="w-14 h-14 bg-tertiary text-white rounded-full flex items-center justify-center shadow-xl hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" data-icon="contact_support">contact_support</span>
+</button>
+</div>
+</body></html>

@@ -22,8 +22,8 @@ export default function KanbanColumn({ id, label, color, tasks, loading, userId 
       {/* Column header */}
       <div className="flex items-center gap-2 mb-4">
         <span className={`w-2.5 h-2.5 rounded-full ${color}`} />
-        <h2 className="text-sm font-bold text-[#191c1e]">{label}</h2>
-        <span className="ml-auto text-xs font-semibold text-[#434655] bg-[#f7f9fb] px-2.5 py-0.5 rounded-full">
+        <h2 className="text-sm font-bold text-on-surface">{label}</h2>
+        <span className="ml-auto text-xs font-semibold text-on-surface-variant bg-surface px-2.5 py-0.5 rounded-full">
           {tasks.length}
         </span>
       </div>
@@ -32,13 +32,13 @@ export default function KanbanColumn({ id, label, color, tasks, loading, userId 
       <div
         ref={setNodeRef}
         className={`flex flex-col gap-3 flex-1 rounded-2xl transition-colors min-h-[120px] p-2 ${
-          isOver ? 'bg-[#4d556a]/5 ring-2 ring-[#4d556a]/20' : 'bg-[#f0f2f5]'
+          isOver ? 'bg-primary-container/10 ring-2 ring-primary/20' : 'bg-surface-container-low'
         }`}
         style={{ height: 'calc(100vh - 280px)', overflowY: 'auto', scrollbarWidth: 'none' }}
       >
         {loading ? (
           <div className="flex items-center justify-center h-20">
-            <span className="material-symbols-outlined animate-spin text-[#434655]">progress_activity</span>
+            <span className="material-symbols-outlined animate-spin text-on-surface-variant">progress_activity</span>
           </div>
         ) : (
           <SortableContext items={tasks.map(t => t.id)} strategy={verticalListSortingStrategy}>
@@ -46,7 +46,7 @@ export default function KanbanColumn({ id, label, color, tasks, loading, userId 
               <KanbanCard key={task.id} task={task} userId={userId} />
             ))}
             {tasks.length === 0 && (
-              <div className="flex items-center justify-center h-20 text-xs text-[#434655]/50">
+              <div className="flex items-center justify-center h-20 text-xs text-on-surface-variant/50">
                 No tasks
               </div>
             )}

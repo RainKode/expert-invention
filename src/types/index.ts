@@ -52,6 +52,7 @@ export interface User {
   billable_permission: BillablePermission
   status: UserStatus
   invite_accepted: boolean
+  onboarding_complete: boolean
   created_at: string
   updated_at: string
   deactivated_at: string | null
@@ -504,4 +505,130 @@ export interface WorkloadData {
   members: WorkloadMemberRow[]
   working_days: number[]   // union of all member work_week days present this week
 }
+
+// ─── Notification System (Sprint 6) ──────────────────────────────────────────
+
+export type NotificationType =
+  | 'task_assigned'
+  | 'task_reassigned_away'
+  | 'task_due_today'
+  | 'task_overdue'
+  | 'task_in_review'
+  | 'task_sent_back'
+  | 'task_marked_done'
+  | 'dependency_unblocked'
+  | 'plan_not_submitted'
+  | 'checkin_not_submitted'
+  | 'zero_tasks_planned'
+  | 'comment_on_plan'
+  | 'comment_on_task'
+
+export type NotificationChannel = 'in_app' | 'email' | 'both'
+
+export interface Notification {
+  id: string
+  recipient_id: string
+  type: NotificationType
+  title: string
+  message: string
+  link: string | null
+  read: boolean
+  channel: NotificationChannel
+  metadata: Record<string, unknown> | null
+  created_at: string
+}
+
+export interface NotificationPreference {
+  id: string
+  user_id: string
+  notification_type: NotificationType
+  enabled: boolean
+  updated_at: string
+}
+
+// The 3 notification types users can disable
+export const OPTIONAL_NOTIFICATION_TYPES: NotificationType[] = [
+  'task_marked_done',
+  'comment_on_plan',
+  'comment_on_task',
+]
+
+// Notification types that also send email
+export const EMAIL_NOTIFICATION_TYPES: NotificationType[] = [
+  'task_overdue',
+  'plan_not_submitted',
+  'zero_tasks_planned',
+]
+
+// Metadata for notification type display
+export const NOTIFICATION_TYPE_META: Record<NotificationType, { icon: string; label: string }> = {
+  task_assigned: { icon: 'assignment_ind', label: 'Task Assigned' },
+  task_reassigned_away: { icon: 'swap_horiz', label: 'Task Reassigned' },
+  task_due_today: { icon: 'today', label: 'Due Today' },
+  task_overdue: { icon: 'warning', label: 'Overdue' },
+  task_in_review: { icon: 'rate_review', label: 'In Review' },
+  task_sent_back: { icon: 'undo', label: 'Sent Back' },
+  task_marked_done: { icon: 'task_alt', label: 'Completed' },
+  dependency_unblocked: { icon: 'lock_open', label: 'Unblocked' },
+  plan_not_submitted: { icon: 'calendar_today', label: 'Plan Overdue' },
+  checkin_not_submitted: { icon: 'assignment_turned_in', label: 'Check-in Missing' },
+  zero_tasks_planned: { icon: 'event_busy', label: 'No Tasks Planned' },
+  comment_on_plan: { icon: 'chat_bubble_outline', label: 'Plan Comment' },
+  comment_on_task: { icon: 'comment', label: 'Task Comment' },
+}
+
+// ─── File Management (Sprint 8) ──────────────────────────────────────────────
+
+export type FileContext = 'attachment' | 'completion_report' | 'wrapup'
+
+export interface TaskFile {
+  id: string
+  filename: string
+  file_type: string              // MIME type
+  file_size: number              // bytes
+  storage_path: string
+  uploaded_by: string
+  task_id: string | null
+  wrap_up_id: string | null
+  permanent: boolean
+  context: FileContext
+  created_at: string
+  // joined
+  uploader?: Pick<User, 'id' | 'name'> | null
+}
+
+// File type categories for icon display
+export const FILE_TYPE_ICONS: Record<string, { icon: string; color: string }> = {
+  'application/pdf': { icon: 'picture_as_pdf', color: 'text-error' },
+  'image/png': { icon: 'image', color: 'text-primary' },
+  'image/jpeg': { icon: 'image', color: 'text-primary' },
+  'image/jpg': { icon: 'image', color: 'text-primary' },
+  'image/gif': { icon: 'image', color: 'text-primary' },
+  'image/webp': { icon: 'image', color: 'text-primary' },
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document': { icon: 'description', color: 'text-[#2B579A]' },
+  'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': { icon: 'table_chart', color: 'text-green-600' },
+  'application/msword': { icon: 'description', color: 'text-[#2B579A]' },
+  'application/vnd.ms-excel': { icon: 'table_chart', color: 'text-green-600' },
+  'video/mp4': { icon: 'videocam', color: 'text-tertiary' },
+  'video/webm': { icon: 'videocam', color: 'text-tertiary' },
+  'video/quicktime': { icon: 'videocam', color: 'text-tertiary' },
+}
+
+export const ALLOWED_FILE_TYPES = [
+  'application/pdf',
+  'image/png',
+  'image/jpeg',
+  'image/jpg',
+  'image/gif',
+  'image/webp',
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+  'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+  'application/msword',
+  'application/vnd.ms-excel',
+  'video/mp4',
+  'video/webm',
+  'video/quicktime',
+]
+
+export const MAX_FILE_SIZE = 25 * 1024 * 1024 // 25MB
 

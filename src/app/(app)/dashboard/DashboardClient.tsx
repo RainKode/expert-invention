@@ -57,7 +57,7 @@ export default function DashboardClient({ data, role }: Props) {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
         {/* ── Today's Tasks (7 cols, taller) ─────────────────────────────── */}
-        <div className="lg:col-span-7 bg-surface-container-lowest rounded-lg p-8 shadow-[0px_8px_32px_rgba(77,85,106,0.06)] min-h-[520px]">
+        <div className="lg:col-span-7 bg-surface-container-lowest rounded-2xl p-8 shadow-[0px_8px_32px_rgba(77,85,106,0.06)] min-h-[520px]">
           <div className="flex items-center justify-between mb-8">
             <h2 className="text-xl font-bold tracking-tight">Today&apos;s Tasks</h2>
             <Link href="/tasks" className="text-primary-container hover:underline font-semibold text-sm">
@@ -66,7 +66,7 @@ export default function DashboardClient({ data, role }: Props) {
           </div>
 
           {data.overdue_tasks.length > 0 && (
-            <div className="mb-4 px-3 py-2 bg-error-container rounded-md flex items-center gap-2 text-on-error-container text-xs font-bold">
+            <div className="mb-4 px-3 py-2 bg-error-container rounded-xl flex items-center gap-2 text-on-error-container text-xs font-bold">
               <span className="material-symbols-outlined text-sm"
                 style={{ fontVariationSettings: "'FILL' 1" }}>warning</span>
               {data.overdue_tasks.length} overdue task{data.overdue_tasks.length > 1 ? 's' : ''}
@@ -76,7 +76,7 @@ export default function DashboardClient({ data, role }: Props) {
           <div className="flex flex-col gap-4">
             {data.overdue_tasks.map(t => (
               <Link key={t.id} href={`/tasks/${t.id}`}
-                className="group flex items-center gap-4 p-4 hover:bg-surface-container-low rounded-md transition-all duration-300">
+                className="group flex items-center gap-4 p-4 hover:bg-surface-container-low rounded-xl transition-all duration-300">
                 <div className="w-2 h-2 rounded-full bg-error shrink-0" />
                 <div className="flex-1 min-w-0">
                   <h3 className="font-semibold text-on-surface truncate">{t.title}</h3>
@@ -93,7 +93,7 @@ export default function DashboardClient({ data, role }: Props) {
 
             {data.today_tasks.map(t => (
               <Link key={t.id} href={`/tasks/${t.id}`}
-                className="group flex items-center gap-4 p-4 hover:bg-surface-container-low rounded-md transition-all duration-300">
+                className="group flex items-center gap-4 p-4 hover:bg-surface-container-low rounded-xl transition-all duration-300">
                 <div className={`w-2 h-2 rounded-full shrink-0 ${PRIORITY_DOT[t.priority]}`} />
                 <div className="flex-1 min-w-0">
                   <h3 className="font-semibold text-on-surface truncate">{t.title}</h3>
@@ -124,7 +124,7 @@ export default function DashboardClient({ data, role }: Props) {
         <div className="lg:col-span-5 flex flex-col gap-8">
 
           {/* Weekly Completion Rate */}
-          <div className="bg-surface-container-lowest rounded-lg p-8 shadow-[0px_8px_32px_rgba(77,85,106,0.06)]">
+          <div className="bg-surface-container-lowest rounded-2xl p-8 shadow-[0px_8px_32px_rgba(77,85,106,0.06)]">
             <h2 className="text-lg font-bold tracking-tight mb-6">Weekly Completion Rate</h2>
             <div className="flex items-center gap-8">
               {/* Donut */}
@@ -159,7 +159,7 @@ export default function DashboardClient({ data, role }: Props) {
           </div>
 
           {/* Upcoming Deadlines */}
-          <div className="bg-surface-container-lowest rounded-lg p-8 shadow-[0px_8px_32px_rgba(77,85,106,0.06)]">
+          <div className="bg-surface-container-lowest rounded-2xl p-8 shadow-[0px_8px_32px_rgba(77,85,106,0.06)]">
             <h2 className="text-lg font-bold tracking-tight mb-6">Upcoming Deadlines</h2>
             {data.upcoming_deadlines.length === 0 ? (
               <p className="text-on-surface-variant text-sm">No deadlines in the next 3 days.</p>
@@ -169,8 +169,8 @@ export default function DashboardClient({ data, role }: Props) {
                   const dt = new Date(d.due_date)
                   return (
                     <Link key={d.id} href={`/tasks/${d.id}`}
-                      className="flex items-center gap-4 hover:bg-surface-container-low p-1 rounded-md transition-colors">
-                      <div className="w-10 h-10 rounded-md bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed font-bold text-[10px] text-center leading-tight shrink-0">
+                      className="flex items-center gap-4 hover:bg-surface-container-low p-1 rounded-xl transition-colors">
+                      <div className="w-10 h-10 rounded-xl bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed font-bold text-[10px] text-center leading-tight shrink-0">
                         {MONTH_NAMES[dt.getMonth()]}<br />{dt.getDate()}
                       </div>
                       <div className="flex-1 min-w-0">
@@ -189,7 +189,7 @@ export default function DashboardClient({ data, role }: Props) {
         </div>
 
         {/* ── Carry-overs (bottom, 7 cols) ────────────────────────────────── */}
-        <div className="lg:col-span-7 bg-surface-container-lowest rounded-lg p-8 shadow-[0px_8px_32px_rgba(77,85,106,0.06)]">
+        <div className="lg:col-span-7 bg-surface-container-lowest rounded-2xl p-8 shadow-[0px_8px_32px_rgba(77,85,106,0.06)]">
           <h2 className="text-lg font-bold tracking-tight mb-6">Carry-overs</h2>
           {data.carry_overs.length === 0 ? (
             <p className="text-on-surface-variant text-sm">No carry-overs this week.</p>
@@ -197,7 +197,7 @@ export default function DashboardClient({ data, role }: Props) {
             <div className="flex flex-col gap-4">
               {data.carry_overs.map(c => (
                 <Link key={c.id} href={`/tasks/${c.id}`}
-                  className="flex items-center gap-4 p-3 bg-surface-container-low rounded-md hover:bg-surface-container transition-colors">
+                  className="flex items-center gap-4 p-3 bg-surface-container-low rounded-xl hover:bg-surface-container transition-colors">
                   <span className="material-symbols-outlined text-tertiary"
                     style={{ fontVariationSettings: "'FILL' 0" }}>history</span>
                   <div className="flex-1 min-w-0">
@@ -215,7 +215,7 @@ export default function DashboardClient({ data, role }: Props) {
 
         {/* ── Manager quick-links bento (bottom, 5 cols) ──────────────────── */}
         {isManager ? (
-          <div className="lg:col-span-5 bg-gradient-to-br from-[#4d556a] to-[#656d84] rounded-lg p-8 shadow-[0px_8px_32px_rgba(77,85,106,0.1)] text-white">
+          <div className="lg:col-span-5 bg-gradient-to-br from-[#4d556a] to-[#656d84] rounded-2xl p-8 shadow-[0px_8px_32px_rgba(77,85,106,0.1)] text-white">
             <div className="flex justify-between items-start mb-6">
               <h2 className="text-lg font-bold">Manager Views</h2>
               <span className="material-symbols-outlined"
@@ -244,7 +244,7 @@ export default function DashboardClient({ data, role }: Props) {
             </div>
           </div>
         ) : (
-          <div className="lg:col-span-5 bg-gradient-to-br from-[#4d556a] to-[#656d84] rounded-lg p-8 shadow-[0px_8px_32px_rgba(77,85,106,0.1)] text-white">
+          <div className="lg:col-span-5 bg-gradient-to-br from-[#4d556a] to-[#656d84] rounded-2xl p-8 shadow-[0px_8px_32px_rgba(77,85,106,0.1)] text-white">
             <div className="flex justify-between items-start mb-4">
               <h2 className="text-lg font-bold">Your Week</h2>
               <span className="material-symbols-outlined"

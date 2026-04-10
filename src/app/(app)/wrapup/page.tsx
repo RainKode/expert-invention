@@ -83,6 +83,7 @@ export default async function WrapupPage() {
   }
 
   const draft = {
+    id: null,
     user_id: user.id,
     date: today,
     planned_tasks_json: planned,

@@ -25,9 +25,9 @@ const TYPE_LABELS: Record<CustomFieldType, string> = {
 }
 
 const SCOPE_COLORS: Record<CustomFieldScopeType, string> = {
-  global: 'bg-indigo-100 text-indigo-700',
-  team: 'bg-blue-100 text-blue-700',
-  project: 'bg-purple-100 text-purple-700',
+  global: 'bg-primary-container/20 text-primary',
+  team: 'bg-secondary-container text-secondary',
+  project: 'bg-tertiary-fixed text-on-tertiary-fixed-variant',
 }
 
 export default function CustomFieldsClient({ initialFields, teamId }: Props) {
@@ -92,19 +92,19 @@ export default function CustomFieldsClient({ initialFields, teamId }: Props) {
       </div>
 
       {error && (
-        <div className="mb-4 p-3 bg-red-50 text-red-700 rounded-xl text-sm">{error}</div>
+        <div className="mb-4 p-3 bg-error-container text-on-error-container rounded-xl text-sm">{error}</div>
       )}
 
       {/* Tabs */}
-      <div className="flex gap-6 mb-6 border-b border-[#c6c6cd]/20">
+      <div className="flex gap-1 mb-6 p-1.5 bg-surface-container-high rounded-full w-fit">
         {TABS.map(t => (
           <button
             key={t.key}
             onClick={() => setActiveTab(t.key)}
-            className={`pb-3 text-sm font-medium transition-colors ${
+            className={`px-5 py-2 rounded-full text-sm font-medium transition-all ${
               activeTab === t.key
-                ? 'text-[#4d556a] border-b-4 border-[#4d556a]'
-                : 'text-[#434655] hover:text-[#191c1e]'
+                ? 'bg-surface-container-lowest shadow-ambient-sm text-on-surface font-semibold'
+                : 'text-on-surface-variant hover:text-on-surface'
             }`}
           >
             {t.label}
@@ -158,13 +158,13 @@ export default function CustomFieldsClient({ initialFields, teamId }: Props) {
               {/* Status */}
               <div className="col-span-2">
                 {field.status === 'active' ? (
-                  <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                    <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
+                  <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium bg-primary-container/20 text-primary">
+                    <span className="w-1.5 h-1.5 rounded-full bg-primary" />
                     Active
                   </span>
                 ) : (
-                  <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-500">
-                    <span className="w-1.5 h-1.5 rounded-full bg-gray-400" />
+                  <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium bg-surface-container text-outline">
+                    <span className="w-1.5 h-1.5 rounded-full bg-outline" />
                     Archived
                   </span>
                 )}
@@ -257,15 +257,16 @@ function AddFieldModal({ teamId, onCreated, onClose }: {
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ background: 'rgba(77,85,106,0.3)', backdropFilter: 'blur(4px)' }}>
-      <div className="bg-white rounded-2xl shadow-[0_24px_48px_rgba(77,85,106,0.12)] w-full max-w-md p-8">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+      <div className="absolute inset-0 bg-on-surface/40 backdrop-blur-[20px]" onClick={onClose} />
+      <div className="relative bg-surface-container-lowest rounded-2xl shadow-ambient w-full max-w-md p-8">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-bold text-[#191c1e]">Add Custom Field</h2>
-          <button onClick={onClose} className="p-2 rounded-lg hover:bg-[#f7f9fb]">
-            <span className="material-symbols-outlined text-[20px] text-[#434655]">close</span>
+          <h2 className="text-xl font-bold text-on-surface">Add Custom Field</h2>
+          <button onClick={onClose} className="p-2 rounded-full hover:bg-surface-container">
+            <span className="material-symbols-outlined text-[20px] text-on-surface-variant">close</span>
           </button>
         </div>
-        {error && <p className="mb-4 text-sm text-red-600">{error}</p>}
+        {error && <p className="mb-4 text-sm text-error">{error}</p>}
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
             <label className="block text-sm font-medium text-[#434655] mb-1.5">Field Name</label>
@@ -323,20 +324,20 @@ function AddFieldModal({ teamId, onCreated, onClose }: {
                       className="flex-1 px-4 py-2 rounded-full bg-[#f7f9fb] text-sm text-[#191c1e] outline-none focus:ring-2 focus:ring-[#4d556a]/30"
                     />
                     {options.length > 1 && (
-                      <button type="button" onClick={() => setOptions(prev => prev.filter((_, idx) => idx !== i))} className="text-[#434655] hover:text-red-500">
+                      <button type="button" onClick={() => setOptions(prev => prev.filter((_, idx) => idx !== i))} className="text-on-surface-variant hover:text-error">
                         <span className="material-symbols-outlined text-[16px]">remove_circle</span>
                       </button>
                     )}
                   </div>
                 ))}
-                <button type="button" onClick={() => setOptions(prev => [...prev, ''])} className="text-sm text-[#4d556a] flex items-center gap-1 mt-1">
+                <button type="button" onClick={() => setOptions(prev => [...prev, ''])} className="text-sm text-on-surface-variant flex items-center gap-1 mt-1">
                   <span className="material-symbols-outlined text-[16px]">add</span> Add option
                 </button>
               </div>
             </div>
           )}
           <div className="flex gap-3 pt-2">
-            <button type="button" onClick={onClose} className="flex-1 py-2.5 rounded-full bg-[#f7f9fb] text-[#434655] font-medium text-sm">Cancel</button>
+            <button type="button" onClick={onClose} className="flex-1 py-2.5 rounded-full bg-surface-container text-on-surface-variant font-medium text-sm">Cancel</button>
             <button
               type="submit"
               disabled={loading}
@@ -384,15 +385,16 @@ function EditFieldModal({ field, onUpdated, onClose }: {
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ background: 'rgba(77,85,106,0.3)', backdropFilter: 'blur(4px)' }}>
-      <div className="bg-white rounded-2xl shadow-[0_24px_48px_rgba(77,85,106,0.12)] w-full max-w-md p-8">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+      <div className="absolute inset-0 bg-on-surface/40 backdrop-blur-[20px]" onClick={onClose} />
+      <div className="relative bg-surface-container-lowest rounded-2xl shadow-ambient w-full max-w-md p-8">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-bold text-[#191c1e]">Edit Field</h2>
-          <button onClick={onClose} className="p-2 rounded-lg hover:bg-[#f7f9fb]">
-            <span className="material-symbols-outlined text-[20px] text-[#434655]">close</span>
+          <h2 className="text-xl font-bold text-on-surface">Edit Field</h2>
+          <button onClick={onClose} className="p-2 rounded-full hover:bg-surface-container">
+            <span className="material-symbols-outlined text-[20px] text-on-surface-variant">close</span>
           </button>
         </div>
-        {error && <p className="mb-4 text-sm text-red-600">{error}</p>}
+        {error && <p className="mb-4 text-sm text-error">{error}</p>}
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
             <label className="block text-sm font-medium text-[#434655] mb-1.5">Field Name</label>
@@ -415,20 +417,20 @@ function EditFieldModal({ field, onUpdated, onClose }: {
                       className="flex-1 px-4 py-2 rounded-full bg-[#f7f9fb] text-sm text-[#191c1e] outline-none focus:ring-2 focus:ring-[#4d556a]/30"
                     />
                     {options.length > 1 && (
-                      <button type="button" onClick={() => setOptions(prev => prev.filter((_, idx) => idx !== i))} className="text-[#434655] hover:text-red-500">
+                      <button type="button" onClick={() => setOptions(prev => prev.filter((_, idx) => idx !== i))} className="text-on-surface-variant hover:text-error">
                         <span className="material-symbols-outlined text-[16px]">remove_circle</span>
                       </button>
                     )}
                   </div>
                 ))}
-                <button type="button" onClick={() => setOptions(prev => [...prev, ''])} className="text-sm text-[#4d556a] flex items-center gap-1">
+                <button type="button" onClick={() => setOptions(prev => [...prev, ''])} className="text-sm text-on-surface-variant flex items-center gap-1">
                   <span className="material-symbols-outlined text-[16px]">add</span> Add option
                 </button>
               </div>
             </div>
           )}
           <div className="flex gap-3 pt-2">
-            <button type="button" onClick={onClose} className="flex-1 py-2.5 rounded-full bg-[#f7f9fb] text-[#434655] font-medium text-sm">Cancel</button>
+            <button type="button" onClick={onClose} className="flex-1 py-2.5 rounded-full bg-surface-container text-on-surface-variant font-medium text-sm">Cancel</button>
             <button
               type="submit"
               disabled={loading}

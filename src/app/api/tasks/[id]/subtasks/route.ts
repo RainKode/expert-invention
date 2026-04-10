@@ -25,6 +25,7 @@ export async function GET(_: NextRequest, { params }: Params) {
     .from('tasks')
     .select('*, assignee:profiles!tasks_assignee_id_fkey(id, name, email)')
     .eq('parent_task_id', id)
+    .neq('status', 'archived')
     .order('created_at', { ascending: true })
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })

@@ -36,15 +36,15 @@ const EVENT_COLOR: Record<ActivityEventType, string> = {
   task_status_changed: 'bg-secondary-container text-on-secondary-container',
   task_assigned: 'bg-tertiary-fixed text-on-tertiary-fixed-variant',
   task_reassigned: 'bg-tertiary-fixed text-on-tertiary-fixed-variant',
-  task_completed: 'bg-emerald-100 text-emerald-700',
-  task_commented: 'bg-blue-50 text-blue-600',
-  plan_submitted: 'bg-violet-100 text-violet-700',
-  plan_unlocked: 'bg-amber-100 text-amber-700',
-  checkin_submitted: 'bg-sky-100 text-sky-700',
-  wrapup_submitted: 'bg-indigo-100 text-indigo-700',
+  task_completed: 'bg-primary-container/40 text-primary',
+  task_commented: 'bg-primary-container/60 text-on-surface',
+  plan_submitted: 'bg-secondary-container/60 text-secondary',
+  plan_unlocked: 'bg-tertiary-container text-tertiary',
+  checkin_submitted: 'bg-secondary-container text-on-secondary-container',
+  wrapup_submitted: 'bg-secondary-container/60 text-secondary',
   field_updated: 'bg-surface-container text-on-surface-variant',
-  user_joined: 'bg-emerald-50 text-emerald-600',
-  warning_acknowledged: 'bg-amber-100 text-[#d4820a]',
+  user_joined: 'bg-primary-container/30 text-primary',
+  warning_acknowledged: 'bg-tertiary-container text-[#d4820a]',
 }
 
 function timeAgo(iso: string): string {

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sunday - Search Results</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-primary": "#bec6df",
+                        "secondary-fixed-dim": "#bec6e0",
+                        "tertiary-fixed-dim": "#d1c4bb",
+                        "on-tertiary-fixed-variant": "#4e453e",
+                        "on-secondary-fixed-variant": "#3e465c",
+                        "secondary": "#565e74",
+                        "on-surface-variant": "#45464c",
+                        "surface": "#f7f9fb",
+                        "on-secondary": "#ffffff",
+                        "background": "#f7f9fb",
+                        "on-surface": "#191c1e",
+                        "on-primary-container": "#c2cae3",
+                        "tertiary-container": "#5d544d",
+                        "on-background": "#191c1e",
+                        "surface-dim": "#d8dadc",
+                        "surface-container": "#eceef0",
+                        "on-tertiary-fixed": "#211a15",
+                        "primary-container": "#4d556a",
+                        "on-secondary-container": "#5c647b",
+                        "on-primary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "outline": "#76777d",
+                        "inverse-surface": "#2d3133",
+                        "primary": "#363e52",
+                        "surface-container-highest": "#e0e3e5",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed": "#131b2e",
+                        "surface-container-high": "#e6e8ea",
+                        "on-error": "#ffffff",
+                        "secondary-fixed": "#dae2fd",
+                        "on-primary-fixed-variant": "#3e465b",
+                        "surface-container-low": "#f2f4f6",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed": "#eee0d7",
+                        "outline-variant": "#c6c6cd",
+                        "tertiary": "#453d36",
+                        "primary-fixed-dim": "#bec6df",
+                        "on-tertiary-container": "#d6c9bf",
+                        "surface-tint": "#565e73",
+                        "error": "#ba1a1a",
+                        "on-error-container": "#93000a",
+                        "surface-bright": "#f7f9fb",
+                        "secondary-container": "#dae2fd",
+                        "on-primary-fixed": "#131b2e",
+                        "primary-fixed": "#dae2fc",
+                        "inverse-on-surface": "#eff1f3",
+                        "surface-variant": "#e0e3e5"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans", "sans-serif"],
+                        "body": ["Plus Jakarta Sans", "sans-serif"],
+                        "label": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    "boxShadow": {
+                        "ambient": "0px 24px 48px rgba(77, 85, 106, 0.06)"
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .glass-dropdown {
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .text-highlight {
+            color: #4d556a;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<div class="px-40 flex flex-1 justify-center py-5">
+<div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+<!-- Header (TopAppBar adapted for Context) -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-surface-container-high px-10 py-3 bg-surface z-10 relative">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-on-surface">
+<div class="size-4 text-primary">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M8.57829 8.57829C5.52816 11.6284 3.451 15.5145 2.60947 19.7452C1.76794 23.9758 2.19984 28.361 3.85056 32.3462C5.50128 36.3314 8.29667 39.7376 11.8832 42.134C15.4698 44.5305 19.6865 45.8096 24 45.8096C28.3135 45.8096 32.5302 44.5305 36.1168 42.134C39.7033 39.7375 42.4987 36.3314 44.1494 32.3462C45.8002 28.361 46.2321 23.9758 45.3905 19.7452C44.549 15.5145 42.4718 11.6284 39.4217 8.57829L24 24L8.57829 8.57829Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-on-surface text-lg font-headline font-bold leading-tight tracking-[-0.015em]">Sunday</h2>
+</div>
+<!-- Search Bar -->
+<div class="relative w-96">
+<label class="flex flex-col w-full h-12">
+<div class="flex w-full flex-1 items-stretch rounded-full h-full bg-surface-container-low shadow-sm">
+<div class="text-on-surface-variant flex border-none items-center justify-center pl-4 rounded-l-full">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-full text-on-surface focus:outline-0 focus:ring-0 border-none bg-transparent h-full placeholder:text-outline px-4 font-body text-base font-normal leading-normal" placeholder="Search tasks, projects, people..." value="des"/>
+<button class="flex items-center justify-center pr-4 text-on-surface-variant hover:text-on-surface">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+</label>
+<!-- Glassmorphism Dropdown -->
+<div class="absolute top-14 left-0 w-[480px] glass-dropdown rounded-[16px] shadow-ambient overflow-hidden flex flex-col z-50 py-2">
+<!-- Section: Tasks -->
+<div class="px-4 py-2">
+<h4 class="text-xs font-label text-on-surface-variant font-medium tracking-wide uppercase mb-2">Tasks</h4>
+<!-- Task Item 1 (Selected/Active State) -->
+<div class="relative flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-surface-container-high cursor-pointer bg-surface-container-low group">
+<div class="absolute left-0 top-0 bottom-0 w-[3px] bg-gradient-to-b from-primary-container to-secondary rounded-l-lg"></div>
+<div class="flex items-center justify-center w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">check_circle</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-body text-on-surface truncate"><span class="text-highlight">Des</span>ign System Update</p>
+</div>
+<div class="flex items-center gap-2 shrink-0">
+<span class="text-[10px] font-label font-medium px-2 py-0.5 rounded-full bg-tertiary-container text-on-tertiary-container">In Progress</span>
+<img alt="Assignee avatar" class="w-6 h-6 rounded-full object-cover border border-outline-variant/15" data-alt="Small circular avatar of a professional woman with dark hair" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3-ucWE391hEdy7B5_DHzUlv-kQcyJrbbpbDgi-n4__2zC-t4Nq_Ia2h7YwcND-t2q4MBTG3QH28xSGRxyVUR6nExtKtVloC8mqErSgaRYp0XkAWthv2ldONBwlKYK4t7q7dd7hcfbKpdQ2j43crUbv_1X1xf0PTZKvh6uwZ7gjCMMVGBuwIVCcytf9bbelbTw5DJ67azoaIHhmJzoOZjSgOshHJUDPS7b6XT9xIuhtDAkBdBcoruhiEasut9-kjYJeyHQaSNKDc0"/>
+</div>
+</div>
+<!-- Task Item 2 -->
+<div class="relative flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-surface-container-high cursor-pointer group mt-1">
+<div class="flex items-center justify-center w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">check_circle</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-body text-on-surface truncate"><span class="text-highlight">Des</span>k Setup Guidelines</p>
+</div>
+<div class="flex items-center gap-2 shrink-0">
+<span class="text-[10px] font-label font-medium px-2 py-0.5 rounded-full bg-surface-variant text-on-surface-variant">To Do</span>
+<div class="w-6 h-6 rounded-full bg-secondary-container flex items-center justify-center text-[10px] text-on-secondary-container font-medium">JD</div>
+</div>
+</div>
+</div>
+<!-- Section: Projects -->
+<div class="px-4 py-2 mt-1">
+<h4 class="text-xs font-label text-on-surface-variant font-medium tracking-wide uppercase mb-2">Projects</h4>
+<!-- Project Item 1 -->
+<div class="relative flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-surface-container-high cursor-pointer group">
+<div class="flex items-center justify-center w-8 h-8 rounded-md bg-primary-fixed-dim/20 text-primary-container">
+<span class="material-symbols-outlined text-[20px]">folder</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-body text-on-surface truncate">Brand <span class="text-highlight">Des</span>ign Refresh 2024</p>
+</div>
+<div class="shrink-0">
+<span class="text-[10px] font-label font-medium px-2 py-0.5 rounded bg-surface-variant text-on-surface-variant">Marketing</span>
+</div>
+</div>
+</div>
+<!-- Section: People -->
+<div class="px-4 py-2 mt-1">
+<h4 class="text-xs font-label text-on-surface-variant font-medium tracking-wide uppercase mb-2">People</h4>
+<!-- Person Item 1 -->
+<div class="relative flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-surface-container-high cursor-pointer group">
+<img alt="Profile" class="w-8 h-8 rounded-full object-cover" data-alt="Headshot of a smiling man with glasses against a neutral background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaths_SnnKlqIM8kc3jcMFl8P2TgNMyQaAPvbVo53RhyhB8PpVQgNm7PoI6G36-185ZZ1pwOn5-u1nmGMhzLWyNk13mpCtl6r2AGTsfmU7_QzS6VerNlz0N8VriRPa2WLhMCjVRXXmPWcGfcf5-lI7AwDNa4AJWbKFTno5Mv0TKgNkPW6rfkqhmRRYiqRC6V6zCRYmVDHMkk7omyR1087h82xurWs6zfvqrWn8jf3TBw8803y5GZRCzbeyhkIghb2FrMpUDNV5czc"/>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-body text-on-surface truncate"><span class="text-highlight">Des</span>mond Miles</p>
+</div>
+<div class="shrink-0">
+<span class="text-xs text-on-surface-variant font-body">Lead Designer</span>
+</div>
+</div>
+</div>
+<!-- See All Footer -->
+<div class="mt-2 border-t border-outline-variant/15 px-2 pt-2 pb-1">
+<button class="w-full flex items-center justify-center gap-2 py-2.5 text-sm font-body font-medium text-primary hover:bg-surface-container-high rounded-lg transition-colors">
+                                        See all 12 results for "des"
+                                        <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="flex flex-1 justify-end gap-8">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 bg-surface-container-highest border border-outline-variant/15" data-alt="User profile picture placeholder" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDXxwMkoo_ytTfTd3hHLga6zjGiWvsbiZIJvBrw3LOFLmQMD6aYiFuE3BpXty62Eo-L_8dxebv4ImMorb3AXspUdpqAWg4eLDrnhTmWXr7ZZ_7bSEU2hNnDfgUgRMLX3NartSECV8UEiYAS8fvlPQY6GCe59M4rYF4j_09b4rQDm6jORyprxHm0AnvQevGE4d5NM_rhWT5qafheKKEO8fnvB-bz5XF9OVWp7SVbh5MsDPIAcl7DtuyJtkrb5YQWMSGvG8f1ScR-_Xw");'></div>
+</div>
+</header>
+<!-- Page Content Dummy Area -->
+<main class="flex-1 p-10 opacity-40 pointer-events-none">
+<h1 class="text-[2rem] font-headline font-bold text-on-surface tracking-[-0.02em] mb-8">Good morning</h1>
+<div class="grid grid-cols-3 gap-6">
+<div class="h-64 bg-surface-container-lowest rounded-lg shadow-ambient"></div>
+<div class="h-64 bg-surface-container-lowest rounded-lg shadow-ambient"></div>
+<div class="h-64 bg-surface-container-lowest rounded-lg shadow-ambient"></div>
+</div>
+</main>
+</div>
+</div>
+</div>
+</div>
+</body></html>

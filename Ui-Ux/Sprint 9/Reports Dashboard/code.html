@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Reports - HR Atrium</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#453d36",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-secondary-container": "#5c647b",
+                        "on-primary-container": "#c2cae3",
+                        "on-secondary-fixed": "#131b2e",
+                        "inverse-primary": "#bec6df",
+                        "tertiary-container": "#5d544d",
+                        "surface": "#f7f9fb",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed-variant": "#3e465b",
+                        "on-primary-fixed": "#131b2e",
+                        "tertiary-fixed-dim": "#d1c4bb",
+                        "surface-container": "#eceef0",
+                        "on-surface": "#191c1e",
+                        "error-container": "#ffdad6",
+                        "surface-container-low": "#f2f4f6",
+                        "primary-fixed": "#dae2fc",
+                        "secondary-fixed": "#dae2fd",
+                        "tertiary-fixed": "#eee0d7",
+                        "primary-container": "#4d556a",
+                        "secondary": "#656d84",
+                        "surface-bright": "#f7f9fb",
+                        "on-background": "#191c1e",
+                        "background": "#f7f9fb",
+                        "error": "#ba1a1a",
+                        "surface-container-high": "#e6e8ea",
+                        "primary-fixed-dim": "#bec6df",
+                        "outline-variant": "#c6c6cd",
+                        "on-tertiary-fixed": "#211a15",
+                        "outline": "#76777d",
+                        "surface-tint": "#565e73",
+                        "on-surface-variant": "#45464c",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-container": "#d6c9bf",
+                        "surface-variant": "#e0e3e5",
+                        "on-tertiary-fixed-variant": "#4e453e",
+                        "secondary-fixed-dim": "#bec6e0",
+                        "inverse-surface": "#2d3133",
+                        "on-primary": "#ffffff",
+                        "secondary-container": "#dae2fd",
+                        "primary": "#363e52",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-tertiary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "surface-dim": "#d8dadc",
+                        "on-secondary-fixed-variant": "#3e465c",
+                        "surface-container-lowest": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Plus Jakarta Sans"],
+                        "label": ["Plus Jakarta Sans"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f7f9fb; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .active-tab-indicator { position: absolute; left: 0; top: 25%; height: 50%; width: 3px; background-color: #4d556a; border-radius: 0 4px 4px 0; }
+        .glass-effect { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(20px); }
+        .primary-gradient { background: linear-gradient(135deg, #4d556a 0%, #656d84 100%); }
+    </style>
+</head>
+<body class="text-on-surface">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full flex flex-col p-6 gap-2 bg-slate-100/50 dark:bg-slate-900/50 h-screen w-72 rounded-r-[48px] z-50">
+<div class="mb-10 px-4">
+<h1 class="text-lg font-extrabold text-slate-800 dark:text-slate-100 tracking-tighter">Sunday</h1>
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant/60 font-bold">HR Reporting</p>
+</div>
+<nav class="flex flex-col gap-2 flex-grow">
+<a class="flex items-center gap-4 px-6 py-4 text-slate-500 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-[24px] hover:translate-x-1 transition-transform duration-200 font-semibold text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-4 px-6 py-4 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-[24px] shadow-sm hover:translate-x-1 transition-transform duration-200 font-semibold text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+                Reports
+            </a>
+<a class="flex items-center gap-4 px-6 py-4 text-slate-500 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-[24px] hover:translate-x-1 transition-transform duration-200 font-semibold text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+                Users
+            </a>
+<a class="flex items-center gap-4 px-6 py-4 text-slate-500 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-[24px] hover:translate-x-1 transition-transform duration-200 font-semibold text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="hub">hub</span>
+                Teams
+            </a>
+<a class="flex items-center gap-4 px-6 py-4 text-slate-500 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-[24px] hover:translate-x-1 transition-transform duration-200 font-semibold text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+                Settings
+            </a>
+</nav>
+<div class="mt-auto flex flex-col gap-2">
+<a class="flex items-center gap-4 px-6 py-4 text-slate-500 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-[24px] transition-all font-semibold text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+                Help
+            </a>
+<a class="flex items-center gap-4 px-6 py-4 text-slate-500 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-[24px] transition-all font-semibold text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+                Logout
+            </a>
+</div>
+</aside>
+<!-- TopNavBar -->
+<header class="sticky top-0 z-40 flex justify-between items-center w-full px-8 py-4 bg-slate-50/80 dark:bg-slate-950/80 backdrop-blur-xl shadow-[0px_24px_48px_rgba(77,85,106,0.06)] ml-72 w-[calc(100%-18rem)]">
+<div class="flex flex-col">
+<nav class="flex items-center gap-2 text-xs font-medium text-on-surface-variant mb-1">
+<span>Home</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-primary font-bold">Reports</span>
+</nav>
+<h2 class="text-xl font-bold text-slate-800 dark:text-slate-100 tracking-tighter">Reports</h2>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative group">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-slate-400">search</span>
+<input class="bg-surface-container-low border-none rounded-full py-2.5 pl-12 pr-6 text-sm w-64 focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Global Search..." type="text"/>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 text-slate-500 hover:text-slate-800 transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-slate-500 hover:text-slate-800 transition-colors">
+<span class="material-symbols-outlined">apps</span>
+</button>
+<div class="ml-2 w-10 h-10 rounded-full bg-surface-container-highest overflow-hidden ring-2 ring-white shadow-sm">
+<img class="w-full h-full object-cover" data-alt="professional woman portrait with soft natural lighting and neutral grey background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAy33DmMjOZQZxcwuJV_UCqarP9TG6ZPOBS1iiBGZAXDbMLwxsuW9F4249apBogmN5aQZbu--7QmBadx9XGFUu7KdT1ZumXF3xfPT-tI7SCV57em3SJ80tKNA0jCaxKi9fxiApN4-hQznQLHFKyzMYXtQGr9RnbxJeZIDuEc_Cqf4HIryLPBe9HW2W29nlUkLxOMraw13OHG4GLKFvZ9uD9Z7isqLCZjpzCmGx6sstAPWVkRs9juqF6B2BeI5T-p7UOebjTZE8_8SY"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="ml-72 p-12 pt-16 flex flex-col gap-10">
+<!-- Page Header -->
+<div class="max-w-4xl">
+<h1 class="text-[1.5rem] font-headline font-bold text-on-surface tracking-tight leading-none mb-3">Reports</h1>
+<p class="text-on-surface-variant text-lg">Generate and download reports for your team.</p>
+</div>
+<div class="grid grid-cols-12 gap-8 items-start">
+<!-- Left: Report Type Selector -->
+<div class="col-span-12 lg:col-span-5 flex flex-col gap-4">
+<h3 class="text-xs font-bold uppercase tracking-widest text-on-surface-variant px-2">Select Report Type</h3>
+<!-- Selected Card -->
+<button class="relative w-full text-left flex items-center gap-6 p-6 rounded-lg bg-surface-container-low transition-all group overflow-hidden">
+<div class="active-tab-indicator"></div>
+<div class="w-12 h-12 flex items-center justify-center rounded-2xl bg-primary-container text-white">
+<span class="material-symbols-outlined">analytics</span>
+</div>
+<div class="flex-grow">
+<h4 class="font-bold text-on-surface">Weekly Team Performance</h4>
+<p class="text-sm text-on-surface-variant">Efficiency and output metrics by team.</p>
+</div>
+<div class="w-6 h-6 rounded-full border-2 border-primary flex items-center justify-center">
+<div class="w-3 h-3 rounded-full bg-primary"></div>
+</div>
+</button>
+<!-- Inactive Cards -->
+<button class="w-full text-left flex items-center gap-6 p-6 rounded-lg bg-surface-container-lowest hover:bg-surface-container transition-all group">
+<div class="w-12 h-12 flex items-center justify-center rounded-2xl bg-surface-container-high text-on-surface-variant">
+<span class="material-symbols-outlined">person</span>
+</div>
+<div class="flex-grow">
+<h4 class="font-bold text-on-surface">Individual Employee</h4>
+<p class="text-sm text-on-surface-variant">Detailed breakdown of individual metrics.</p>
+</div>
+<div class="w-6 h-6 rounded-full border-2 border-outline-variant"></div>
+</button>
+<button class="w-full text-left flex items-center gap-6 p-6 rounded-lg bg-surface-container-lowest hover:bg-surface-container transition-all group">
+<div class="w-12 h-12 flex items-center justify-center rounded-2xl bg-surface-container-high text-on-surface-variant">
+<span class="material-symbols-outlined">schedule</span>
+</div>
+<div class="flex-grow">
+<h4 class="font-bold text-on-surface">Billable Hours Summary</h4>
+<p class="text-sm text-on-surface-variant">Client work and project time logs.</p>
+</div>
+<div class="w-6 h-6 rounded-full border-2 border-outline-variant"></div>
+</button>
+<button class="w-full text-left flex items-center gap-6 p-6 rounded-lg bg-surface-container-lowest hover:bg-surface-container transition-all group">
+<div class="w-12 h-12 flex items-center justify-center rounded-2xl bg-surface-container-high text-on-surface-variant">
+<span class="material-symbols-outlined">file_export</span>
+</div>
+<div class="flex-grow">
+<h4 class="font-bold text-on-surface">Full Task Export</h4>
+<p class="text-sm text-on-surface-variant">CSV export of all completed tasks.</p>
+</div>
+<div class="w-6 h-6 rounded-full border-2 border-outline-variant"></div>
+</button>
+<button class="w-full text-left flex items-center gap-6 p-6 rounded-lg bg-surface-container-lowest hover:bg-surface-container transition-all group">
+<div class="w-12 h-12 flex items-center justify-center rounded-2xl bg-surface-container-high text-on-surface-variant">
+<span class="material-symbols-outlined">history</span>
+</div>
+<div class="flex-grow">
+<h4 class="font-bold text-on-surface">System Activity</h4>
+<p class="text-sm text-on-surface-variant">Audit logs and system-wide changes.</p>
+</div>
+<div class="w-6 h-6 rounded-full border-2 border-outline-variant"></div>
+</button>
+</div>
+<!-- Right: Parameters and Action -->
+<div class="col-span-12 lg:col-span-7 flex flex-col gap-8">
+<!-- Parameters Card -->
+<div class="bg-surface-container-lowest rounded-xl p-10 shadow-[0px_24px_48px_rgba(77,85,106,0.06)] flex flex-col gap-10">
+<h3 class="text-lg font-bold text-on-surface">Report Parameters</h3>
+<div class="grid grid-cols-2 gap-8">
+<div class="flex flex-col gap-3">
+<label class="text-sm font-bold text-on-surface-variant ml-2">From</label>
+<div class="relative">
+<span class="absolute left-5 top-1/2 -translate-y-1/2 material-symbols-outlined text-slate-400">calendar_today</span>
+<input class="w-full bg-surface-container-low border-none rounded-full py-4 pl-14 pr-6 font-medium focus:ring-2 focus:ring-primary/10" type="text" value="Oct 01, 2023"/>
+</div>
+</div>
+<div class="flex flex-col gap-3">
+<label class="text-sm font-bold text-on-surface-variant ml-2">To</label>
+<div class="relative">
+<span class="absolute left-5 top-1/2 -translate-y-1/2 material-symbols-outlined text-slate-400">calendar_today</span>
+<input class="w-full bg-surface-container-low border-none rounded-full py-4 pl-14 pr-6 font-medium focus:ring-2 focus:ring-primary/10" type="text" value="Oct 07, 2023"/>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-3">
+<label class="text-sm font-bold text-on-surface-variant ml-2">Team Selector</label>
+<div class="relative">
+<span class="absolute left-5 top-1/2 -translate-y-1/2 material-symbols-outlined text-slate-400">group</span>
+<input class="w-full bg-surface-container-low border-none rounded-full py-4 pl-14 pr-6 font-medium focus:ring-2 focus:ring-primary/10" type="text" value="Alpha Team"/>
+<span class="absolute right-5 top-1/2 -translate-y-1/2 material-symbols-outlined text-slate-400">expand_more</span>
+</div>
+</div>
+<div class="flex flex-col gap-3">
+<label class="text-sm font-bold text-on-surface-variant ml-2">Export Format</label>
+<div class="flex bg-surface-container-low p-1.5 rounded-full w-fit">
+<button class="px-8 py-2.5 rounded-full bg-white shadow-sm font-bold text-on-surface text-sm">PDF</button>
+<button class="px-8 py-2.5 rounded-full text-on-surface-variant font-bold text-sm hover:text-on-surface transition-colors">CSV</button>
+</div>
+</div>
+<button class="primary-gradient text-white font-bold py-5 rounded-full shadow-lg shadow-primary-container/20 hover:scale-[1.02] transition-transform active:scale-95 flex items-center justify-center gap-3">
+<span class="material-symbols-outlined">magic_button</span>
+                        Generate Report
+                    </button>
+</div>
+<!-- Recent Results -->
+<div class="bg-surface-container-low/50 rounded-xl p-8 flex flex-col gap-6">
+<div class="flex justify-between items-center px-2">
+<h3 class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Last Generated Result</h3>
+<span class="text-xs text-on-surface-variant">2 minutes ago</span>
+</div>
+<div class="bg-white p-6 rounded-lg flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-tertiary/10 text-tertiary flex items-center justify-center">
+<span class="material-symbols-outlined">picture_as_pdf</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface">Weekly Team Performance — Alpha Team</h4>
+<p class="text-xs text-on-surface-variant">Oct 01 - Oct 07, 2023 • 2.4 MB</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex items-center gap-2 px-5 py-2.5 rounded-full border border-outline-variant/30 text-on-surface-variant font-bold text-xs hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-sm">download</span>
+                                Download PDF
+                            </button>
+<button class="flex items-center gap-2 px-5 py-2.5 rounded-full border border-outline-variant/30 text-on-surface-variant font-bold text-xs hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-sm">table_view</span>
+                                Download CSV
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- FAB Suppression: This screen is focused, so no FAB as per instructions -->
+</body></html>

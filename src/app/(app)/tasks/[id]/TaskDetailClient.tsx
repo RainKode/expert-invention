@@ -8,13 +8,14 @@ import CompletionReportModal from '@/components/tasks/CompletionReportModal'
 import ReviewerSendBackModal from '@/components/tasks/ReviewerSendBackModal'
 import AddDependencyModal from '@/components/tasks/AddDependencyModal'
 import QuickTaskModal from '@/components/tasks/QuickTaskModal'
+import FileAttachments from '@/components/files/FileAttachments'
 import { CustomFieldValue } from '@/types'
 
 const STATUS_BADGE: Record<string, string> = {
-  todo: 'bg-red-50 text-red-700 border-red-200',
-  in_progress: 'bg-blue-50 text-blue-700 border-blue-200',
-  in_review: 'bg-purple-50 text-purple-700 border-purple-200',
-  done: 'bg-green-50 text-green-700 border-green-200',
+  todo: 'bg-surface-container text-on-surface-variant',
+  in_progress: 'bg-secondary-container text-on-secondary-container',
+  in_review: 'bg-tertiary-container text-on-tertiary-container',
+  done: 'bg-primary-container text-on-primary-container',
 }
 
 const STATUS_LABEL: Record<string, string> = {
@@ -31,9 +32,9 @@ const PRIORITY_LABEL: Record<string, string> = {
 }
 
 const PRIORITY_COLOR: Record<string, string> = {
-  high: 'bg-red-100 text-red-700',
-  medium: 'bg-amber-100 text-amber-700',
-  low: 'bg-slate-100 text-slate-600',
+  high: 'bg-error-container text-on-error-container',
+  medium: 'bg-tertiary-container text-on-tertiary-container',
+  low: 'bg-surface-container text-on-surface-variant',
 }
 
 const TIMELINE_LABELS: Record<string, string> = {
@@ -240,9 +241,9 @@ export default function TaskDetailClient({
         </Link>
 
         {/* Header */}
-        <div className="bg-surface-container-lowest rounded-3xl p-6 border border-surface-container-high/50">
+        <div className="bg-surface-container-lowest rounded-3xl p-6 shadow-ambient-sm">
           <div className="flex flex-wrap items-start gap-3 mb-4">
-            <span className={`px-3 py-1 rounded-full text-xs font-bold border ${PRIORITY_COLOR[task.priority]}`}>
+            <span className={`px-3 py-1 rounded-full text-xs font-bold ${PRIORITY_COLOR[task.priority]}`}>
               {PRIORITY_LABEL[task.priority]} Priority
             </span>
             {task.project && (
@@ -251,7 +252,7 @@ export default function TaskDetailClient({
               </span>
             )}
             {task.billable && (
-              <span className="px-3 py-1 rounded-full text-xs font-bold bg-green-100 text-green-700">Billable</span>
+              <span className="px-3 py-1 rounded-full text-xs font-bold bg-tertiary-container text-on-tertiary-container">Billable</span>
             )}
           </div>
 
@@ -259,7 +260,7 @@ export default function TaskDetailClient({
 
           <div className="flex flex-wrap items-center gap-3">
             {/* Status badge */}
-            <span className={`px-3 py-1.5 rounded-xl text-sm font-bold border ${STATUS_BADGE[task.status]}`}>
+            <span className={`px-3 py-1.5 rounded-full text-sm font-bold ${STATUS_BADGE[task.status]}`}>
               {STATUS_LABEL[task.status]}
             </span>
 
@@ -275,7 +276,7 @@ export default function TaskDetailClient({
                   }
                 }}
                 disabled={statusChanging}
-                className="px-5 py-2 rounded-xl text-sm font-bold text-white shadow-ambient-sm disabled:opacity-60 transition-opacity"
+                className="px-5 py-2 rounded-full text-sm font-bold text-white shadow-ambient-sm disabled:opacity-60 transition-opacity"
                 style={{ background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }}
               >
                 {statusChanging ? '…' : next === 'in_review' ? 'Submit for Review' : 'Mark In Progress'}
@@ -287,13 +288,14 @@ export default function TaskDetailClient({
               <>
                 <button
                   onClick={handleApprove}
-                  className="px-5 py-2 rounded-xl text-sm font-bold text-white bg-green-600 shadow-ambient-sm hover:bg-green-700 transition-colors"
+                  className="px-5 py-2 rounded-full text-sm font-bold text-on-primary shadow-ambient-sm transition-colors"
+                  style={{ background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }}
                 >
                   Approve
                 </button>
                 <button
                   onClick={() => setSendBackOpen(true)}
-                  className="px-5 py-2 rounded-xl text-sm font-bold text-error border border-error/30 hover:bg-error-container transition-colors"
+                  className="px-5 py-2 rounded-full text-sm font-bold text-error hover:bg-error-container transition-colors"
                 >
                   Send Back
                 </button>
@@ -304,7 +306,7 @@ export default function TaskDetailClient({
             {(isCreator || isManager) && task.status !== 'done' && (
               <button
                 onClick={() => setReassignOpen(true)}
-                className="px-4 py-2 rounded-xl text-sm font-semibold text-on-surface-variant hover:bg-surface-container-high transition-colors"
+                className="px-4 py-2 rounded-full text-sm font-semibold text-on-surface-variant hover:bg-surface-container-high transition-colors"
               >
                 <span className="material-symbols-outlined text-base mr-1">swap_horiz</span>
                 Reassign
@@ -318,7 +320,7 @@ export default function TaskDetailClient({
           {/* Left: tabs + content */}
           <div className="space-y-5">
             {/* Tabs */}
-            <div className="flex gap-1 border-b border-surface-container-high">
+            <div className="flex gap-1">
               {(['details', 'timeline'] as const).map(tab => (
                 <button
                   key={tab}
@@ -342,7 +344,7 @@ export default function TaskDetailClient({
               <div className="space-y-6">
                 {/* Description */}
                 {task.description && (
-                  <div className="bg-surface-container-lowest rounded-2xl p-5 border border-surface-container-high/50">
+                  <div className="bg-surface-container-lowest rounded-2xl p-5 shadow-ambient-sm">
                     <h3 className="text-[10px] font-bold uppercase tracking-widest text-outline mb-3">Description</h3>
                     <p className="text-sm text-on-surface whitespace-pre-wrap">{task.description}</p>
                   </div>
@@ -350,7 +352,7 @@ export default function TaskDetailClient({
 
                 {/* Completion report */}
                 {task.completion_report_text && (
-                  <div className="bg-tertiary-container/20 rounded-2xl p-5 border border-tertiary/20">
+                  <div className="bg-tertiary-container/20 rounded-2xl p-5">
                     <h3 className="text-[10px] font-bold uppercase tracking-widest text-tertiary mb-3">Completion Report</h3>
                     <p className="text-sm text-on-surface whitespace-pre-wrap">{task.completion_report_text}</p>
                   </div>
@@ -360,7 +362,7 @@ export default function TaskDetailClient({
                 {!task.completion_report_text && task.status === 'in_progress' && isAssignee && (
                   <button
                     onClick={() => setCompletionOpen(true)}
-                    className="w-full p-4 rounded-2xl border-2 border-dashed border-surface-container-high hover:border-primary/30 transition-colors text-sm text-outline hover:text-primary"
+                    className="w-full p-4 rounded-2xl bg-surface-container-low hover:bg-surface-container-high transition-colors text-sm text-outline hover:text-primary"
                   >
                     + Add completion report
                   </button>
@@ -390,14 +392,14 @@ export default function TaskDetailClient({
                         <Link
                           key={sub.id}
                           href={`/tasks/${sub.id}`}
-                          className={`flex items-center gap-3 p-4 rounded-2xl border transition-colors hover:border-primary/30 ${
+                          className={`flex items-center gap-3 p-4 rounded-2xl transition-colors hover:bg-surface-container-high ${
                             sub.status === 'done'
-                              ? 'bg-surface-container border-surface-container-high/50'
-                              : 'bg-slate-50 border-amber-200/60'
+                              ? 'bg-surface-container'
+                              : 'bg-surface-container-low'
                           }`}
                         >
                           <span
-                            className={`material-symbols-outlined text-xl ${sub.status === 'done' ? 'text-green-600' : 'text-outline/40'}`}
+                            className={`material-symbols-outlined text-xl ${sub.status === 'done' ? 'text-primary' : 'text-outline/40'}`}
                             style={sub.status === 'done' ? { fontVariationSettings: "'FILL' 1" } : undefined}
                           >
                             {sub.status === 'done' ? 'check_circle' : 'radio_button_unchecked'}
@@ -417,7 +419,7 @@ export default function TaskDetailClient({
                 </div>
 
                 {/* Dependencies */}
-                <div className="bg-surface-container-lowest rounded-2xl p-5 border border-surface-container-high/50">
+                <div className="bg-surface-container-lowest rounded-2xl p-5 shadow-ambient-sm">
                   <div className="flex items-center justify-between mb-4">
                     <h3 className="text-[10px] font-bold uppercase tracking-widest text-outline">Dependencies</h3>
                     {task.status !== 'done' && (
@@ -435,7 +437,7 @@ export default function TaskDetailClient({
                   ) : (
                     <div className="grid grid-cols-1 gap-2">
                       {task.task_dependencies.map(dep => dep.depends_on && (
-                        <div key={dep.depends_on_task_id} className="flex items-center gap-3 p-3 bg-error-container/30 border border-error/20 rounded-xl">
+                        <div key={dep.depends_on_task_id} className="flex items-center gap-3 p-3 bg-error-container/30 rounded-xl">
                           <span className="material-symbols-outlined text-sm text-error">block</span>
                           <Link href={`/tasks/${dep.depends_on.id}`} className="text-sm flex-1 font-medium text-on-surface hover:text-primary truncate">
                             {dep.depends_on.title}
@@ -456,6 +458,15 @@ export default function TaskDetailClient({
                     </div>
                   )}
                 </div>
+
+                {/* Attachments */}
+                <div className="bg-surface-container-lowest rounded-2xl p-5 shadow-ambient-sm">
+                  <FileAttachments
+                    taskId={task.id}
+                    context="attachment"
+                    readOnly={task.status === 'done'}
+                  />
+                </div>
               </div>
             )}
 
@@ -473,8 +484,8 @@ export default function TaskDetailClient({
                     <div className="absolute left-2 top-2 bottom-2 w-0.5 bg-surface-container-high" />
                     {timeline.map((event, i) => (
                       <div key={event.id} className={`relative flex gap-4 ${i < timeline.length - 1 ? 'pb-5' : ''}`}>
-                        <div className="absolute left-[-16px] w-4 h-4 rounded-full bg-surface-container border-2 border-surface-container-high flex items-center justify-center" />
-                        <div className="flex-1 bg-surface-container-lowest rounded-2xl p-4 border border-surface-container-high/50">
+                        <div className="absolute left-[-16px] w-4 h-4 rounded-full bg-surface-container flex items-center justify-center" />
+                          <div className="flex-1 bg-surface-container-lowest rounded-2xl p-4 shadow-ambient-sm">
                           <div className="flex items-center justify-between mb-1">
                             <p className="text-xs font-bold text-on-surface">{TIMELINE_LABELS[event.event_type] ?? event.event_type}</p>
                             <p className="text-[10px] text-outline">{formatDateTime(event.created_at)}</p>
@@ -500,7 +511,7 @@ export default function TaskDetailClient({
 
           {/* Right: metadata sidebar */}
           <div className="space-y-4">
-            <div className="bg-surface-container-lowest rounded-2xl p-5 border border-surface-container-high/50 space-y-5">
+            <div className="bg-surface-container-lowest rounded-2xl p-5 shadow-ambient-sm space-y-5">
               <MetaRow label="Assignee" value={task.assignee?.name ?? 'Unassigned'} />
               <MetaRow label="Creator" value={task.creator?.name ?? '—'} />
               {task.reviewer && <MetaRow label="Reviewer" value={task.reviewer.name} />}
@@ -520,7 +531,7 @@ export default function TaskDetailClient({
 
             {/* Custom Field Values */}
             {customFieldValues.length > 0 && (
-              <div className="bg-surface-container-lowest rounded-2xl p-5 border border-surface-container-high/50 space-y-4">
+              <div className="bg-surface-container-lowest rounded-2xl p-5 shadow-ambient-sm space-y-4">
                 <p className="text-[10px] font-bold uppercase tracking-widest text-outline">Custom Fields</p>
                 {customFieldValues.map(cfv => {
                   const def = cfv.field_definition
@@ -649,12 +660,12 @@ function CustomFieldEditor({ fieldValue, saving, onSave }: {
         <button
           onClick={() => { onSave(val); setEditing(false) }}
           disabled={saving}
-          className="px-3 py-1 rounded-lg text-xs font-semibold text-white"
+          className="px-3 py-1 rounded-full text-xs font-semibold text-white"
           style={{ background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }}
         >
           {saving ? '…' : 'Save'}
         </button>
-        <button onClick={() => { setVal(fieldValue.value ?? ''); setEditing(false) }} className="px-3 py-1 rounded-lg text-xs text-outline hover:text-on-surface">
+        <button onClick={() => { setVal(fieldValue.value ?? ''); setEditing(false) }} className="px-3 py-1 rounded-full text-xs text-outline hover:text-on-surface">
           Cancel
         </button>
       </div>

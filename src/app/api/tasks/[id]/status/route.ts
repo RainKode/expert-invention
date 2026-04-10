@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { createAdminClient } from '@/lib/supabase/admin'
 import { logTimelineEvent } from '@/lib/task-timeline'
+import { createNotification } from '@/lib/notifications'
 import { z } from 'zod'
 
 const VALID_TRANSITIONS: Record<string, string[]> = {
@@ -90,6 +91,50 @@ export async function POST(request: NextRequest, { params }: Params) {
     oldValue: task.status,
     newValue: newStatus,
   })
+
+  // Notify reviewer when task moves to in_review
+  if (newStatus === 'in_review' && task.reviewer_id) {
+    await createNotification({
+      recipientId: task.reviewer_id,
+      type: 'task_in_review',
+      title: 'Task Ready for Review',
+      message: `"${task.title}" has been submitted for your review`,
+      link: `/tasks/${id}`,
+      metadata: { task_id: id, actor_id: user.id },
+    })
+  }
+
+  // Check for dependency unblocks when a task is completed
+  if (newStatus === 'done') {
+    const adminClient = createAdminClient()
+    const { data: dependents } = await adminClient
+      .from('task_dependencies')
+      .select('task_id, task:tasks!task_dependencies_task_id_fkey(id, title, assignee_id)')
+      .eq('depends_on_task_id', id)
+    for (const dep of dependents ?? []) {
+      const depTask = Array.isArray(dep.task) ? dep.task[0] : dep.task
+      if (!depTask?.assignee_id) continue
+      // Check if ALL dependencies of this dependent task are now done
+      const { data: allDeps } = await adminClient
+        .from('task_dependencies')
+        .select('depends_on:tasks!task_dependencies_depends_on_task_id_fkey(status)')
+        .eq('task_id', dep.task_id)
+      const allDone = (allDeps ?? []).every((d: { depends_on: unknown }) => {
+        const s = Array.isArray(d.depends_on) ? d.depends_on[0] : d.depends_on
+        return (s as { status: string } | null)?.status === 'done'
+      })
+      if (allDone) {
+        await createNotification({
+          recipientId: depTask.assignee_id,
+          type: 'dependency_unblocked',
+          title: 'Dependency Resolved',
+          message: `All dependencies for "${depTask.title}" are complete — you can start working on it`,
+          link: `/tasks/${dep.task_id}`,
+          metadata: { task_id: dep.task_id, unblocked_by: id },
+        })
+      }
+    }
+  }
 
   return NextResponse.json({ task: updated })
 }

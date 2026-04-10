@@ -12,8 +12,8 @@ export const config = {
      * - _next/static (static files)
      * - _next/image (image optimization)
      * - favicon.ico
-     * - /api/auth/* routes that supabase callback needs without auth
+     * - /api/auth/* all auth API routes (login, logout, callback, etc.)
      */
-    '/((?!_next/static|_next/image|favicon.ico|api/auth/callback).*)',
+    '/((?!_next/static|_next/image|favicon.ico|api/auth).*)',
   ],
 }

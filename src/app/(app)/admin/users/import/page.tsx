@@ -146,7 +146,7 @@ function StepIndicator({ current }: { current: Step }) {
   return (
     <div className="mb-16 relative flex justify-between max-w-3xl">
       {/* connector line */}
-      <div className="absolute top-5 left-0 w-full h-[2px] bg-slate-100 -z-10" />
+      <div className="absolute top-5 left-0 w-full h-[2px] bg-surface-container-high -z-10" />
 
       {STEPS.map((label, i) => {
         const step = (i + 1) as Step;
@@ -160,8 +160,8 @@ function StepIndicator({ current }: { current: Step }) {
                 isActive
                   ? 'text-white shadow-lg ring-4 ring-white'
                   : isDone
-                  ? 'bg-green-500 text-white'
-                  : 'bg-slate-100 text-slate-400 border border-slate-200'
+                  ? 'bg-primary text-white'
+                  : 'bg-surface-container text-outline'
               }`}
               style={isActive ? { background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' } : {}}
             >
@@ -173,7 +173,7 @@ function StepIndicator({ current }: { current: Step }) {
             </div>
             <span
               className={`text-xs font-bold uppercase tracking-widest ${
-                isActive ? 'text-slate-700' : isDone ? 'text-green-600' : 'text-slate-400'
+                isActive ? 'text-on-surface' : isDone ? 'text-primary' : 'text-outline'
               }`}
             >
               {label}
@@ -322,7 +322,7 @@ export default function BulkImportPage() {
   // ---------------------------------------------------------------------------
 
   return (
-    <div className="min-h-screen bg-slate-50/50">
+    <div className="min-h-screen bg-surface">
       {/* Ambient shapes */}
       <div className="fixed top-0 right-0 -z-20 w-[500px] h-[500px] rounded-full blur-3xl opacity-40 pointer-events-none translate-x-1/2 -translate-y-1/2"
         style={{ background: 'rgba(77,85,106,0.05)' }} />
@@ -335,14 +335,14 @@ export default function BulkImportPage() {
           <div className="flex items-center gap-3 mb-4">
             <button
               onClick={() => router.push('/admin/users')}
-              className="flex items-center gap-2 text-slate-500 hover:text-slate-700 text-sm transition-colors"
+              className="flex items-center gap-2 text-on-surface-variant hover:text-on-surface text-sm transition-colors"
             >
               <span className="material-symbols-outlined text-sm">arrow_back</span>
               Back to Users
             </button>
           </div>
-          <h2 className="text-3xl font-bold text-slate-800 tracking-tight mb-2">Import Your People</h2>
-          <p className="text-slate-500 max-w-2xl leading-relaxed">
+          <h2 className="text-3xl font-bold text-on-surface tracking-tight mb-2">Import Your People</h2>
+          <p className="text-on-surface-variant max-w-2xl leading-relaxed">
             Bring your entire team into Sunday with a simple CSV upload. We&apos;ll handle the heavy
             lifting while you focus on building a better workplace.
           </p>
@@ -356,11 +356,11 @@ export default function BulkImportPage() {
         {step === 1 && (
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             {/* Instructions card */}
-            <div className="lg:col-span-8 bg-white rounded-2xl p-10 shadow-[0px_24px_48px_rgba(77,85,106,0.06)] relative overflow-hidden">
+            <div className="lg:col-span-8 bg-surface-container-lowest rounded-2xl p-10 shadow-ambient relative overflow-hidden">
               <div className="absolute top-0 right-0 p-8 opacity-5">
                 <span className="material-symbols-outlined" style={{ fontSize: 96 }}>description</span>
               </div>
-              <h3 className="text-xl font-semibold text-slate-700 mb-6">Preparation Rules</h3>
+              <h3 className="text-xl font-semibold text-on-surface mb-6">Preparation Rules</h3>
               <div className="space-y-8">
                 {[
                   {
@@ -385,12 +385,12 @@ export default function BulkImportPage() {
                   },
                 ].map(({ icon, title, body }) => (
                   <div key={title} className="flex gap-6">
-                    <div className="w-12 h-12 rounded-2xl bg-slate-50 flex items-center justify-center flex-shrink-0 text-slate-600">
+                    <div className="w-12 h-12 rounded-2xl bg-surface-container flex items-center justify-center flex-shrink-0 text-on-surface-variant">
                       <span className="material-symbols-outlined">{icon}</span>
                     </div>
                     <div>
-                      <h4 className="font-bold text-slate-800 mb-1">{title}</h4>
-                      <p className="text-slate-500 text-sm leading-relaxed">{body}</p>
+                      <h4 className="font-bold text-on-surface mb-1">{title}</h4>
+                      <p className="text-on-surface-variant text-sm leading-relaxed">{body}</p>
                     </div>
                   </div>
                 ))}
@@ -410,23 +410,23 @@ export default function BulkImportPage() {
 
             {/* Upload zone preview */}
             <div className="lg:col-span-4 space-y-6">
-              <div className="bg-slate-50 rounded-2xl p-8 border-2 border-dashed border-slate-200 flex flex-col items-center justify-center text-center min-h-[300px]">
-                <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center text-slate-500 shadow-sm mb-4">
+              <div className="bg-surface-container rounded-2xl p-8 flex flex-col items-center justify-center text-center min-h-[300px]">
+                <div className="w-16 h-16 bg-surface-container-lowest rounded-full flex items-center justify-center text-on-surface-variant shadow-sm mb-4">
                   <span className="material-symbols-outlined text-3xl">cloud_upload</span>
                 </div>
-                <p className="font-bold text-slate-700 mb-1">Ready to upload?</p>
-                <p className="text-xs text-slate-400 px-6">Drag and drop your .csv file here. Max file size is 5MB.</p>
+                <p className="font-bold text-on-surface mb-1">Ready to upload?</p>
+                <p className="text-xs text-outline px-6">Drag and drop your .csv file here. Max file size is 5MB.</p>
                 <button
                   onClick={() => setStep(2)}
-                  className="mt-6 text-sm font-bold text-slate-600 underline underline-offset-4 decoration-2 hover:text-slate-800 transition-colors"
+                  className="mt-6 text-sm font-bold text-on-surface-variant underline underline-offset-4 decoration-2 hover:text-on-surface transition-colors"
                 >
                   Continue to upload
                 </button>
               </div>
 
-              <div className="bg-slate-100/80 rounded-2xl p-6 flex gap-4">
-                <span className="material-symbols-outlined text-slate-500">info</span>
-                <div className="text-xs leading-relaxed text-slate-600">
+              <div className="bg-surface-container-high/80 rounded-2xl p-6 flex gap-4">
+                <span className="material-symbols-outlined text-on-surface-variant">info</span>
+                <div className="text-xs leading-relaxed text-on-surface-variant">
                   <strong className="block mb-1">Pro Tip:</strong>
                   Using our template ensures the highest success rate. Over 90% of failures are due
                   to header mismatch.
@@ -445,8 +445,8 @@ export default function BulkImportPage() {
               onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
               onDragLeave={() => setIsDragging(false)}
               onDrop={handleFileDrop}
-              className={`bg-white rounded-2xl p-16 border-2 border-dashed flex flex-col items-center justify-center text-center shadow-[0px_24px_48px_rgba(77,85,106,0.06)] transition-all cursor-pointer ${
-                isDragging ? 'border-slate-500 bg-slate-50' : 'border-slate-200'
+              className={`bg-surface-container-lowest rounded-2xl p-16 flex flex-col items-center justify-center text-center shadow-ambient transition-all cursor-pointer ${
+                isDragging ? 'bg-surface-container-high' : ''
               }`}
               onClick={() => fileInputRef.current?.click()}
             >
@@ -458,11 +458,11 @@ export default function BulkImportPage() {
               >
                 <span className="material-symbols-outlined text-4xl">cloud_upload</span>
               </div>
-              <p className="font-bold text-slate-700 text-lg mb-2">
+              <p className="font-bold text-on-surface text-lg mb-2">
                 {isDragging ? 'Drop your file here' : 'Drag & drop your CSV file'}
               </p>
-              <p className="text-slate-400 text-sm mb-6">or click anywhere to browse</p>
-              <span className="px-6 py-2 bg-slate-100 rounded-full text-xs font-bold text-slate-500 uppercase tracking-widest">
+              <p className="text-on-surface-variant text-sm mb-6">or click anywhere to browse</p>
+              <span className="px-6 py-2 bg-surface-container rounded-full text-xs font-bold text-on-surface-variant uppercase tracking-widest">
                 .csv only · max 5MB
               </span>
               <input
@@ -476,8 +476,8 @@ export default function BulkImportPage() {
             </div>
 
             {importError && (
-              <div className="mt-6 p-4 bg-red-50 border border-red-100 rounded-2xl flex gap-3 text-red-700 text-sm">
-                <span className="material-symbols-outlined text-red-500">error</span>
+              <div className="mt-6 p-4 bg-error-container rounded-2xl flex gap-3 text-on-error-container text-sm">
+                <span className="material-symbols-outlined text-error">error</span>
                 {importError}
               </div>
             )}
@@ -490,24 +490,24 @@ export default function BulkImportPage() {
         {step === 3 && (
           <div className="space-y-6">
             {/* Summary bar */}
-            <div className="flex flex-wrap items-center gap-4 p-6 bg-white rounded-2xl shadow-[0px_4px_16px_rgba(77,85,106,0.06)]">
-              <span className="material-symbols-outlined text-slate-500">insert_drive_file</span>
-              <span className="font-medium text-slate-700 text-sm">{fileName}</span>
+            <div className="flex flex-wrap items-center gap-4 p-6 bg-surface-container-lowest rounded-2xl shadow-ambient-sm">
+              <span className="material-symbols-outlined text-on-surface-variant">insert_drive_file</span>
+              <span className="font-medium text-on-surface text-sm">{fileName}</span>
               <span className="ml-auto flex items-center gap-4 text-sm">
-                <span className="flex items-center gap-2 text-green-600 font-bold">
-                  <span className="w-2 h-2 rounded-full bg-green-500 inline-block" />
+                <span className="flex items-center gap-2 text-primary font-bold">
+                  <span className="w-2 h-2 rounded-full bg-primary inline-block" />
                   {validCount} valid
                 </span>
                 {errorCount > 0 && (
-                  <span className="flex items-center gap-2 text-red-600 font-bold">
-                    <span className="w-2 h-2 rounded-full bg-red-500 inline-block" />
+                  <span className="flex items-center gap-2 text-error font-bold">
+                    <span className="w-2 h-2 rounded-full bg-error inline-block" />
                     {errorCount} errors
                   </span>
                 )}
               </span>
               <button
                 onClick={() => { setRows([]); setFileName(''); setStep(2); }}
-                className="text-xs text-slate-400 hover:text-slate-600 transition-colors"
+                className="text-xs text-outline hover:text-on-surface transition-colors"
               >
                 Change file
               </button>
@@ -515,18 +515,18 @@ export default function BulkImportPage() {
 
             {/* Error summary */}
             {errorCount > 0 && (
-              <div className="bg-red-50 border border-red-100 rounded-2xl p-6">
-                <h4 className="font-bold text-red-700 mb-4 flex items-center gap-2">
-                  <span className="material-symbols-outlined text-red-500">error</span>
+              <div className="bg-error-container/20 rounded-2xl p-6">
+                <h4 className="font-bold text-error mb-4 flex items-center gap-2">
+                  <span className="material-symbols-outlined text-error">error</span>
                   {errorCount} row{errorCount !== 1 ? 's' : ''} need attention
                 </h4>
                 <div className="space-y-2 text-sm">
                   {rows
                     .filter((r) => r._status === 'error')
                     .map((r) => (
-                      <div key={r._row} className="flex gap-3 text-red-700">
+                      <div key={r._row} className="flex gap-3 text-error">
                         <span className="font-bold shrink-0">Row {r._row}:</span>
-                        <span className="text-red-600">{r._errors.join(' · ')}</span>
+                        <span className="text-on-error-container">{r._errors.join(' · ')}</span>
                       </div>
                     ))}
                 </div>
@@ -534,18 +534,18 @@ export default function BulkImportPage() {
             )}
 
             {importError && (
-              <div className="p-4 bg-red-50 border border-red-100 rounded-2xl flex gap-3 text-red-700 text-sm">
-                <span className="material-symbols-outlined text-red-500">error</span>
+              <div className="p-4 bg-error-container rounded-2xl flex gap-3 text-on-error-container text-sm">
+                <span className="material-symbols-outlined text-error">error</span>
                 {importError}
               </div>
             )}
 
             {/* Preview table */}
-            <div className="bg-white rounded-2xl shadow-[0px_4px_16px_rgba(77,85,106,0.06)] overflow-hidden">
+            <div className="bg-surface-container-lowest rounded-2xl shadow-ambient-sm overflow-hidden">
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead>
-                    <tr className="border-b border-slate-100 text-xs uppercase tracking-widest text-slate-400">
+                    <tr className="bg-surface-container-low/50 text-xs uppercase tracking-widest text-outline">
                       <th className="px-6 py-4 text-left w-10">#</th>
                       <th className="px-6 py-4 text-left">Status</th>
                       <th className="px-6 py-4 text-left">Name</th>
@@ -559,33 +559,33 @@ export default function BulkImportPage() {
                     {rows.map((row) => (
                       <tr
                         key={row._row}
-                        className={`border-b border-slate-50 transition-colors ${
-                          row._status === 'error' ? 'bg-red-50/50' : 'hover:bg-slate-50/50'
+                        className={`transition-colors ${
+                          row._status === 'error' ? 'bg-error-container/10' : 'hover:bg-surface-container-low/50'
                         }`}
                       >
-                        <td className="px-6 py-4 text-slate-400">{row._row}</td>
+                        <td className="px-6 py-4 text-outline">{row._row}</td>
                         <td className="px-6 py-4">
                           {row._status === 'valid' ? (
-                            <span className="flex items-center gap-1.5 text-green-600 font-medium">
+                            <span className="flex items-center gap-1.5 text-primary font-medium">
                               <span className="material-symbols-outlined text-base" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
                               Valid
                             </span>
                           ) : (
-                            <span className="flex items-center gap-1.5 text-red-600 font-medium" title={row._errors.join('\n')}>
+                            <span className="flex items-center gap-1.5 text-error font-medium" title={row._errors.join('\n')}>
                               <span className="material-symbols-outlined text-base" style={{ fontVariationSettings: "'FILL' 1" }}>error</span>
                               Error
                             </span>
                           )}
                         </td>
-                        <td className="px-6 py-4 font-medium text-slate-800">{row.name || <span className="text-red-400 italic">missing</span>}</td>
-                        <td className="px-6 py-4 text-slate-600">{row.email || <span className="text-red-400 italic">missing</span>}</td>
+                        <td className="px-6 py-4 font-medium text-on-surface">{row.name || <span className="text-error/60 italic">missing</span>}</td>
+                        <td className="px-6 py-4 text-on-surface-variant">{row.email || <span className="text-error/60 italic">missing</span>}</td>
                         <td className="px-6 py-4">
-                          <span className="px-3 py-1 rounded-full bg-slate-100 text-slate-600 text-xs font-medium capitalize">
-                            {row.role || <span className="text-red-400 italic">missing</span>}
+                          <span className="px-3 py-1 rounded-full bg-surface-container text-on-surface-variant text-xs font-medium capitalize">
+                            {row.role || <span className="text-error/60 italic">missing</span>}
                           </span>
                         </td>
-                        <td className="px-6 py-4 text-slate-600">{row.team_name || <span className="text-red-400 italic">missing</span>}</td>
-                        <td className="px-6 py-4 text-slate-500 text-xs">{row.timezone || '—'}</td>
+                        <td className="px-6 py-4 text-on-surface-variant">{row.team_name || <span className="text-error/60 italic">missing</span>}</td>
+                        <td className="px-6 py-4 text-outline text-xs">{row.timezone || '—'}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -608,23 +608,23 @@ export default function BulkImportPage() {
                 task_alt
               </span>
             </div>
-            <h3 className="text-2xl font-bold text-slate-800 mb-3">Import Complete!</h3>
-            <p className="text-slate-500 text-lg mb-2">
-              <span className="font-bold text-slate-700">{importResult.created}</span> users created successfully.
+            <h3 className="text-2xl font-bold text-on-surface mb-3">Import Complete!</h3>
+            <p className="text-on-surface-variant text-lg mb-2">
+              <span className="font-bold text-on-surface">{importResult.created}</span> users created successfully.
             </p>
             {importResult.failed ? (
-              <p className="text-red-600 text-sm mb-6">
+              <p className="text-error text-sm mb-6">
                 {importResult.failed} row{importResult.failed !== 1 ? 's' : ''} failed and were skipped.
               </p>
             ) : (
-              <p className="text-slate-400 text-sm mb-6">Invitation emails will be sent to all imported users.</p>
+              <p className="text-outline text-sm mb-6">Invitation emails will be sent to all imported users.</p>
             )}
 
             {importResult.rowErrors && importResult.rowErrors.length > 0 && (
-              <div className="bg-red-50 rounded-2xl p-4 mb-6 text-left text-sm">
-                <h4 className="font-bold text-red-700 mb-2">Failed rows:</h4>
+              <div className="bg-error-container/20 rounded-2xl p-4 mb-6 text-left text-sm">
+                <h4 className="font-bold text-error mb-2">Failed rows:</h4>
                 {importResult.rowErrors.map((e) => (
-                  <div key={e.row} className="text-red-600 mb-1">
+                  <div key={e.row} className="text-on-error-container mb-1">
                     Row {e.row} ({e.email}): {e.errors.join(', ')}
                   </div>
                 ))}
@@ -634,7 +634,7 @@ export default function BulkImportPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button
                 onClick={() => { setStep(1); setRows([]); setFileName(''); setImportResult(null); }}
-                className="px-8 py-3 border border-slate-200 text-slate-700 rounded-full font-bold hover:bg-slate-50 transition-colors"
+                className="px-8 py-3 bg-surface-container-high text-on-surface-variant rounded-full font-bold hover:bg-surface-container-highest transition-colors"
               >
                 Import More
               </button>
@@ -654,9 +654,9 @@ export default function BulkImportPage() {
       {/* Bottom action bar                                                    */}
       {/* -------------------------------------------------------------------- */}
       {step !== 4 && (
-        <div className="fixed bottom-0 right-0 left-0 md:left-72 bg-white/90 backdrop-blur-md px-8 py-5 flex items-center justify-between border-t border-slate-100 shadow-[0_-8px_24px_rgba(77,85,106,0.04)] z-30">
-          <div className="flex items-center gap-3 text-sm text-slate-400">
-            <span className="material-symbols-outlined text-slate-400">lock</span>
+        <div className="fixed bottom-0 right-0 left-0 md:left-72 bg-surface-container-lowest/90 backdrop-blur-md px-8 py-5 flex items-center justify-between shadow-[0_-8px_24px_rgba(77,85,106,0.04)] z-30">
+          <div className="flex items-center gap-3 text-sm text-outline">
+            <span className="material-symbols-outlined text-outline">lock</span>
             Secure encrypted data transmission active.
           </div>
           <div className="flex items-center gap-4">
@@ -665,7 +665,7 @@ export default function BulkImportPage() {
                 if (step === 1) router.push('/admin/users');
                 else setStep((s) => (s - 1) as Step);
               }}
-              className="px-8 py-3 rounded-full font-bold text-slate-600 hover:bg-slate-100 transition-colors"
+              className="px-8 py-3 rounded-full font-bold text-on-surface-variant hover:bg-surface-container transition-colors"
             >
               {step === 1 ? 'Cancel' : 'Back'}
             </button>

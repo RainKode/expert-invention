@@ -144,7 +144,7 @@ export default function QuickTaskModal({
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-on-surface/40 backdrop-blur-sm"
+        className="absolute inset-0 bg-on-surface/40 backdrop-blur-[20px]"
         onClick={onClose}
       />
 
@@ -231,10 +231,10 @@ export default function QuickTaskModal({
                   className={`flex-1 py-2.5 px-4 rounded-xl text-sm font-semibold transition-all ${
                     priority === p
                       ? p === 'high'
-                        ? 'bg-red-600 text-white shadow-sm'
+                        ? 'bg-error text-on-error shadow-sm'
                         : p === 'medium'
-                        ? 'bg-amber-500 text-white shadow-sm'
-                        : 'bg-slate-500 text-white shadow-sm'
+                        ? 'bg-tertiary-container text-on-tertiary-container shadow-sm'
+                        : 'bg-secondary text-on-secondary shadow-sm'
                       : 'bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high'
                   }`}
                 >
@@ -343,7 +343,7 @@ export default function QuickTaskModal({
 
           {/* Conditional: Already completed fields */}
           {alreadyCompleted && (
-            <div className="space-y-4 p-4 bg-tertiary-container/30 rounded-2xl border border-tertiary/20">
+            <div className="space-y-4 p-4 bg-tertiary-container/30 rounded-2xl">
               <p className="text-[10px] font-bold uppercase tracking-widest text-tertiary">Completion Details</p>
               <div>
                 <label className="block text-[10px] font-bold uppercase tracking-widest text-outline mb-2">Actual Hours</label>
@@ -441,18 +441,18 @@ export default function QuickTaskModal({
         </form>
 
         {/* Footer */}
-        <div className="px-8 py-5 flex justify-end gap-3 border-t border-surface-container-high">
+        <div className="px-8 py-5 flex justify-end gap-3 bg-surface-container-low/50">
           <button
             type="button"
             onClick={onClose}
-            className="px-6 py-2.5 rounded-xl text-sm font-semibold text-on-surface-variant hover:bg-surface-container-high transition-colors"
+            className="px-6 py-2.5 rounded-full text-sm font-semibold text-on-surface-variant hover:bg-surface-container-high transition-colors"
           >
             Cancel
           </button>
           <button
             onClick={handleSubmit}
             disabled={submitting}
-            className="px-6 py-2.5 rounded-xl text-sm font-bold text-white shadow-ambient-sm disabled:opacity-60 transition-opacity"
+            className="px-6 py-2.5 rounded-full text-sm font-bold text-white shadow-ambient-sm disabled:opacity-60 transition-opacity"
             style={{ background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }}
           >
             {submitting ? 'Creating…' : 'Create Task'}

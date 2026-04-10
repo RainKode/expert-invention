@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-variant": "#e0e3e5",
+                    "outline": "#76777d",
+                    "tertiary": "#453d36",
+                    "on-error": "#ffffff",
+                    "surface-bright": "#f7f9fb",
+                    "on-primary-fixed-variant": "#3e465b",
+                    "on-primary": "#ffffff",
+                    "on-secondary-container": "#5c647b",
+                    "surface": "#f7f9fb",
+                    "surface-container-lowest": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "on-surface-variant": "#45464c",
+                    "secondary": "#565e74",
+                    "surface-container-high": "#e6e8ea",
+                    "inverse-on-surface": "#eff1f3",
+                    "primary-fixed": "#dae2fc",
+                    "on-secondary": "#ffffff",
+                    "primary-container": "#4d556a",
+                    "on-tertiary": "#ffffff",
+                    "inverse-surface": "#2d3133",
+                    "primary-fixed-dim": "#bec6df",
+                    "on-primary-container": "#c2cae3",
+                    "surface-tint": "#565e73",
+                    "surface-container-highest": "#e0e3e5",
+                    "inverse-primary": "#bec6df",
+                    "on-tertiary-fixed-variant": "#4e453e",
+                    "on-tertiary-container": "#d6c9bf",
+                    "surface-dim": "#d8dadc",
+                    "surface-container-low": "#f2f4f6",
+                    "on-surface": "#191c1e",
+                    "tertiary-container": "#5d544d",
+                    "secondary-fixed": "#dae2fd",
+                    "outline-variant": "#c6c6cd",
+                    "on-primary-fixed": "#131b2e",
+                    "primary": "#363e52",
+                    "error-container": "#ffdad6",
+                    "surface-container": "#eceef0",
+                    "background": "#f7f9fb",
+                    "tertiary-fixed-dim": "#d1c4bb",
+                    "secondary-container": "#dae2fd",
+                    "on-tertiary-fixed": "#211a15",
+                    "on-secondary-fixed": "#131b2e",
+                    "error": "#ba1a1a",
+                    "secondary-fixed-dim": "#bec6e0",
+                    "tertiary-fixed": "#eee0d7",
+                    "on-secondary-fixed-variant": "#3e465c",
+                    "on-background": "#191c1e"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Plus Jakarta Sans"],
+                    "label": ["Plus Jakarta Sans"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .filled-icon {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface antialiased">
+<!-- TopNavBar Shell -->
+<nav class="fixed top-0 w-full z-50 bg-[#f7f9fb]/80 dark:bg-[#191c1e]/80 backdrop-blur-xl flex justify-between items-center px-8 py-4 w-full shadow-[0px_24px_48px_rgba(77,85,106,0.06)]">
+<div class="flex items-center gap-12">
+<!-- Brand Identity -->
+<span class="text-xl font-bold tracking-tighter text-[#4d556a] dark:text-[#f7f9fb] font-['Plus_Jakarta_Sans']">Sunday HR</span>
+<!-- Navigation Links -->
+<div class="hidden md:flex gap-8 items-center">
+<a class="font-['Plus_Jakarta_Sans'] tracking-tight text-[#4d556a] font-bold border-b-2 border-[#4d556a] pb-1" href="#">Dashboard</a>
+<a class="font-['Plus_Jakarta_Sans'] tracking-tight text-[#434655] hover:text-[#4d556a] transition-colors font-medium" href="#">Team</a>
+<a class="font-['Plus_Jakarta_Sans'] tracking-tight text-[#434655] hover:text-[#4d556a] transition-colors font-medium" href="#">Payroll</a>
+<a class="font-['Plus_Jakarta_Sans'] tracking-tight text-[#434655] hover:text-[#4d556a] transition-colors font-medium" href="#">Directory</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<!-- Action Icons Cluster -->
+<div class="flex items-center gap-2">
+<!-- Completed Notification Bell Component -->
+<button class="relative p-2 hover:bg-[#4d556a]/5 rounded-full transition-all scale-95 active:scale-90 flex items-center justify-center">
+<span class="material-symbols-outlined filled-icon text-[#4d556a] text-[24px]">notifications</span>
+<!-- Unread Count Badge -->
+<span class="absolute top-1 right-1 flex items-center justify-center min-w-[18px] h-[18px] px-1 bg-gradient-to-br from-[#4d556a] to-[#656d84] rounded-full border-2 border-surface text-[10px] font-bold text-on-primary">
+                        12
+                    </span>
+</button>
+<button class="p-2 hover:bg-[#4d556a]/5 rounded-full transition-all scale-95 active:scale-90 flex items-center justify-center">
+<span class="material-symbols-outlined text-[#4d556a] text-[24px]">settings</span>
+</button>
+</div>
+<!-- Profile Anchor -->
+<div class="flex items-center gap-3 pl-4 border-l border-outline-variant/15">
+<img alt="User profile" class="w-10 h-10 rounded-full object-cover shadow-sm" data-alt="professional portrait of a confident man with a friendly expression in a modern office setting with soft sunlight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcqBFhENaJ27mMdD5M12P1eRaIFEiV5DbCxg6xlvVfzSu_66hKCnpgFi-VQAvTrlnd25IangjGLRYJkA0N_WSQgq5NZXB-Qy5Ip3L25p89yJBGA4UvaF1yQo87dXNbQnJTVrBRv6abIIwemGLrMNOBOk6aTRjjeEMXt3WDaxGg3cJbpYU1UJFRw7RnjV2n5lTcVrS0xdPHRZQh48YxKpKlbikMRmBaITBePdeViqnPYIbVMatHv_-KhIQf4dNlN5Y2pGLTnwnPR1I"/>
+</div>
+</div>
+</nav>
+<!-- Sidebar Shell (Right Aligned) -->
+<aside class="fixed right-0 top-0 h-full w-80 z-[60] rounded-l-[32px] bg-[#ffffff]/80 dark:bg-[#191c1e]/90 backdrop-blur-2xl shadow-2xl shadow-[#4d556a]/10 flex flex-col p-6 gap-4">
+<!-- Sidebar Header -->
+<div class="flex flex-col gap-1 mb-4">
+<div class="flex items-center justify-between">
+<h2 class="text-lg font-semibold text-[#4d556a] font-['Plus_Jakarta_Sans']">Notifications</h2>
+<span class="material-symbols-outlined text-[#4d556a]">notifications_active</span>
+</div>
+<p class="text-xs text-on-surface-variant/70 font-medium">Manage your alerts</p>
+</div>
+<!-- Sidebar Navigation Tabs -->
+<nav class="flex flex-col gap-2">
+<button class="flex items-center gap-3 bg-gradient-to-br from-[#4d556a] to-[#656d84] text-white rounded-full px-4 py-3 text-sm transition-transform active:scale-95">
+<span class="material-symbols-outlined text-sm">notifications_active</span>
+<span class="font-medium">Activity</span>
+</button>
+<button class="flex items-center gap-3 text-[#434655] px-4 py-3 hover:bg-[#4d556a]/5 rounded-full text-sm transition-all">
+<span class="material-symbols-outlined text-sm">tune</span>
+<span class="font-medium">Preferences</span>
+</button>
+<button class="flex items-center gap-3 text-[#434655] px-4 py-3 hover:bg-[#4d556a]/5 rounded-full text-sm transition-all">
+<span class="material-symbols-outlined text-sm">hub</span>
+<span class="font-medium">Channels</span>
+</button>
+<button class="flex items-center gap-3 text-[#434655] px-4 py-3 hover:bg-[#4d556a]/5 rounded-full text-sm transition-all">
+<span class="material-symbols-outlined text-sm">calendar_today</span>
+<span class="font-medium">Schedule</span>
+</button>
+<button class="flex items-center gap-3 text-[#434655] px-4 py-3 hover:bg-[#4d556a]/5 rounded-full text-sm transition-all">
+<span class="material-symbols-outlined text-sm">bedtime</span>
+<span class="font-medium">Quiet Mode</span>
+</button>
+</nav>
+<!-- Sidebar CTA Footer -->
+<div class="mt-auto pt-6">
+<button class="w-full py-4 px-6 rounded-xl bg-surface-container text-[#4d556a] text-sm font-bold hover:bg-surface-container-high transition-colors">
+                Mark all as read
+            </button>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="pt-24 pr-80 min-h-screen">
+<div class="p-12">
+<!-- Asymmetric Editorial Moment -->
+<div class="max-w-4xl">
+<header class="mb-16">
+<h1 class="text-[3.5rem] leading-[1.1] font-extrabold tracking-[-0.04em] text-primary-container mb-4">
+                        Good morning,<br/>human resources.
+                    </h1>
+<div class="flex items-center gap-4 text-on-surface-variant">
+<span class="text-sm font-medium tracking-wide uppercase">Operational Overview</span>
+<div class="h-px w-12 bg-outline-variant/30"></div>
+<span class="text-sm font-medium">Monday, June 12</span>
+</div>
+</header>
+<!-- Empty State Content Area -->
+<div class="grid grid-cols-12 gap-8">
+<!-- Placeholder Bento Item -->
+<div class="col-span-12 md:col-span-8 h-[400px] rounded-[2rem] bg-surface-container-lowest shadow-[0px_24px_48px_rgba(77,85,106,0.06)] p-8 flex flex-col justify-end">
+<div class="max-w-sm">
+<h3 class="text-2xl font-bold tracking-tight text-primary-container mb-2">Workspace Quietude</h3>
+<p class="text-on-surface-variant leading-relaxed">The main dashboard canvas is currently awaiting task orchestration. Notifications and recent updates will appear in your side panel.</p>
+</div>
+</div>
+<!-- Decorative Human Element -->
+<div class="col-span-12 md:col-span-4 h-[400px] rounded-[2rem] overflow-hidden relative group">
+<img alt="Collaborative workspace" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="blurred bright architectural office interior with large windows and soft shadows on white walls" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBng4m_8qIrzY7angrYlAeyjq_eqbsAZ8vm0aJqkbO-lAAuumW50laWK9BBkmubcsxI6o19XRnCoipCVu236Qrhm6-eyo7p3oi9f0Hje68a7BZpJmuIsNOdIQ8TSiPe_jeJ5TQ_fPOSJviv_sOOSHfdJeIsJNZRuimPhEMCq3Sc9HboU4-443-W0Ehae6e2k8G5E2iw06Xc_t1itbKOxu13psMSGJ1NDmVQT82QMTtfPy0gcUPgoVnX2BEI4AEc2o1OgaDzd7uEiBU"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary-container/40 to-transparent"></div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

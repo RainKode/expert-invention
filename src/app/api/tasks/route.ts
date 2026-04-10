@@ -3,8 +3,9 @@ import { createClient } from '@/lib/supabase/server'
 import { createAdminClient } from '@/lib/supabase/admin'
 import { can } from '@/lib/permissions'
 import { logTimelineEvent } from '@/lib/task-timeline'
+import { createNotification } from '@/lib/notifications'
 import { z } from 'zod'
-import type { Role, TaskStatus } from '@/types'
+import type { Role, TaskStatus, CustomFieldType } from '@/types'
 
 const createTaskSchema = z.object({
   title: z.string().min(1, 'Title is required').max(255),
@@ -58,6 +59,7 @@ export async function GET(request: NextRequest) {
       project:projects(id, name)
     `)
     .is('parent_task_id', parentTaskId ?? null)
+    .neq('status', 'archived')
     .order('due_date', { ascending: true })
 
   // Scope by role — managers can request team scope
@@ -80,6 +82,66 @@ export async function GET(request: NextRequest) {
   if (dueBefore) query = query.lte('due_date', dueBefore)
   if (dueAfter) query = query.gte('due_date', dueAfter)
   if (search) query = query.ilike('title', `%${search}%`)
+
+  // --- Custom field filtering ---
+  // Custom field params use prefix "cf_" e.g. ?cf_<fieldId>=value
+  // For number fields: cf_<id>_min / cf_<id>_max
+  // For date fields: cf_<id>_from / cf_<id>_to
+  // For checkbox: cf_<id>=true/false
+  const cfFilters: { fieldId: string; value?: string; min?: string; max?: string; from?: string; to?: string }[] = []
+  searchParams.forEach((val, key) => {
+    const cfMatch = key.match(/^cf_([a-f0-9-]+?)(?:_(min|max|from|to))?$/)
+    if (cfMatch && val) {
+      const fieldId = cfMatch[1]
+      const suffix = cfMatch[2] as 'min' | 'max' | 'from' | 'to' | undefined
+      let entry = cfFilters.find(f => f.fieldId === fieldId)
+      if (!entry) { entry = { fieldId }; cfFilters.push(entry) }
+      if (suffix) { entry[suffix] = val } else { entry.value = val }
+    }
+  })
+
+  let customFieldTaskIds: string[] | null = null
+  if (cfFilters.length > 0) {
+    const admin = createAdminClient()
+    // For each custom field filter, find matching task IDs
+    const taskIdSets = await Promise.all(cfFilters.map(async (cf) => {
+      let cfQuery = admin.from('custom_field_values')
+        .select('task_id')
+        .eq('field_definition_id', cf.fieldId)
+
+      if (cf.value !== undefined) {
+        // Exact or ilike match depending on type
+        cfQuery = cfQuery.ilike('value', `%${cf.value}%`)
+      }
+      if (cf.min !== undefined) {
+        cfQuery = cfQuery.gte('value', cf.min)
+      }
+      if (cf.max !== undefined) {
+        cfQuery = cfQuery.lte('value', cf.max)
+      }
+      if (cf.from !== undefined) {
+        cfQuery = cfQuery.gte('value', cf.from)
+      }
+      if (cf.to !== undefined) {
+        cfQuery = cfQuery.lte('value', cf.to)
+      }
+
+      const { data: vals } = await cfQuery
+      return new Set((vals ?? []).map((v: { task_id: string }) => v.task_id))
+    }))
+
+    // Intersect all sets
+    let intersection = taskIdSets[0]
+    for (let i = 1; i < taskIdSets.length; i++) {
+      intersection = new Set([...intersection].filter(id => taskIdSets[i].has(id)))
+    }
+    customFieldTaskIds = [...intersection]
+
+    if (customFieldTaskIds.length === 0) {
+      return NextResponse.json({ tasks: [] })
+    }
+    query = query.in('id', customFieldTaskIds)
+  }
 
   const { data, error } = await query
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
@@ -161,6 +223,17 @@ export async function POST(request: NextRequest) {
       eventType: 'assigned',
       actorId: user.id,
       newValue: data.assignee_id,
+    })
+
+    // Notify the assignee
+    const { data: creatorProfile } = await admin.from('profiles').select('name').eq('id', user.id).single()
+    await createNotification({
+      recipientId: data.assignee_id,
+      type: 'task_assigned',
+      title: 'New Task Assigned',
+      message: `${creatorProfile?.name ?? 'Someone'} assigned you "${task.title}"`,
+      link: `/tasks/${task.id}`,
+      metadata: { task_id: task.id, actor_id: user.id },
     })
   }
 

@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Atrium Boards - Task Board</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "outline-variant": "#c6c6cd",
+                "on-primary-fixed": "#131b2e",
+                "surface-tint": "#565e73",
+                "outline": "#76777d",
+                "secondary-container": "#dae2fd",
+                "on-background": "#191c1e",
+                "error-container": "#ffdad6",
+                "error": "#ba1a1a",
+                "on-secondary-fixed-variant": "#3e465c",
+                "surface-container-low": "#f2f4f6",
+                "tertiary-fixed-dim": "#d1c4bb",
+                "on-surface": "#191c1e",
+                "surface-bright": "#f7f9fb",
+                "on-error-container": "#93000a",
+                "primary-fixed": "#dae2fc",
+                "on-tertiary": "#ffffff",
+                "surface-dim": "#d8dadc",
+                "primary-fixed-dim": "#bec6df",
+                "secondary-fixed-dim": "#bec6e0",
+                "on-secondary-container": "#5c647b",
+                "on-primary-fixed-variant": "#3e465b",
+                "secondary-fixed": "#dae2fd",
+                "on-secondary-fixed": "#131b2e",
+                "tertiary": "#453d36",
+                "on-primary": "#ffffff",
+                "on-tertiary-fixed-variant": "#4e453e",
+                "surface-container-lowest": "#ffffff",
+                "surface": "#f7f9fb",
+                "background": "#f7f9fb",
+                "secondary": "#565e74",
+                "on-surface-variant": "#45464c",
+                "surface-container-highest": "#e0e3e5",
+                "inverse-surface": "#2d3133",
+                "inverse-on-surface": "#eff1f3",
+                "inverse-primary": "#bec6df",
+                "tertiary-fixed": "#eee0d7",
+                "tertiary-container": "#5d544d",
+                "on-primary-container": "#c2cae3",
+                "on-tertiary-fixed": "#211a15",
+                "on-secondary": "#ffffff",
+                "surface-variant": "#e0e3e5",
+                "surface-container-high": "#e6e8ea",
+                "primary-container": "#4d556a",
+                "on-tertiary-container": "#d6c9bf",
+                "on-error": "#ffffff",
+                "surface-container": "#eceef0",
+                "primary": "#363e52"
+            },
+            "borderRadius": {
+                "DEFAULT": "1rem",
+                "lg": "2rem",
+                "xl": "3rem",
+                "full": "9999px"
+            },
+            "fontFamily": {
+                "headline": ["Plus Jakarta Sans"],
+                "body": ["Plus Jakarta Sans"],
+                "label": ["Plus Jakarta Sans"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f7f9fb; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .kanban-column { height: calc(100vh - 240px); }
+    </style>
+</head>
+<body class="text-on-surface">
+<!-- SideNavBar (Authority: JSON) -->
+<nav class="fixed left-0 top-0 h-full flex flex-col p-4 bg-slate-100 dark:bg-slate-950 h-screen w-64 rounded-r-[24px] z-50">
+<div class="flex items-center gap-3 px-4 mb-8">
+<div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">architecture</span>
+</div>
+<div>
+<h2 class="text-lg font-black text-slate-800 dark:text-slate-100 tracking-tight">Architectural Quietude</h2>
+<p class="text-[10px] uppercase tracking-widest text-slate-500 font-bold">Workspace</p>
+</div>
+</div>
+<div class="flex flex-col gap-1 mb-auto">
+<a class="text-slate-500 dark:text-slate-400 px-4 py-3 flex items-center gap-3 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-[24px] transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-medium">Dashboard</span>
+</a>
+<a class="bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-[24px] font-bold shadow-sm px-4 py-3 flex items-center gap-3 transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="trello" style="font-variation-settings: 'FILL' 1;">view_kanban</span>
+<span>Boards</span>
+</a>
+<a class="text-slate-500 dark:text-slate-400 px-4 py-3 flex items-center gap-3 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-[24px] transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-medium">Teams</span>
+</a>
+<a class="text-slate-500 dark:text-slate-400 px-4 py-3 flex items-center gap-3 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-[24px] transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-medium">Reports</span>
+</a>
+<a class="text-slate-500 dark:text-slate-400 px-4 py-3 flex items-center gap-3 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-[24px] transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-medium">Settings</span>
+</a>
+</div>
+<button class="mt-4 w-full bg-primary-container text-white rounded-full py-4 font-bold flex items-center justify-center gap-2 shadow-lg shadow-primary-container/20 hover:scale-[0.98] transition-transform">
+<span class="material-symbols-outlined text-sm">add</span>
+            New Project
+        </button>
+</nav>
+<!-- Main Content Canvas -->
+<main class="ml-64 min-h-screen">
+<!-- TopNavBar (Authority: JSON) -->
+<header class="w-full top-0 sticky z-40 bg-slate-50/80 dark:bg-slate-900/80 backdrop-blur-xl shadow-[0px_24px_48px_rgba(77,85,106,0.06)]">
+<div class="flex justify-between items-center px-8 py-4 w-full max-w-[1440px] mx-auto">
+<div class="flex items-center gap-8">
+<h1 class="text-xl font-bold text-slate-700 dark:text-slate-100 font-plus-jakarta tracking-tight">Atrium Boards</h1>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 font-plus-jakarta tracking-tight font-semibold" href="#">My Tasks</a>
+<a class="text-slate-900 dark:text-white border-b-2 border-slate-700 dark:border-slate-300 pb-1 font-plus-jakarta tracking-tight font-semibold" href="#">Views</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 font-plus-jakarta tracking-tight font-semibold" href="#">Custom Fields</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-slate-100/50 dark:hover:bg-slate-800/50 transition-colors text-slate-700 dark:text-slate-200">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 rounded-full hover:bg-slate-100/50 dark:hover:bg-slate-800/50 transition-colors text-slate-700 dark:text-slate-200">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="w-10 h-10 rounded-full overflow-hidden ml-2 shadow-sm">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="professional headshot of a creative director in a neutral studio setting with soft lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMwzJvI6NbBtnQwiYDoHaI0GcE06G0G7KN8cwF4dk27OJoyPsbO3kGyodm8gU45KN_LKlZWLeD94ciR8NMO_Ppol_p49upUS3KzhG3tHxun878EShkXYsa8YPFOLN8K4E4FEFIfCUw1E5RgIew0JrsyKPmn4jX5vmA-aM1DtiVrsmhvpp9hal47IeNfnFZdkunvxb9TB9RErdvFMa7fKTweUqEgqbRkH5nXIr0uZ81c540IK_3kwYJtgM3rLaV77FeTomud0Lk-p0"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Board Header Section -->
+<section class="px-8 pt-8 pb-4">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<div class="flex items-center gap-3 mb-2">
+<span class="px-3 py-1 bg-tertiary-fixed text-on-tertiary-fixed-variant text-[10px] font-bold rounded-full uppercase tracking-widest">Workspace / Q4</span>
+</div>
+<h2 class="text-4xl font-extrabold tracking-tighter text-on-surface">Board</h2>
+</div>
+<div class="flex items-center gap-3">
+<button class="px-6 py-3 bg-surface-container-low text-on-surface-variant rounded-full font-bold hover:bg-surface-container-high transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">bookmark</span>
+                        Saved Views
+                    </button>
+<button class="px-6 py-3 bg-primary-container text-white rounded-full font-bold shadow-lg shadow-primary-container/10 hover:scale-[0.98] transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">save</span>
+                        Save View
+                    </button>
+</div>
+</div>
+<!-- Filter Bar -->
+<div class="mt-8 flex flex-col gap-4 py-4 bg-surface-container-lowest/50 backdrop-blur-md rounded-2xl px-6">
+<div class="flex flex-wrap items-center gap-3">
+<div class="flex-1 min-w-[200px] flex items-center bg-surface px-4 py-2 rounded-full border border-outline-variant/10">
+<span class="material-symbols-outlined text-outline text-[20px] mr-2">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-full placeholder:text-outline/60" placeholder="Search tasks..." type="text"/>
+</div>
+<div class="flex flex-wrap items-center gap-2">
+<!-- Existing Filters -->
+<button class="px-4 py-2 bg-surface hover:bg-surface-container-high text-xs font-bold text-on-surface-variant rounded-full transition-colors flex items-center gap-2">
+                            Priority <span class="material-symbols-outlined text-[16px]">expand_more</span>
+</button>
+<button class="px-4 py-2 bg-surface hover:bg-surface-container-high text-xs font-bold text-on-surface-variant rounded-full transition-colors flex items-center gap-2">
+                            Type <span class="material-symbols-outlined text-[16px]">expand_more</span>
+</button>
+<button class="px-4 py-2 bg-surface hover:bg-surface-container-high text-xs font-bold text-on-surface-variant rounded-full transition-colors flex items-center gap-2">
+                            Nature <span class="material-symbols-outlined text-[16px]">expand_more</span>
+</button>
+<button class="px-4 py-2 bg-surface hover:bg-surface-container-high text-xs font-bold text-on-surface-variant rounded-full transition-colors flex items-center gap-2">
+                            Project <span class="material-symbols-outlined text-[16px]">expand_more</span>
+</button>
+<button class="px-4 py-2 bg-surface hover:bg-surface-container-high text-xs font-bold text-on-surface-variant rounded-full transition-colors flex items-center gap-2 border-r pr-4 mr-2 border-outline-variant/20">
+                            Billable <span class="material-symbols-outlined text-[16px]">expand_more</span>
+</button>
+<!-- Dynamic Custom Field Filters -->
+<!-- Text Field -->
+<div class="bg-surface-container-low px-3 py-2 rounded-[48px] flex items-center gap-2 border border-outline-variant/10">
+<span class="text-[10px] font-black text-outline uppercase tracking-tighter">Client</span>
+<input class="bg-transparent border-none focus:ring-0 p-0 text-xs w-20 placeholder:text-outline/50" placeholder="Search..." type="text"/>
+</div>
+<!-- Number Range -->
+<div class="bg-surface-container-low px-3 py-2 rounded-[48px] flex items-center gap-2 border border-outline-variant/10">
+<span class="text-[10px] font-black text-outline uppercase tracking-tighter">Budget</span>
+<div class="flex items-center gap-1">
+<input class="bg-surface-container-lowest/50 border-none rounded-md px-1.5 py-0.5 text-[10px] w-12 focus:ring-1 focus:ring-primary-container" placeholder="Min" type="number"/>
+<span class="text-[10px] text-outline opacity-50">-</span>
+<input class="bg-surface-container-lowest/50 border-none rounded-md px-1.5 py-0.5 text-[10px] w-12 focus:ring-1 focus:ring-primary-container" placeholder="Max" type="number"/>
+</div>
+</div>
+<!-- Date Range -->
+<button class="px-4 py-2 bg-surface-container-low hover:bg-surface-container-high text-xs font-bold text-on-surface-variant rounded-[48px] transition-colors flex items-center gap-2 border border-outline-variant/10">
+<span class="text-[10px] font-black text-outline uppercase tracking-tighter">Due</span>
+<span class="material-symbols-outlined text-[16px]">calendar_today</span>
+<span>Anytime</span>
+</button>
+<!-- Dropdown Glassmorphism -->
+<div class="relative group">
+<button class="px-4 py-2 bg-white/40 backdrop-blur-md border border-white/20 hover:bg-white/60 text-xs font-bold text-on-surface-variant rounded-[24px] transition-all flex items-center gap-2">
+<span class="text-[10px] font-black text-outline uppercase tracking-tighter">Stage</span>
+<span>Concept</span>
+<span class="material-symbols-outlined text-[16px]">expand_more</span>
+</button>
+</div>
+<!-- Checkbox Boolean Pill -->
+<div class="flex items-center bg-surface-container-low rounded-full p-1 border border-outline-variant/10">
+<button class="px-3 py-1 text-[10px] font-bold rounded-full transition-colors bg-white shadow-sm text-primary">Any</button>
+<button class="px-3 py-1 text-[10px] font-bold rounded-full transition-colors text-outline hover:text-on-surface">Yes</button>
+<button class="px-3 py-1 text-[10px] font-bold rounded-full transition-colors text-outline hover:text-on-surface">No</button>
+<span class="ml-2 mr-3 text-[10px] font-black text-outline uppercase tracking-tighter">Urgent</span>
+</div>
+<!-- More Filters -->
+<button class="ml-auto px-4 py-2 bg-primary-container/10 hover:bg-primary-container/20 text-primary-container rounded-[48px] font-bold text-xs flex items-center gap-2 transition-all">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+                            More
+                            <span class="bg-primary-container text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center">3</span>
+</button>
+</div>
+</div>
+<!-- Active Filter Chips -->
+<div class="flex flex-wrap items-center gap-2 pt-2 border-t border-outline-variant/10">
+<span class="text-[10px] font-bold text-outline uppercase tracking-widest mr-2">Active Filters:</span>
+<div class="flex items-center gap-2 px-3 py-1 bg-primary/5 border border-primary/10 rounded-full group cursor-default">
+<span class="text-[10px] font-semibold text-primary/80">Priority: High</span>
+<button class="hover:text-error transition-colors"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</div>
+<div class="flex items-center gap-2 px-3 py-1 bg-primary/5 border border-primary/10 rounded-full group cursor-default">
+<span class="text-[10px] font-semibold text-primary/80">Stage: Concept</span>
+<button class="hover:text-error transition-colors"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</div>
+<button class="text-[10px] font-bold text-error/60 hover:text-error transition-colors px-2 underline underline-offset-2">Clear all</button>
+</div>
+</div>
+</section>
+<!-- Kanban Board Area -->
+<section class="px-8 pb-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Column: To Do -->
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between px-2">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-slate-300"></span>
+<h3 class="font-bold text-slate-900 tracking-tight">To Do</h3>
+<span class="text-[10px] font-bold bg-slate-200 text-slate-600 px-2 py-0.5 rounded-full">4</span>
+</div>
+<button class="p-1.5 hover:bg-surface-container-high rounded-full transition-colors">
+<span class="material-symbols-outlined text-[18px]">more_horiz</span>
+</button>
+</div>
+<div class="kanban-column overflow-y-auto no-scrollbar flex flex-col gap-4 pr-1">
+<div class="bg-surface-container-lowest p-5 rounded-[16px] shadow-sm hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-300 group cursor-grab active:cursor-grabbing">
+<div class="w-12 h-1.5 bg-tertiary-fixed rounded-full mb-4"></div>
+<h4 class="font-bold text-on-surface mb-3 leading-tight group-hover:text-primary transition-colors">Design System Audit for Client Onboarding</h4>
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="px-2 py-0.5 bg-surface-container-low text-[10px] font-bold text-on-surface-variant rounded">UX/UI</span>
+<span class="px-2 py-0.5 bg-surface-container-low text-[10px] font-bold text-on-surface-variant rounded">Internal</span>
+</div>
+<div class="flex items-center justify-between mt-auto">
+<div class="flex -space-x-2">
+<img alt="member 1" class="w-8 h-8 rounded-full border-2 border-white" data-alt="close up portrait of a young professional woman with natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPzhbj2PMpn5l3C5D1nFK52s6xu49fuYBGM0jE5pPYlpQWxYQFF6bEzV5mLvUCrDh8v1OFc2L0OaSRLS7iP6XmSO3HgVmQfgZbCuaeKGexXLg6Eh4qboGfTIpvMzCqTCuf9e_Yx024ggRwR1HUKYrFHYsO3vNBlyDRqKFFNhv7b9ePRDKPlAJZ1dRMX4qrgJtQ6LTNujMgRsOtfNOzCoGrM1l1F0yKKojQ1x37SqB5VGd4dPDE95MTni4QVVqlw8AIBBVtHo9aHQo"/>
+<img alt="member 2" class="w-8 h-8 rounded-full border-2 border-white" data-alt="portrait of a young man with glasses in a minimalist bright setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDT4BxDFqmKCB3J_cup0t1OsUeMotJnDt_OMM4DT5wWtBec8DG5fwBp9ebdKzrlHSiiuRC9QAXUYiGDexs-INvdMuwsEMxKToG6trEd0DuXoM3tFTeLc3SWPA4RfqQXftyyyPUreGJ0peOF_bnPksAU6jwD4zyRoLSW1-CAQ74Ihk2y29yzdiJfwbcJuK1TyJHkbGyzAUZO0qmzM0YLwRFs5_P73f8HK9OegzlieuRngpk3JuTlD941xqo7cBD99dd7Jizv3emo2jM"/>
+</div>
+<span class="text-[10px] text-outline font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">comment</span> 12
+                            </span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-5 rounded-[16px] shadow-sm hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-300 group">
+<div class="w-12 h-1.5 bg-blue-100 rounded-full mb-4"></div>
+<h4 class="font-bold text-on-surface mb-3 leading-tight">Revise Q3 Sales Deck Typography</h4>
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="px-2 py-0.5 bg-surface-container-low text-[10px] font-bold text-on-surface-variant rounded">Sales</span>
+</div>
+<div class="flex items-center justify-between mt-auto">
+<img alt="member 3" class="w-8 h-8 rounded-full border-2 border-white" data-alt="professional man in tech environment smiling softly" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4ZdNty0pRqlbLmnTvZE7T3y2XzG3Zx8HEnE09yjEU9l2xMV-hzVNRFSUIkRtpk_KrvqWJmQAccrUuIOFOyOfruHhAix3eT1FD2s9Z2a7VN4vsRDmiYB0JqTtDEkYg-88N8ZxS3K6OVVdyMvASB4AQnR-WtGwLDpqMI1g9pWotcxTdRwhK2tqbqpHQIo75VzVio8uOoIogtp-BvHQ0l9BQ_V6d4Z-mBu7-vRempMGwb4IgyordcisPT8zz8wfCpawv3ALi83V-ChQ"/>
+<span class="text-[10px] text-outline font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">attachment</span> 3
+                            </span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-5 rounded-[16px] shadow-sm hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-300 group">
+<div class="w-12 h-1.5 bg-slate-200 rounded-full mb-4"></div>
+<h4 class="font-bold text-on-surface mb-3 leading-tight">API Documentation Polish</h4>
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="px-2 py-0.5 bg-surface-container-low text-[10px] font-bold text-on-surface-variant rounded">Dev</span>
+</div>
+<div class="flex items-center justify-between mt-auto">
+<div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center text-[10px] font-bold">JD</div>
+<span class="text-[10px] text-outline font-bold">2 days left</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Column: In Progress -->
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between px-2">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-blue-500"></span>
+<h3 class="font-bold text-slate-900 tracking-tight">In Progress</h3>
+<span class="text-[10px] font-bold bg-blue-100 text-blue-600 px-2 py-0.5 rounded-full">2</span>
+</div>
+<button class="p-1.5 hover:bg-surface-container-high rounded-full transition-colors">
+<span class="material-symbols-outlined text-[18px]">more_horiz</span>
+</button>
+</div>
+<div class="kanban-column overflow-y-auto no-scrollbar flex flex-col gap-4 pr-1">
+<div class="bg-surface-container-lowest p-5 rounded-[16px] shadow-md hover:shadow-xl transition-all duration-300 group">
+<div class="w-12 h-1.5 bg-error/20 rounded-full mb-4"></div>
+<div class="mb-3 overflow-hidden rounded-lg aspect-video">
+<img class="w-full h-full object-cover" data-alt="architectural drawing of a modern house with minimalist clean lines and large windows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0BTsrFsclP0yXCszTu_ZKd9Ik9RfMEg-ap4nppz4DFY4IKjUEgwJAy51R0RvSwYB0q44i9E5HlGLrIGQd5gWSLYSsp3dZnKullVmLyemkalROUTwAtJBx3Qm171n4tzp-e6LRk3DI4-rCH5MivH58BJBu-yMso51R4KT54jLhn8z2HmCyZhly8xnCmrzijxVB0E9rnAaWgOfTPfeRzZ0SFzNYTC8SOs5WO5VXzoTzltU6V028f6evTVN47a-yGngPwNsOokLX-lU"/>
+</div>
+<h4 class="font-bold text-on-surface mb-3 leading-tight">Atrium Mobile Navigation Refactor</h4>
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="px-2 py-0.5 bg-error-container text-[10px] font-bold text-on-error-container rounded">High Priority</span>
+</div>
+<div class="flex items-center justify-between mt-auto">
+<div class="flex -space-x-2">
+<img alt="member 4" class="w-8 h-8 rounded-full border-2 border-white" data-alt="vibrant portrait of a woman with a bright smile in a natural setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBiZiWeeZfIXtb5doSdGNWBn535sn8kBkJNE2LTky-JeJ8R10ectEjH9d2Fqexe2vuvIY0ZWVOlSTNyzBOMcYJAzQzUCunT9B__RD4zrGJ7PJy7WA8IvtaN2KIPqS-Dm2ySQ-9nLV3Iadu89oI28CBwEFDDPzAbDZEn6AD7TIuVW_RCotY1VgOnzJ2kQ1r0MtsghSW1e8o_Asq3uO9F8WgUq7EycK6C1vYPpKOBIEkbnMr9ntPAlzF01ThHg8Xz9ULieeQ3G5QLjmw"/>
+<div class="w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center text-[10px] font-bold border-2 border-white">+3</div>
+</div>
+<span class="text-[10px] text-error font-bold">Due Today</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-5 rounded-[16px] shadow-sm hover:shadow-xl transition-all duration-300 group">
+<div class="w-12 h-1.5 bg-primary-container/20 rounded-full mb-4"></div>
+<h4 class="font-bold text-on-surface mb-3 leading-tight">Dark Mode Color Tokens Refinement</h4>
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="px-2 py-0.5 bg-surface-container-low text-[10px] font-bold text-on-surface-variant rounded">Design</span>
+<span class="px-2 py-0.5 bg-surface-container-low text-[10px] font-bold text-on-surface-variant rounded">System</span>
+</div>
+<div class="flex items-center justify-between mt-auto">
+<img alt="member 5" class="w-8 h-8 rounded-full border-2 border-white" data-alt="professional male portrait with soft studio lighting and neutral background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmg5t7PAoGPBypRkUXnDPS05zptSKFymg8QV_XGfbaDkX0XjWEqw7Vvmc0-bxRkJhPh6T-UJZaDvq6Lzudby9_q5LZdK9GCBUtl9KnOhuH9Get7TcINRolNT_83tu9EjsyMzl9IvYAkSK6P8y12CI1rlVR1gFZ0gue3q3UngBKQiiVve3ov5gEPBNS1FnO3A01BD2uG6xfTxyLk-7gw4VqyZ3zhHqOtJwAKkxn2vilDXLSPL6QFAlzNBvP6qU4Gr3nTdvYNiqncaQ"/>
+<span class="text-[10px] text-outline font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">sync</span> 65%
+                            </span>
+</div>
+</div>
+</div>
+</div>
+<!-- Column: In Review -->
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between px-2">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-amber-400"></span>
+<h3 class="font-bold text-slate-900 tracking-tight">In Review</h3>
+<span class="text-[10px] font-bold bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full">1</span>
+</div>
+<button class="p-1.5 hover:bg-surface-container-high rounded-full transition-colors">
+<span class="material-symbols-outlined text-[18px]">more_horiz</span>
+</button>
+</div>
+<div class="kanban-column overflow-y-auto no-scrollbar flex flex-col gap-4 pr-1">
+<div class="bg-surface-container-lowest p-5 rounded-[16px] shadow-sm hover:shadow-xl transition-all duration-300 group">
+<div class="w-12 h-1.5 bg-tertiary rounded-full mb-4"></div>
+<h4 class="font-bold text-on-surface mb-3 leading-tight">Final QA: User Permissions Engine</h4>
+<p class="text-xs text-on-surface-variant/70 mb-4 line-clamp-2">The security audit found 2 minor issues with the role assignment logic that need eyes.</p>
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="px-2 py-0.5 bg-surface-container-low text-[10px] font-bold text-on-surface-variant rounded">Backend</span>
+</div>
+<div class="flex items-center justify-between mt-auto">
+<div class="flex -space-x-2">
+<img alt="member 6" class="w-8 h-8 rounded-full border-2 border-white" data-alt="minimalist portrait of a woman in a bright room with window light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOBzoPenvn7iE5DblcHeDF_QBRG4pg-8aKwwp-Y1rVjo0Z2ZE-Safv467zpmfjYHHdY18KIw6tmI-NudeD-58n9cKXRuiVfdWZ_NA--rUVAHqzCmOWaTBqybk274sYhzHjlkEb7iXfDCz1fotGpVtZwj_12-shD408O-98EZyuEZkjfg8FXHO6UeGf7Qvz-Mid56gyMrxBI16ljxtfzZZIuJnWQ3sL7yodVkoRV3KaK_caX6fUdwGfNF4abG_Yl-gT0mOLYbBOkDI"/>
+</div>
+<span class="text-[10px] text-amber-600 font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">warning</span> Pending
+                            </span>
+</div>
+</div>
+</div>
+</div>
+<!-- Column: Done -->
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between px-2">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+<h3 class="font-bold text-slate-900 tracking-tight">Done</h3>
+<span class="text-[10px] font-bold bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">12</span>
+</div>
+<button class="p-1.5 hover:bg-surface-container-high rounded-full transition-colors">
+<span class="material-symbols-outlined text-[18px]">more_horiz</span>
+</button>
+</div>
+<div class="kanban-column overflow-y-auto no-scrollbar flex flex-col gap-4 pr-1">
+<div class="bg-surface-container-lowest/60 p-5 rounded-[16px] shadow-sm hover:shadow-lg transition-all duration-300 group opacity-70 hover:opacity-100">
+<div class="w-12 h-1.5 bg-emerald-200 rounded-full mb-4"></div>
+<h4 class="font-bold text-on-surface mb-3 leading-tight line-through">Employee Anniversary Logic</h4>
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="px-2 py-0.5 bg-emerald-50 text-[10px] font-bold text-emerald-700 rounded">Completed</span>
+</div>
+<div class="flex items-center justify-between mt-auto">
+<img alt="member 7" class="w-8 h-8 rounded-full border-2 border-white" data-alt="professional headshot of a man with a friendly expression in a modern office" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBT_wxiO9D8MPpZ_byR52osuwtRCQFpVeAaShRHocamUb2ZXxrbd9bXY56o2XKN39rXcfnYk0ltH5nteJ7g8GqqoefnVHKXBbitInny5bJ-qqX00yAagtP6kBAM_HNJeWJoLXnsRJz43TGRw9wXUyxbltO26FCUNbww9JZDoE0VLRjcwT15UXvTg6lPHM2n-sjxpajwuobDEFSc5JC0RnQXh3dauyu7WZ7-ohm_qkE0il36aEv9q5jVSGEFSsu2ou0NkNpyE9Z4tE8"/>
+<span class="material-symbols-outlined text-emerald-600 text-[18px]">check_circle</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest/60 p-5 rounded-[16px] shadow-sm hover:shadow-lg transition-all duration-300 group opacity-70 hover:opacity-100">
+<div class="w-12 h-1.5 bg-emerald-200 rounded-full mb-4"></div>
+<h4 class="font-bold text-on-surface mb-3 leading-tight line-through">Migration to New Hosting</h4>
+<div class="flex items-center justify-between mt-auto">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center text-[10px] font-bold border-2 border-white">ST</div>
+</div>
+<span class="material-symbols-outlined text-emerald-600 text-[18px]">check_circle</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Floating Action Button -->
+<div class="fixed bottom-10 right-10 flex flex-col gap-4">
+<button class="w-14 h-14 bg-primary-container text-white rounded-full flex items-center justify-center shadow-2xl shadow-primary-container/40 hover:scale-110 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[32px]">add</span>
+</button>
+</div>
+</body></html>

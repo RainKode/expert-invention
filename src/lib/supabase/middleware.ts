@@ -48,5 +48,25 @@ export async function updateSession(request: NextRequest) {
     return NextResponse.redirect(url)
   }
 
+  // Onboarding redirect: non-admin users who haven't completed onboarding
+  if (user && !isPublicPath) {
+    const isOnboardingPath = request.nextUrl.pathname.startsWith('/onboarding')
+    const isApiPath = request.nextUrl.pathname.startsWith('/api')
+
+    if (!isOnboardingPath && !isApiPath) {
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('role, onboarding_complete')
+        .eq('id', user.id)
+        .single()
+
+      if (profile && profile.role !== 'admin' && !profile.onboarding_complete) {
+        const url = request.nextUrl.clone()
+        url.pathname = '/onboarding'
+        return NextResponse.redirect(url)
+      }
+    }
+  }
+
   return supabaseResponse
 }

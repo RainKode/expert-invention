@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { createAdminClient } from '@/lib/supabase/admin'
 import { logTimelineEvent } from '@/lib/task-timeline'
+import { createNotification } from '@/lib/notifications'
 import { z } from 'zod'
 
 const schema = z.object({
@@ -51,6 +52,31 @@ export async function POST(request: NextRequest, { params }: Params) {
     newValue: new_assignee_id,
     metadata: { reason },
   })
+
+  // Notify the previous assignee (reassigned away)
+  const { data: actorProfile } = await admin.from('profiles').select('name').eq('id', user.id).single()
+  if (task.assignee_id && task.assignee_id !== new_assignee_id) {
+    await createNotification({
+      recipientId: task.assignee_id,
+      type: 'task_reassigned_away',
+      title: 'Task Reassigned',
+      message: `"${task.title}" has been reassigned to another team member`,
+      link: `/tasks/${id}`,
+      metadata: { task_id: id, actor_id: user.id },
+    })
+  }
+
+  // Notify the new assignee
+  if (new_assignee_id !== user.id) {
+    await createNotification({
+      recipientId: new_assignee_id,
+      type: 'task_assigned',
+      title: 'New Task Assigned',
+      message: `${actorProfile?.name ?? 'Someone'} assigned you "${task.title}"`,
+      link: `/tasks/${id}`,
+      metadata: { task_id: id, actor_id: user.id },
+    })
+  }
 
   return NextResponse.json({ task: updated })
 }

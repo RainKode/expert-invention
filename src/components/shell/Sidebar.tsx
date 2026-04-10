@@ -1,8 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { usePathname, useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { usePathname } from 'next/navigation'
 import { type Role } from '@/types'
 import { can } from '@/lib/permissions'
 
@@ -27,6 +26,7 @@ const NAV_ITEMS: NavItem[] = [
   { label: 'Activity', href: '/dashboard/activity', icon: 'history' },
   { label: 'Reports', href: '/reports', icon: 'bar_chart', requiredAction: 'export_reports' },
   { label: 'Custom Fields', href: '/settings/custom-fields', icon: 'tune', requiredAction: 'create_custom_fields' },
+  { label: 'Notifications', href: '/settings/notifications', icon: 'notifications' },
 ]
 
 const ADMIN_NAV: NavItem[] = [
@@ -38,11 +38,12 @@ interface SidebarProps {
   userName: string
   userRole: Role
   onLogout: () => void
+  mobileOpen?: boolean
+  onMobileClose?: () => void
 }
 
-export default function Sidebar({ userName, userRole, onLogout }: SidebarProps) {
+export default function Sidebar({ userName, userRole, onLogout, mobileOpen = false, onMobileClose }: SidebarProps) {
   const pathname = usePathname()
-  const [mobileOpen, setMobileOpen] = useState(false)
 
   const visibleNav = NAV_ITEMS.filter(
     (item) => !item.requiredAction || can(userRole, item.requiredAction)
@@ -53,7 +54,7 @@ export default function Sidebar({ userName, userRole, onLogout }: SidebarProps) 
   const NavLink = ({ item }: { item: NavItem }) => (
     <Link
       href={item.href}
-      onClick={() => setMobileOpen(false)}
+      onClick={() => onMobileClose?.()}
       className={
         isActive(item.href)
           ? 'flex items-center gap-4 px-4 py-3 text-white font-semibold rounded-2xl shadow-ambient-sm transition-all'
@@ -126,7 +127,7 @@ export default function Sidebar({ userName, userRole, onLogout }: SidebarProps) 
           <span>Settings</span>
         </Link>
 
-        <div className="pt-4 mt-2 border-t border-surface-container-high">
+        <div className="pt-4 mt-2">
           <div className="flex items-center gap-3 px-4 py-2">
             <div className="w-9 h-9 rounded-full bg-primary-container flex items-center justify-center shrink-0">
               <span className="text-on-primary-container text-sm font-bold">
@@ -163,7 +164,7 @@ export default function Sidebar({ userName, userRole, onLogout }: SidebarProps) 
       {mobileOpen && (
         <div
           className="fixed inset-0 z-50 bg-on-surface/40 backdrop-blur-sm md:hidden"
-          onClick={() => setMobileOpen(false)}
+          onClick={() => onMobileClose?.()}
         >
           <aside
             className="absolute left-0 top-0 bottom-0 w-72 bg-surface-container-low flex flex-col shadow-2xl"

@@ -55,15 +55,15 @@ export default function ReviewerSendBackModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      <div className="absolute inset-0 bg-on-surface/40 backdrop-blur-sm" onClick={onClose} />
+      <div className="absolute inset-0 bg-on-surface/40 backdrop-blur-[20px]" onClick={onClose} />
       <div className="relative w-full max-w-sm bg-surface-container rounded-3xl shadow-2xl overflow-hidden">
         {/* Header */}
-        <div className="px-6 py-5 flex items-center justify-between border-b border-surface-container-high">
+        <div className="px-6 py-5 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <span className="material-symbols-outlined text-xl text-error">undo</span>
             <h2 className="text-base font-bold text-on-surface">Send back for revision</h2>
           </div>
-          <button onClick={onClose} className="p-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors">
+          <button onClick={onClose} className="p-1.5 rounded-full text-on-surface-variant hover:bg-surface-container-high transition-colors">
             <span className="material-symbols-outlined text-lg">close</span>
           </button>
         </div>
@@ -108,14 +108,14 @@ export default function ReviewerSendBackModal({
           {error && <p className="text-sm text-error bg-error-container rounded-xl px-4 py-2">{error}</p>}
         </div>
 
-        <div className="px-6 py-4 flex gap-3 border-t border-surface-container-high">
-          <button type="button" onClick={onClose} className="flex-1 py-2.5 rounded-xl text-sm font-semibold text-on-surface-variant hover:bg-surface-container-high transition-colors">
+        <div className="px-6 py-4 flex gap-3 bg-surface-container-low/50">
+          <button type="button" onClick={onClose} className="flex-1 py-2.5 rounded-full text-sm font-semibold text-on-surface-variant hover:bg-surface-container-high transition-colors">
             Cancel
           </button>
           <button
             onClick={handleSubmit}
             disabled={submitting || !reason.trim()}
-            className="flex-1 py-2.5 rounded-xl text-sm font-bold text-white bg-error shadow-ambient-sm disabled:opacity-60 transition-opacity"
+            className="flex-1 py-2.5 rounded-full text-sm font-bold text-white bg-error shadow-ambient-sm disabled:opacity-60 transition-opacity"
           >
             {submitting ? 'Sending…' : 'Send Back'}
           </button>

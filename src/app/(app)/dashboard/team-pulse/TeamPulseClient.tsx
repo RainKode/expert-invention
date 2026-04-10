@@ -32,24 +32,24 @@ function nextWeek(weekStart: string) {
 function capacityColor(planned: number, available: number) {
   if (available === 0) return 'bg-surface-container text-on-surface-variant'
   const pct = (planned / available) * 100
-  if (pct >= 80 && pct <= 110) return 'bg-emerald-500/10 text-emerald-700'
+  if (pct >= 80 && pct <= 110) return 'bg-primary-container/20 text-primary'
   if (pct > 110) return 'bg-error-container text-error'
-  if (pct >= 50) return 'bg-amber-400/10 text-amber-700'
-  return 'bg-rose-400/10 text-rose-600'
+  if (pct >= 50) return 'bg-tertiary-container/20 text-tertiary'
+  return 'bg-error-container/20 text-error'
 }
 
 function capacityBar(planned: number, available: number) {
   if (available === 0) return 'bg-surface-container-high'
   const pct = (planned / available) * 100
-  if (pct >= 80 && pct <= 110) return 'bg-emerald-500'
+  if (pct >= 80 && pct <= 110) return 'bg-primary'
   if (pct > 110) return 'bg-error'
-  if (pct >= 50) return 'bg-amber-400'
-  return 'bg-rose-400'
+  if (pct >= 50) return 'bg-tertiary'
+  return 'bg-error'
 }
 
 const STATUS_BADGE: Record<PlanSubmissionStatus, { label: string; cls: string }> = {
-  submitted: { label: 'Submitted', cls: 'bg-emerald-100 text-emerald-700' },
-  draft: { label: 'Draft', cls: 'bg-amber-100 text-amber-600' },
+  submitted: { label: 'Submitted', cls: 'bg-primary-container/20 text-primary' },
+  draft: { label: 'Draft', cls: 'bg-tertiary-container text-on-tertiary-container' },
   fluid: { label: 'Fluid', cls: 'bg-secondary-container text-on-secondary-container' },
 }
 
@@ -174,13 +174,13 @@ export default function TeamPulseClient({ data, weekStart, workingDays }: Props)
             <h3 className="text-lg font-bold text-on-surface tracking-tight">Capacity Matrix</h3>
             <div className="flex gap-4 text-xs font-bold text-on-surface-variant">
               <span className="flex items-center gap-1.5">
-                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" /> 80–100%
+                <span className="w-2.5 h-2.5 rounded-full bg-primary" /> 80–100%
               </span>
               <span className="flex items-center gap-1.5">
-                <span className="w-2.5 h-2.5 rounded-full bg-amber-400" /> 50–79%
+                <span className="w-2.5 h-2.5 rounded-full bg-tertiary" /> 50–79%
               </span>
               <span className="flex items-center gap-1.5">
-                <span className="w-2.5 h-2.5 rounded-full bg-rose-400" /> &lt;50%
+                <span className="w-2.5 h-2.5 rounded-full bg-error" /> &lt;50%
               </span>
             </div>
           </div>
@@ -216,7 +216,7 @@ export default function TeamPulseClient({ data, weekStart, workingDays }: Props)
               {data.members.map((row, i) => (
                 <>
                   <div key={`${row.user.id}-name`}
-                    className={`p-6 flex items-center gap-4 bg-surface-container-lowest ${i > 0 ? 'border-t border-surface-container-low/50' : ''}`}>
+                    className={`p-6 flex items-center gap-4 bg-surface-container-lowest`}>
                     <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#4d556a] to-[#656d84] flex items-center justify-center text-white font-bold text-sm shrink-0">
                       {row.user.name.charAt(0)}
                     </div>
@@ -236,7 +236,7 @@ export default function TeamPulseClient({ data, weekStart, workingDays }: Props)
 
                     return (
                       <div key={`${row.user.id}-${dow}`}
-                        className={`p-4 flex flex-col items-center justify-center gap-1 ${i > 0 ? 'border-t border-surface-container-low/50' : ''}`}>
+                        className={`p-4 flex flex-col items-center justify-center gap-1`}>
                         {isOff ? (
                           <span className="text-[10px] font-medium text-on-surface-variant/40">Off</span>
                         ) : (
@@ -255,7 +255,7 @@ export default function TeamPulseClient({ data, weekStart, workingDays }: Props)
 
                   {/* Status cell */}
                   <div key={`${row.user.id}-status`}
-                    className={`p-4 flex items-center justify-center ${i > 0 ? 'border-t border-surface-container-low/50' : ''}`}>
+                    className={`p-4 flex items-center justify-center`}>
                     {row.submission_status ? (
                       <span className={`text-[10px] font-bold uppercase px-3 py-1 rounded-full ${STATUS_BADGE[row.submission_status as PlanSubmissionStatus].cls}`}>
                         {STATUS_BADGE[row.submission_status as PlanSubmissionStatus].label}
@@ -298,7 +298,7 @@ export default function TeamPulseClient({ data, weekStart, workingDays }: Props)
                     <p className="text-sm font-bold truncate">{t.title}</p>
                     <p className="text-xs text-on-surface-variant">Assigned to {t.assignee_name}</p>
                   </div>
-                  <div className="bg-rose-50 text-rose-600 px-3 py-1 rounded-full text-[10px] font-extrabold uppercase shrink-0">
+                  <div className="bg-error-container text-error px-3 py-1 rounded-full text-[10px] font-extrabold uppercase shrink-0">
                     {t.days_overdue}d Overdue
                   </div>
                 </div>

@@ -30,10 +30,10 @@ const STATUS_TABS = [
 ]
 
 const STATUS_BADGE: Record<string, string> = {
-  todo: 'bg-red-50 text-red-700',
-  in_progress: 'bg-blue-50 text-blue-700',
-  in_review: 'bg-purple-50 text-purple-700',
-  done: 'bg-green-50 text-green-700',
+  todo: 'bg-surface-container text-on-surface-variant',
+  in_progress: 'bg-secondary-container text-on-secondary-container',
+  in_review: 'bg-tertiary-container text-on-tertiary-container',
+  done: 'bg-primary-container text-on-primary-container',
 }
 
 const STATUS_LABEL: Record<string, string> = {
@@ -44,9 +44,9 @@ const STATUS_LABEL: Record<string, string> = {
 }
 
 const PRIORITY_BAR: Record<string, string> = {
-  high: 'bg-red-500',
-  medium: 'bg-amber-400',
-  low: 'bg-slate-400',
+  high: 'bg-error',
+  medium: 'bg-tertiary',
+  low: 'bg-outline',
 }
 
 interface TasksClientProps {
@@ -107,7 +107,7 @@ export default function TasksClient({ userId, userRole, projects }: TasksClientP
         </div>
         <button
           onClick={() => setModalOpen(true)}
-          className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold text-white shadow-ambient-sm transition-opacity hover:opacity-90"
+          className="flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold text-white shadow-ambient-sm transition-opacity hover:opacity-90"
           style={{ background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }}
         >
           <span className="material-symbols-outlined text-lg">add</span>
@@ -116,7 +116,7 @@ export default function TasksClient({ userId, userRole, projects }: TasksClientP
       </div>
 
       {/* Status tabs */}
-      <div className="flex gap-1 border-b border-surface-container-high">
+      <div className="flex gap-1">
         {STATUS_TABS.map(tab => (
           <button
             key={tab.key}
@@ -227,15 +227,15 @@ export default function TasksClient({ userId, userRole, projects }: TasksClientP
               onClick={() => router.push(`/tasks/${task.id}`)}
               className="w-full group"
             >
-              <div className="flex items-center gap-0 bg-surface-container-lowest rounded-2xl overflow-hidden hover:shadow-ambient-sm transition-shadow border border-surface-container-high/50">
+              <div className="flex items-center gap-0 bg-surface-container-lowest rounded-2xl overflow-hidden hover:shadow-ambient-sm transition-shadow">
                 {/* Priority bar */}
-                <div className={`w-1 self-stretch ${PRIORITY_BAR[task.priority] ?? 'bg-slate-300'}`} />
+                <div className={`w-1 self-stretch ${PRIORITY_BAR[task.priority] ?? 'bg-outline'}`} />
 
                 <div className="flex-1 flex items-center gap-4 px-5 py-4">
                   {/* Status icon */}
                   <span
                     className={`material-symbols-outlined text-xl shrink-0 ${
-                      task.status === 'done' ? 'text-green-600' : 'text-outline/40'
+                      task.status === 'done' ? 'text-primary' : 'text-outline/40'
                     }`}
                     style={task.status === 'done' ? { fontVariationSettings: "'FILL' 1" } : undefined}
                   >
@@ -259,8 +259,8 @@ export default function TasksClient({ userId, userRole, projects }: TasksClientP
                     </span>
 
                     {task.billable && (
-                      <span className="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center" title="Billable">
-                        <span className="material-symbols-outlined text-xs text-green-700">attach_money</span>
+                      <span className="w-6 h-6 rounded-full bg-tertiary-container flex items-center justify-center" title="Billable">
+                        <span className="material-symbols-outlined text-xs text-tertiary">attach_money</span>
                       </span>
                     )}
 

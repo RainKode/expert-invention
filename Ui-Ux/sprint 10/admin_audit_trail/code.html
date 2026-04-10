@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Audit Trail | Sunday HR</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error-container": "#ffdad6",
+                        "surface-container-high": "#e6e8ea",
+                        "on-primary-fixed-variant": "#3e465b",
+                        "error": "#ba1a1a",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-tertiary-container": "#d6c9bf",
+                        "on-error-container": "#93000a",
+                        "secondary": "#565e74",
+                        "inverse-primary": "#bec6df",
+                        "surface-container": "#eceef0",
+                        "on-secondary-fixed-variant": "#3e465c",
+                        "on-secondary": "#ffffff",
+                        "background": "#f7f9fb",
+                        "on-secondary-fixed": "#131b2e",
+                        "surface-bright": "#f7f9fb",
+                        "secondary-fixed": "#dae2fd",
+                        "on-surface-variant": "#45464c",
+                        "on-primary-container": "#c2cae3",
+                        "on-background": "#191c1e",
+                        "surface-variant": "#e0e3e5",
+                        "tertiary-fixed-dim": "#d1c4bb",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed": "#131b2e",
+                        "outline-variant": "#c6c6cd",
+                        "surface-tint": "#565e73",
+                        "surface": "#f7f9fb",
+                        "tertiary-container": "#5d544d",
+                        "surface-dim": "#d8dadc",
+                        "on-secondary-container": "#5c647b",
+                        "on-surface": "#191c1e",
+                        "on-tertiary-fixed": "#211a15",
+                        "tertiary": "#453d36",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-highest": "#e0e3e5",
+                        "primary-fixed-dim": "#bec6df",
+                        "on-primary": "#ffffff",
+                        "inverse-surface": "#2d3133",
+                        "outline": "#76777d",
+                        "on-tertiary-fixed-variant": "#4e453e",
+                        "surface-container-low": "#f2f4f6",
+                        "secondary-fixed-dim": "#bec6e0",
+                        "on-error": "#ffffff",
+                        "primary-container": "#4d556a",
+                        "tertiary-fixed": "#eee0d7",
+                        "primary": "#363e52",
+                        "primary-fixed": "#dae2fc",
+                        "secondary-container": "#dae2fd"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Plus Jakarta Sans"],
+                        "label": ["Plus Jakarta Sans"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-40 bg-slate-50/80 dark:bg-slate-950/80 backdrop-blur-xl shadow-[0px_24px_48px_rgba(77,85,106,0.06)]">
+<div class="flex justify-between items-center h-16 px-8 w-full">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold tracking-tighter text-slate-800 dark:text-slate-100">Sunday HR</span>
+<div class="hidden md:flex gap-6 items-center">
+<a class="font-['Plus_Jakarta_Sans'] tracking-tight font-medium text-slate-500 dark:text-slate-400 hover:text-slate-800 transition-colors" href="#">Dashboard</a>
+<a class="font-['Plus_Jakarta_Sans'] tracking-tight font-medium text-slate-500 dark:text-slate-400 hover:text-slate-800 transition-colors" href="#">People</a>
+<a class="font-['Plus_Jakarta_Sans'] tracking-tight font-medium text-slate-500 dark:text-slate-400 hover:text-slate-800 transition-colors" href="#">Time</a>
+<a class="font-['Plus_Jakarta_Sans'] tracking-tight font-medium text-slate-500 dark:text-slate-400 hover:text-slate-800 transition-colors" href="#">Payroll</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-slate-700 p-2 hover:bg-surface-container-high rounded-full transition-colors" data-icon="notifications">notifications</button>
+<button class="material-symbols-outlined text-slate-700 p-2 hover:bg-surface-container-high rounded-full transition-colors" data-icon="help_outline">help_outline</button>
+<img alt="User profile" class="w-8 h-8 rounded-full border-2 border-white shadow-sm" data-alt="professional portrait of a confident woman in business attire with soft natural lighting and studio background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvBhMFS-y9kUAQmY_XfhKJT-nAI2GOS67Vh95jFw4pCliqw3kJA2kdVxxO0SaqAZzIOq0Kcl8n_y_FsfyifJnPd0OwCSAWhTVemMTXrbBNpNPSSdnpiQd8EnX9G8J562DAP2jL7BgtT-_gwTQq_kZ2WAqWVtVrm0awG2BrCktQM1gPfVvFggzkK-fEtmiG53xWDFlEHe7rKVuJOvOxH2S46IM8UIMxvX2u5PibZ7tOJk5wmWNJvwfQdqAsCPqS3r3TAPjiru-sBv8"/>
+</div>
+</div>
+</nav>
+<!-- SideNavBar (Admin Console Context) -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-slate-100 dark:bg-slate-900 flex flex-col p-4 pt-20 space-y-2 z-30">
+<div class="px-4 mb-6">
+<h2 class="text-lg font-black text-slate-800 dark:text-slate-100">Admin Console</h2>
+<p class="text-xs font-semibold text-slate-500 uppercase tracking-widest">Global Settings</p>
+</div>
+<nav class="flex-grow space-y-1">
+<a class="flex items-center gap-3 font-['Plus_Jakarta_Sans'] text-sm font-semibold text-slate-500 px-4 py-2 hover:bg-slate-200/50 transition-all rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+                Settings
+            </a>
+<a class="flex items-center gap-3 font-['Plus_Jakarta_Sans'] text-sm font-semibold bg-white text-slate-900 rounded-xl shadow-sm px-4 py-3" href="#">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+                Audit Logs
+            </a>
+<a class="flex items-center gap-3 font-['Plus_Jakarta_Sans'] text-sm font-semibold text-slate-500 px-4 py-2 hover:bg-slate-200/50 transition-all rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="person_add">person_add</span>
+                Onboarding
+            </a>
+<a class="flex items-center gap-3 font-['Plus_Jakarta_Sans'] text-sm font-semibold text-slate-500 px-4 py-2 hover:bg-slate-200/50 transition-all rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+                Teams
+            </a>
+<a class="flex items-center gap-3 font-['Plus_Jakarta_Sans'] text-sm font-semibold text-slate-500 px-4 py-2 hover:bg-slate-200/50 transition-all rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+                Documents
+            </a>
+</nav>
+<div class="mt-auto pt-4 border-t border-slate-200/50 flex flex-col gap-1">
+<button class="bg-primary-container text-white px-4 py-3 rounded-xl font-semibold text-sm mb-4 flex items-center justify-center gap-2 hover:opacity-90 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-lg" data-icon="add">add</span>
+                Invite Member
+            </button>
+<a class="flex items-center gap-3 font-['Plus_Jakarta_Sans'] text-sm font-semibold text-slate-500 px-4 py-2 hover:bg-slate-200/50 transition-all rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="contact_support">contact_support</span>
+                Support
+            </a>
+<a class="flex items-center gap-3 font-['Plus_Jakarta_Sans'] text-sm font-semibold text-slate-500 px-4 py-2 hover:bg-slate-200/50 transition-all rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+                Log out
+            </a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="pl-64 pt-16 min-h-screen">
+<div class="max-w-[1400px] mx-auto px-12 py-12">
+<!-- Header Section -->
+<header class="mb-10">
+<h1 class="text-3xl font-headline font-bold tracking-tight text-on-surface mb-2">Audit Trail</h1>
+<p class="text-on-surface-variant font-medium">Read-only log of structural changes</p>
+</header>
+<!-- Filter Bar -->
+<section class="mb-8 flex flex-wrap gap-4 items-end">
+<div class="flex-1 min-w-[240px]">
+<label class="block text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-2 ml-4">Date Range</label>
+<div class="bg-surface-container-lowest h-12 px-5 rounded-full flex items-center gap-3 shadow-[0px_4px_12px_rgba(77,85,106,0.04)]">
+<span class="material-symbols-outlined text-slate-400" data-icon="calendar_today">calendar_today</span>
+<span class="text-sm font-medium text-on-surface">Oct 1, 2023 - Oct 31, 2023</span>
+</div>
+</div>
+<div class="flex-1 min-w-[200px]">
+<label class="block text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-2 ml-4">Event Type</label>
+<div class="bg-surface-container-lowest h-12 px-5 rounded-full flex items-center justify-between shadow-[0px_4px_12px_rgba(77,85,106,0.04)]">
+<span class="text-sm font-medium text-on-surface">All Events</span>
+<span class="material-symbols-outlined text-slate-400" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+<div class="flex-1 min-w-[200px]">
+<label class="block text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-2 ml-4">Actor</label>
+<div class="bg-surface-container-lowest h-12 px-5 rounded-full flex items-center justify-between shadow-[0px_4px_12px_rgba(77,85,106,0.04)]">
+<span class="text-sm font-medium text-on-surface">Any Actor</span>
+<span class="material-symbols-outlined text-slate-400" data-icon="person_search">person_search</span>
+</div>
+</div>
+<button class="h-12 px-8 bg-primary-container text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all active:scale-95 flex items-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="filter_list">filter_list</span>
+                    Apply Filters
+                </button>
+</section>
+<!-- Audit Table Layout (Card based, 4px gap) -->
+<section class="space-y-1">
+<!-- Table Header -->
+<div class="grid grid-cols-[1.5fr_2fr_1.5fr_3fr_1.5fr_1.5fr] gap-4 px-8 py-4 text-xs font-bold text-on-surface-variant uppercase tracking-widest">
+<div>Timestamp</div>
+<div>Actor</div>
+<div>Event Type</div>
+<div>Description</div>
+<div>Old Value</div>
+<div>New Value</div>
+</div>
+<!-- Row 1 -->
+<div class="grid grid-cols-[1.5fr_2fr_1.5fr_3fr_1.5fr_1.5fr] gap-4 px-8 py-5 bg-surface-container-lowest rounded-2xl items-center shadow-sm hover:bg-slate-50 transition-colors">
+<div class="text-sm text-on-surface-variant font-medium">Oct 24, 14:32:01</div>
+<div class="flex items-center gap-3">
+<img alt="Actor" class="w-8 h-8 rounded-full" data-alt="close-up portrait of a male professional with a friendly smile and warm natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCM4Hmi9wWCVFvVuLrXlUHn39r2_N56zAzlWg47cYKyKldg56iUFzCP04LHDodtOTTh48i78fTJl00KBV3A-ZbzerW0rh3NWOOaBrwLV8neel-xMTHvkLt10o_bgVthE4huyJ999f7VJCt1cQiOPABu9bBxwr1kw7PMRp20cGf_jb7pGLwE-ggQl0DalO4_DHhqoRIXSHpeEsSeZl_1Ugwsoe8Ou9fRYQHO0puTkWowW66U9awWemfh_NJFrUR_TH5yrMjpl-Kx8Zs"/>
+<div>
+<p class="text-sm font-bold text-on-surface">Marcus Chen</p>
+<p class="text-[10px] text-on-surface-variant uppercase font-bold tracking-tighter">System Admin</p>
+</div>
+</div>
+<div>
+<span class="bg-primary-container/10 text-primary-container px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider">User Edited</span>
+</div>
+<div class="text-sm text-on-surface font-medium pr-4">Updated permissions for regional managers in APAC sector.</div>
+<div class="text-sm font-mono text-error/70 line-through">Write-Only</div>
+<div class="text-sm font-mono text-primary font-bold">Admin-Full</div>
+</div>
+<!-- Row 2 -->
+<div class="grid grid-cols-[1.5fr_2fr_1.5fr_3fr_1.5fr_1.5fr] gap-4 px-8 py-5 bg-surface-container-lowest rounded-2xl items-center shadow-sm hover:bg-slate-50 transition-colors">
+<div class="text-sm text-on-surface-variant font-medium">Oct 24, 11:15:44</div>
+<div class="flex items-center gap-3">
+<img alt="Actor" class="w-8 h-8 rounded-full" data-alt="smiling woman with glasses in a modern office environment with soft bokeh background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCr85owS9Za2uhalX8Tlh94yDVGpvC7G65Z1P1t4KhUrVPdvvA4U0TyLEZT7P8OlkfhFd8saOL89-T_pcrkEKNeK-ERcxE0XC2kICpovNtFJdCgqw26Ef0CrZe_W4HKz_gYEkKvM0u-WiDQcQoVmWDEkEyEh6i162cH0R1MJbFF6nTZw2Ms1o556_rgL-fovLcVlKK9Ivs73yaDDVkqFHZqwtVjCukANMfdd06fho7cUw1NvWngbG2y70Or2ZKAZLU-g5ZZ4bytdY8"/>
+<div>
+<p class="text-sm font-bold text-on-surface">Elena Rodriguez</p>
+<p class="text-[10px] text-on-surface-variant uppercase font-bold tracking-tighter">Security Lead</p>
+</div>
+</div>
+<div>
+<span class="bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider">Deactivated</span>
+</div>
+<div class="text-sm text-on-surface font-medium pr-4">Suspended API access for legacy integration 'OldFlow_v2'.</div>
+<div class="text-sm font-mono text-error/70 line-through">Active</div>
+<div class="text-sm font-mono text-primary font-bold">Disabled</div>
+</div>
+<!-- Row 3 -->
+<div class="grid grid-cols-[1.5fr_2fr_1.5fr_3fr_1.5fr_1.5fr] gap-4 px-8 py-5 bg-surface-container-lowest rounded-2xl items-center shadow-sm hover:bg-slate-50 transition-colors">
+<div class="text-sm text-on-surface-variant font-medium">Oct 23, 09:44:12</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-tertiary-fixed-dim flex items-center justify-center text-tertiary font-bold text-xs">S</div>
+<div>
+<p class="text-sm font-bold text-on-surface">Sunday Bot</p>
+<p class="text-[10px] text-on-surface-variant uppercase font-bold tracking-tighter">Automation</p>
+</div>
+</div>
+<div>
+<span class="bg-slate-100 text-slate-600 px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider">System Sync</span>
+</div>
+<div class="text-sm text-on-surface font-medium pr-4">Automated payroll schema migration for Q4 compliance.</div>
+<div class="text-sm font-mono text-error/70 line-through">v1.2.0</div>
+<div class="text-sm font-mono text-primary font-bold">v1.2.1</div>
+</div>
+<!-- Row 4 -->
+<div class="grid grid-cols-[1.5fr_2fr_1.5fr_3fr_1.5fr_1.5fr] gap-4 px-8 py-5 bg-surface-container-lowest rounded-2xl items-center shadow-sm hover:bg-slate-50 transition-colors">
+<div class="text-sm text-on-surface-variant font-medium">Oct 22, 16:20:00</div>
+<div class="flex items-center gap-3">
+<img alt="Actor" class="w-8 h-8 rounded-full" data-alt="professional headshot of a man with a beard and confident expression in a bright studio setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKe3xBSH-UA7Dy4lKkajRJasQVyoS21uGCvTdiHuRJO5T1yI8k-Br_tboWXuBgwvTpArcvqCVpyJ35rWS_L5hdviJNPzNBdZ30hHKSDtXx24b9-oChEhYQvjwg8YqcMLqq7JtNuJCAZdT02XXu72KG2nsMK2JnZdMksa2MHUuRumVzzbrIzXR3P7Qdf5ZuMU3fx0YgE6jGqh3Q0Oa4RdXNUnYqQpeRqHRlo3IZntK9mu5xVktX5eMhtkWc9fryMDlMJqkHsRnNWtY"/>
+<div>
+<p class="text-sm font-bold text-on-surface">Jordan Smith</p>
+<p class="text-[10px] text-on-surface-variant uppercase font-bold tracking-tighter">Global Admin</p>
+</div>
+</div>
+<div>
+<span class="bg-primary-container/10 text-primary-container px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider">User Edited</span>
+</div>
+<div class="text-sm text-on-surface font-medium pr-4">Changed corporate logo and primary brand palette.</div>
+<div class="text-sm font-mono text-error/70 line-through">Indigo</div>
+<div class="text-sm font-mono text-primary font-bold">Slate-Steel</div>
+</div>
+</section>
+<!-- Pagination -->
+<footer class="mt-12 flex items-center justify-between px-8">
+<div class="text-sm text-on-surface-variant font-medium">
+                    Showing <span class="font-bold text-on-surface">1 - 20</span> of <span class="font-bold text-on-surface">1,482</span> entries
+                </div>
+<div class="flex items-center gap-2">
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-primary-container text-white font-bold shadow-md">1</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface font-semibold hover:bg-surface-container transition-colors">2</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface font-semibold hover:bg-surface-container transition-colors">3</button>
+<span class="px-2 text-on-surface-variant">...</span>
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface font-semibold hover:bg-surface-container transition-colors">74</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</footer>
+</div>
+</main>
+</body></html>

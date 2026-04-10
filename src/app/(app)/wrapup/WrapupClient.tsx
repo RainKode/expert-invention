@@ -3,12 +3,13 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import type { WrapupTaskRow, TaskStatus } from '@/types'
+import FileAttachments from '@/components/files/FileAttachments'
 
 const STATUS_BADGE: Record<TaskStatus, string> = {
   todo: 'bg-surface-container-high text-outline',
   in_progress: 'bg-secondary-container text-on-secondary-container',
-  in_review: 'bg-[#fff4e5] text-[#b45309]',
-  done: 'bg-emerald-100 text-emerald-700',
+  in_review: 'bg-tertiary-container text-on-tertiary-container',
+  done: 'bg-primary-container/20 text-primary',
 }
 
 const STATUS_LABEL: Record<TaskStatus, string> = {
@@ -19,6 +20,7 @@ const STATUS_LABEL: Record<TaskStatus, string> = {
 }
 
 interface WrapupData {
+  id: string | null
   user_id: string
   date: string
   planned_tasks_json: WrapupTaskRow[]
@@ -67,8 +69,8 @@ export default function WrapupClient({ wrapup, alreadySubmitted }: Props) {
 
   function matchIcon(p: WrapupTaskRow, a: WrapupTaskRow) {
     const delta = a.actual_hours - p.planned_hours
-    if (Math.abs(delta) < 0.5) return { icon: 'check_circle', color: 'text-emerald-500' }
-    return { icon: 'warning', color: 'text-amber-500' }
+    if (Math.abs(delta) < 0.5) return { icon: 'check_circle', color: 'text-primary' }
+    return { icon: 'warning', color: 'text-tertiary' }
   }
 
   async function handleSubmit() {
@@ -127,9 +129,9 @@ export default function WrapupClient({ wrapup, alreadySubmitted }: Props) {
       </header>
 
       {submitted && (
-        <div className="mb-8 bg-emerald-50 text-emerald-700 p-5 rounded-2xl flex items-center gap-4">
+        <div className="mb-8 bg-primary-container/20 text-primary p-5 rounded-2xl flex items-center gap-4">
           <span
-            className="material-symbols-outlined text-emerald-500"
+            className="material-symbols-outlined text-primary"
             style={{ fontVariationSettings: "'FILL' 1" }}
           >
             verified
@@ -229,18 +231,21 @@ export default function WrapupClient({ wrapup, alreadySubmitted }: Props) {
         </div>
         <div className="flex flex-col gap-4">
           <label className="text-sm font-bold text-[#4d556a] ml-2">Attachments</label>
-          <div className="flex-1 border-2 border-dashed border-outline-variant/30 rounded-2xl bg-surface-container-lowest flex flex-col items-center justify-center p-8 transition-colors hover:bg-white cursor-pointer group">
-            <span className="material-symbols-outlined text-4xl text-outline mb-4 group-hover:scale-110 transition-transform">
-              cloud_upload
-            </span>
-            <p className="text-sm font-bold text-on-surface mb-1">Upload progress files</p>
-            <p className="text-xs text-on-surface-variant opacity-60 text-center">
-              Drag and drop or click to browse. Support PDF, PNG, JPG.
-            </p>
-            <button className="mt-6 px-6 py-2 bg-surface-container-low text-on-surface-variant text-xs font-bold rounded-full hover:bg-surface-container-high transition-colors">
-              Select Files
-            </button>
-          </div>
+          {wrapup?.id ? (
+            <FileAttachments
+              wrapUpId={wrapup.id}
+              context="wrapup"
+              readOnly={submitted}
+            />
+          ) : (
+            <div className="flex-1 border-2 border-dashed border-outline-variant/30 rounded-2xl bg-surface-container-lowest flex flex-col items-center justify-center p-8 transition-colors">
+              <span className="material-symbols-outlined text-4xl text-outline mb-4">cloud_upload</span>
+              <p className="text-sm font-bold text-on-surface mb-1">Upload progress files</p>
+              <p className="text-xs text-on-surface-variant opacity-60 text-center">
+                Submit the wrap-up first to attach files.
+              </p>
+            </div>
+          )}
         </div>
       </section>
 
@@ -249,7 +254,7 @@ export default function WrapupClient({ wrapup, alreadySubmitted }: Props) {
         <div className="flex flex-col items-center justify-center gap-6 pb-20">
           <div className="flex items-center gap-2 text-sm font-medium text-on-surface-variant">
             <span
-              className="material-symbols-outlined text-emerald-500 text-lg"
+              className="material-symbols-outlined text-primary text-lg"
               style={{ fontVariationSettings: "'FILL' 1" }}
             >
               verified

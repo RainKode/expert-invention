@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { createAdminClient } from '@/lib/supabase/admin'
 import { logTimelineEvent } from '@/lib/task-timeline'
+import { createNotification } from '@/lib/notifications'
 import { z } from 'zod'
 
 const schema = z.object({
@@ -56,6 +57,49 @@ export async function POST(request: NextRequest, { params }: Params) {
       metadata: { comment },
     })
 
+    // Notify assignee and creator that task is done
+    const doneRecipients = new Set<string>()
+    if (task.assignee_id && task.assignee_id !== user.id) doneRecipients.add(task.assignee_id)
+    if (task.creator_id && task.creator_id !== user.id) doneRecipients.add(task.creator_id)
+    for (const recipientId of doneRecipients) {
+      await createNotification({
+        recipientId,
+        type: 'task_marked_done',
+        title: 'Task Completed',
+        message: `"${task.title}" has been approved and marked as done`,
+        link: `/tasks/${id}`,
+        metadata: { task_id: id, actor_id: user.id },
+      })
+    }
+
+    // Check for dependency unblocks
+    const { data: dependents } = await admin
+      .from('task_dependencies')
+      .select('task_id, task:tasks!task_dependencies_task_id_fkey(id, title, assignee_id)')
+      .eq('depends_on_task_id', id)
+    for (const dep of dependents ?? []) {
+      const depTask = Array.isArray(dep.task) ? dep.task[0] : dep.task
+      if (!depTask?.assignee_id) continue
+      const { data: allDeps } = await admin
+        .from('task_dependencies')
+        .select('depends_on:tasks!task_dependencies_depends_on_task_id_fkey(status)')
+        .eq('task_id', dep.task_id)
+      const allDone = (allDeps ?? []).every((d: { depends_on: unknown }) => {
+        const s = Array.isArray(d.depends_on) ? d.depends_on[0] : d.depends_on
+        return (s as { status: string } | null)?.status === 'done'
+      })
+      if (allDone) {
+        await createNotification({
+          recipientId: depTask.assignee_id,
+          type: 'dependency_unblocked',
+          title: 'Dependency Resolved',
+          message: `All dependencies for "${depTask.title}" are complete — you can start working on it`,
+          link: `/tasks/${dep.task_id}`,
+          metadata: { task_id: dep.task_id, unblocked_by: id },
+        })
+      }
+    }
+
     return NextResponse.json({ task: updated })
   }
 
@@ -78,6 +122,18 @@ export async function POST(request: NextRequest, { params }: Params) {
     actorId: user.id,
     metadata: { reason: comment },
   })
+
+  // Notify assignee that the task was sent back
+  if (task.assignee_id && task.assignee_id !== user.id) {
+    await createNotification({
+      recipientId: task.assignee_id,
+      type: 'task_sent_back',
+      title: 'Task Sent Back',
+      message: `"${task.title}" was sent back for revision: ${comment}`,
+      link: `/tasks/${id}`,
+      metadata: { task_id: id, actor_id: user.id, reason: comment },
+    })
+  }
 
   return NextResponse.json({ task: updated })
 }

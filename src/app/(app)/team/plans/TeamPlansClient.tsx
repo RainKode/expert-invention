@@ -36,16 +36,16 @@ function getDayDate(weekStartISO: string, dow: number): Date {
 function cellStyle(hours: number, available: number) {
   if (hours === 0) return { bg: 'bg-surface-container-lowest', label: '', text: 'text-outline' }
   const pct = (hours / available) * 100
-  if (pct >= 80 && pct <= 100) return { bg: 'bg-[#d6e3c2]/40', label: 'Healthy', text: 'text-emerald-700' }
+  if (pct >= 80 && pct <= 100) return { bg: 'bg-primary-container/20', label: 'Healthy', text: 'text-primary' }
   if (pct > 100) return { bg: 'bg-error-container', label: 'Over', text: 'text-error' }
-  if (pct >= 50) return { bg: 'bg-[#fff4e5]', label: 'Low', text: 'text-amber-600' }
+  if (pct >= 50) return { bg: 'bg-tertiary-container/40', label: 'Low', text: 'text-tertiary' }
   return { bg: 'bg-surface-container-lowest', label: 'Empty', text: 'text-outline' }
 }
 
 const STATUS_BADGE: Record<string, string> = {
-  submitted: 'bg-emerald-100 text-emerald-700',
+  submitted: 'bg-primary-container/20 text-primary',
   fluid: 'bg-secondary-container text-on-secondary-container',
-  draft: 'bg-[#fff4e5] text-[#b45309]',
+  draft: 'bg-tertiary-container text-on-tertiary-container',
 }
 
 interface MemberSummary {
@@ -163,7 +163,7 @@ export default function TeamPlansClient({ members, weekStartISO, teamName }: Pro
         <div className="bg-surface-container-low rounded-2xl overflow-hidden shadow-2xl shadow-[#4d556a]/5">
           {/* Grid Header */}
           <div
-            className="grid border-b border-outline-variant/10"
+            className="grid"
             style={{ gridTemplateColumns: `1fr repeat(${displayDays.length}, 1fr) auto` }}
           >
             <div className="p-6 text-[10px] font-bold uppercase tracking-widest text-outline">
@@ -186,7 +186,7 @@ export default function TeamPlansClient({ members, weekStartISO, teamName }: Pro
           {members.map((member) => (
             <div
               key={member.user.id}
-              className="grid border-b border-outline-variant/5 last:border-0"
+              className="grid last:border-0"
               style={{ gridTemplateColumns: `1fr repeat(${displayDays.length}, 1fr) auto` }}
             >
               {/* Name */}

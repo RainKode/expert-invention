@@ -2,36 +2,46 @@
 
 import { type Role } from '@/types'
 import { ROLE_LABELS } from '@/lib/permissions'
+import GlobalSearchBar from '@/components/search/GlobalSearchBar'
 
 interface TopBarProps {
   userName: string
   userRole: Role
+  unreadNotificationCount?: number
+  onNotificationClick?: () => void
+  onMenuOpen?: () => void
 }
 
-export default function TopBar({ userName, userRole }: TopBarProps) {
+export default function TopBar({ userName, userRole, unreadNotificationCount = 0, onNotificationClick, onMenuOpen }: TopBarProps) {
   return (
-    <header className="fixed top-0 right-0 left-0 md:left-72 h-16 z-30 px-6 flex items-center justify-between bg-surface-container-lowest/80 backdrop-blur-xl shadow-[0px_2px_15px_rgba(77,85,106,0.04)]">
-      {/* Search */}
-      <div className="relative max-w-md w-full hidden sm:block">
-        <span className="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline text-lg">
-          search
-        </span>
-        <input
-          type="text"
-          placeholder="Search tasks, people, teams..."
-          className="w-full pl-11 pr-4 py-2 bg-surface-container-low border-none rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-outline"
-        />
-      </div>
+    <header className="fixed top-0 right-0 left-0 md:left-72 h-16 z-30 px-4 md:px-6 flex items-center justify-between bg-surface-container-lowest/80 backdrop-blur-xl shadow-[0px_2px_15px_rgba(77,85,106,0.04)]">
+      {/* Mobile hamburger */}
+      <button
+        onClick={onMenuOpen}
+        className="md:hidden p-2 -ml-1 hover:bg-surface-container-high rounded-full transition-colors"
+        aria-label="Open menu"
+      >
+        <span className="material-symbols-outlined text-on-surface">menu</span>
+      </button>
 
-      {/* Mobile: just spacer */}
-      <div className="md:hidden" />
+      {/* Global Search Bar — centered, 40% width */}
+      <GlobalSearchBar />
 
       {/* Right side */}
       <div className="flex items-center gap-4">
-        {/* Notifications */}
-        <button className="relative p-2 text-on-surface-variant hover:opacity-70 transition-opacity">
-          <span className="material-symbols-outlined text-xl">notifications</span>
-          <span className="absolute top-2 right-2 w-2 h-2 bg-error rounded-full border-2 border-surface-container-lowest" />
+        {/* Notifications Bell */}
+        <button
+          onClick={onNotificationClick}
+          className="relative p-2 hover:bg-[#4d556a]/5 rounded-full transition-all active:scale-90"
+        >
+          <span className="material-symbols-outlined text-[24px] text-[#4d556a]" style={{ fontVariationSettings: unreadNotificationCount > 0 ? "'FILL' 1" : "'FILL' 0" }}>
+            notifications
+          </span>
+          {unreadNotificationCount > 0 && (
+            <span className="absolute top-1 right-1 flex items-center justify-center min-w-[18px] h-[18px] px-1 bg-gradient-to-br from-[#4d556a] to-[#656d84] rounded-full border-2 border-surface-container-lowest text-[10px] font-bold text-on-primary">
+              {unreadNotificationCount > 99 ? '99+' : unreadNotificationCount}
+            </span>
+          )}
         </button>
 
         {/* User info */}

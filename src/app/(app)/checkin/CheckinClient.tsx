@@ -110,9 +110,9 @@ export default function CheckinClient({ checkin, alreadySubmitted }: Props) {
       </header>
 
       {submitted && (
-        <div className="mb-8 bg-emerald-50 text-emerald-700 p-5 rounded-2xl flex items-center gap-4">
+        <div className="mb-8 bg-primary-container/20 text-primary p-5 rounded-2xl flex items-center gap-4">
           <span
-            className="material-symbols-outlined text-emerald-500"
+            className="material-symbols-outlined text-primary"
             style={{ fontVariationSettings: "'FILL' 1" }}
           >
             check_circle
@@ -157,7 +157,7 @@ export default function CheckinClient({ checkin, alreadySubmitted }: Props) {
                     checked={task.confirmed}
                     onChange={() => toggleTask(task.task_id)}
                   />
-                  <div className="w-14 h-8 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:start-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-[#4d556a]" />
+                  <div className="w-14 h-8 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:start-[4px] after:bg-white after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-[#4d556a]" />
                 </label>
               )}
             </div>
@@ -180,7 +180,7 @@ export default function CheckinClient({ checkin, alreadySubmitted }: Props) {
 
         {/* Insight bento */}
         <div className="grid grid-cols-3 gap-6 mt-6">
-          <div className="col-span-2 bg-[#d0c3ba]/20 p-8 rounded-2xl flex flex-col justify-between overflow-hidden relative">
+          <div className="col-span-2 bg-tertiary-container/20 p-8 rounded-2xl flex flex-col justify-between overflow-hidden relative">
             <div className="relative z-10">
               <h4 className="text-tertiary font-bold text-xl mb-2">Today&apos;s Load</h4>
               <p className="text-on-tertiary-fixed-variant max-w-sm">

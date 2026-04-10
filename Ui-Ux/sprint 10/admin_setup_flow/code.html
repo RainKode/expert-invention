@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sunday HR - Admin Setup</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error-container": "#ffdad6",
+                        "surface-container-high": "#e6e8ea",
+                        "on-primary-fixed-variant": "#3e465b",
+                        "error": "#ba1a1a",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-tertiary-container": "#d6c9bf",
+                        "on-error-container": "#93000a",
+                        "secondary": "#565e74",
+                        "inverse-primary": "#bec6df",
+                        "surface-container": "#eceef0",
+                        "on-secondary-fixed-variant": "#3e465c",
+                        "on-secondary": "#ffffff",
+                        "background": "#f7f9fb",
+                        "on-secondary-fixed": "#131b2e",
+                        "surface-bright": "#f7f9fb",
+                        "secondary-fixed": "#dae2fd",
+                        "on-surface-variant": "#45464c",
+                        "on-primary-container": "#c2cae3",
+                        "on-background": "#191c1e",
+                        "surface-variant": "#e0e3e5",
+                        "tertiary-fixed-dim": "#d1c4bb",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed": "#131b2e",
+                        "outline-variant": "#c6c6cd",
+                        "surface-tint": "#565e73",
+                        "surface": "#f7f9fb",
+                        "tertiary-container": "#5d544d",
+                        "surface-dim": "#d8dadc",
+                        "on-secondary-container": "#5c647b",
+                        "on-surface": "#191c1e",
+                        "on-tertiary-fixed": "#211a15",
+                        "tertiary": "#453d36",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-highest": "#e0e3e5",
+                        "primary-fixed-dim": "#bec6df",
+                        "on-primary": "#ffffff",
+                        "inverse-surface": "#2d3133",
+                        "outline": "#76777d",
+                        "on-tertiary-fixed-variant": "#4e453e",
+                        "surface-container-low": "#f2f4f6",
+                        "secondary-fixed-dim": "#bec6e0",
+                        "on-error": "#ffffff",
+                        "primary-container": "#4d556a",
+                        "tertiary-fixed": "#eee0d7",
+                        "primary": "#363e52",
+                        "primary-fixed": "#dae2fc",
+                        "secondary-container": "#dae2fd"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Plus Jakarta Sans"],
+                        "label": ["Plus Jakarta Sans"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .signature-gradient {
+            background: linear-gradient(135deg, #4d556a 0%, #656d84 100%);
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f7f9fb;
+        }
+    </style>
+</head>
+<body class="text-on-background">
+<!-- Top Navigation Anchor -->
+<header class="fixed top-0 w-full z-40 bg-slate-50/80 backdrop-blur-xl shadow-[0px_24px_48px_rgba(77,85,106,0.06)] px-8 h-16 flex justify-between items-center">
+<div class="flex items-center gap-4">
+<span class="text-xl font-bold tracking-tighter text-slate-800">Sunday HR</span>
+<div class="h-6 w-px bg-outline-variant/30 mx-2"></div>
+<span class="text-sm font-semibold text-on-surface-variant tracking-tight uppercase">Admin Console</span>
+</div>
+<div class="flex items-center gap-6">
+<span class="text-sm text-on-surface-variant font-medium">Setup Progress: 35%</span>
+<div class="w-24 h-1.5 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary-container w-1/3"></div>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-xl">help_outline</span>
+</div>
+</div>
+</header>
+<main class="pt-32 pb-24 px-6 md:px-12 max-w-7xl mx-auto">
+<!-- 3-Step Indicator -->
+<div class="flex justify-center mb-16">
+<div class="flex items-center w-full max-w-2xl justify-between relative">
+<!-- Progress Line -->
+<div class="absolute top-1/2 left-0 w-full h-[2px] bg-surface-container-high -translate-y-1/2 z-0"></div>
+<!-- Step 1 (Active) -->
+<div class="relative z-10 flex flex-col items-center gap-3">
+<div class="w-10 h-10 rounded-full signature-gradient text-white flex items-center justify-center shadow-lg ring-4 ring-background">
+<span class="text-sm font-bold">1</span>
+</div>
+<span class="text-xs font-bold tracking-tight text-on-surface uppercase">Departments</span>
+</div>
+<!-- Step 2 -->
+<div class="relative z-10 flex flex-col items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center ring-4 ring-background">
+<span class="text-sm font-bold">2</span>
+</div>
+<span class="text-xs font-bold tracking-tight text-on-surface-variant uppercase">Teams</span>
+</div>
+<!-- Step 3 -->
+<div class="relative z-10 flex flex-col items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center ring-4 ring-background">
+<span class="text-sm font-bold">3</span>
+</div>
+<span class="text-xs font-bold tracking-tight text-on-surface-variant uppercase">Employees</span>
+</div>
+</div>
+</div>
+<!-- Layout Container: Bento Grid Style -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Left Column: Interaction & Form -->
+<div class="lg:col-span-5 space-y-8">
+<section class="bg-surface-container-lowest p-8 rounded-xl shadow-[0px_24px_48px_rgba(77,85,106,0.06)]">
+<div class="mb-8">
+<h1 class="text-2xl font-bold tracking-tight text-on-surface mb-2">Create Department</h1>
+<p class="text-on-surface-variant text-sm">Define the primary functional areas of your organization.</p>
+</div>
+<form class="space-y-6">
+<div class="space-y-2">
+<label class="text-xs font-bold text-on-surface-variant uppercase ml-4">Department Name</label>
+<input class="w-full h-12 bg-surface-container-low border-none rounded-full px-6 focus:ring-2 focus:ring-primary-container/20 text-sm font-medium" placeholder="e.g. Engineering, Marketing..." type="text"/>
+</div>
+<div class="space-y-2">
+<label class="text-xs font-bold text-on-surface-variant uppercase ml-4">Department Head</label>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">person</span>
+<input class="w-full h-12 bg-surface-container-low border-none rounded-full pl-12 pr-6 focus:ring-2 focus:ring-primary-container/20 text-sm font-medium" placeholder="Select a manager" type="text"/>
+</div>
+</div>
+<button class="w-full signature-gradient text-white h-12 rounded-full font-semibold flex items-center justify-center gap-2 transition-transform active:scale-95 shadow-lg">
+<span class="material-symbols-outlined text-lg">add</span>
+                            Add Department
+                        </button>
+</form>
+</section>
+<!-- Step Hint Card -->
+<div class="bg-tertiary-fixed rounded-xl p-6 flex gap-4">
+<div class="w-12 h-12 rounded-full bg-white flex-shrink-0 flex items-center justify-center text-tertiary shadow-sm">
+<span class="material-symbols-outlined">lightbulb</span>
+</div>
+<div>
+<h4 class="text-sm font-bold text-on-tertiary-fixed mb-1">Human-Centric Setup</h4>
+<p class="text-xs text-on-tertiary-fixed-variant leading-relaxed">Departments help you automate reporting lines and manage global permissions efficiently.</p>
+</div>
+</div>
+</div>
+<!-- Right Column: Visualization -->
+<div class="lg:col-span-7">
+<div class="bg-surface-container-low rounded-xl p-1 min-h-[500px]">
+<div class="bg-surface-container-lowest rounded-[1.75rem] p-8 h-full">
+<div class="flex justify-between items-center mb-10">
+<h2 class="text-lg font-bold tracking-tight text-on-surface">Organization Structure</h2>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="text-xs font-semibold">Total: 4 Departments</span>
+</div>
+</div>
+<!-- Department List (Asymmetric List) -->
+<div class="space-y-4">
+<!-- Item 1 -->
+<div class="group flex items-center justify-between p-5 rounded-lg bg-surface-container-low/50 hover:bg-surface-container-high transition-all border border-transparent hover:border-outline-variant/10">
+<div class="flex items-center gap-5">
+<div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined">code</span>
+</div>
+<div>
+<h3 class="font-bold text-on-surface">Engineering</h3>
+<span class="text-xs font-medium text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">account_circle</span>
+                                            Alex Rivera (CTO)
+                                        </span>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="px-3 py-1 bg-white rounded-full text-[10px] font-bold text-on-surface-variant shadow-sm uppercase tracking-wider">12 Teams</span>
+<button class="w-8 h-8 rounded-full hover:bg-white flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-lg">more_horiz</span>
+</button>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="group flex items-center justify-between p-5 rounded-lg bg-surface-container-low/50 hover:bg-surface-container-high transition-all">
+<div class="flex items-center gap-5">
+<div class="w-12 h-12 rounded-full bg-primary-fixed flex items-center justify-center text-on-primary-fixed">
+<span class="material-symbols-outlined">palette</span>
+</div>
+<div>
+<h3 class="font-bold text-on-surface">Product Design</h3>
+<span class="text-xs font-medium text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">account_circle</span>
+                                            Sarah Chen
+                                        </span>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="px-3 py-1 bg-white rounded-full text-[10px] font-bold text-on-surface-variant shadow-sm uppercase tracking-wider">4 Teams</span>
+<button class="w-8 h-8 rounded-full hover:bg-white flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-lg">more_horiz</span>
+</button>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="group flex items-center justify-between p-5 rounded-lg bg-surface-container-low/50 hover:bg-surface-container-high transition-all">
+<div class="flex items-center gap-5">
+<div class="w-12 h-12 rounded-full bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed">
+<span class="material-symbols-outlined">campaign</span>
+</div>
+<div>
+<h3 class="font-bold text-on-surface">Marketing</h3>
+<span class="text-xs font-medium text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">account_circle</span>
+                                            Jordan Bell
+                                        </span>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="px-3 py-1 bg-white rounded-full text-[10px] font-bold text-on-surface-variant shadow-sm uppercase tracking-wider">8 Teams</span>
+<button class="w-8 h-8 rounded-full hover:bg-white flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-lg">more_horiz</span>
+</button>
+</div>
+</div>
+<!-- Empty Slot Visualization -->
+<div class="border-2 border-dashed border-outline-variant/30 rounded-lg p-8 flex flex-col items-center justify-center gap-2 opacity-60">
+<span class="material-symbols-outlined text-outline text-3xl">add_circle</span>
+<span class="text-xs font-bold text-outline uppercase tracking-widest">Next Entry</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Action Bar (Fixed-ish) -->
+<div class="mt-20 flex justify-between items-center border-t border-outline-variant/20 pt-12">
+<button class="px-8 h-12 rounded-full text-on-surface-variant font-semibold hover:bg-surface-container transition-colors">
+                Save &amp; Exit Setup
+            </button>
+<div class="flex gap-4">
+<button class="px-8 h-12 rounded-full bg-surface-container text-on-surface-variant font-semibold opacity-50 cursor-not-allowed">
+                    Previous Step
+                </button>
+<button class="px-10 h-12 rounded-full signature-gradient text-white font-bold flex items-center gap-3 shadow-xl transition-transform active:scale-95">
+                    Continue to Teams
+                    <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</main>
+<!-- Hidden Steps Blueprint (Reference only for layout logic) -->
+<!-- Step 2: Teams tree logic would replace Step 1 content in a dynamic app -->
+<!-- Step 3: Import CSV logic would replace Step 1/2 content in a dynamic app -->
+<!-- Glassmorphism Tooltip Mock -->
+<div class="fixed bottom-8 right-8 z-50">
+<div class="bg-surface-container-lowest/80 backdrop-blur-xl p-4 rounded-xl shadow-[0px_24px_48px_rgba(77,85,106,0.06)] border border-white/40 flex items-center gap-3">
+<div class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></div>
+<span class="text-xs font-bold text-on-surface-variant">Admin Live Support Available</span>
+</div>
+</div>
+</body></html>

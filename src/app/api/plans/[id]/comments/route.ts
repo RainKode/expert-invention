@@ -5,6 +5,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { createAdminClient } from '@/lib/supabase/admin'
 import { can } from '@/lib/permissions'
+import { createNotification } from '@/lib/notifications'
 import { z } from 'zod'
 import type { Role } from '@/types'
 
@@ -58,10 +59,10 @@ export async function POST(
 
   const admin = createAdminClient()
 
-  // Verify plan exists
+  // Verify plan exists and get the plan owner
   const { data: plan } = await admin
     .from('weekly_plans')
-    .select('id')
+    .select('id, user_id')
     .eq('id', params.id)
     .single()
 
@@ -74,5 +75,19 @@ export async function POST(
     .single()
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+
+  // Notify the plan owner if the commenter is not the owner
+  if (plan.user_id && plan.user_id !== user.id) {
+    const { data: authorProfile } = await admin.from('profiles').select('name').eq('id', user.id).single()
+    await createNotification({
+      recipientId: plan.user_id,
+      type: 'comment_on_plan',
+      title: 'New Comment on Your Plan',
+      message: `${authorProfile?.name ?? 'A manager'} commented on your weekly plan`,
+      link: `/plan`,
+      metadata: { plan_id: params.id, actor_id: user.id },
+    })
+  }
+
   return NextResponse.json({ comment: data }, { status: 201 })
 }

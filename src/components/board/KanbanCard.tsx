@@ -6,9 +6,9 @@ import { CSS } from '@dnd-kit/utilities'
 import { TaskWithRelations as Task } from '@/types'
 
 const PRIORITY_BAR: Record<string, string> = {
-  high: 'bg-red-500',
-  medium: 'bg-amber-400',
-  low: 'bg-slate-400',
+  high: 'bg-error',
+  medium: 'bg-tertiary',
+  low: 'bg-outline',
 }
 
 interface Props {
@@ -35,15 +35,15 @@ export default function KanbanCard({ task, userId: _userId, isDragging }: Props)
     <div
       ref={setNodeRef}
       style={style}
-      className={`bg-white rounded-2xl p-4 shadow-[0_2px_12px_rgba(77,85,106,0.06)] hover:shadow-[0_8px_32px_rgba(77,85,106,0.12)] transition-shadow select-none ${isDragging ? 'shadow-[0_16px_48px_rgba(77,85,106,0.20)] rotate-1' : ''}`}
+      className={`bg-surface-container-lowest rounded-2xl p-4 shadow-ambient-sm hover:shadow-ambient transition-shadow select-none ${isDragging ? 'shadow-ambient rotate-1' : ''}`}
     >
       {/* Priority bar + drag handle */}
       <div className="flex items-center justify-between mb-3">
-        <div className={`w-10 h-1.5 rounded-full ${PRIORITY_BAR[task.priority] ?? 'bg-slate-300'}`} />
+        <div className={`w-10 h-1.5 rounded-full ${PRIORITY_BAR[task.priority] ?? 'bg-outline'}`} />
         <div
           {...attributes}
           {...listeners}
-          className="cursor-grab active:cursor-grabbing p-1 -mr-1 text-[#c6c6cd] hover:text-[#434655] transition-colors"
+          className="cursor-grab active:cursor-grabbing p-1 -mr-1 text-outline-variant hover:text-on-surface-variant transition-colors"
           title="Drag to move"
         >
           <span className="material-symbols-outlined text-[16px]">drag_indicator</span>
@@ -53,7 +53,7 @@ export default function KanbanCard({ task, userId: _userId, isDragging }: Props)
       {/* Title */}
       <Link
         href={`/tasks/${task.id}`}
-        className="block text-sm font-semibold text-[#191c1e] hover:text-[#4d556a] leading-snug mb-2 transition-colors line-clamp-2"
+        className="block text-sm font-semibold text-on-surface hover:text-primary leading-snug mb-2 transition-colors line-clamp-2"
         onClick={e => e.stopPropagation()}
       >
         {task.title}
@@ -62,17 +62,17 @@ export default function KanbanCard({ task, userId: _userId, isDragging }: Props)
       {/* Tags row */}
       <div className="flex flex-wrap gap-1.5 mb-3">
         {task.project && (
-          <span className="px-2 py-0.5 rounded-full text-[10px] font-medium bg-[#f7f9fb] text-[#434655]">
+          <span className="px-2 py-0.5 rounded-full text-[10px] font-medium bg-surface text-on-surface-variant">
             {task.project.name}
           </span>
         )}
         {task.task_nature && (
-          <span className="px-2 py-0.5 rounded-full text-[10px] font-medium bg-[#f7f9fb] text-[#434655] capitalize">
+          <span className="px-2 py-0.5 rounded-full text-[10px] font-medium bg-surface text-on-surface-variant capitalize">
             {task.task_nature}
           </span>
         )}
         {task.billable && (
-          <span className="w-5 h-5 rounded-full bg-green-100 text-green-700 flex items-center justify-center text-[10px] font-bold">$</span>
+          <span className="w-5 h-5 rounded-full bg-tertiary-container text-on-tertiary-container flex items-center justify-center text-[10px] font-bold">$</span>
         )}
       </div>
 
@@ -84,14 +84,14 @@ export default function KanbanCard({ task, userId: _userId, isDragging }: Props)
             {task.assignee.name.charAt(0).toUpperCase()}
           </div>
         ) : (
-          <div className="w-7 h-7 rounded-full bg-[#f7f9fb] border border-dashed border-[#c6c6cd] flex items-center justify-center">
-            <span className="material-symbols-outlined text-[12px] text-[#c6c6cd]">person</span>
+          <div className="w-7 h-7 rounded-full bg-surface border-outline-variant/15 flex items-center justify-center">
+            <span className="material-symbols-outlined text-[12px] text-outline-variant">person</span>
           </div>
         )}
 
         {/* Due date */}
         {task.due_date && (
-          <span className={`text-[10px] font-medium ${isOverdue ? 'text-red-500' : 'text-[#434655]'}`}>
+          <span className={`text-[10px] font-medium ${isOverdue ? 'text-error' : 'text-on-surface-variant'}`}>
             {isOverdue && <span className="material-symbols-outlined text-[10px] mr-0.5">warning</span>}
             {new Date(task.due_date).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}
           </span>

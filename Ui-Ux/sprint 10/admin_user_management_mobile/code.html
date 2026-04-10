@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=375, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "error-container": "#ffdad6",
+                    "surface-container-high": "#e6e8ea",
+                    "on-primary-fixed-variant": "#3e465b",
+                    "error": "#ba1a1a",
+                    "inverse-on-surface": "#eff1f3",
+                    "on-tertiary-container": "#d6c9bf",
+                    "on-error-container": "#93000a",
+                    "secondary": "#565e74",
+                    "inverse-primary": "#bec6df",
+                    "surface-container": "#eceef0",
+                    "on-secondary-fixed-variant": "#3e465c",
+                    "on-secondary": "#ffffff",
+                    "background": "#f7f9fb",
+                    "on-secondary-fixed": "#131b2e",
+                    "surface-bright": "#f7f9fb",
+                    "secondary-fixed": "#dae2fd",
+                    "on-surface-variant": "#45464c",
+                    "on-primary-container": "#c2cae3",
+                    "on-background": "#191c1e",
+                    "surface-variant": "#e0e3e5",
+                    "tertiary-fixed-dim": "#d1c4bb",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-fixed": "#131b2e",
+                    "outline-variant": "#c6c6cd",
+                    "surface-tint": "#565e73",
+                    "surface": "#f7f9fb",
+                    "tertiary-container": "#5d544d",
+                    "surface-dim": "#d8dadc",
+                    "on-secondary-container": "#5c647b",
+                    "on-surface": "#191c1e",
+                    "on-tertiary-fixed": "#211a15",
+                    "tertiary": "#453d36",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-highest": "#e0e3e5",
+                    "primary-fixed-dim": "#bec6df",
+                    "on-primary": "#ffffff",
+                    "inverse-surface": "#2d3133",
+                    "outline": "#76777d",
+                    "on-tertiary-fixed-variant": "#4e453e",
+                    "surface-container-low": "#f2f4f6",
+                    "secondary-fixed-dim": "#bec6e0",
+                    "on-error": "#ffffff",
+                    "primary-container": "#4d556a",
+                    "tertiary-fixed": "#eee0d7",
+                    "primary": "#363e52",
+                    "primary-fixed": "#dae2fc",
+                    "secondary-container": "#dae2fd"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Plus Jakarta Sans"],
+                    "label": ["Plus Jakarta Sans"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- Mobile Top Bar -->
+<header class="fixed top-0 w-full z-50 bg-slate-50/80 dark:bg-slate-950/80 backdrop-blur-xl shadow-[0px_24px_48px_rgba(77,85,106,0.06)] px-6 h-16 flex justify-between items-center">
+<div class="flex items-center gap-3">
+<button class="p-2 -ml-2 text-primary active:scale-95 transition-transform">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<span class="text-xl font-bold tracking-tighter text-slate-800 dark:text-slate-100">Sunday HR</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 text-slate-700 dark:text-slate-300 active:scale-95 transition-transform">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-container-high overflow-hidden">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="Close up portrait of a professional man in a business casual shirt with soft natural lighting and neutral background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKgs4ov6CJURo4z3WlXtibx6wnUQHjKyMcMgF5EkYLppylGBCzS40T0UZzavN4Mmm2ANP8h2nSPXR30aKQFwN97LxE_IV_K8BB147E1Sapa9ZzXTQa5MLgEFu9Tq5FxelfnUxDdw4NbHG6hw8AV3v8ahZiTdATZ_b794AEDrrV2w5ajXWCx0-5KdEM0Db9x3in_d1qu8Z594hFluMFWYjhGNYXDh9O8K6FE99IsQSg0o9d5J-Ctuz2LR2nl05HE33Jyev96wD3Asg"/>
+</div>
+</div>
+</header>
+<main class="pt-20 pb-24 px-6">
+<!-- Editorial Header -->
+<div class="mb-8 pt-4">
+<h1 class="text-2xl font-bold tracking-tight text-on-surface mb-1">User Management</h1>
+<p class="text-on-surface-variant text-sm leading-relaxed opacity-70">Oversee your team's access and roles across the Sunday platform.</p>
+</div>
+<!-- Search & Filter Cluster -->
+<div class="flex flex-col gap-4 mb-8">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline text-lg">search</span>
+<input class="w-full h-12 pl-12 pr-4 bg-surface-container-lowest rounded-full border-none shadow-[0px_4px_12px_rgba(77,85,106,0.04)] focus:ring-2 focus:ring-primary-fixed text-sm placeholder:text-outline" placeholder="Search members..." type="text"/>
+</div>
+<div class="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+<button class="flex items-center gap-2 px-5 py-2.5 bg-primary-container text-white rounded-full text-sm font-medium shadow-lg shadow-primary-container/20 whitespace-nowrap">
+<span class="material-symbols-outlined text-sm">tune</span>
+                    Filter View
+                </button>
+<button class="px-5 py-2.5 bg-surface-container-low text-on-surface-variant rounded-full text-sm font-medium whitespace-nowrap">
+                    All Teams
+                </button>
+<button class="px-5 py-2.5 bg-surface-container-low text-on-surface-variant rounded-full text-sm font-medium whitespace-nowrap">
+                    Active Only
+                </button>
+</div>
+</div>
+<!-- User Cards Stack -->
+<div class="space-y-4">
+<!-- Card 1: Alex Rivera -->
+<div class="bg-surface-container-lowest rounded-lg p-5 shadow-[0px_12px_24px_rgba(77,85,106,0.04)] relative overflow-hidden">
+<div class="flex items-start gap-4 mb-4">
+<img class="w-12 h-12 rounded-full object-cover" data-alt="Modern professional portrait of a person with short hair, warm studio lighting and soft teal background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1vu_T-tMi3vI8MmAJHs8AYfwTO_JCWlmJJ_KZKN3smFQgdjuhjiM3LC1GRr4cZ0hoNl_xS0qc_hLNh7MynO8g6rLLB21HEhns5uRq9wzqa1WxRU6C6QZi0CgVqxdc3QDPVF0s01gV9nl6YpHVgetbG2Yf7HF89hg1XbO6dbDQwz-mzlzgWDG8G-mRX8-aTE3B_iXof1GTo8reJl-ccRFabEGWUleRKsyaCM3BGdBKe3mqdkSUSUAcmDdoA_XBGRetT-u61ludC9M"/>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h3 class="font-bold text-on-surface leading-tight">Alex Rivera</h3>
+<span class="px-2 py-0.5 rounded-md bg-secondary-fixed text-on-secondary-fixed text-[10px] font-bold uppercase tracking-wider">Admin</span>
+</div>
+<p class="text-xs text-on-surface-variant mb-1">alex.r@sundayhr.com</p>
+</div>
+</div>
+<div class="flex flex-wrap gap-2 mb-6">
+<div class="flex items-center gap-1.5 px-3 py-1 bg-surface-container-low rounded-full">
+<span class="material-symbols-outlined text-xs text-on-surface-variant">groups</span>
+<span class="text-[11px] font-semibold text-on-surface-variant">Engineering</span>
+</div>
+<div class="flex items-center gap-1.5 px-3 py-1 bg-emerald-50 text-emerald-700 rounded-full">
+<div class="w-1.5 h-1.5 rounded-full bg-emerald-500"></div>
+<span class="text-[11px] font-bold">Active</span>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 py-2.5 bg-surface-container-low text-on-surface font-semibold text-xs rounded-full active:scale-95 transition-all">Edit</button>
+<button class="flex-1 py-2.5 bg-surface-container-low text-on-surface font-semibold text-xs rounded-full active:scale-95 transition-all">Deactivate</button>
+<button class="w-10 h-10 flex items-center justify-center bg-tertiary-fixed text-on-tertiary-fixed rounded-full active:scale-95 transition-all">
+<span class="material-symbols-outlined text-sm">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Card 2: Sarah Chen -->
+<div class="bg-surface-container-lowest rounded-lg p-5 shadow-[0px_12px_24px_rgba(77,85,106,0.04)] relative overflow-hidden">
+<div class="flex items-start gap-4 mb-4">
+<img class="w-12 h-12 rounded-full object-cover" data-alt="Candid portrait of a smiling young woman with dark hair in a bright airy office environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtaXlA6CA3nQ0uquP_qTMuNYng97HZTTIcWrd43aD2EvOnBTMkwe-3Zq0GZdDafTBqRy53TiTNz9cYY-4n_tm6J-Wr17vridA2NMrlcpoIQ_RtH1Ja-RMRBcaTZnDjzTfJ_d0oKP5quBlsjV04uByufI7UsFNbKpiVC6g3koOtHTJn96GyCL148qT4luMH7Ed-0F0rC3DnHwAF_BOUUx3TxxAxgLxpUIQhOzKh6GZ--TnPdizwRCeN2lC9KCytlcCrZX_XO1m1FTU"/>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h3 class="font-bold text-on-surface leading-tight">Sarah Chen</h3>
+<span class="px-2 py-0.5 rounded-md bg-surface-container-high text-on-surface-variant text-[10px] font-bold uppercase tracking-wider">Editor</span>
+</div>
+<p class="text-xs text-on-surface-variant mb-1">s.chen@sundayhr.com</p>
+</div>
+</div>
+<div class="flex flex-wrap gap-2 mb-6">
+<div class="flex items-center gap-1.5 px-3 py-1 bg-surface-container-low rounded-full">
+<span class="material-symbols-outlined text-xs text-on-surface-variant">groups</span>
+<span class="text-[11px] font-semibold text-on-surface-variant">Product Design</span>
+</div>
+<div class="flex items-center gap-1.5 px-3 py-1 bg-amber-50 text-amber-700 rounded-full">
+<div class="w-1.5 h-1.5 rounded-full bg-amber-400"></div>
+<span class="text-[11px] font-bold">Pending Invite</span>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 py-2.5 bg-primary-container text-white font-semibold text-xs rounded-full active:scale-95 transition-all shadow-md">Resend Invite</button>
+<button class="flex-1 py-2.5 bg-surface-container-low text-on-surface font-semibold text-xs rounded-full active:scale-95 transition-all">Edit</button>
+<button class="w-10 h-10 flex items-center justify-center bg-surface-container-low text-on-surface-variant rounded-full active:scale-95 transition-all">
+<span class="material-symbols-outlined text-sm">delete</span>
+</button>
+</div>
+</div>
+<!-- Card 3: Jordan Smyth -->
+<div class="bg-surface-container-lowest rounded-lg p-5 shadow-[0px_12px_24px_rgba(77,85,106,0.04)] relative overflow-hidden opacity-80">
+<div class="flex items-start gap-4 mb-4">
+<img class="w-12 h-12 rounded-full object-cover grayscale" data-alt="Headshot of a man with a beard wearing a denim shirt, professional lighting, softly blurred grey urban background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwkxvIuYaiIjcvyN_1CWL_g0fv_hMywthZo-dxYG1aabmGKniY6qfU9ocbKjLSg4pD7R-5G2TE2i53wnqJiLgRx8VTt1cD1t3UdGrn-r7iTwUp_4BUAy6r6OMu1rNqhZ-eVbCfXVg6W7ncQT1Wa8phx8nEqqqZRbXMf3Bj8UuX9jzk2W-Z8CgWQky1qYp_IUo6DbiXdoOyYYO-Zf7tQUazhG7KKS-raSL3c3BHQBe-66_7uyQnhSQCNXJ5XHRPjQ5hPwpbnimmWBA"/>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h3 class="font-bold text-on-surface leading-tight">Jordan Smyth</h3>
+<span class="px-2 py-0.5 rounded-md bg-surface-container-high text-on-surface-variant text-[10px] font-bold uppercase tracking-wider">Viewer</span>
+</div>
+<p class="text-xs text-on-surface-variant mb-1">j.smyth@sundayhr.com</p>
+</div>
+</div>
+<div class="flex flex-wrap gap-2 mb-6">
+<div class="flex items-center gap-1.5 px-3 py-1 bg-surface-container-low rounded-full">
+<span class="material-symbols-outlined text-xs text-on-surface-variant">groups</span>
+<span class="text-[11px] font-semibold text-on-surface-variant">Operations</span>
+</div>
+<div class="flex items-center gap-1.5 px-3 py-1 bg-slate-100 text-slate-500 rounded-full">
+<div class="w-1.5 h-1.5 rounded-full bg-slate-400"></div>
+<span class="text-[11px] font-bold">Inactive</span>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="flex-[2] py-2.5 bg-surface-container-low text-on-surface font-semibold text-xs rounded-full active:scale-95 transition-all">Reactivate User</button>
+<button class="flex-1 py-2.5 bg-error-container text-on-error-container font-semibold text-xs rounded-full active:scale-95 transition-all">Delete</button>
+</div>
+</div>
+</div>
+<!-- FAB for Adding User -->
+<button class="fixed bottom-24 right-6 w-14 h-14 bg-gradient-to-br from-primary-container to-secondary flex items-center justify-center rounded-full text-white shadow-2xl active:scale-90 transition-transform z-40">
+<span class="material-symbols-outlined text-2xl">person_add</span>
+</button>
+</main>
+<!-- Bottom Navigation Shell -->
+<nav class="md:hidden fixed bottom-0 w-full bg-slate-50/80 backdrop-blur-xl h-16 flex items-center justify-around px-2 z-50">
+<button class="flex flex-col items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined text-xl">dashboard</span>
+<span class="text-[10px] font-medium">Dashboard</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-900 border-b-2 border-slate-600 pb-1 -mb-1 px-2">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">groups</span>
+<span class="text-[10px] font-bold">People</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined text-xl">schedule</span>
+<span class="text-[10px] font-medium">Time</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined text-xl">payments</span>
+<span class="text-[10px] font-medium">Payroll</span>
+</button>
+</nav>
+<!-- Hypothetical Filter Sheet Overlay (Visual only) -->
+<!-- This would normally be toggled via JS; shown here as a static design element -->
+<div class="hidden fixed inset-0 bg-on-background/20 backdrop-blur-sm z-[60]">
+<div class="absolute bottom-0 w-full bg-surface rounded-t-lg p-8 shadow-2xl transition-transform duration-300 transform translate-y-0">
+<div class="w-12 h-1.5 bg-surface-container-highest rounded-full mx-auto mb-8"></div>
+<div class="flex justify-between items-center mb-6">
+<h2 class="text-xl font-bold tracking-tight">Filter Members</h2>
+<button class="text-primary font-semibold text-sm">Reset</button>
+</div>
+<div class="space-y-6 mb-8">
+<div>
+<label class="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-3">Role</label>
+<div class="flex flex-wrap gap-2">
+<span class="px-4 py-2 rounded-full bg-primary-container text-white text-xs font-medium">Admin</span>
+<span class="px-4 py-2 rounded-full bg-surface-container-low text-on-surface-variant text-xs font-medium">Editor</span>
+<span class="px-4 py-2 rounded-full bg-surface-container-low text-on-surface-variant text-xs font-medium">Viewer</span>
+</div>
+</div>
+<div>
+<label class="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-3">Team</label>
+<select class="w-full bg-surface-container-low border-none rounded-lg text-sm p-4 focus:ring-primary-fixed">
+<option>All Teams</option>
+<option>Engineering</option>
+<option>Product Design</option>
+<option>Marketing</option>
+</select>
+</div>
+</div>
+<button class="w-full py-4 bg-gradient-to-r from-primary-container to-secondary text-white font-bold rounded-full shadow-lg active:scale-95 transition-all">
+                Apply Filters
+            </button>
+</div>
+</div>
+</body></html>

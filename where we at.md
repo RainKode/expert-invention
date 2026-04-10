@@ -405,6 +405,75 @@ Apply migration 003 to Supabase, then run `npm run dev` and smoke-test the kanba
 - Weekly Plan icon changed to `calendar_view_week`.
 
 ### TypeScript
+
+`npx tsc --noEmit` passes with **zero errors**. Sprint 5 is complete.
+
+### Next Session
+
+Start with Sprint 6 — Notification System.
+
+---
+
+## Session 6 — Sprint 6 Complete
+
+**Sprint:** 6 — Notification System  
+**Status:** Complete. `npx tsc --noEmit` passes with zero errors.
+
+### What Was Built
+
+The full notification system covering all 13 notification triggers defined in the product architecture (§4.1). This includes the database schema, notification dispatch helpers, 4 notification API endpoints, a notification preferences API, a notification drawer (slide-out panel from the TopBar bell), a notification preferences settings page, hooks into 5 existing API routes dispatching 8 inline notification types, and a cron endpoint handling 5 scheduled notification types.
+
+### Key Decisions
+
+- **Cron vs Inline:** 8 of 13 triggers fire inline within existing API routes (task_assigned, task_reassigned_away, task_in_review, task_sent_back, task_marked_done, dependency_unblocked, comment_on_plan). 5 triggers require scheduled checks and are handled by a single cron endpoint (`/api/cron/notifications`): task_due_today, task_overdue, plan_not_submitted, checkin_not_submitted, zero_tasks_planned.
+- **Dependency Unblocked:** Implemented in two locations — `tasks/[id]/status/route.ts` (direct status change to done) and `tasks/[id]/review/route.ts` (approve marks done). Both check task_dependencies for downstream tasks whose deps are now all satisfied.
+- **comment_on_task deferred:** No task comments API route exists yet. The notification type is defined, the preference toggle works, but no route dispatches it. Will need `src/app/api/tasks/[id]/comments/route.ts` in a future sprint.
+- **Email dispatch deferred:** The `channel` field is correctly set to `'both'` for the 3 email-eligible types (task_overdue, plan_not_submitted, zero_tasks_planned), but actual email sending (Resend/SendGrid) is not integrated yet. Notification records are created with the correct channel marking for when email is wired.
+- **Notification preferences:** Only 3 types are user-disableable (task_marked_done, comment_on_plan, comment_on_task). The other 10 are marked "Required" in the preferences UI and cannot be toggled off.
+- **Polling:** NotificationPanel polls every 30s for the list; AppShellClient polls every 60s for the unread count badge.
+
+### Files Created
+
+| File | Purpose |
+|------|---------|
+| `supabase/migrations/006_sprint6_schema.sql` | `notification_type` enum (13 values), `notification_channel` enum, `notifications` table, `notification_preferences` table, indexes, RLS policies |
+| `src/lib/notifications.ts` | `createNotification()`, `createNotificationBulk()`, `getUnreadCount()` — dispatches via admin client, checks user preferences for optional types |
+| `src/app/api/notifications/route.ts` | GET — paginated notification list with read/unread filter, returns `unread_count` |
+| `src/app/api/notifications/[id]/read/route.ts` | POST — mark single notification as read (ownership verified) |
+| `src/app/api/notifications/read-all/route.ts` | POST — mark all current user's notifications as read |
+| `src/app/api/notifications/preferences/route.ts` | GET — full preference set with defaults; PUT — upsert (validates only optional types) |
+| `src/app/api/cron/notifications/route.ts` | GET with `x-cron-secret` header auth — runs 5 scheduled checks (task_due_today, task_overdue, plan_not_submitted, checkin_not_submitted, zero_tasks_planned) |
+| `src/components/notifications/NotificationPanel.tsx` | Right-side drawer (400px, z-60), filter chips, icon-coded notification list, loading skeleton, empty state, "Notification Preferences" footer link |
+| `src/app/(app)/settings/notifications/page.tsx` | Server component with auth guard |
+| `src/app/(app)/settings/notifications/NotificationPreferencesClient.tsx` | Required (10 types, locked) + Optional (3 types, toggleable) sections, bento grid, save/discard footer |
+
+### Files Modified
+
+| File | Change |
+|------|--------|
+| `src/types/index.ts` | Added `NotificationType` (13-value union), `NotificationChannel`, `Notification`, `NotificationPreference`, `OPTIONAL_NOTIFICATION_TYPES`, `EMAIL_NOTIFICATION_TYPES`, `NOTIFICATION_TYPE_META` |
+| `src/components/shell/TopBar.tsx` | Added `unreadNotificationCount` + `onNotificationClick` props; bell uses filled icon when unread > 0; Indigo-Slate gradient badge (caps at 99+) |
+| `src/app/(app)/AppShellClient.tsx` | Imported NotificationPanel; added panel open/close state + unread count state; initial fetch + 60s polling; passes props to TopBar |
+| `src/components/shell/Sidebar.tsx` | Added "Notifications" nav item (→ `/settings/notifications`, icon: `notifications`) |
+| `src/app/api/tasks/route.ts` | POST: dispatches `task_assigned` to assignee when creator ≠ assignee |
+| `src/app/api/tasks/[id]/reassign/route.ts` | POST: dispatches `task_reassigned_away` to old assignee + `task_assigned` to new assignee |
+| `src/app/api/tasks/[id]/status/route.ts` | POST: dispatches `task_in_review` to reviewer; checks `dependency_unblocked` when task → done |
+| `src/app/api/tasks/[id]/review/route.ts` | POST approve: `task_marked_done` to assignee+creator + `dependency_unblocked` check; POST send_back: `task_sent_back` to assignee |
+| `src/app/api/plans/[id]/comments/route.ts` | POST: dispatches `comment_on_plan` to plan owner; expanded plan select to include `user_id` |
+
+### TypeScript
+
+`npx tsc --noEmit` passes with **zero errors**.
+
+### Outstanding / Deferred
+
+- **Email dispatch:** Channel flag is set but no email provider integrated yet.
+- **comment_on_task:** No task comments route exists. Notification type and preference toggle are ready.
+- **Cron scheduling:** The `/api/cron/notifications` endpoint exists but needs to be wired to Vercel Cron, pg_cron, or an external scheduler.
+
+### Next Session
+
+Start with Sprint 7 — Global Search and Advanced Filtering.
 - `npx tsc --noEmit` → Exit 0 — clean.
 
 ### Key Decisions Made
@@ -527,4 +596,316 @@ Apply migration 005 to the Supabase project (`supabase/migrations/005_sprint5_sc
 
 Then check `sunday-sprint-plan.md` for Sprint 6 scope before starting new work.
 
+---
+
+## Session 7 — Sprint 7 Complete
+
+**Sprint:** 7 — Global Search and Advanced Filtering  
+**Status:** Complete. `npx tsc --noEmit` passes with zero errors.
+
+### What Was Built
+
+Full-text search across tasks, projects, and people from a persistent global search bar in the TopBar. Advanced filtering on the task board extended to support dynamic custom field filters (text, number range, date range, dropdown, checkbox). Active filter chips with individual removal. Custom field filters integrate with the existing saved views system.
+
+### Key Decisions
+
+- **PostgreSQL tsvector** for task search — weighted columns: title (A), description (B), completion_report_text (C). GIN index for fast lookup. Trigger auto-updates the vector on insert/update.
+- **pg_trgm extension** for people/project search — trigram-based partial matching on profiles.name and projects.name.
+- **Fallback to ilike** — If tsvector search fails (e.g., migration not yet applied), the API falls back to ilike matching on task titles.
+- **Custom field filtering via subquery pattern** — The tasks API collects `cf_*` query params, queries custom_field_values for matching task IDs per field, intersects all sets, then applies `.in('id', taskIds)` to the main query. This avoids complex joins.
+- **Index signature `[key: string]: string`** on the Filters interface — allows dynamic `cf_*` keys without type gymnastics.
+- **Ctrl+K / Cmd+K** keyboard shortcut to focus search bar (matches design spec).
+- **300ms debounce** on search input to avoid excessive API calls.
+- **Scrim overlay behind dropdown** when search is active (matching the design's `bg-surface/20 backdrop-blur-[2px]`).
+
+### Files Created
+
+| File | Purpose |
+|------|---------|
+| `supabase/migrations/007_sprint7_search.sql` | tsvector column + GIN index on tasks, trigger for auto-update, pg_trgm extension + trigram indexes on profiles.name and projects.name |
+| `src/app/api/search/route.ts` | GET `/api/search?q=keyword&limit=5` — full-text search across tasks (tsvector), projects (ilike), people (ilike on name+email). Role-scoped results. |
+| `src/components/search/GlobalSearchBar.tsx` | Glassmorphism dropdown with categorised results (Tasks, Projects, People). Keyboard navigation (↑↓ Enter), Ctrl+K shortcut, match highlighting, "See all N results" footer, loading skeletons, empty state. |
+
+### Files Modified
+
+| File | Change |
+|------|--------|
+| `src/components/shell/TopBar.tsx` | Replaced static search input with `<GlobalSearchBar />` component import |
+| `src/app/api/tasks/route.ts` | Added `CustomFieldType` import + custom field filtering: collects `cf_*` params, queries custom_field_values for matching task IDs, intersects, applies `.in('id', ids)` |
+| `src/app/(app)/board/page.tsx` | Fetches `custom_field_definitions` (active) and passes as `customFields` prop to BoardClient |
+| `src/app/(app)/board/BoardClient.tsx` | Extended Filters interface with string index signature; added `customFields` prop; dynamic custom field filter controls (text, number range, date range, dropdown, checkbox 3-state toggle); active filter chips row with individual remove + "Clear all"; `CustomFieldFilter` + `FilterChip` helper components |
+
+### TypeScript
+
+`npx tsc --noEmit` passes with **zero errors**.
+
+### Next Session
+
+Start with Sprint 8 — Audit Logging and Compliance.
+
+---
+
+## Session 8: Sprint 8 — File Management
+
+**Sprint Completed:** Sprint 8 (File Management)
+**Date:** Session 8
+
+### What Was Built
+
+Sprint 8 implements file attachments on tasks and EOD wrap-ups, with secure Supabase Storage, in-app preview for PDFs and images, and drag-and-drop upload UI.
+
+**Task 8.1 — File Storage Setup:**
+- Created `task_files` table with columns: id, filename, file_type, file_size, storage_path, uploaded_by, task_id, wrap_up_id, permanent, context, created_at
+- RLS policies: authenticated users can view all task files, can insert files via own uploaded_by
+- No delete policy — task files are permanent per spec
+- Indexed on task_id, wrap_up_id, uploaded_by
+
+**Task 8.2 — File Upload/Download API:**
+- `POST /api/files` — multipart FormData upload; validates file type against ALLOWED_FILE_TYPES, validates 25MB max size, uploads to Supabase Storage bucket `task-files`, inserts record in task_files, logs timeline event for task files
+- `GET /api/files?task_id=x` / `GET /api/files?wrap_up_id=x` — list files for a task or wrapup with uploader join
+- `GET /api/files/:id` — download file with correct Content-Type and Content-Disposition headers
+- `GET /api/files/:id/preview` — generates signed URL (1 hour expiry) for in-app preview
+
+**Task 8.3 — In-App File Preview (FilePreviewModal):**
+- Glassmorphism modal matching UX spec (85% white, 30px blur, apple-shadow)
+- PDF preview via iframe with signed URL
+- Image preview with native `<img>` tag
+- Floating Apple-style control bar with zoom controls (25% increments) and download
+- Fallback "Download Instead" for unsupported file types (DOCX, XLSX, video)
+- Keyboard Escape to close
+
+**Task 8.4 — File Attachment UI (FileAttachments):**
+- Reusable `FileAttachments` component with drag-and-drop zone + file browse
+- Matches UX design: 80px drop zone, cloud_upload icon, "Drag files here or browse"
+- File list with type-specific icons (PDF red, image primary, XLSX green, DOCX blue, video tertiary)
+- Visibility (preview) and download action buttons on hover
+- Uploading progress spinner
+- Error display for invalid files
+
+### Key Decisions
+
+1. **Supabase Storage bucket:** Named `task-files`, files organized as `tasks/{task_id}/{timestamp}_{filename}` or `wrapups/{wrap_up_id}/{timestamp}_{filename}`
+2. **File context field:** Added `context` column ('attachment' | 'completion_report' | 'wrapup') to distinguish file purpose
+3. **Type constants:** `ALLOWED_FILE_TYPES`, `MAX_FILE_SIZE`, `FILE_TYPE_ICONS` all defined in `src/types/index.ts` for shared access between client and API
+4. **Preview approach:** PDF rendered via iframe + signed URL (no external PDF.js dependency needed). Images via native `<img>`. Unsupported types get download fallback.
+5. **Wrapup file flow:** Files can only be attached after wrapup is submitted (needs a wrap_up_id); before submission the section shows a message to submit first
+
+### Files Created
+
+| File | Purpose |
+|------|---------|
+| `supabase/migrations/008_sprint8_files.sql` | task_files table, indexes, RLS policies |
+| `src/app/api/files/route.ts` | POST upload + GET list files |
+| `src/app/api/files/[id]/route.ts` | GET download file |
+| `src/app/api/files/[id]/preview/route.ts` | GET signed preview URL |
+| `src/components/files/FilePreviewModal.tsx` | Glassmorphism preview modal for PDF/images |
+| `src/components/files/FileAttachments.tsx` | Reusable drag-and-drop file attachments component |
+
+### Files Modified
+
+| File | Change |
+|------|--------|
+| `src/types/index.ts` | Added `TaskFile`, `FileContext`, `FILE_TYPE_ICONS`, `ALLOWED_FILE_TYPES`, `MAX_FILE_SIZE` |
+| `src/app/(app)/tasks/[id]/TaskDetailClient.tsx` | Imported `FileAttachments`, added Attachments section after Dependencies in Details tab |
+| `src/components/tasks/CompletionReportModal.tsx` | Replaced file placeholder with real file upload (file select, validation, uploads to /api/files with context=completion_report) |
+| `src/app/(app)/wrapup/WrapupClient.tsx` | Imported `FileAttachments`, added `id` to WrapupData interface, replaced placeholder with `FileAttachments` for submitted wrapups |
+| `src/app/(app)/wrapup/page.tsx` | Added `id: null` to draft wrapup object for type compatibility |
+
+### TypeScript
+
+`npx tsc --noEmit` passes with **zero errors**.
+
+### Next Session
+
+Start with Sprint 9.
+
+---
+
+## Session 9: Sprint 9 — Reporting & Export
+
+### Sprint Completed
+
+Sprint 9 (Reporting & Export) is fully implemented with 0 TypeScript errors.
+
+### What Was Built
+
+**Report Data Aggregation Layer** (`src/lib/reports/aggregation.ts`):
+- 5 aggregation functions: `generateWeeklyTeamReport`, `generateIndividualReport`, `generateBillableReport`, `generateSystemActivityReport`, `generateTaskExport`
+- Role-scoped member queries reused from team-pulse pattern (team → department → all by role)
+- Weekly team: committed vs completed tasks, completion rate, planned vs actual hours, overdue count per member
+- Individual employee: all tasks with status, hours, on-time analysis, summary stats
+- Billable hours: all billable tasks with estimated vs actual hours
+- System activity: all activity_events for date range (admin only)
+- Task export: all task fields + custom field values dynamically collected
+
+**CSV Export** (`src/lib/reports/csv.ts`):
+- 5 CSV generators using `papaparse` (already installed)
+- Task export includes dynamic custom field columns
+- Totals rows appended where appropriate
+
+**PDF Report Generation** (`src/lib/reports/pdf.ts`):
+- 3 PDF generators using `pdfmake` (installed this session): weekly team, individual employee, billable hours
+- Professional layout with Indigo-Slate themed headers, clean tables, totals rows
+- `renderPDF()` function uses server-side pdfmake with built-in Helvetica fonts
+- Returns `Uint8Array` compatible with Next.js `NextResponse`
+
+**5 API Endpoints**:
+- `POST /api/reports/weekly-team` — PDF/CSV, permission: `export_reports`
+- `POST /api/reports/individual-employee` — PDF/CSV, requires `employee_id`, permission: `export_reports`
+- `POST /api/reports/billable-hours` — PDF/CSV, permission: `export_reports`
+- `POST /api/reports/system-activity` — CSV only, permission: `view_audit_trail` (admin only)
+- `POST /api/reports/task-export` — CSV only, permission: `export_reports`
+- All accept `date_from`, `date_to`, `format`, plus `team_id` or `employee_id` as applicable
+- Default date range: current week (Monday–Sunday)
+
+**Reports UI** (`src/app/(app)/reports/`):
+- Server page fetches user profile, teams list, employees list; redirects if no `export_reports` permission
+- Client component matches UX design exactly: two-column layout (5/12 + 7/12)
+- Left: 5 report type radio cards with active-tab-indicator, icon bg change, radio dot
+- Right: parameters card (date range inputs, team/employee selector contextual, format toggle, generate button), last generated result section
+- System Activity card hidden for non-admin users
+- Format toggle hidden for CSV-only report types (task export, system activity)
+- Loading state with spinner, error display, blob download via `URL.createObjectURL`
+- Design system compliant: `rounded-full` inputs/buttons, `primary-gradient` CTA, ambient shadows, no borders
+
+### Dependencies Added
+
+- `pdfmake` + `@types/pdfmake` — server-side PDF generation with built-in fonts (no headless browser)
+
+### Key Decisions
+
+- System Activity report is CSV-only (raw event logs don't benefit from PDF tables)
+- Task Export is CSV-only per sprint plan spec
+- Used `require('pdfmake')` instead of dynamic import to avoid TypeScript constructor issues
+- Cast `Uint8Array` to `BodyInit` in route handlers for Next.js compatibility
+- `renderPDF` returns `Uint8Array` (not `Buffer`) to satisfy strict BodyInit typing
+
+### Files Created
+
+| File | Purpose |
+|------|--------|
+| `src/lib/reports/aggregation.ts` | Data aggregation for all 5 report types |
+| `src/lib/reports/csv.ts` | CSV generation with papaparse |
+| `src/lib/reports/pdf.ts` | PDF generation with pdfmake + render function |
+| `src/app/api/reports/weekly-team/route.ts` | Weekly team performance endpoint |
+| `src/app/api/reports/individual-employee/route.ts` | Individual employee endpoint |
+| `src/app/api/reports/billable-hours/route.ts` | Billable hours summary endpoint |
+| `src/app/api/reports/system-activity/route.ts` | System activity endpoint (admin) |
+| `src/app/api/reports/task-export/route.ts` | Full task export endpoint |
+| `src/app/(app)/reports/page.tsx` | Server page with auth + data fetch |
+| `src/app/(app)/reports/ReportsClient.tsx` | Client component — full Reports UI |
+
+### TypeScript
+
+`npx tsc --noEmit` passes with **zero errors**.
+
+### Next Session
+
+Start with Sprint 10.
+
+---
+
+## Session 10: Sprint 10 — Polish, Settings & Final Pass
+
+### Sprint Completed
+
+Sprint 10 (Polish — Mobile Optimisation, Onboarding, Archiving, Audit Trail, Settings, Deactivation Modal) is fully implemented with **0 TypeScript errors**. This is the final sprint — the product is now feature-complete per the sprint plan.
+
+### What Was Built
+
+**Task 10.1 — Mobile UI Optimisation** *(previous session)*:
+- Responsive breakpoints applied across all major pages (dashboard, tasks, board, planning, wrapup, reports, admin).
+
+**Task 10.2 — First-Login Onboarding** *(previous session)*:
+- `GET/PATCH /api/onboarding/status` — checks profile completeness, marks onboarding done.
+- `src/app/onboarding/` — 3-step wizard (Welcome → Profile → Ready) outside the app shell.
+- Middleware redirect for un-onboarded users.
+
+**Task 10.3 — Admin Setup Flow** *(previous session)*:
+- `GET/PATCH /api/admin/setup/status` — tracks 5 setup steps.
+- `src/app/(app)/admin/setup/` — guided checklist with progress bar and step-specific deep links.
+
+**Task 10.4 — Archiving Background Job** *(previous session)*:
+- `POST /api/cron/archive-tasks` — moves tasks with `status=done` + `completed_at` older than configured months to `status=archived`. Logs to audit_log and activity_events.
+- `supabase/migrations/010_sprint10_archiving.sql` — adds `archived` to `task_status` enum, `system_settings` table.
+
+**Archived Task Exclusion (cross-cutting fix)**:
+- Added `.neq('status', 'archived')` to **11 query locations** across 8 files:
+  - `src/app/api/tasks/route.ts`, `src/app/api/search/route.ts` (2 queries), `src/app/api/tasks/[id]/subtasks/route.ts`
+  - `src/app/api/cron/notifications/route.ts` (2 queries), `src/app/api/dashboard/my-overview/route.ts` (3 queries)
+  - `src/app/api/dashboard/team-pulse/route.ts`, `src/app/api/onboarding/status/route.ts`
+  - `src/lib/reports/aggregation.ts` (4 report functions)
+
+**Task 10.5 — Admin Audit Trail**:
+- `GET /api/admin/audit-trail` — paginated endpoint with filters (date_from, date_to, event_type, actor_id). Queries `audit_log` table with actor profile join. Returns entries, total, page, total_pages, event_types.
+- `src/app/(app)/admin/audit-trail/page.tsx` — server page with `view_audit_trail` admin permission check, fetches actors for filter dropdown.
+- `src/app/(app)/admin/audit-trail/AuditTrailClient.tsx` — filter bar (date pickers, event type dropdown, actor dropdown), Apply Filters button, grid-based rows with Timestamp/Actor/EventType/Description/OldValue/NewValue columns, pagination with numbered page circles.
+
+**Task 10.6 — Settings Pages**:
+- `GET/PATCH /api/settings/user-preferences` — manages `default_task_view` on profiles.
+- `GET/PATCH /api/settings/team` — manages team settings (planning_mode, submission_deadline_day/time, check_in_mandatory, eod_mandatory). Uses `create_custom_fields` permission (manager+). Inserts audit_log on change.
+- `GET/PATCH /api/settings/system` — manages system_settings table (company_name, default_available_hours, archive_window_months). Admin only via `manage_users_and_teams`. Inserts audit_log.
+- `src/app/(app)/settings/SettingsLayout.tsx` — sub-navigation with 3 items. Desktop: left sidebar. Mobile: horizontal pill tabs.
+- `src/app/(app)/settings/layout.tsx` — layout wrapper.
+- `src/app/(app)/settings/page.tsx` — User Preferences root.
+- `src/app/(app)/settings/UserPreferencesClient.tsx` — notification toggles + default task view segmented control (List/Kanban).
+- `src/app/(app)/settings/team/TeamSettingsClient.tsx` — planning mode toggle, conditional deadline fields, check-in/EOD toggles, manage custom fields link.
+- `src/app/(app)/settings/system/SystemSettingsClient.tsx` — bento grid: org name, available hours stepper, archive window, quick management links.
+
+**Task 10.7 — Deactivation Task Reassignment Modal**:
+- `GET /api/admin/users/[id]/open-tasks` — fetches open tasks (not done/archived) for a user + team members for reassignment.
+- `POST /api/admin/users/[id]/open-tasks` — reassign or close individual tasks with audit_log entries.
+- `src/components/admin/DeactivationModal.tsx` — glassmorphism modal: progress counter bar, scrollable task list with resolved (greyed, green check) and active (reassign dropdown + close button) row states, footer with remaining count and disabled-until-resolved Deactivate button.
+- `src/app/(app)/admin/users/UsersClient.tsx` — replaced `confirm()` dialog with DeactivationModal for active users; reactivation still uses simple confirm.
+
+### Key Decisions
+
+1. **No `manage_team_settings` permission exists** — team settings API uses `create_custom_fields` (manager+) which is the closest semantic match.
+2. **Audit trail queries `audit_log` table** (not `activity_events`) — this is the admin-specific audit table with old_value/new_value tracking.
+3. **Deactivation modal opens only for active users** — reactivating a deactivated user still uses a simple confirm dialog since there are no tasks to reassign.
+4. **Settings layout sub-navigation** — User Preferences visible to all, Team Settings to manager+, System Settings to admin. Each page does its own server-side permission check.
+5. **Archived task exclusion** applied universally — ensures archived tasks never appear in active task lists, search results, dashboard widgets, notifications, or reports.
+
+### Files Created
+
+| File | Purpose |
+|------|--------|
+| `src/app/api/admin/audit-trail/route.ts` | Paginated audit trail GET with filters |
+| `src/app/(app)/admin/audit-trail/page.tsx` | Server page with admin guard |
+| `src/app/(app)/admin/audit-trail/AuditTrailClient.tsx` | Full audit trail UI |
+| `src/app/api/settings/user-preferences/route.ts` | User preferences GET/PATCH |
+| `src/app/api/settings/team/route.ts` | Team settings GET/PATCH |
+| `src/app/api/settings/system/route.ts` | System settings GET/PATCH |
+| `src/app/(app)/settings/SettingsLayout.tsx` | Settings sub-navigation |
+| `src/app/(app)/settings/layout.tsx` | Layout wrapper |
+| `src/app/(app)/settings/page.tsx` | User Preferences page |
+| `src/app/(app)/settings/UserPreferencesClient.tsx` | Notification + default view prefs |
+| `src/app/(app)/settings/team/page.tsx` | Team Settings page |
+| `src/app/(app)/settings/team/TeamSettingsClient.tsx` | Team config UI |
+| `src/app/(app)/settings/system/page.tsx` | System Settings page (admin) |
+| `src/app/(app)/settings/system/SystemSettingsClient.tsx` | System config bento grid |
+| `src/app/api/admin/users/[id]/open-tasks/route.ts` | Deactivation open tasks API |
+| `src/components/admin/DeactivationModal.tsx` | Task reassignment modal |
+
+### Files Modified
+
+| File | Change |
+|------|--------|
+| `src/app/api/tasks/route.ts` | Added `.neq('status', 'archived')` |
+| `src/app/api/search/route.ts` | Added `.neq('status', 'archived')` to both queries |
+| `src/app/api/tasks/[id]/subtasks/route.ts` | Added `.neq('status', 'archived')` |
+| `src/app/api/cron/notifications/route.ts` | Added `.neq('status', 'archived')` to 2 queries |
+| `src/app/api/dashboard/my-overview/route.ts` | Added `.neq('status', 'archived')` to 3 queries |
+| `src/app/api/dashboard/team-pulse/route.ts` | Added `.neq('status', 'archived')` |
+| `src/app/api/onboarding/status/route.ts` | Added `.neq('status', 'archived')` |
+| `src/lib/reports/aggregation.ts` | Added `.neq('status', 'archived')` to 4 functions |
+| `src/app/(app)/admin/users/UsersClient.tsx` | Imported DeactivationModal, added `deactivateUser` state, replaced `confirm()` with modal for active users |
+
+### TypeScript
+
+`npx tsc --noEmit` passes with **zero errors**.
+
+### Project Status
+
+**All 10 sprints are now complete.** The Sunday task management platform is feature-complete per the sprint plan. Every sprint compiled with 0 TypeScript errors.
 

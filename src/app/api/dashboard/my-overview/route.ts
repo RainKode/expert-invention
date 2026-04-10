@@ -47,6 +47,7 @@ export async function GET() {
     .eq('assignee_id', user.id)
     .eq('due_date', today)
     .neq('status', 'done')
+    .neq('status', 'archived')
     .order('priority', { ascending: true })
 
   // Overdue tasks (due before today, not done)
@@ -56,6 +57,7 @@ export async function GET() {
     .eq('assignee_id', user.id)
     .lt('due_date', today)
     .neq('status', 'done')
+    .neq('status', 'archived')
     .order('due_date', { ascending: true })
 
   // All done tasks this week
@@ -110,6 +112,7 @@ export async function GET() {
     .gt('due_date', today)
     .lte('due_date', in3DaysISO)
     .neq('status', 'done')
+    .neq('status', 'archived')
     .order('due_date', { ascending: true })
     .limit(5)
 

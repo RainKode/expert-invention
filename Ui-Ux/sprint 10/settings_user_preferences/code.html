@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sunday HR - User Preferences</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error-container": "#ffdad6",
+                        "surface-container-high": "#e6e8ea",
+                        "on-primary-fixed-variant": "#3e465b",
+                        "error": "#ba1a1a",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-tertiary-container": "#d6c9bf",
+                        "on-error-container": "#93000a",
+                        "secondary": "#565e74",
+                        "inverse-primary": "#bec6df",
+                        "surface-container": "#eceef0",
+                        "on-secondary-fixed-variant": "#3e465c",
+                        "on-secondary": "#ffffff",
+                        "background": "#f7f9fb",
+                        "on-secondary-fixed": "#131b2e",
+                        "surface-bright": "#f7f9fb",
+                        "secondary-fixed": "#dae2fd",
+                        "on-surface-variant": "#45464c",
+                        "on-primary-container": "#c2cae3",
+                        "on-background": "#191c1e",
+                        "surface-variant": "#e0e3e5",
+                        "tertiary-fixed-dim": "#d1c4bb",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed": "#131b2e",
+                        "outline-variant": "#c6c6cd",
+                        "surface-tint": "#565e73",
+                        "surface": "#f7f9fb",
+                        "tertiary-container": "#5d544d",
+                        "surface-dim": "#d8dadc",
+                        "on-secondary-container": "#5c647b",
+                        "on-surface": "#191c1e",
+                        "on-tertiary-fixed": "#211a15",
+                        "tertiary": "#453d36",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-highest": "#e0e3e5",
+                        "primary-fixed-dim": "#bec6df",
+                        "on-primary": "#ffffff",
+                        "inverse-surface": "#2d3133",
+                        "outline": "#76777d",
+                        "on-tertiary-fixed-variant": "#4e453e",
+                        "surface-container-low": "#f2f4f6",
+                        "secondary-fixed-dim": "#bec6e0",
+                        "on-error": "#ffffff",
+                        "primary-container": "#4d556a",
+                        "tertiary-fixed": "#eee0d7",
+                        "primary": "#363e52",
+                        "primary-fixed": "#dae2fc",
+                        "secondary-container": "#dae2fd"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Plus Jakarta Sans"],
+                        "label": ["Plus Jakarta Sans"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .tonal-shift-bg { background-color: #f2f4f6; }
+        .no-border { border: none !important; }
+        .glass-overlay {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-40 bg-slate-50/80 dark:bg-slate-950/80 backdrop-blur-xl shadow-[0px_24px_48px_rgba(77,85,106,0.06)] h-16 px-8 flex justify-between items-center no-border">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold tracking-tighter text-slate-800 dark:text-slate-100">Sunday HR</span>
+<div class="hidden md:flex gap-6 font-['Plus_Jakarta_Sans'] tracking-tight font-medium">
+<a class="text-slate-500 dark:text-slate-400 hover:text-slate-800 transition-colors" href="#">Dashboard</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-slate-800 transition-colors" href="#">People</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-slate-800 transition-colors" href="#">Time</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-slate-800 transition-colors" href="#">Payroll</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-700 active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-slate-700 active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container ml-2">
+<img alt="User profile" data-alt="Close-up portrait of a professional woman with soft natural lighting and a clean neutral background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_h1ba5xkQQ7Hv0Ys_NTDXCt0QPHNbYOYgoX3MjHF3se3DJUjqt8_ApuvoS_mc07bujYlpD1bTssyrN2gwb0Trg4LRem4h_-aclqGClsPCPOHVivcVja1K713AzohYeOSop3GeBK451OExHPcDXVw2XfFlnih8lsQaFRvrsZaqbvRQb4Eal75-0_NF5C5um3CdF90_dxZT_wkSRrsDnUvVmVceSWL0RkNHNQDUdipa-uH2jpNLwwK6BxEgcmctESR3X4vRZNxFB9E"/>
+</div>
+</div>
+</nav>
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 border-r-0 bg-slate-100 dark:bg-slate-900 flex flex-col p-4 space-y-2 pt-20">
+<div class="mb-6 px-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center text-white">
+<span class="material-symbols-outlined" data-icon="admin_panel_settings">admin_panel_settings</span>
+</div>
+<div>
+<h2 class="text-lg font-black text-slate-800 dark:text-slate-100 leading-tight">Admin Console</h2>
+<p class="text-xs font-semibold text-slate-500">Global Settings</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-xl shadow-sm px-4 py-2 font-['Plus_Jakarta_Sans'] text-sm font-semibold active:translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+<a class="flex items-center gap-3 text-slate-500 dark:text-slate-400 px-4 py-2 font-['Plus_Jakarta_Sans'] text-sm font-semibold hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-xl transition-all active:translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="receipt_long">receipt_long</span>
+<span>Audit Logs</span>
+</a>
+<a class="flex items-center gap-3 text-slate-500 dark:text-slate-400 px-4 py-2 font-['Plus_Jakarta_Sans'] text-sm font-semibold hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-xl transition-all active:translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="person_add">person_add</span>
+<span>Onboarding</span>
+</a>
+<a class="flex items-center gap-3 text-slate-500 dark:text-slate-400 px-4 py-2 font-['Plus_Jakarta_Sans'] text-sm font-semibold hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-xl transition-all active:translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="groups">groups</span>
+<span>Teams</span>
+</a>
+<a class="flex items-center gap-3 text-slate-500 dark:text-slate-400 px-4 py-2 font-['Plus_Jakarta_Sans'] text-sm font-semibold hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-xl transition-all active:translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="description">description</span>
+<span>Documents</span>
+</a>
+</nav>
+<div class="pt-4 border-t border-slate-200 dark:border-slate-800 space-y-1">
+<button class="w-full bg-gradient-to-br from-primary-container to-secondary text-white rounded-full py-3 px-6 text-sm font-bold shadow-lg mb-4 active:scale-95 transition-all">
+                Invite Member
+            </button>
+<a class="flex items-center gap-3 text-slate-500 dark:text-slate-400 px-4 py-2 font-['Plus_Jakarta_Sans'] text-sm font-semibold hover:bg-slate-200/50 rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="contact_support">contact_support</span>
+<span>Support</span>
+</a>
+<a class="flex items-center gap-3 text-slate-500 dark:text-slate-400 px-4 py-2 font-['Plus_Jakarta_Sans'] text-sm font-semibold hover:bg-slate-200/50 rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="logout">logout</span>
+<span>Log out</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Layout -->
+<main class="pl-64 pt-16 h-screen flex overflow-hidden">
+<!-- Nested Sub-Navigation -->
+<aside class="w-[240px] bg-surface-container-low h-full py-10 flex flex-col flex-shrink-0">
+<nav class="space-y-1">
+<a class="flex items-center gap-3 px-6 py-3 relative text-on-surface font-semibold bg-primary-container/10 border-l-[3px] border-primary-container" href="#">
+<span class="material-symbols-outlined text-primary-container" data-icon="person">person</span>
+<span class="text-sm">User Preferences</span>
+</a>
+<a class="flex items-center gap-3 px-6 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="settings_account_box">settings_account_box</span>
+<span class="text-sm">Team Settings</span>
+</a>
+<a class="flex items-center gap-3 px-6 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="dvr">dvr</span>
+<span class="text-sm">System Settings</span>
+</a>
+<a class="flex items-center gap-3 px-6 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="dynamic_form">dynamic_form</span>
+<span class="text-sm">Custom Fields</span>
+</a>
+<a class="flex items-center gap-3 px-6 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="rocket_launch">rocket_launch</span>
+<span class="text-sm">Projects</span>
+</a>
+</nav>
+</aside>
+<!-- Content Area -->
+<section class="flex-1 bg-surface-container-lowest p-8 overflow-y-auto">
+<div class="max-w-4xl mx-auto">
+<header class="mb-12">
+<h1 class="text-3xl font-headline font-extrabold tracking-tighter text-on-surface mb-2">User Preferences</h1>
+<p class="text-on-surface-variant text-sm">Manage your personal notifications, workspace views, and default settings.</p>
+</header>
+<div class="space-y-12">
+<!-- Notification Preferences -->
+<section>
+<h2 class="text-lg font-headline font-bold text-on-surface mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary" data-icon="notifications_active">notifications_active</span>
+                            Notification Preferences
+                        </h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Required List -->
+<div class="bg-surface-container-low p-6 rounded-lg">
+<h3 class="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-4">Core System Alerts</h3>
+<ul class="space-y-4">
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary" data-icon="check_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<div>
+<p class="text-sm font-semibold text-on-surface">Security Verification</p>
+<p class="text-xs text-on-surface-variant">Mandatory alerts for new device logins.</p>
+</div>
+</li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary" data-icon="check_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<div>
+<p class="text-sm font-semibold text-on-surface">Payroll Disbursal</p>
+<p class="text-xs text-on-surface-variant">Confirmations when salary is processed.</p>
+</div>
+</li>
+</ul>
+</div>
+<!-- Optional Toggles -->
+<div class="space-y-4">
+<div class="flex items-center justify-between p-4 bg-surface rounded-xl hover:shadow-sm transition-all">
+<div>
+<p class="text-sm font-semibold text-on-surface">Weekly Digest</p>
+<p class="text-xs text-on-surface-variant">Summary of team activity and milestones.</p>
+</div>
+<button class="w-12 h-6 bg-primary-container rounded-full relative flex items-center px-1">
+<div class="w-4 h-4 bg-white rounded-full shadow-sm ml-auto"></div>
+</button>
+</div>
+<div class="flex items-center justify-between p-4 bg-surface rounded-xl hover:shadow-sm transition-all">
+<div>
+<p class="text-sm font-semibold text-on-surface">Task Mentions</p>
+<p class="text-xs text-on-surface-variant">Instant push for comments and mentions.</p>
+</div>
+<button class="w-12 h-6 bg-surface-container-highest rounded-full relative flex items-center px-1">
+<div class="w-4 h-4 bg-white rounded-full shadow-sm"></div>
+</button>
+</div>
+<div class="flex items-center justify-between p-4 bg-surface rounded-xl hover:shadow-sm transition-all">
+<div>
+<p class="text-sm font-semibold text-on-surface">Marketing Updates</p>
+<p class="text-xs text-on-surface-variant">News about features and product updates.</p>
+</div>
+<button class="w-12 h-6 bg-surface-container-highest rounded-full relative flex items-center px-1">
+<div class="w-4 h-4 bg-white rounded-full shadow-sm"></div>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Default Task View -->
+<section>
+<h2 class="text-lg font-headline font-bold text-on-surface mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary" data-icon="grid_view">grid_view</span>
+                            Default Task View
+                        </h2>
+<div class="inline-flex p-1.5 bg-surface-container rounded-full">
+<button class="flex items-center gap-2 px-6 py-2.5 bg-white shadow-sm rounded-full text-sm font-bold text-primary transition-all">
+<span class="material-symbols-outlined text-lg" data-icon="format_list_bulleted">format_list_bulleted</span>
+                                List View
+                            </button>
+<button class="flex items-center gap-2 px-6 py-2.5 text-on-surface-variant hover:text-on-surface text-sm font-semibold transition-all">
+<span class="material-symbols-outlined text-lg" data-icon="view_kanban">view_kanban</span>
+                                Kanban Board
+                            </button>
+</div>
+<p class="mt-4 text-xs text-on-surface-variant italic">This view will be applied globally across all your project workspaces.</p>
+</section>
+<!-- Saved Views List -->
+<section class="pb-12">
+<h2 class="text-lg font-headline font-bold text-on-surface mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary" data-icon="bookmarks">bookmarks</span>
+                            Saved Views
+                        </h2>
+<div class="bg-surface-container-low rounded-lg overflow-hidden">
+<div class="p-4 flex items-center gap-4 hover:bg-white transition-all cursor-pointer">
+<div class="w-10 h-10 rounded-xl bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined" data-icon="assignment_late">assignment_late</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-bold text-on-surface">Urgent &amp; Overdue</p>
+<p class="text-xs text-on-surface-variant">Filtered by high priority tasks past due date.</p>
+</div>
+<div class="flex gap-2">
+<button class="p-2 hover:bg-surface-container rounded-full text-on-surface-variant">
+<span class="material-symbols-outlined text-sm" data-icon="edit">edit</span>
+</button>
+<button class="p-2 hover:bg-error-container/20 rounded-full text-error">
+<span class="material-symbols-outlined text-sm" data-icon="delete">delete</span>
+</button>
+</div>
+</div>
+<div class="p-4 flex items-center gap-4 hover:bg-white transition-all cursor-pointer">
+<div class="w-10 h-10 rounded-xl bg-tertiary-fixed-dim flex items-center justify-center text-on-tertiary-fixed-variant">
+<span class="material-symbols-outlined" data-icon="groups_3">groups_3</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-bold text-on-surface">Team Quarterly Progress</p>
+<p class="text-xs text-on-surface-variant">Aggregated view of Q3 performance reviews.</p>
+</div>
+<div class="flex gap-2">
+<button class="p-2 hover:bg-surface-container rounded-full text-on-surface-variant">
+<span class="material-symbols-outlined text-sm" data-icon="edit">edit</span>
+</button>
+<button class="p-2 hover:bg-error-container/20 rounded-full text-error">
+<span class="material-symbols-outlined text-sm" data-icon="delete">delete</span>
+</button>
+</div>
+</div>
+<div class="p-4 flex items-center gap-4 hover:bg-white transition-all cursor-pointer">
+<div class="w-10 h-10 rounded-xl bg-surface-container-highest flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-bold text-on-surface">Payroll Archive 2023</p>
+<p class="text-xs text-on-surface-variant">Read-only view of historical payroll cycles.</p>
+</div>
+<div class="flex gap-2">
+<button class="p-2 hover:bg-surface-container rounded-full text-on-surface-variant">
+<span class="material-symbols-outlined text-sm" data-icon="edit">edit</span>
+</button>
+<button class="p-2 hover:bg-error-container/20 rounded-full text-error">
+<span class="material-symbols-outlined text-sm" data-icon="delete">delete</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</section>
+</main>
+</body></html>

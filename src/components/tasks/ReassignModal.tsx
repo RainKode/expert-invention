@@ -64,11 +64,11 @@ export default function ReassignModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      <div className="absolute inset-0 bg-on-surface/40 backdrop-blur-sm" onClick={onClose} />
+      <div className="absolute inset-0 bg-on-surface/40 backdrop-blur-[20px]" onClick={onClose} />
       <div className="relative w-full max-w-sm bg-surface-container rounded-3xl shadow-2xl overflow-hidden">
-        <div className="px-6 py-5 flex items-center justify-between border-b border-surface-container-high">
+        <div className="px-6 py-5 flex items-center justify-between">
           <h2 className="text-base font-bold text-on-surface">Reassign Task</h2>
-          <button onClick={onClose} className="p-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors">
+          <button onClick={onClose} className="p-1.5 rounded-full text-on-surface-variant hover:bg-surface-container-high transition-colors">
             <span className="material-symbols-outlined text-lg">close</span>
           </button>
         </div>
@@ -91,7 +91,7 @@ export default function ReassignModal({
               placeholder="Search team members…"
               value={search}
               onChange={e => setSearch(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 bg-surface-container-low rounded-xl text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/30"
+              className="w-full pl-10 pr-4 py-2.5 bg-surface-container-low rounded-full text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/30"
             />
           </div>
 
@@ -139,14 +139,14 @@ export default function ReassignModal({
           {error && <p className="text-sm text-error bg-error-container rounded-xl px-4 py-2">{error}</p>}
         </div>
 
-        <div className="px-6 py-4 flex gap-3 border-t border-surface-container-high">
-          <button type="button" onClick={onClose} className="flex-1 py-2.5 rounded-xl text-sm font-semibold text-on-surface-variant hover:bg-surface-container-high transition-colors">
+        <div className="px-6 py-4 flex gap-3 bg-surface-container-low/50">
+          <button type="button" onClick={onClose} className="flex-1 py-2.5 rounded-full text-sm font-semibold text-on-surface-variant hover:bg-surface-container-high transition-colors">
             Cancel
           </button>
           <button
             onClick={handleSubmit}
             disabled={submitting || !selectedId}
-            className="flex-1 py-2.5 rounded-xl text-sm font-bold text-white shadow-ambient-sm disabled:opacity-60 transition-opacity"
+            className="flex-1 py-2.5 rounded-full text-sm font-bold text-white shadow-ambient-sm disabled:opacity-60 transition-opacity"
             style={{ background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }}
           >
             {submitting ? 'Reassigning…' : 'Reassign'}

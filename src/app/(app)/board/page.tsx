@@ -15,10 +15,11 @@ export default async function BoardPage() {
 
   if (!profile) redirect('/login')
 
-  const [{ data: projects }, { data: teamMembers }, { data: savedViews }] = await Promise.all([
+  const [{ data: projects }, { data: teamMembers }, { data: savedViews }, { data: customFields }] = await Promise.all([
     supabase.from('projects').select('id, name').order('name'),
     supabase.from('profiles').select('id, name').eq('team_id', profile.team_id),
     supabase.from('saved_views').select('*').order('created_at'),
+    supabase.from('custom_field_definitions').select('id, name, field_type, options, scope_type, scope_id, status').eq('status', 'active').order('name'),
   ])
 
   return (
@@ -29,6 +30,7 @@ export default async function BoardPage() {
       projects={projects ?? []}
       teamMembers={teamMembers ?? []}
       initialSavedViews={savedViews ?? []}
+      customFields={customFields ?? []}
     />
   )
 }

@@ -134,6 +134,7 @@ export async function GET(request: NextRequest) {
     .in('assignee_id', memberIds)
     .lt('due_date', today)
     .neq('status', 'done')
+    .neq('status', 'archived')
     .order('due_date', { ascending: true })
     .limit(20)
 
