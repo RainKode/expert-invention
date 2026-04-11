@@ -1,6 +1,9 @@
 import { Suspense } from 'react'
 import SetPasswordClient from './SetPasswordClient'
 
+// Prevent static prerendering — this page reads query params at runtime
+export const dynamic = 'force-dynamic'
+
 export default function SetPasswordPage() {
   return (
     <Suspense
