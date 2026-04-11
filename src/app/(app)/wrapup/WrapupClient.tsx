@@ -73,8 +73,11 @@ export default function WrapupClient({ wrapup, alreadySubmitted }: Props) {
     return { icon: 'warning', color: 'text-tertiary' }
   }
 
+  const [submitError, setSubmitError] = useState<string | null>(null)
+
   async function handleSubmit() {
     setSubmitting(true)
+    setSubmitError(null)
     try {
       const res = await fetch('/api/wrapup', {
         method: 'POST',
@@ -88,7 +91,12 @@ export default function WrapupClient({ wrapup, alreadySubmitted }: Props) {
       if (res.ok) {
         setSubmitted(true)
         router.refresh()
+      } else {
+        const d = await res.json().catch(() => ({}))
+        setSubmitError(d.error ?? 'Failed to submit wrap-up. Please try again.')
       }
+    } catch {
+      setSubmitError('Network error. Please try again.')
     } finally {
       setSubmitting(false)
     }
@@ -261,6 +269,9 @@ export default function WrapupClient({ wrapup, alreadySubmitted }: Props) {
             </span>
             All hours logged and discrepancies noted.
           </div>
+          {submitError && (
+            <p className="text-sm text-error font-medium">{submitError}</p>
+          )}
           <button
             onClick={handleSubmit}
             disabled={submitting}

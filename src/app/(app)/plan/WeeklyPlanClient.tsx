@@ -301,13 +301,17 @@ function CommentsSection({
     if (!text.trim()) return
     setSubmitting(true)
     try {
-      await fetch(`/api/plans/${planId}/comments`, {
+      const res = await fetch(`/api/plans/${planId}/comments`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ text }),
       })
-      setText('')
-      router.refresh()
+      if (res.ok) {
+        setText('')
+        router.refresh()
+      } else {
+        alert('Failed to post comment. Please try again.')
+      }
     } finally {
       setSubmitting(false)
     }
@@ -658,8 +662,12 @@ export default function WeeklyPlanClient({
                 {canComment && (
                   <button
                     onClick={async () => {
-                      await fetch(`/api/plans/${planId}/unlock`, { method: 'POST' })
-                      router.refresh()
+                      const res = await fetch(`/api/plans/${planId}/unlock`, { method: 'POST' })
+                      if (res.ok) {
+                        router.refresh()
+                      } else {
+                        alert('Failed to unlock plan.')
+                      }
                     }}
                     className="px-6 py-2.5 rounded-full bg-surface-container-high font-bold text-sm hover:bg-surface-container-highest transition-all"
                   >

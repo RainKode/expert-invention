@@ -145,7 +145,11 @@ export default function TeamPlansClient({ members, weekStartISO, teamName }: Pro
                     ))}
                   </div>
                 </div>
-                <button className="text-[#4d556a] hover:bg-surface-container-high p-2 rounded-full transition-colors shrink-0">
+                <button
+                  onClick={() => router.push(`/plan?user=${m.user.id}`)}
+                  className="text-[#4d556a] hover:bg-surface-container-high p-2 rounded-full transition-colors shrink-0"
+                  title="View plan"
+                >
                   <span className="material-symbols-outlined">edit_calendar</span>
                 </button>
               </div>

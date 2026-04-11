@@ -79,8 +79,11 @@ export default function AuditTrailClient({ actors }: Props) {
   useEffect(() => { fetchEntries() }, [fetchEntries])
 
   function applyFilters() {
-    setPage(1)
-    fetchEntries()
+    if (page === 1) {
+      fetchEntries()
+    } else {
+      setPage(1)
+    }
   }
 
   const startItem = (page - 1) * limit + 1

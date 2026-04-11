@@ -78,20 +78,28 @@ export default function TeamPulseClient({ data, weekStart, workingDays }: Props)
 
   async function handleAcknowledge() {
     setAckSaving(true)
-    await fetch('/api/dashboard/acknowledge-warning', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        employee_id: ackModal.employeeId,
-        week_start: weekStart,
-        unplanned_days: ackModal.unplannedDays,
-        note: ackNote || null,
-      }),
-    })
-    setAckSaving(false)
-    setAckModal({ open: false, employeeId: '', employeeName: '', unplannedDays: [] })
-    setAckNote('')
-    router.refresh()
+    try {
+      const res = await fetch('/api/dashboard/acknowledge-warning', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          employee_id: ackModal.employeeId,
+          week_start: weekStart,
+          unplanned_days: ackModal.unplannedDays,
+          note: ackNote || null,
+        }),
+      })
+      if (!res.ok) {
+        const d = await res.json().catch(() => ({}))
+        alert(d.error ?? 'Failed to acknowledge. Please try again.')
+        return
+      }
+      setAckModal({ open: false, employeeId: '', employeeName: '', unplannedDays: [] })
+      setAckNote('')
+      router.refresh()
+    } finally {
+      setAckSaving(false)
+    }
   }
 
   return (

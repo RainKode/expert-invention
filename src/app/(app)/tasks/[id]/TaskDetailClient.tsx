@@ -170,16 +170,23 @@ export default function TaskDetailClient({
     setStatusChanging(false)
   }, [taskId, fetchTask])
 
+  const [approving, setApproving] = useState(false)
+
   const handleApprove = useCallback(async () => {
-    const res = await fetch(`/api/tasks/${taskId}/review`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ action: 'approve' }),
-    })
-    if (res.ok) await fetchTask()
-    else {
-      const d = await res.json()
-      alert(d.error ?? 'Failed to approve')
+    setApproving(true)
+    try {
+      const res = await fetch(`/api/tasks/${taskId}/review`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'approve' }),
+      })
+      if (res.ok) await fetchTask()
+      else {
+        const d = await res.json()
+        alert(d.error ?? 'Failed to approve')
+      }
+    } finally {
+      setApproving(false)
     }
   }, [taskId, fetchTask])
 
@@ -288,10 +295,11 @@ export default function TaskDetailClient({
               <>
                 <button
                   onClick={handleApprove}
-                  className="px-5 py-2 rounded-full text-sm font-bold text-on-primary shadow-ambient-sm transition-colors"
+                  disabled={approving}
+                  className="px-5 py-2 rounded-full text-sm font-bold text-on-primary shadow-ambient-sm transition-colors disabled:opacity-60"
                   style={{ background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }}
                 >
-                  Approve
+                  {approving ? 'Approving…' : 'Approve'}
                 </button>
                 <button
                   onClick={() => setSendBackOpen(true)}

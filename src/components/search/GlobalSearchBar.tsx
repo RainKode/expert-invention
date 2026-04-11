@@ -137,9 +137,13 @@ export default function GlobalSearchBar() {
     } else if (e.key === 'ArrowUp') {
       e.preventDefault()
       setActiveIndex(i => (i - 1 + flatItems.length) % flatItems.length)
-    } else if (e.key === 'Enter' && activeIndex >= 0) {
+    } else if (e.key === 'Enter') {
       e.preventDefault()
-      navigateToItem(flatItems[activeIndex])
+      if (activeIndex >= 0) {
+        navigateToItem(flatItems[activeIndex])
+      } else if (flatItems.length > 0) {
+        navigateToItem(flatItems[0])
+      }
     }
   }
 

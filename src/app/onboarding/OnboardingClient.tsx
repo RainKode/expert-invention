@@ -26,20 +26,35 @@ export default function OnboardingClient({
 }: OnboardingClientProps) {
   const router = useRouter()
   const [step, setStep] = useState(1)
+  const [saving, setSaving] = useState(false)
   const totalSteps = 3
 
   const firstName = employeeName.split(' ')[0]
 
   const completeOnboarding = useCallback(async () => {
-    await fetch('/api/onboarding/status', { method: 'POST' })
-    router.push('/plan')
-    router.refresh()
+    setSaving(true)
+    try {
+      const res = await fetch('/api/onboarding/status', { method: 'POST' })
+      if (res.ok) {
+        router.push('/plan')
+        router.refresh()
+      }
+    } finally {
+      setSaving(false)
+    }
   }, [router])
 
   const skipOnboarding = useCallback(async () => {
-    await fetch('/api/onboarding/status', { method: 'POST' })
-    router.push('/dashboard')
-    router.refresh()
+    setSaving(true)
+    try {
+      const res = await fetch('/api/onboarding/status', { method: 'POST' })
+      if (res.ok) {
+        router.push('/dashboard')
+        router.refresh()
+      }
+    } finally {
+      setSaving(false)
+    }
   }, [router])
 
   return (
@@ -215,15 +230,17 @@ export default function OnboardingClient({
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
               <button
                 onClick={completeOnboarding}
-                className="px-10 py-4 rounded-full text-white font-bold shadow-lg shadow-primary-container/20 hover:scale-[1.02] transition-transform active:scale-95 flex items-center gap-3"
+                disabled={saving}
+                className="px-10 py-4 rounded-full text-white font-bold shadow-lg shadow-primary-container/20 hover:scale-[1.02] transition-transform active:scale-95 flex items-center gap-3 disabled:opacity-60"
                 style={{ background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }}
               >
                 <span className="material-symbols-outlined">calendar_view_week</span>
-                Go to My Plan
+                {saving ? 'Loading…' : 'Go to My Plan'}
               </button>
               <button
                 onClick={skipOnboarding}
-                className="px-8 py-4 rounded-full text-on-surface-variant font-bold hover:bg-surface-container transition-colors"
+                disabled={saving}
+                className="px-8 py-4 rounded-full text-on-surface-variant font-bold hover:bg-surface-container transition-colors disabled:opacity-60"
               >
                 Skip for now
               </button>

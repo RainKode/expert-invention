@@ -60,8 +60,11 @@ export default function CheckinClient({ checkin, alreadySubmitted }: Props) {
     )
   }
 
+  const [submitError, setSubmitError] = useState<string | null>(null)
+
   async function handleSubmit() {
     setSubmitting(true)
+    setSubmitError(null)
     try {
       const res = await fetch('/api/checkin', {
         method: 'POST',
@@ -71,7 +74,12 @@ export default function CheckinClient({ checkin, alreadySubmitted }: Props) {
       if (res.ok) {
         setSubmitted(true)
         router.refresh()
+      } else {
+        const d = await res.json().catch(() => ({}))
+        setSubmitError(d.error ?? 'Failed to submit check-in. Please try again.')
       }
+    } catch {
+      setSubmitError('Network error. Please try again.')
     } finally {
       setSubmitting(false)
     }
@@ -203,7 +211,10 @@ export default function CheckinClient({ checkin, alreadySubmitted }: Props) {
 
         {/* Submit */}
         {!submitted && (
-          <div className="flex justify-center mt-12 mb-20">
+          <div className="flex flex-col items-center mt-12 mb-20 gap-3">
+            {submitError && (
+              <p className="text-sm text-error font-medium">{submitError}</p>
+            )}
             <button
               onClick={handleSubmit}
               disabled={submitting}

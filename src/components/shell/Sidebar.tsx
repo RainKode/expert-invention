@@ -32,6 +32,8 @@ const NAV_ITEMS: NavItem[] = [
 const ADMIN_NAV: NavItem[] = [
   { label: 'Users', href: '/admin/users', icon: 'manage_accounts' },
   { label: 'Teams', href: '/admin/teams', icon: 'corporate_fare' },
+  { label: 'Audit Trail', href: '/admin/audit-trail', icon: 'policy' },
+  { label: 'Setup', href: '/admin/setup', icon: 'settings_suggest' },
 ]
 
 interface SidebarProps {
