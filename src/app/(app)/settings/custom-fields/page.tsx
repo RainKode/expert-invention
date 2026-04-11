@@ -1,5 +1,6 @@
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/admin'
 import CustomFieldsClient from './CustomFieldsClient'
 
 const MANAGER_ROLES = ['assistant_manager', 'manager', 'senior_manager', 'admin']
@@ -9,7 +10,9 @@ export default async function CustomFieldsPage() {
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) redirect('/login')
 
-  const { data: profile } = await supabase
+  const admin = createAdminClient()
+
+  const { data: profile } = await admin
     .from('profiles')
     .select('role, team_id')
     .eq('id', user.id)
@@ -19,7 +22,7 @@ export default async function CustomFieldsPage() {
     redirect('/dashboard')
   }
 
-  const { data: fields } = await supabase
+  const { data: fields } = await admin
     .from('custom_field_definitions')
     .select('*')
     .order('created_at', { ascending: false })

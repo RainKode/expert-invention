@@ -1,4 +1,5 @@
 import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/admin'
 import { redirect } from 'next/navigation'
 import { can } from '@/lib/permissions'
 import { type Role } from '@/types'
@@ -9,7 +10,9 @@ export default async function TeamTasksPage() {
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) redirect('/login')
 
-  const { data: profile } = await supabase
+  const admin = createAdminClient()
+
+  const { data: profile } = await admin
     .from('profiles')
     .select('id, name, role, team_id')
     .eq('id', user.id)
@@ -19,13 +22,13 @@ export default async function TeamTasksPage() {
     redirect('/tasks')
   }
 
-  const { data: projects } = await supabase
+  const { data: projects } = await admin
     .from('projects')
     .select('id, name')
     .order('name')
 
   // Fetch team members for assignee filter
-  const { data: teamMembers } = await supabase
+  const { data: teamMembers } = await admin
     .from('profiles')
     .select('id, name, email')
     .eq('team_id', profile.team_id)

@@ -25,7 +25,9 @@ export default async function PlanPage({
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) redirect('/login')
 
-  const { data: profile } = await supabase
+  const admin = createAdminClient()
+
+  const { data: profile } = await admin
     .from('profiles')
     .select('role, team_id, available_hours, work_week')
     .eq('id', user.id)
@@ -39,8 +41,6 @@ export default async function PlanPage({
     ? new Date(requestedWeek)
     : getMondayOfWeek(new Date())
   const weekStartISO = toISODate(weekStart)
-
-  const admin = createAdminClient()
 
   // Fetch or create plan
   let { data: plan } = await admin
@@ -85,7 +85,7 @@ export default async function PlanPage({
         .order('priority', { ascending: false })
         .limit(50),
       profile.team_id
-        ? supabase.from('teams').select('planning_mode, submission_deadline_day, submission_deadline_time').eq('id', profile.team_id).single()
+        ? admin.from('teams').select('planning_mode, submission_deadline_day, submission_deadline_time').eq('id', profile.team_id).single()
         : Promise.resolve({ data: null }),
     ])
 

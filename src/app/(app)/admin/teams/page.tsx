@@ -1,4 +1,5 @@
 import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/admin'
 import { redirect } from 'next/navigation'
 import TeamsClient from './TeamsClient'
 
@@ -9,11 +10,12 @@ export default async function AdminTeamsPage() {
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) redirect('/login')
 
-  const { data: profile } = await supabase.from('profiles').select('role').eq('id', user.id).single()
+  const admin = createAdminClient()
+  const { data: profile } = await admin.from('profiles').select('role').eq('id', user.id).single()
   if (profile?.role !== 'admin') redirect('/dashboard')
 
   // Fetch managers for dropdowns
-  const { data: managers } = await supabase
+  const { data: managers } = await admin
     .from('profiles')
     .select('id, name, role')
     .in('role', ['manager', 'senior_manager', 'admin'])

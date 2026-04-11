@@ -1,5 +1,6 @@
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/admin'
 import BoardClient from './BoardClient'
 
 export default async function BoardPage() {
@@ -7,7 +8,9 @@ export default async function BoardPage() {
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) redirect('/login')
 
-  const { data: profile } = await supabase
+  const admin = createAdminClient()
+
+  const { data: profile } = await admin
     .from('profiles')
     .select('role, team_id')
     .eq('id', user.id)
@@ -16,10 +19,10 @@ export default async function BoardPage() {
   if (!profile) redirect('/login')
 
   const [{ data: projects }, { data: teamMembers }, { data: savedViews }, { data: customFields }] = await Promise.all([
-    supabase.from('projects').select('id, name').order('name'),
-    supabase.from('profiles').select('id, name').eq('team_id', profile.team_id),
-    supabase.from('saved_views').select('*').order('created_at'),
-    supabase.from('custom_field_definitions').select('id, name, field_type, options, scope_type, scope_id, status').eq('status', 'active').order('name'),
+    admin.from('projects').select('id, name').order('name'),
+    admin.from('profiles').select('id, name').eq('team_id', profile.team_id),
+    admin.from('saved_views').select('*').order('created_at'),
+    admin.from('custom_field_definitions').select('id, name, field_type, options, scope_type, scope_id, status').eq('status', 'active').order('name'),
   ])
 
   return (

@@ -23,7 +23,9 @@ export default async function TeamPlansPage({
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) redirect('/login')
 
-  const { data: profile } = await supabase
+  const admin = createAdminClient()
+
+  const { data: profile } = await admin
     .from('profiles')
     .select('role, team_id')
     .eq('id', user.id)
@@ -38,8 +40,6 @@ export default async function TeamPlansPage({
     ? new Date(searchParams.week)
     : getMondayOfWeek(new Date())
   const weekStartISO = weekStart.toISOString().split('T')[0]
-
-  const admin = createAdminClient()
 
   // Fetch team members
   let membersQuery = admin

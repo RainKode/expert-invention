@@ -1,4 +1,5 @@
 import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/admin'
 import { redirect } from 'next/navigation'
 import TasksClient from './TasksClient'
 
@@ -7,7 +8,9 @@ export default async function TasksPage() {
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) redirect('/login')
 
-  const { data: profile } = await supabase
+  const admin = createAdminClient()
+
+  const { data: profile } = await admin
     .from('profiles')
     .select('id, name, role')
     .eq('id', user.id)
@@ -15,7 +18,7 @@ export default async function TasksPage() {
 
   if (!profile) redirect('/login')
 
-  const { data: projects } = await supabase
+  const { data: projects } = await admin
     .from('projects')
     .select('id, name')
     .order('name')

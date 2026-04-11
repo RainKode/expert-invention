@@ -1,4 +1,5 @@
 import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/admin'
 import { redirect, notFound } from 'next/navigation'
 import TaskDetailClient from './TaskDetailClient'
 
@@ -10,7 +11,9 @@ export default async function TaskDetailPage({ params }: Params) {
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) redirect('/login')
 
-  const { data: profile } = await supabase
+  const admin = createAdminClient()
+
+  const { data: profile } = await admin
     .from('profiles')
     .select('id, name, role, team_id')
     .eq('id', user.id)
@@ -22,7 +25,7 @@ export default async function TaskDetailPage({ params }: Params) {
   const isManager = ['manager', 'senior_manager', 'admin', 'assistant_manager'].includes(profile.role)
   let teamMembers: { id: string; name: string; email: string }[] = []
   if (isManager && profile.team_id) {
-    const { data } = await supabase
+    const { data } = await admin
       .from('profiles')
       .select('id, name, email')
       .eq('team_id', profile.team_id)
@@ -32,7 +35,7 @@ export default async function TaskDetailPage({ params }: Params) {
   }
 
   // Fetch projects for dependency modal tasks list
-  const { data: allTasks } = await supabase
+  const { data: allTasks } = await admin
     .from('tasks')
     .select('id, title, status')
     .neq('id', id)
