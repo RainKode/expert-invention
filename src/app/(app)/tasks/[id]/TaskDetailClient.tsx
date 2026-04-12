@@ -3,13 +3,15 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import ReassignModal from '@/components/tasks/ReassignModal'
-import CompletionReportModal from '@/components/tasks/CompletionReportModal'
-import ReviewerSendBackModal from '@/components/tasks/ReviewerSendBackModal'
-import AddDependencyModal from '@/components/tasks/AddDependencyModal'
-import QuickTaskModal from '@/components/tasks/QuickTaskModal'
+import dynamic from 'next/dynamic'
 import FileAttachments from '@/components/files/FileAttachments'
 import { CustomFieldValue } from '@/types'
+
+const ReassignModal = dynamic(() => import('@/components/tasks/ReassignModal'), { ssr: false })
+const CompletionReportModal = dynamic(() => import('@/components/tasks/CompletionReportModal'), { ssr: false })
+const ReviewerSendBackModal = dynamic(() => import('@/components/tasks/ReviewerSendBackModal'), { ssr: false })
+const AddDependencyModal = dynamic(() => import('@/components/tasks/AddDependencyModal'), { ssr: false })
+const QuickTaskModal = dynamic(() => import('@/components/tasks/QuickTaskModal'), { ssr: false })
 
 const STATUS_BADGE: Record<string, string> = {
   todo: 'bg-surface-container text-on-surface-variant',

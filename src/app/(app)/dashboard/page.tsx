@@ -2,9 +2,9 @@
 // My Overview — personal dashboard
 // Server component: fetches overview data, passes to client
 
-import { createClient } from '@/lib/supabase/server'
 import { createAdminClient } from '@/lib/supabase/admin'
 import { redirect } from 'next/navigation'
+import { getAuthUser, getProfile } from '@/lib/auth-cache'
 import DashboardClient from './DashboardClient'
 import type { MyOverviewData } from '@/types'
 
@@ -23,8 +23,7 @@ function getSundayISO(monday: string): string {
 }
 
 export default async function DashboardPage() {
-  const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
+  const user = await getAuthUser()
   if (!user) redirect('/login')
 
   const admin = createAdminClient()
@@ -32,13 +31,8 @@ export default async function DashboardPage() {
   const weekStart = getMondayISO()
   const weekEnd = getSundayISO(weekStart)
 
-  const { data: profile } = await admin
-    .from('profiles')
-    .select('name, role')
-    .eq('id', user.id)
-    .single()
-
-  const [todayResult, overdueResult, doneResult, deadlineResult] = await Promise.all([
+  const [profile, todayResult, overdueResult, doneResult, deadlineResult, weekPlanResult] = await Promise.all([
+    getProfile(user.id),
     admin.from('tasks')
       .select('id, title, status, priority, due_date, estimated_hours, project:projects(name)')
       .eq('assignee_id', user.id)
@@ -66,14 +60,14 @@ export default async function DashboardPage() {
       .neq('status', 'done')
       .order('due_date', { ascending: true })
       .limit(5),
+    admin.from('weekly_plans')
+      .select('id')
+      .eq('user_id', user.id)
+      .eq('week_start_date', weekStart)
+      .single(),
   ])
 
-  const { data: weekPlan } = await admin
-    .from('weekly_plans')
-    .select('id')
-    .eq('user_id', user.id)
-    .eq('week_start_date', weekStart)
-    .single()
+  const weekPlan = weekPlanResult.data
 
   let totalCommitted = 0
   let carryOvers: MyOverviewData['carry_overs'] = []

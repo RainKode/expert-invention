@@ -2,7 +2,9 @@
 
 import { useState, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
-import QuickTaskModal from '@/components/tasks/QuickTaskModal'
+import dynamic from 'next/dynamic'
+
+const QuickTaskModal = dynamic(() => import('@/components/tasks/QuickTaskModal'), { ssr: false })
 
 interface Project { id: string; name: string }
 interface TeamMember { id: string; name: string; email: string }

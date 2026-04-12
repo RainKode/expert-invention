@@ -7,7 +7,9 @@ import { z } from 'zod'
 import { ROLE_LABELS, ROLE_OPTIONS } from '@/lib/permissions'
 import { type Role, type UserStatus } from '@/types'
 import Link from 'next/link'
-import DeactivationModal from '@/components/admin/DeactivationModal'
+import dynamic from 'next/dynamic'
+
+const DeactivationModal = dynamic(() => import('@/components/admin/DeactivationModal'), { ssr: false })
 
 // Minimal type for display
 interface UserRow {

@@ -15,8 +15,9 @@ const commentSchema = z.object({
 
 export async function GET(
   _request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
@@ -25,7 +26,7 @@ export async function GET(
   const { data, error } = await admin
     .from('plan_comments')
     .select('*, author:profiles(id, name, role)')
-    .eq('plan_id', params.id)
+    .eq('plan_id', id)
     .order('created_at', { ascending: true })
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
@@ -34,8 +35,9 @@ export async function GET(
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
@@ -63,14 +65,14 @@ export async function POST(
   const { data: plan } = await admin
     .from('weekly_plans')
     .select('id, user_id')
-    .eq('id', params.id)
+    .eq('id', id)
     .single()
 
   if (!plan) return NextResponse.json({ error: 'Plan not found' }, { status: 404 })
 
   const { data, error } = await admin
     .from('plan_comments')
-    .insert({ plan_id: params.id, author_id: user.id, text: parsed.data.text })
+    .insert({ plan_id: id, author_id: user.id, text: parsed.data.text })
     .select('*, author:profiles(id, name, role)')
     .single()
 
@@ -85,7 +87,7 @@ export async function POST(
       title: 'New Comment on Your Plan',
       message: `${authorProfile?.name ?? 'A manager'} commented on your weekly plan`,
       link: `/plan`,
-      metadata: { plan_id: params.id, actor_id: user.id },
+      metadata: { plan_id: id, actor_id: user.id },
     })
   }
 

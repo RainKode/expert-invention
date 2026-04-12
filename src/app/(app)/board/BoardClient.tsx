@@ -14,7 +14,9 @@ import {
 import { TaskWithRelations as Task, SavedView, CustomFieldDefinition, CustomFieldType } from '@/types'
 import KanbanColumn from '@/components/board/KanbanColumn'
 import KanbanCard from '@/components/board/KanbanCard'
-import CompletionReportModal from '@/components/tasks/CompletionReportModal'
+import dynamic from 'next/dynamic'
+
+const CompletionReportModal = dynamic(() => import('@/components/tasks/CompletionReportModal'), { ssr: false })
 
 const COLUMNS = [
   { id: 'todo', label: 'To Do', color: 'bg-outline' },

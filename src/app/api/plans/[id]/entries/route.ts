@@ -32,12 +32,13 @@ async function checkPlanOwnership(planId: string, userId: string) {
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params
   const user = await resolveUser(request)
   if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
-  const plan = await checkPlanOwnership(params.id, user.id)
+  const plan = await checkPlanOwnership(id, user.id)
   if (!plan) return NextResponse.json({ error: 'Plan not found' }, { status: 404 })
   if (plan.user_id !== user.id) return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
   if (plan.locked) return NextResponse.json({ error: 'Plan is locked — unlock first' }, { status: 409 })
@@ -53,7 +54,7 @@ export async function POST(
     .from('plan_entries')
     .upsert(
       {
-        plan_id: params.id,
+        plan_id: id,
         task_id: parsed.data.task_id,
         day_of_week: parsed.data.day_of_week,
         planned_hours: parsed.data.planned_hours,
@@ -71,12 +72,13 @@ export async function POST(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params
   const user = await resolveUser(request)
   if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
-  const plan = await checkPlanOwnership(params.id, user.id)
+  const plan = await checkPlanOwnership(id, user.id)
   if (!plan) return NextResponse.json({ error: 'Plan not found' }, { status: 404 })
   if (plan.user_id !== user.id) return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
   if (plan.locked) return NextResponse.json({ error: 'Plan is locked' }, { status: 409 })
@@ -92,7 +94,7 @@ export async function DELETE(
   const { error } = await admin
     .from('plan_entries')
     .delete()
-    .eq('plan_id', params.id)
+    .eq('plan_id', id)
     .eq('task_id', taskId)
     .eq('day_of_week', parseInt(dayOfWeek, 10))
 

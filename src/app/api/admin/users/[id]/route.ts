@@ -6,9 +6,7 @@ import { type Role } from '@/types'
 import { z } from 'zod'
 import crypto from 'crypto'
 
-interface Params {
-  params: { id: string }
-}
+type Params = { params: Promise<{ id: string }> }
 
 // ─── PATCH /api/admin/users/[id] — Update user ────────────────────────────────
 
@@ -24,6 +22,7 @@ const updateSchema = z.object({
 })
 
 export async function PATCH(request: Request, { params }: Params) {
+  const { id } = await params
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return NextResponse.json({ error: 'Unauthenticated' }, { status: 401 })
@@ -37,14 +36,14 @@ export async function PATCH(request: Request, { params }: Params) {
   if (!parsed.success) return NextResponse.json({ error: parsed.error.issues[0].message }, { status: 400 })
 
   const adminClient = createAdminClient()
-  const { error } = await adminClient.from('profiles').update(parsed.data).eq('id', params.id)
+  const { error } = await adminClient.from('profiles').update(parsed.data).eq('id', id)
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
 
   await adminClient.from('audit_log').insert({
     actor_id: user.id,
     action: 'user.update',
     resource_type: 'user',
-    resource_id: params.id,
+    resource_id: id,
     metadata: parsed.data,
   })
 
@@ -54,6 +53,7 @@ export async function PATCH(request: Request, { params }: Params) {
 // ─── DELETE /api/admin/users/[id] — Deactivate user ──────────────────────────
 
 export async function DELETE(request: Request, { params }: Params) {
+  const { id } = await params
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return NextResponse.json({ error: 'Unauthenticated' }, { status: 401 })
@@ -63,7 +63,7 @@ export async function DELETE(request: Request, { params }: Params) {
   if (!check.allowed) return NextResponse.json({ error: check.error }, { status: check.status })
 
   // Cannot deactivate yourself
-  if (params.id === user.id) {
+  if (id === user.id) {
     return NextResponse.json({ error: 'You cannot deactivate your own account.' }, { status: 400 })
   }
 
@@ -76,25 +76,25 @@ export async function DELETE(request: Request, { params }: Params) {
     await adminClient.from('profiles').update({
       status: 'active',
       deactivated_at: null,
-    }).eq('id', params.id)
+    }).eq('id', id)
 
     await adminClient.from('audit_log').insert({
       actor_id: user.id,
       action: 'user.reactivate',
       resource_type: 'user',
-      resource_id: params.id,
+      resource_id: id,
     })
   } else {
     await adminClient.from('profiles').update({
       status: 'deactivated',
       deactivated_at: new Date().toISOString(),
-    }).eq('id', params.id)
+    }).eq('id', id)
 
     await adminClient.from('audit_log').insert({
       actor_id: user.id,
       action: 'user.deactivate',
       resource_type: 'user',
-      resource_id: params.id,
+      resource_id: id,
     })
   }
 
@@ -104,6 +104,7 @@ export async function DELETE(request: Request, { params }: Params) {
 // ─── POST /api/admin/users/[id]/resend-invite ─────────────────────────────────
 
 export async function POST(request: Request, { params }: Params) {
+  const { id } = await params
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return NextResponse.json({ error: 'Unauthenticated' }, { status: 401 })
@@ -115,12 +116,12 @@ export async function POST(request: Request, { params }: Params) {
   const adminClient = createAdminClient()
 
   // Invalidate old tokens
-  await adminClient.from('invite_tokens').update({ accepted: true }).eq('user_id', params.id).eq('accepted', false)
+  await adminClient.from('invite_tokens').update({ accepted: true }).eq('user_id', id).eq('accepted', false)
 
   // Create new token
   const token = crypto.randomBytes(32).toString('hex')
   await adminClient.from('invite_tokens').insert({
-    user_id: params.id,
+    user_id: id,
     token,
     expires_at: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
   })

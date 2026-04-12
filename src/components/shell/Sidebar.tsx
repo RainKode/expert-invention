@@ -1,5 +1,6 @@
 'use client'
 
+import { memo, useMemo, useCallback } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { type Role } from '@/types'
@@ -44,14 +45,14 @@ interface SidebarProps {
   onMobileClose?: () => void
 }
 
-export default function Sidebar({ userName, userRole, onLogout, mobileOpen = false, onMobileClose }: SidebarProps) {
+export default memo(function Sidebar({ userName, userRole, onLogout, mobileOpen = false, onMobileClose }: SidebarProps) {
   const pathname = usePathname()
 
-  const visibleNav = NAV_ITEMS.filter(
+  const visibleNav = useMemo(() => NAV_ITEMS.filter(
     (item) => !item.requiredAction || can(userRole, item.requiredAction)
-  )
+  ), [userRole])
 
-  const isActive = (href: string) => pathname === href || pathname.startsWith(href + '/')
+  const isActive = useCallback((href: string) => pathname === href || pathname.startsWith(href + '/'), [pathname])
 
   const NavLink = ({ item }: { item: NavItem }) => (
     <Link
@@ -196,4 +197,4 @@ export default function Sidebar({ userName, userRole, onLogout, mobileOpen = fal
       </nav>
     </>
   )
-}
+})

@@ -8,8 +8,9 @@ import type { Role } from '@/types'
 
 export async function POST(
   _request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
@@ -30,7 +31,7 @@ export async function POST(
   const { data: plan } = await admin
     .from('weekly_plans')
     .select('id, locked')
-    .eq('id', params.id)
+    .eq('id', id)
     .single()
 
   if (!plan) return NextResponse.json({ error: 'Plan not found' }, { status: 404 })
@@ -39,7 +40,7 @@ export async function POST(
   const { data, error } = await admin
     .from('weekly_plans')
     .update({ submission_status: 'draft', locked: false, submitted_at: null })
-    .eq('id', params.id)
+    .eq('id', id)
     .select()
     .single()
 

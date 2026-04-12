@@ -1,5 +1,6 @@
 'use client'
 
+import { memo } from 'react'
 import { type Role } from '@/types'
 import { ROLE_LABELS } from '@/lib/permissions'
 import GlobalSearchBar from '@/components/search/GlobalSearchBar'
@@ -12,7 +13,7 @@ interface TopBarProps {
   onMenuOpen?: () => void
 }
 
-export default function TopBar({ userName, userRole, unreadNotificationCount = 0, onNotificationClick, onMenuOpen }: TopBarProps) {
+export default memo(function TopBar({ userName, userRole, unreadNotificationCount = 0, onNotificationClick, onMenuOpen }: TopBarProps) {
   return (
     <header className="fixed top-0 right-0 left-0 md:left-72 h-16 z-30 px-4 md:px-6 flex items-center justify-between bg-surface-container-lowest/80 backdrop-blur-xl shadow-[0px_2px_15px_rgba(77,85,106,0.04)]">
       {/* Mobile hamburger */}
@@ -61,4 +62,4 @@ export default function TopBar({ userName, userRole, unreadNotificationCount = 0
       </div>
     </header>
   )
-}
+})

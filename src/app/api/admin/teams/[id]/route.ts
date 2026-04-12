@@ -5,7 +5,7 @@ import { requirePermission } from '@/lib/permissions'
 import { type Role } from '@/types'
 import { z } from 'zod'
 
-interface Params { params: { id: string } }
+type Params = { params: Promise<{ id: string }> }
 
 async function getActor() {
   const supabase = await createClient()
@@ -29,6 +29,7 @@ const updateSchema = z.object({
 })
 
 export async function PATCH(request: Request, { params }: Params) {
+  const { id } = await params
   const { user, actor } = await getActor()
   if (!user) return NextResponse.json({ error: 'Unauthenticated' }, { status: 401 })
 
@@ -42,13 +43,14 @@ export async function PATCH(request: Request, { params }: Params) {
   const { type, ...data } = parsed.data
   const adminClient = createAdminClient()
   const table = type === 'department' ? 'departments' : 'teams'
-  const { error } = await adminClient.from(table).update(data).eq('id', params.id)
+  const { error } = await adminClient.from(table).update(data).eq('id', id)
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
 
   return NextResponse.json({ success: true })
 }
 
 export async function DELETE(request: Request, { params }: Params) {
+  const { id } = await params
   const { user, actor } = await getActor()
   if (!user) return NextResponse.json({ error: 'Unauthenticated' }, { status: 401 })
 
@@ -60,7 +62,7 @@ export async function DELETE(request: Request, { params }: Params) {
 
   const adminClient = createAdminClient()
   const table = type === 'department' ? 'departments' : 'teams'
-  const { error } = await adminClient.from(table).delete().eq('id', params.id)
+  const { error } = await adminClient.from(table).delete().eq('id', id)
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
 
   return NextResponse.json({ success: true })

@@ -2,22 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 
-.material-symbols-outlined {
-  font-variation-settings:
-    'FILL' 0,
-    'wght' 300,
-    'GRAD' 0,
-    'opsz' 24;
-  font-family: 'Material Symbols Outlined';
-  font-style: normal;
-  display: inline-block;
-  line-height: 1;
-  text-transform: none;
-  letter-spacing: normal;
-  word-wrap: normal;
-  white-space: nowrap;
-  direction: ltr;
-  user-select: none;
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@layer components {
+  .skeleton {
+    background: linear-gradient(90deg, #eceef0 25%, #e6e8ea 50%, #eceef0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite linear;
+    border-radius: 0.5rem;
+  }
+}
+
+@layer base {
+  .material-symbols-outlined {
+    font-variation-settings:
+      'FILL' 0,
+      'wght' 300,
+      'GRAD' 0,
+      'opsz' 24;
+    font-family: 'Material Symbols Outlined';
+    font-style: normal;
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+    user-select: none;
+  }
 }
 
 @layer base {

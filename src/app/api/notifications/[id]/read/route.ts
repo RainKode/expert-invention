@@ -5,8 +5,9 @@ import { createAdminClient } from '@/lib/supabase/admin'
 // POST /api/notifications/[id]/read — mark a single notification as read
 export async function POST(
   _request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return NextResponse.json({ error: 'Unauthenticated' }, { status: 401 })
@@ -16,7 +17,7 @@ export async function POST(
   const { data: notification, error: fetchError } = await adminClient
     .from('notifications')
     .select('id, recipient_id')
-    .eq('id', params.id)
+    .eq('id', id)
     .single()
 
   if (fetchError || !notification) {
@@ -30,7 +31,7 @@ export async function POST(
   const { error } = await adminClient
     .from('notifications')
     .update({ read: true })
-    .eq('id', params.id)
+    .eq('id', id)
 
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 })

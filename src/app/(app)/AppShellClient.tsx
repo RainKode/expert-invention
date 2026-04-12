@@ -2,11 +2,14 @@
 
 import { useState, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
+import dynamic from 'next/dynamic'
 import Sidebar from '@/components/shell/Sidebar'
 import TopBar from '@/components/shell/TopBar'
-import QuickTaskModal from '@/components/tasks/QuickTaskModal'
-import NotificationPanel from '@/components/notifications/NotificationPanel'
 import { type Role } from '@/types'
+
+// Lazy-load heavy modals — only downloaded when user opens them
+const QuickTaskModal = dynamic(() => import('@/components/tasks/QuickTaskModal'), { ssr: false })
+const NotificationPanel = dynamic(() => import('@/components/notifications/NotificationPanel'), { ssr: false })
 
 interface AppShellClientProps {
   userName: string
@@ -53,15 +56,22 @@ export default function AppShellClient({
     router.refresh()
   }
 
+  const handleMobileClose = useCallback(() => setMobileMenuOpen(false), [])
+  const handleNotificationClick = useCallback(() => setNotificationPanelOpen(true), [])
+  const handleMenuOpen = useCallback(() => setMobileMenuOpen(true), [])
+  const handleQuickTaskClose = useCallback(() => setQuickTaskOpen(false), [])
+  const handleTaskCreated = useCallback(() => router.refresh(), [router])
+  const handleNotificationClose = useCallback(() => setNotificationPanelOpen(false), [])
+
   return (
     <div className="min-h-screen bg-background">
-      <Sidebar userName={userName} userRole={userRole} onLogout={handleLogout} mobileOpen={mobileMenuOpen} onMobileClose={() => setMobileMenuOpen(false)} />
+      <Sidebar userName={userName} userRole={userRole} onLogout={handleLogout} mobileOpen={mobileMenuOpen} onMobileClose={handleMobileClose} />
       <TopBar
         userName={userName}
         userRole={userRole}
         unreadNotificationCount={unreadCount}
-        onNotificationClick={() => setNotificationPanelOpen(true)}
-        onMenuOpen={() => setMobileMenuOpen(true)}
+        onNotificationClick={handleNotificationClick}
+        onMenuOpen={handleMenuOpen}
       />
       <main className="md:ml-72 mt-16 p-6 md:p-8 min-h-screen pb-24 md:pb-8">
         {children}
@@ -79,15 +89,15 @@ export default function AppShellClient({
 
       <QuickTaskModal
         open={quickTaskOpen}
-        onClose={() => setQuickTaskOpen(false)}
-        onCreated={() => router.refresh()}
+        onClose={handleQuickTaskClose}
+        onCreated={handleTaskCreated}
         currentUserId={userId}
         userRole={userRole}
       />
 
       <NotificationPanel
         open={notificationPanelOpen}
-        onClose={() => setNotificationPanelOpen(false)}
+        onClose={handleNotificationClose}
         onUnreadCountChange={setUnreadCount}
       />
     </div>

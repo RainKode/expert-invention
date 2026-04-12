@@ -1,8 +1,10 @@
 'use client'
 
 import { useState, useCallback, useRef, useEffect } from 'react'
-import FilePreviewModal from '@/components/files/FilePreviewModal'
+import dynamic from 'next/dynamic'
 import { FILE_TYPE_ICONS, ALLOWED_FILE_TYPES, MAX_FILE_SIZE } from '@/types'
+
+const FilePreviewModal = dynamic(() => import('@/components/files/FilePreviewModal'), { ssr: false })
 
 interface FileRecord {
   id: string
