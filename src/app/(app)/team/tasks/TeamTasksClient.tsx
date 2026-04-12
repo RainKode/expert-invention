@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import dynamic from 'next/dynamic'
+import { cachedFetch } from '@/lib/fetch-cache'
 
 const QuickTaskModal = dynamic(() => import('@/components/tasks/QuickTaskModal'), { ssr: false })
 
@@ -81,13 +82,14 @@ export default function TeamTasksClient({ userId, userRole, projects, teamMember
     if (filterProject) params.set('project_id', filterProject)
     if (overdueOnly) params.set('due_before', new Date().toISOString().split('T')[0])
 
-    const res = await fetch(`/api/tasks?${params}`)
-    if (res.ok) {
-      const data = await res.json()
+    try {
+      const data = await cachedFetch<{ tasks: Task[] }>(`/api/tasks?${params}`)
       let list: Task[] = data.tasks ?? []
       // If overdueOnly, filter out done tasks client-side too
       if (overdueOnly) list = list.filter(t => t.status !== 'done')
       setTasks(list)
+    } catch {
+      // Keep previous data
     }
     setLoading(false)
   }, [activeStatus, filterAssignee, filterPriority, filterType, filterProject, overdueOnly])

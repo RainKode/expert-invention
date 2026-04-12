@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import dynamic from 'next/dynamic'
+import { cachedFetch, invalidateCache } from '@/lib/fetch-cache'
 
 const QuickTaskModal = dynamic(() => import('@/components/tasks/QuickTaskModal'), { ssr: false })
 
@@ -79,10 +80,11 @@ export default function TasksClient({ userId, userRole, projects }: TasksClientP
     if (filterProject) params.set('project_id', filterProject)
     if (filterBillable) params.set('billable', 'true')
 
-    const res = await fetch(`/api/tasks?${params}`)
-    if (res.ok) {
-      const data = await res.json()
+    try {
+      const data = await cachedFetch<{ tasks: Task[] }>(`/api/tasks?${params}`)
       setTasks(data.tasks ?? [])
+    } catch {
+      // Fallback: already showing previous data or empty
     }
     setLoading(false)
   }, [activeStatus, filterPriority, filterType, filterNature, filterProject, filterBillable])

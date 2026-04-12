@@ -15,6 +15,7 @@ import { TaskWithRelations as Task, SavedView, CustomFieldDefinition, CustomFiel
 import KanbanColumn from '@/components/board/KanbanColumn'
 import KanbanCard from '@/components/board/KanbanCard'
 import dynamic from 'next/dynamic'
+import { cachedFetch, invalidateCache } from '@/lib/fetch-cache'
 
 const CompletionReportModal = dynamic(() => import('@/components/tasks/CompletionReportModal'), { ssr: false })
 
@@ -91,10 +92,11 @@ export default function BoardClient({ userId, userRole, teamId, projects, teamMe
       if (key.startsWith('cf_') && val) params.set(key, val)
     })
     if (isManager) params.set('team', 'true')
-    const res = await fetch(`/api/tasks?${params}&page_size=200`)
-    if (res.ok) {
-      const d = await res.json()
+    try {
+      const d = await cachedFetch<{ tasks: Task[] }>(`/api/tasks?${params}&page_size=200`, { freshMs: 10000 })
       setTasks(d.tasks ?? [])
+    } catch {
+      // Keep previous data
     }
     setLoading(false)
   }, [filters])
@@ -165,7 +167,11 @@ export default function BoardClient({ userId, userRole, teamId, projects, teamMe
     })
     if (!res.ok) {
       // Revert
+      invalidateCache('/api/tasks')
       fetchTasks()
+    } else {
+      // Bust cache so next page load gets fresh data
+      invalidateCache('/api/tasks')
     }
   }
 

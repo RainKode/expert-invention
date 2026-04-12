@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic'
 import Sidebar from '@/components/shell/Sidebar'
 import TopBar from '@/components/shell/TopBar'
 import { type Role } from '@/types'
+import { invalidateCache } from '@/lib/fetch-cache'
 
 // Lazy-load heavy modals — only downloaded when user opens them
 const QuickTaskModal = dynamic(() => import('@/components/tasks/QuickTaskModal'), { ssr: false })
@@ -60,7 +61,10 @@ export default function AppShellClient({
   const handleNotificationClick = useCallback(() => setNotificationPanelOpen(true), [])
   const handleMenuOpen = useCallback(() => setMobileMenuOpen(true), [])
   const handleQuickTaskClose = useCallback(() => setQuickTaskOpen(false), [])
-  const handleTaskCreated = useCallback(() => router.refresh(), [router])
+  const handleTaskCreated = useCallback(() => {
+    invalidateCache('/api/tasks')
+    router.refresh()
+  }, [router])
   const handleNotificationClose = useCallback(() => setNotificationPanelOpen(false), [])
 
   return (
