@@ -24,22 +24,21 @@ export async function POST(request: NextRequest, { params }: Params) {
 
   const { action, comment } = parsed.data
 
-  const { data: task } = await supabase.from('tasks').select('*').eq('id', id).single()
+  const admin = createAdminClient()
+  const { data: task } = await admin.from('tasks').select('*').eq('id', id).single()
   if (!task) return NextResponse.json({ error: 'Task not found' }, { status: 404 })
 
   if (task.status !== 'in_review') {
     return NextResponse.json({ error: 'Task is not in review status' }, { status: 422 })
   }
 
-  const { data: profile } = await supabase.from('profiles').select('role').eq('id', user.id).single()
+  const { data: profile } = await admin.from('profiles').select('role').eq('id', user.id).single()
   const isReviewer = task.reviewer_id === user.id
   const isManager = ['manager', 'senior_manager', 'admin'].includes(profile?.role ?? '')
 
   if (!isReviewer && !isManager) {
     return NextResponse.json({ error: 'Only the reviewer or a manager can take review action' }, { status: 403 })
   }
-
-  const admin = createAdminClient()
 
   if (action === 'approve') {
     const { data: updated, error } = await admin

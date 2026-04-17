@@ -18,7 +18,8 @@ export async function GET(_: NextRequest, { params }: Params) {
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
-  const { data, error } = await supabase
+  const admin = createAdminClient()
+  const { data, error } = await admin
     .from('custom_field_values')
     .select('*, field_definition:custom_field_definitions(*)')
     .eq('task_id', id)
@@ -41,7 +42,8 @@ export async function POST(request: NextRequest, { params }: Params) {
   const { field_definition_id, value } = parsed.data
 
   // Verify field exists and is active
-  const { data: fieldDef } = await supabase
+  const admin = createAdminClient()
+  const { data: fieldDef } = await admin
     .from('custom_field_definitions')
     .select('*')
     .eq('id', field_definition_id)
@@ -64,14 +66,13 @@ export async function POST(request: NextRequest, { params }: Params) {
   }
 
   // Get existing value for timeline diff
-  const { data: existing } = await supabase
+  const { data: existing } = await admin
     .from('custom_field_values')
     .select('value')
     .eq('task_id', id)
     .eq('field_definition_id', field_definition_id)
     .single()
 
-  const admin = createAdminClient()
   const { data: result, error } = await admin
     .from('custom_field_values')
     .upsert({

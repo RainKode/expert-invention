@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/admin'
 
 type Params = { params: Promise<{ id: string }> }
 
@@ -10,9 +11,10 @@ export async function GET(_: NextRequest, { params }: Params) {
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
-  const { data, error } = await supabase
+  const admin = createAdminClient()
+  const { data, error } = await admin
     .from('task_timeline')
-    .select('*, actor:profiles!task_timeline_actor_id_fkey(id, name, email)')
+    .select('*, actor:profiles!task_timeline_actor_id_fkey(id, name)')
     .eq('task_id', id)
     .order('created_at', { ascending: true })
 

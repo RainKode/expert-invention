@@ -17,7 +17,8 @@ export async function GET(_: NextRequest, { params }: Params) {
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
-  const { data, error } = await supabase
+  const admin = createAdminClient()
+  const { data, error } = await admin
     .from('task_dependencies')
     .select('*, depends_on:tasks!task_dependencies_depends_on_task_id_fkey(id, title, status, assignee_id)')
     .eq('task_id', id)
@@ -44,6 +45,7 @@ export async function POST(request: NextRequest, { params }: Params) {
   }
 
   // Circular dependency check: does depends_on_task_id already (directly or transitively) depend on id?
+  const admin = createAdminClient()
   const visited = new Set<string>()
   const queue = [depends_on_task_id]
   while (queue.length > 0) {
@@ -51,7 +53,7 @@ export async function POST(request: NextRequest, { params }: Params) {
     if (visited.has(current)) continue
     visited.add(current)
 
-    const { data: deps } = await supabase
+    const { data: deps } = await admin
       .from('task_dependencies')
       .select('depends_on_task_id')
       .eq('task_id', current)
@@ -64,7 +66,6 @@ export async function POST(request: NextRequest, { params }: Params) {
     }
   }
 
-  const admin = createAdminClient()
   const { error } = await admin.from('task_dependencies').insert({ task_id: id, depends_on_task_id })
   if (error) {
     if (error.code === '23505') return NextResponse.json({ error: 'Dependency already exists' }, { status: 409 })

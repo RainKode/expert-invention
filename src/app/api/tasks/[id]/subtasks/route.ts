@@ -21,7 +21,8 @@ export async function GET(_: NextRequest, { params }: Params) {
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
-  const { data, error } = await supabase
+  const admin = createAdminClient()
+  const { data, error } = await admin
     .from('tasks')
     .select('*, assignee:profiles!tasks_assignee_id_fkey(id, name)')
     .eq('parent_task_id', id)
@@ -44,10 +45,10 @@ export async function POST(request: NextRequest, { params }: Params) {
   if (!parsed.success) return NextResponse.json({ error: parsed.error.issues[0].message }, { status: 400 })
 
   // Verify parent task exists and user can access it
-  const { data: parent } = await supabase.from('tasks').select('id, team_id, project_id').eq('id', id).single()
+  const admin = createAdminClient()
+  const { data: parent } = await admin.from('tasks').select('id, team_id, project_id').eq('id', id).single()
   if (!parent) return NextResponse.json({ error: 'Parent task not found' }, { status: 404 })
 
-  const admin = createAdminClient()
   const { data: subtask, error } = await admin
     .from('tasks')
     .insert({

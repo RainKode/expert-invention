@@ -24,10 +24,11 @@ export async function POST(request: NextRequest, { params }: Params) {
 
   const { new_assignee_id, reason } = parsed.data
 
-  const { data: task } = await supabase.from('tasks').select('*').eq('id', id).single()
+  const admin = createAdminClient()
+  const { data: task } = await admin.from('tasks').select('*').eq('id', id).single()
   if (!task) return NextResponse.json({ error: 'Task not found' }, { status: 404 })
 
-  const { data: profile } = await supabase.from('profiles').select('role').eq('id', user.id).single()
+  const { data: profile } = await admin.from('profiles').select('role').eq('id', user.id).single()
   const isCreator = task.creator_id === user.id
   const isManager = ['manager', 'senior_manager', 'admin', 'assistant_manager'].includes(profile?.role ?? '')
 
@@ -35,7 +36,6 @@ export async function POST(request: NextRequest, { params }: Params) {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
   }
 
-  const admin = createAdminClient()
   const { data: updated, error } = await admin
     .from('tasks')
     .update({ assignee_id: new_assignee_id })

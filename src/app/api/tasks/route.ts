@@ -166,7 +166,8 @@ export async function POST(request: NextRequest) {
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
-  const { data: profile } = await supabase.from('profiles').select('role, billable_permission, team_id').eq('id', user.id).single()
+  const admin = createAdminClient()
+  const { data: profile } = await admin.from('profiles').select('role, billable_permission, team_id').eq('id', user.id).single()
   const role = profile?.role as Role | undefined
 
   const body = await request.json()
@@ -195,7 +196,6 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Actual hours are required for already-completed tasks' }, { status: 400 })
   }
 
-  const admin = createAdminClient()
   const { data: task, error } = await admin.from('tasks').insert({
     title: data.title,
     description: data.description ?? null,

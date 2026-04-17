@@ -23,18 +23,18 @@ export async function POST(request: NextRequest, { params }: Params) {
 
   const { text, file_path } = parsed.data
 
-  const { data: task } = await supabase.from('tasks').select('assignee_id, creator_id').eq('id', id).single()
+  const admin = createAdminClient()
+  const { data: task } = await admin.from('tasks').select('assignee_id, creator_id').eq('id', id).single()
   if (!task) return NextResponse.json({ error: 'Task not found' }, { status: 404 })
 
   const isInvolved = task.assignee_id === user.id || task.creator_id === user.id
-  const { data: profile } = await supabase.from('profiles').select('role').eq('id', user.id).single()
+  const { data: profile } = await admin.from('profiles').select('role').eq('id', user.id).single()
   const isManager = ['manager', 'senior_manager', 'admin', 'assistant_manager'].includes(profile?.role ?? '')
 
   if (!isInvolved && !isManager) {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
   }
 
-  const admin = createAdminClient()
   const updatePayload: Record<string, unknown> = {}
   if (text !== undefined) updatePayload.completion_report_text = text
   if (file_path !== undefined) updatePayload.completion_report_file_path = file_path

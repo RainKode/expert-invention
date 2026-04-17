@@ -30,10 +30,11 @@ export async function POST(request: NextRequest, { params }: Params) {
 
   const { status: newStatus } = parsed.data
 
-  const { data: task } = await supabase.from('tasks').select('*').eq('id', id).single()
+  const admin = createAdminClient()
+  const { data: task } = await admin.from('tasks').select('*').eq('id', id).single()
   if (!task) return NextResponse.json({ error: 'Task not found' }, { status: 404 })
 
-  const { data: profile } = await supabase.from('profiles').select('role').eq('id', user.id).single()
+  const { data: profile } = await admin.from('profiles').select('role').eq('id', user.id).single()
   const isManager = ['manager', 'senior_manager', 'admin', 'assistant_manager'].includes(profile?.role ?? '')
   const isAssignee = task.assignee_id === user.id
   const isReviewer = task.reviewer_id === user.id
@@ -59,7 +60,7 @@ export async function POST(request: NextRequest, { params }: Params) {
 
   // Check dependencies: cannot start (in_progress) if any blocker is not done
   if (newStatus === 'in_progress') {
-    const { data: deps } = await supabase
+    const { data: deps } = await admin
       .from('task_dependencies')
       .select('depends_on_task_id, depends_on:tasks!task_dependencies_depends_on_task_id_fkey(status)')
       .eq('task_id', id)
@@ -75,7 +76,6 @@ export async function POST(request: NextRequest, { params }: Params) {
     }
   }
 
-  const admin = createAdminClient()
   const updatePayload: Record<string, unknown> = { status: newStatus }
   if (newStatus === 'done') {
     updatePayload.completed_at = new Date().toISOString()

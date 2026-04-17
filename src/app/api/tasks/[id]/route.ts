@@ -27,7 +27,8 @@ export async function GET(_: NextRequest, { params }: Params) {
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
-  const { data: task, error } = await supabase
+  const admin = createAdminClient()
+  const { data: task, error } = await admin
     .from('tasks')
     .select(`
       *,
@@ -62,19 +63,19 @@ export async function PATCH(request: NextRequest, { params }: Params) {
   const parsed = updateSchema.safeParse(body)
   if (!parsed.success) return NextResponse.json({ error: parsed.error.issues[0].message }, { status: 400 })
 
+  const admin = createAdminClient()
+
   // Fetch current task to check permissions & log diffs
-  const { data: current } = await supabase.from('tasks').select('*').eq('id', id).single()
+  const { data: current } = await admin.from('tasks').select('*').eq('id', id).single()
   if (!current) return NextResponse.json({ error: 'Task not found' }, { status: 404 })
 
   // Permission: creator, assignee, reviewer, or manager+
-  const { data: profile } = await supabase.from('profiles').select('role').eq('id', user.id).single()
+  const { data: profile } = await admin.from('profiles').select('role').eq('id', user.id).single()
   const isInvolved = current.creator_id === user.id || current.assignee_id === user.id || current.reviewer_id === user.id
   const isManager = ['manager', 'senior_manager', 'admin', 'assistant_manager'].includes(profile?.role ?? '')
   if (!isInvolved && !isManager) {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
   }
-
-  const admin = createAdminClient()
   const { data: updated, error } = await admin.from('tasks').update(parsed.data).eq('id', id).select().single()
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
 
