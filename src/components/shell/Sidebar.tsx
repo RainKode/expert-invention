@@ -43,9 +43,11 @@ interface SidebarProps {
   onLogout: () => void
   mobileOpen?: boolean
   onMobileClose?: () => void
+  collapsed?: boolean
+  onToggleCollapse?: () => void
 }
 
-export default memo(function Sidebar({ userName, userRole, onLogout, mobileOpen = false, onMobileClose }: SidebarProps) {
+export default memo(function Sidebar({ userName, userRole, onLogout, mobileOpen = false, onMobileClose, collapsed = false, onToggleCollapse }: SidebarProps) {
   const pathname = usePathname()
 
   const visibleNav = useMemo(() => NAV_ITEMS.filter(
@@ -58,10 +60,11 @@ export default memo(function Sidebar({ userName, userRole, onLogout, mobileOpen 
     <Link
       href={item.href}
       onClick={() => onMobileClose?.()}
+      title={collapsed ? item.label : undefined}
       className={
         isActive(item.href)
-          ? 'flex items-center gap-4 px-4 py-3 text-white font-semibold rounded-2xl shadow-ambient-sm transition-all'
-          : 'flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-2xl'
+          ? `flex items-center ${collapsed ? 'justify-center' : ''} gap-4 px-4 py-3 text-white font-semibold rounded-2xl shadow-ambient-sm transition-all`
+          : `flex items-center ${collapsed ? 'justify-center' : ''} gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-2xl`
       }
       style={
         isActive(item.href)
@@ -69,18 +72,18 @@ export default memo(function Sidebar({ userName, userRole, onLogout, mobileOpen 
           : undefined
       }
     >
-      <span className="material-symbols-outlined text-xl">{item.icon}</span>
-      <span>{item.label}</span>
+      <span className="material-symbols-outlined text-xl shrink-0">{item.icon}</span>
+      {!collapsed && <span className="whitespace-nowrap">{item.label}</span>}
     </Link>
   )
 
-  const SidebarContent = () => (
+  const SidebarContent = ({ isCollapsed = false }: { isCollapsed?: boolean }) => (
     <>
       {/* Brand */}
-      <div className="px-8 pt-10 pb-12">
-        <div className="flex items-center gap-3">
+      <div className={`${isCollapsed ? 'px-3 pt-8 pb-6' : 'px-8 pt-10 pb-12'} transition-all duration-300`}>
+        <div className={`flex items-center ${isCollapsed ? 'justify-center' : 'gap-3'}`}>
           <div
-            className="w-10 h-10 rounded-xl flex items-center justify-center shadow-ambient"
+            className="w-10 h-10 rounded-xl flex items-center justify-center shadow-ambient shrink-0"
             style={{ background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }}
           >
             <span
@@ -90,17 +93,35 @@ export default memo(function Sidebar({ userName, userRole, onLogout, mobileOpen 
               hub
             </span>
           </div>
-          <div>
-            <h1 className="text-xl font-bold tracking-tighter text-primary">Sunday</h1>
-            <p className="text-[10px] text-outline uppercase tracking-widest font-semibold">
-              The Digital Atrium
-            </p>
-          </div>
+          {!isCollapsed && (
+            <div>
+              <h1 className="text-xl font-bold tracking-tighter text-primary">Sunday</h1>
+              <p className="text-[10px] text-outline uppercase tracking-widest font-semibold">
+                The Digital Atrium
+              </p>
+            </div>
+          )}
         </div>
       </div>
 
+      {/* Collapse toggle button */}
+      {onToggleCollapse && (
+        <div className={`${isCollapsed ? 'px-2' : 'px-4'} mb-2`}>
+          <button
+            onClick={onToggleCollapse}
+            className="w-full flex items-center justify-center gap-2 py-2 rounded-2xl text-on-surface-variant hover:bg-surface-container-high transition-colors"
+            title={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+          >
+            <span className="material-symbols-outlined text-lg transition-transform duration-300" style={{ transform: isCollapsed ? 'rotate(180deg)' : 'rotate(0deg)' }}>
+              chevron_left
+            </span>
+            {!isCollapsed && <span className="text-xs font-semibold">Collapse</span>}
+          </button>
+        </div>
+      )}
+
       {/* Primary Nav */}
-      <nav className="flex-1 px-4 space-y-1">
+      <nav className={`flex-1 ${isCollapsed ? 'px-2' : 'px-4'} space-y-1 overflow-y-auto overflow-x-hidden`}>
         {visibleNav.map((item) => (
           <NavLink key={item.href} item={item} />
         ))}
@@ -108,10 +129,13 @@ export default memo(function Sidebar({ userName, userRole, onLogout, mobileOpen 
         {/* Admin section */}
         {userRole === 'admin' && (
           <>
-            <div className="pt-6 pb-2 px-4">
-              <p className="text-[10px] text-outline uppercase tracking-widest font-semibold">
-                Admin
-              </p>
+            <div className={`pt-6 pb-2 ${isCollapsed ? 'px-2' : 'px-4'}`}>
+              {!isCollapsed && (
+                <p className="text-[10px] text-outline uppercase tracking-widest font-semibold">
+                  Admin
+                </p>
+              )}
+              {isCollapsed && <div className="w-6 mx-auto border-t border-outline-variant/15" />}
             </div>
             {ADMIN_NAV.map((item) => (
               <NavLink key={item.href} item={item} />
@@ -121,36 +145,50 @@ export default memo(function Sidebar({ userName, userRole, onLogout, mobileOpen 
       </nav>
 
       {/* Footer */}
-      <div className="px-4 py-8 space-y-2">
+      <div className={`${isCollapsed ? 'px-2' : 'px-4'} py-8 space-y-2`}>
         <Link
           href="/settings"
-          className="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-2xl"
+          title={isCollapsed ? 'Settings' : undefined}
+          className={`flex items-center ${isCollapsed ? 'justify-center' : ''} gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-2xl`}
         >
-          <span className="material-symbols-outlined text-xl">settings</span>
-          <span>Settings</span>
+          <span className="material-symbols-outlined text-xl shrink-0">settings</span>
+          {!isCollapsed && <span>Settings</span>}
         </Link>
 
         <div className="pt-4 mt-2">
-          <div className="flex items-center gap-3 px-4 py-2">
+          <div className={`flex items-center ${isCollapsed ? 'justify-center' : 'gap-3'} px-4 py-2`}>
             <div className="w-9 h-9 rounded-full bg-primary-container flex items-center justify-center shrink-0">
               <span className="text-on-primary-container text-sm font-bold">
                 {userName.charAt(0).toUpperCase()}
               </span>
             </div>
-            <div className="overflow-hidden flex-1">
-              <p className="text-sm font-bold text-on-surface truncate">{userName}</p>
-              <p className="text-[11px] text-outline uppercase font-semibold tracking-wider">
-                {userRole.replace(/_/g, ' ')}
-              </p>
-            </div>
+            {!isCollapsed && (
+              <>
+                <div className="overflow-hidden flex-1">
+                  <p className="text-sm font-bold text-on-surface truncate">{userName}</p>
+                  <p className="text-[11px] text-outline uppercase font-semibold tracking-wider">
+                    {userRole.replace(/_/g, ' ')}
+                  </p>
+                </div>
+                <button
+                  onClick={onLogout}
+                  className="p-2 text-outline hover:text-error transition-colors"
+                  title="Sign out"
+                >
+                  <span className="material-symbols-outlined text-xl">logout</span>
+                </button>
+              </>
+            )}
+          </div>
+          {isCollapsed && (
             <button
               onClick={onLogout}
-              className="p-2 text-outline hover:text-error transition-colors"
+              className="w-full flex items-center justify-center py-2 mt-1 text-outline hover:text-error transition-colors rounded-2xl hover:bg-surface-container-high"
               title="Sign out"
             >
               <span className="material-symbols-outlined text-xl">logout</span>
             </button>
-          </div>
+          )}
         </div>
       </div>
     </>
@@ -159,8 +197,12 @@ export default memo(function Sidebar({ userName, userRole, onLogout, mobileOpen 
   return (
     <>
       {/* Desktop Sidebar */}
-      <aside className="fixed left-0 top-0 bottom-0 z-40 h-full w-72 hidden md:flex flex-col bg-surface-container-low shadow-ambient">
-        <SidebarContent />
+      <aside
+        className={`fixed left-0 top-0 bottom-0 z-40 h-full hidden md:flex flex-col bg-surface-container-low shadow-ambient transition-all duration-300 ease-in-out ${
+          collapsed ? 'w-[72px]' : 'w-72'
+        }`}
+      >
+        <SidebarContent isCollapsed={collapsed} />
       </aside>
 
       {/* Mobile Overlay */}
@@ -173,7 +215,7 @@ export default memo(function Sidebar({ userName, userRole, onLogout, mobileOpen 
             className="absolute left-0 top-0 bottom-0 w-72 bg-surface-container-low flex flex-col shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
-            <SidebarContent />
+            <SidebarContent isCollapsed={false} />
           </aside>
         </div>
       )}

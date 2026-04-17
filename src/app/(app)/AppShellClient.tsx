@@ -31,6 +31,7 @@ export default function AppShellClient({
   const [notificationPanelOpen, setNotificationPanelOpen] = useState(false)
   const [unreadCount, setUnreadCount] = useState(0)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
 
   // Fetch initial unread count
   const fetchUnreadCount = useCallback(async () => {
@@ -90,10 +91,11 @@ export default function AppShellClient({
     router.refresh()
   }, [router])
   const handleNotificationClose = useCallback(() => setNotificationPanelOpen(false), [])
+  const handleToggleSidebar = useCallback(() => setSidebarCollapsed(c => !c), [])
 
   return (
     <div className="min-h-screen bg-background">
-      <Sidebar userName={userName} userRole={userRole} onLogout={handleLogout} mobileOpen={mobileMenuOpen} onMobileClose={handleMobileClose} />
+      <Sidebar userName={userName} userRole={userRole} onLogout={handleLogout} mobileOpen={mobileMenuOpen} onMobileClose={handleMobileClose} collapsed={sidebarCollapsed} onToggleCollapse={handleToggleSidebar} />
       <TopBar
         userName={userName}
         userRole={userRole}
@@ -101,7 +103,7 @@ export default function AppShellClient({
         onNotificationClick={handleNotificationClick}
         onMenuOpen={handleMenuOpen}
       />
-      <main className="md:ml-72 mt-16 p-6 md:p-8 min-h-screen pb-24 md:pb-8">
+      <main className={`mt-16 p-6 md:p-8 min-h-screen pb-24 md:pb-8 transition-all duration-300 ease-in-out ${sidebarCollapsed ? 'md:ml-[72px]' : 'md:ml-72'}`}>
         {children}
       </main>
 
