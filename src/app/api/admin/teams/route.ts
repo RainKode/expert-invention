@@ -38,8 +38,8 @@ export async function GET() {
   const check = requirePermission(actor?.role as Role, 'manage_users_and_teams')
   if (!check.allowed) return NextResponse.json({ error: check.error }, { status: check.status })
 
-  const supabase = await createClient()
-  const { data: departments } = await supabase
+  const adminClient = createAdminClient()
+  const { data: departments } = await adminClient
     .from('departments')
     .select(`
       id, name, senior_manager_id,

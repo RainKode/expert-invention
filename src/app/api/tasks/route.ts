@@ -32,7 +32,8 @@ export async function GET(request: NextRequest) {
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
-  const { data: profile } = await supabase.from('profiles').select('role').eq('id', user.id).single()
+  const admin = createAdminClient()
+  const { data: profile } = await admin.from('profiles').select('role, team_id').eq('id', user.id).single()
   const role = profile?.role as Role | undefined
 
   const { searchParams } = new URL(request.url)
@@ -49,8 +50,8 @@ export async function GET(request: NextRequest) {
   const teamScope = searchParams.get('team') === 'true'
   const search = searchParams.get('search')
 
-  // Base select with relations
-  let query = supabase
+  // Use admin client to bypass RLS — scoping is handled by application logic below
+  let query = admin
     .from('tasks')
     .select(`
       id, title, status, priority, task_type, task_nature, billable,
@@ -63,9 +64,20 @@ export async function GET(request: NextRequest) {
     .neq('status', 'archived')
     .order('due_date', { ascending: true })
 
-  // Scope by role — managers can request team scope
+  // Scope by role
   if (teamScope && role && can(role, 'view_team_tasks')) {
-    // Team scope: tasks within manager's visible scope (handled by RLS)
+    // Managers see tasks for their team members
+    if (role !== 'admin' && profile?.team_id) {
+      const { data: teamMembers } = await admin
+        .from('profiles')
+        .select('id')
+        .eq('team_id', profile.team_id)
+      if (teamMembers && teamMembers.length > 0) {
+        const memberIds = teamMembers.map((m: { id: string }) => m.id)
+        query = query.in('assignee_id', memberIds)
+      }
+    }
+    // Admin sees all tasks (no filter)
   } else {
     // Personal scope: only tasks where user is involved
     query = query.or(
@@ -103,7 +115,6 @@ export async function GET(request: NextRequest) {
 
   let customFieldTaskIds: string[] | null = null
   if (cfFilters.length > 0) {
-    const admin = createAdminClient()
     // For each custom field filter, find matching task IDs
     const taskIdSets = await Promise.all(cfFilters.map(async (cf) => {
       let cfQuery = admin.from('custom_field_values')
