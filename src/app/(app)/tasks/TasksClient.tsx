@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback, useRef } from 'react'
+import { useState, useEffect, useCallback, useRef, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
 import dynamic from 'next/dynamic'
 import { cachedFetch, invalidateCache } from '@/lib/fetch-cache'
@@ -46,6 +46,13 @@ const STATUS_LABEL: Record<string, string> = {
   done: 'Done',
 }
 
+const STATUS_ICON: Record<string, string> = {
+  todo: 'radio_button_unchecked',
+  in_progress: 'pending',
+  in_review: 'visibility',
+  done: 'check_circle',
+}
+
 const PRIORITY_DOT: Record<string, string> = {
   high: 'bg-error',
   medium: 'bg-tertiary',
@@ -58,8 +65,33 @@ const PRIORITY_LABEL: Record<string, string> = {
   low: 'Low',
 }
 
+const KANBAN_COLUMNS = [
+  { key: 'todo', label: 'To Do', color: 'bg-outline' },
+  { key: 'in_progress', label: 'In Progress', color: 'bg-secondary' },
+  { key: 'in_review', label: 'In Review', color: 'bg-tertiary' },
+  { key: 'done', label: 'Done', color: 'bg-primary' },
+]
+
 type SortField = 'title' | 'status' | 'priority' | 'due_date' | 'assignee' | 'project' | 'task_type' | 'task_nature'
 type SortDir = 'asc' | 'desc'
+type ViewMode = 'list' | 'kanban'
+
+interface ColumnDef {
+  field: SortField
+  label: string
+  minWidth: number
+  defaultWidth: number
+}
+
+const COLUMNS: ColumnDef[] = [
+  { field: 'title', label: 'Task', minWidth: 120, defaultWidth: 999 },
+  { field: 'status', label: 'Status', minWidth: 80, defaultWidth: 120 },
+  { field: 'priority', label: 'Priority', minWidth: 80, defaultWidth: 100 },
+  { field: 'task_type', label: 'Type', minWidth: 70, defaultWidth: 100 },
+  { field: 'project', label: 'Project', minWidth: 80, defaultWidth: 120 },
+  { field: 'due_date', label: 'Due Date', minWidth: 80, defaultWidth: 120 },
+  { field: 'assignee', label: 'Assignee', minWidth: 80, defaultWidth: 100 },
+]
 
 /* ---- Dropdown filter component ---- */
 function FilterDropdown({ label, icon, value, options, onChange }: {
@@ -125,6 +157,123 @@ function FilterDropdown({ label, icon, value, options, onChange }: {
   )
 }
 
+/* ---- Column header dropdown ---- */
+function ColumnHeaderDropdown({ column, sortField, sortDir, onSort, onHide, onResetWidth }: {
+  column: ColumnDef
+  sortField: SortField
+  sortDir: SortDir
+  onSort: (field: SortField, dir: SortDir) => void
+  onHide: (field: SortField) => void
+  onResetWidth: (field: SortField) => void
+}) {
+  const [open, setOpen] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    function close(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false)
+    }
+    document.addEventListener('mousedown', close)
+    return () => document.removeEventListener('mousedown', close)
+  }, [])
+
+  return (
+    <div ref={ref} className="relative">
+      <button
+        onClick={(e) => { e.stopPropagation(); setOpen(o => !o) }}
+        className={`material-symbols-outlined text-xs transition-all duration-150 ${
+          open ? 'text-primary opacity-100' : 'opacity-0 group-hover:opacity-60'
+        } hover:text-primary`}
+      >
+        more_vert
+      </button>
+      {open && (
+        <div className="absolute top-full right-0 mt-1 min-w-[160px] bg-surface-container-lowest/90 backdrop-blur-[20px] rounded-[16px] shadow-ambient overflow-hidden z-50">
+          <div className="py-1.5">
+            <button
+              onClick={() => { onSort(column.field, 'asc'); setOpen(false) }}
+              className={`w-full flex items-center gap-2.5 px-3.5 py-2 text-xs font-medium transition-colors hover:bg-surface-container-high ${
+                sortField === column.field && sortDir === 'asc' ? 'text-primary' : 'text-on-surface-variant'
+              }`}
+            >
+              <span className="material-symbols-outlined text-sm">arrow_upward</span>
+              Sort Ascending
+            </button>
+            <button
+              onClick={() => { onSort(column.field, 'desc'); setOpen(false) }}
+              className={`w-full flex items-center gap-2.5 px-3.5 py-2 text-xs font-medium transition-colors hover:bg-surface-container-high ${
+                sortField === column.field && sortDir === 'desc' ? 'text-primary' : 'text-on-surface-variant'
+              }`}
+            >
+              <span className="material-symbols-outlined text-sm">arrow_downward</span>
+              Sort Descending
+            </button>
+            <div className="mx-3 my-1 border-t border-outline-variant/15" />
+            <button
+              onClick={() => { onResetWidth(column.field); setOpen(false) }}
+              className="w-full flex items-center gap-2.5 px-3.5 py-2 text-xs font-medium text-on-surface-variant transition-colors hover:bg-surface-container-high"
+            >
+              <span className="material-symbols-outlined text-sm">width</span>
+              Reset Width
+            </button>
+            {column.field !== 'title' && (
+              <button
+                onClick={() => { onHide(column.field); setOpen(false) }}
+                className="w-full flex items-center gap-2.5 px-3.5 py-2 text-xs font-medium text-on-surface-variant transition-colors hover:bg-surface-container-high"
+              >
+                <span className="material-symbols-outlined text-sm">visibility_off</span>
+                Hide Column
+              </button>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
+
+/* ---- Resizable column handle ---- */
+function ResizeHandle({ onResize }: { onResize: (delta: number) => void }) {
+  const startX = useRef(0)
+  const dragging = useRef(false)
+
+  const onMouseDown = useCallback((e: React.MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    startX.current = e.clientX
+    dragging.current = true
+
+    const onMouseMove = (ev: MouseEvent) => {
+      if (!dragging.current) return
+      const delta = ev.clientX - startX.current
+      startX.current = ev.clientX
+      onResize(delta)
+    }
+
+    const onMouseUp = () => {
+      dragging.current = false
+      document.removeEventListener('mousemove', onMouseMove)
+      document.removeEventListener('mouseup', onMouseUp)
+      document.body.style.cursor = ''
+      document.body.style.userSelect = ''
+    }
+
+    document.body.style.cursor = 'col-resize'
+    document.body.style.userSelect = 'none'
+    document.addEventListener('mousemove', onMouseMove)
+    document.addEventListener('mouseup', onMouseUp)
+  }, [onResize])
+
+  return (
+    <div
+      onMouseDown={onMouseDown}
+      className="absolute right-0 top-0 bottom-0 w-1.5 cursor-col-resize z-10 group/handle hover:bg-primary/20 transition-colors"
+    >
+      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-0.5 h-4 rounded-full bg-outline/0 group-hover/handle:bg-primary/40 transition-colors" />
+    </div>
+  )
+}
+
 interface TasksClientProps {
   userId: string
   userRole: string
@@ -145,6 +294,9 @@ export default function TasksClient({ userId, userRole, projects }: TasksClientP
   const [sortField, setSortField] = useState<SortField>('created_at' as SortField)
   const [sortDir, setSortDir] = useState<SortDir>('desc')
   const [selectedTasks, setSelectedTasks] = useState<Set<string>>(new Set())
+  const [viewMode, setViewMode] = useState<ViewMode>('list')
+  const [columnWidths, setColumnWidths] = useState<Record<string, number>>({})
+  const [hiddenColumns, setHiddenColumns] = useState<Set<SortField>>(new Set())
 
   const fetchTasks = useCallback(async () => {
     setLoading(true)
@@ -177,8 +329,11 @@ export default function TasksClient({ userId, userRole, projects }: TasksClientP
     return new Date(dateStr).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })
   }
 
-  const handleSort = (field: SortField) => {
-    if (sortField === field) {
+  const handleSort = (field: SortField, dir?: SortDir) => {
+    if (dir) {
+      setSortField(field)
+      setSortDir(dir)
+    } else if (sortField === field) {
       setSortDir(d => d === 'asc' ? 'desc' : 'asc')
     } else {
       setSortField(field)
@@ -227,19 +382,110 @@ export default function TasksClient({ userId, userRole, projects }: TasksClientP
 
   const activeFilterCount = [filterPriority, filterType, filterNature, filterProject, filterBillable ? 'x' : ''].filter(Boolean).length
 
-  const SortableHeader = ({ field, label, className = '' }: { field: SortField; label: string; className?: string }) => (
-    <button
-      onClick={() => handleSort(field)}
-      className={`flex items-center gap-1 text-[11px] font-semibold uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-colors group ${className}`}
-    >
-      {label}
-      <span className={`material-symbols-outlined text-xs transition-all duration-200 ${
-        sortField === field ? 'text-primary opacity-100' : 'opacity-0 group-hover:opacity-40'
-      } ${sortField === field && sortDir === 'desc' ? 'rotate-180' : ''}`}>
-        arrow_upward
-      </span>
-    </button>
-  )
+  const visibleColumns = useMemo(() => COLUMNS.filter(c => !hiddenColumns.has(c.field)), [hiddenColumns])
+
+  const getColWidth = (field: string) => columnWidths[field]
+  const resizeColumn = useCallback((field: string, delta: number) => {
+    setColumnWidths(prev => {
+      const col = COLUMNS.find(c => c.field === field)
+      const current = prev[field] ?? col?.defaultWidth ?? 120
+      const min = col?.minWidth ?? 60
+      return { ...prev, [field]: Math.max(min, current + delta) }
+    })
+  }, [])
+  const resetColumnWidth = useCallback((field: SortField) => {
+    setColumnWidths(prev => {
+      const next = { ...prev }
+      delete next[field]
+      return next
+    })
+  }, [])
+  const hideColumn = useCallback((field: SortField) => {
+    setHiddenColumns(prev => new Set(prev).add(field))
+  }, [])
+  const showColumn = useCallback((field: SortField) => {
+    setHiddenColumns(prev => {
+      const next = new Set(prev)
+      next.delete(field)
+      return next
+    })
+  }, [])
+
+  // Build grid template from visible columns
+  const gridTemplate = useMemo(() => {
+    const cols = visibleColumns.map(c => {
+      if (c.field === 'title') {
+        const w = getColWidth(c.field)
+        return w ? `${w}px` : 'minmax(0,2fr)'
+      }
+      const w = getColWidth(c.field)
+      return w ? `${w}px` : `${c.defaultWidth}px`
+    })
+    return `40px ${cols.join(' ')} 40px`
+  }, [visibleColumns, columnWidths]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Kanban data grouped by status
+  const kanbanData = useMemo(() => {
+    const map: Record<string, Task[]> = {}
+    for (const col of KANBAN_COLUMNS) map[col.key] = []
+    for (const t of sortedTasks) {
+      if (map[t.status]) map[t.status].push(t)
+    }
+    return map
+  }, [sortedTasks])
+
+  // ---- Render helpers ----
+  const renderCellContent = (task: Task, field: SortField) => {
+    switch (field) {
+      case 'title':
+        return (
+          <div className="min-w-0 flex items-center gap-2.5">
+            <div className={`w-1 h-6 rounded-full shrink-0 ${PRIORITY_DOT[task.priority] ?? 'bg-outline'}`} />
+            <p className={`text-sm font-medium text-on-surface truncate group-hover:text-primary transition-colors ${task.status === 'done' ? 'line-through text-outline' : ''}`}>
+              {task.title}
+            </p>
+          </div>
+        )
+      case 'status':
+        return (
+          <div className="flex items-center gap-1.5">
+            <span className={`w-2 h-2 rounded-full shrink-0 ${STATUS_DOT[task.status] ?? 'bg-outline'}`} />
+            <span className="text-xs text-on-surface-variant font-medium truncate">{STATUS_LABEL[task.status] ?? task.status}</span>
+          </div>
+        )
+      case 'priority':
+        return (
+          <div className="flex items-center gap-1.5">
+            <span className={`w-2 h-2 rounded-full shrink-0 ${PRIORITY_DOT[task.priority] ?? 'bg-outline'}`} />
+            <span className="text-xs text-on-surface-variant font-medium">{PRIORITY_LABEL[task.priority] ?? task.priority}</span>
+          </div>
+        )
+      case 'task_type':
+        return <span className="text-xs text-on-surface-variant font-medium capitalize truncate">{task.task_type === 'adhoc' ? 'Ad Hoc' : task.task_type}</span>
+      case 'task_nature':
+        return <span className="text-xs text-on-surface-variant font-medium capitalize truncate">{task.task_nature}</span>
+      case 'project':
+        return <span className="text-xs text-on-surface-variant font-medium truncate">{task.project?.name ?? '—'}</span>
+      case 'due_date':
+        return (
+          <span className={`text-xs font-medium flex items-center gap-1 ${isOverdue(task) ? 'text-error' : task.due_date ? 'text-on-surface-variant' : 'text-outline/40'}`}>
+            {task.due_date && <span className="material-symbols-outlined text-xs">event</span>}
+            {formatDate(task.due_date)}
+          </span>
+        )
+      case 'assignee':
+        return task.assignee ? (
+          <div className="flex items-center gap-2">
+            <div className="w-6 h-6 rounded-full bg-primary-container flex items-center justify-center shrink-0">
+              <span className="text-[10px] font-bold text-on-primary-container">{task.assignee.name.charAt(0).toUpperCase()}</span>
+            </div>
+            <span className="text-xs text-on-surface-variant font-medium truncate hidden xl:block">{task.assignee.name.split(' ')[0]}</span>
+          </div>
+        ) : <span className="text-xs text-outline/40">—</span>
+      default:
+        return null
+    }
+  }
 
   return (
     <div className="flex flex-col h-[calc(100vh-7rem)]">
@@ -254,38 +500,81 @@ export default function TasksClient({ userId, userRole, projects }: TasksClientP
             )}
           </p>
         </div>
-        <button
-          onClick={() => setModalOpen(true)}
-          className="flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold text-white shadow-ambient-sm transition-all duration-200 hover:opacity-90 hover:shadow-ambient hover:scale-[1.02] active:scale-[0.98]"
-          style={{ background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }}
-        >
-          <span className="material-symbols-outlined text-lg">add</span>
-          New Task
-        </button>
+        <div className="flex items-center gap-3">
+          {/* View switcher */}
+          <div className="hidden sm:flex items-center bg-surface-container-lowest rounded-full p-1 shadow-ambient-sm">
+            <button
+              onClick={() => setViewMode('list')}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 ${
+                viewMode === 'list'
+                  ? 'text-white shadow-ambient-sm'
+                  : 'text-on-surface-variant hover:text-on-surface'
+              }`}
+              style={viewMode === 'list' ? { background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' } : undefined}
+            >
+              <span className="material-symbols-outlined text-sm">view_list</span>
+              List
+            </button>
+            <button
+              onClick={() => setViewMode('kanban')}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 ${
+                viewMode === 'kanban'
+                  ? 'text-white shadow-ambient-sm'
+                  : 'text-on-surface-variant hover:text-on-surface'
+              }`}
+              style={viewMode === 'kanban' ? { background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' } : undefined}
+            >
+              <span className="material-symbols-outlined text-sm">view_kanban</span>
+              Board
+            </button>
+          </div>
+
+          <button
+            onClick={() => setModalOpen(true)}
+            className="flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold text-white shadow-ambient-sm transition-all duration-200 hover:opacity-90 hover:shadow-ambient hover:scale-[1.02] active:scale-[0.98]"
+            style={{ background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }}
+          >
+            <span className="material-symbols-outlined text-lg">add</span>
+            New Task
+          </button>
+        </div>
       </div>
 
       {/* Status tabs + Filters */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 shrink-0">
-        {/* Status tabs */}
-        <div className="flex gap-0.5 bg-surface-container-lowest rounded-full p-1 shadow-ambient-sm">
-          {STATUS_TABS.map(tab => (
-            <button
-              key={tab.key}
-              onClick={() => setActiveStatus(tab.key)}
-              className={`px-4 py-2 text-xs font-semibold rounded-full transition-all duration-200 ${
-                activeStatus === tab.key
-                  ? 'text-white shadow-ambient-sm'
-                  : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high'
-              }`}
-              style={
-                activeStatus === tab.key
-                  ? { background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }
-                  : undefined
-              }
-            >
-              {tab.label}
-            </button>
-          ))}
+        {/* Status tabs — only show in list view */}
+        {viewMode === 'list' && (
+          <div className="flex gap-0.5 bg-surface-container-lowest rounded-full p-1 shadow-ambient-sm">
+            {STATUS_TABS.map(tab => (
+              <button
+                key={tab.key}
+                onClick={() => setActiveStatus(tab.key)}
+                className={`px-4 py-2 text-xs font-semibold rounded-full transition-all duration-200 ${
+                  activeStatus === tab.key
+                    ? 'text-white shadow-ambient-sm'
+                    : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high'
+                }`}
+                style={
+                  activeStatus === tab.key
+                    ? { background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }
+                    : undefined
+                }
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+        )}
+
+        {/* Mobile view toggle */}
+        <div className="flex sm:hidden items-center gap-2">
+          <button
+            onClick={() => setViewMode(v => v === 'list' ? 'kanban' : 'list')}
+            className="flex items-center gap-1.5 px-3 py-2 rounded-full text-xs font-semibold bg-surface-container-lowest text-on-surface-variant shadow-ambient-sm"
+          >
+            <span className="material-symbols-outlined text-sm">{viewMode === 'list' ? 'view_kanban' : 'view_list'}</span>
+            {viewMode === 'list' ? 'Board' : 'List'}
+          </button>
         </div>
 
         {/* Filter chips row */}
@@ -340,6 +629,26 @@ export default function TasksClient({ userId, userRole, projects }: TasksClientP
             Billable
           </button>
 
+          {/* Hidden columns restore */}
+          {hiddenColumns.size > 0 && (
+            <div className="flex items-center gap-1">
+              {Array.from(hiddenColumns).map(field => {
+                const col = COLUMNS.find(c => c.field === field)
+                return (
+                  <button
+                    key={field}
+                    onClick={() => showColumn(field)}
+                    className="flex items-center gap-1 px-2.5 py-1.5 rounded-full text-[10px] font-semibold bg-surface-container text-on-surface-variant hover:bg-surface-container-high transition-colors"
+                    title={`Show ${col?.label}`}
+                  >
+                    <span className="material-symbols-outlined text-xs">visibility</span>
+                    {col?.label}
+                  </button>
+                )
+              })}
+            </div>
+          )}
+
           {activeFilterCount > 0 && (
             <button
               onClick={() => { setFilterPriority(''); setFilterType(''); setFilterNature(''); setFilterProject(''); setFilterBillable(false) }}
@@ -352,249 +661,271 @@ export default function TasksClient({ userId, userRole, projects }: TasksClientP
         </div>
       </div>
 
-      {/* Spreadsheet table — desktop */}
-      <div className="flex-1 bg-surface-container-lowest rounded-[24px] shadow-ambient overflow-hidden flex flex-col min-h-0">
-        {/* Column headers — hidden on mobile */}
-        <div className="hidden md:grid grid-cols-[40px_minmax(0,2fr)_120px_100px_100px_120px_120px_100px_40px] items-center px-4 py-3 bg-surface-container-low/50 shrink-0 gap-x-2">
-          <div className="flex items-center justify-center">
-            <button
-              onClick={toggleSelectAll}
-              className="w-5 h-5 rounded-md flex items-center justify-center transition-colors hover:bg-surface-container-high"
-            >
-              <span className={`material-symbols-outlined text-base ${
-                selectedTasks.size === sortedTasks.length && sortedTasks.length > 0
-                  ? 'text-primary'
-                  : 'text-outline/40'
-              }`}
-                style={selectedTasks.size === sortedTasks.length && sortedTasks.length > 0 ? { fontVariationSettings: "'FILL' 1" } : undefined}
+      {/* ═══════════ LIST VIEW ═══════════ */}
+      {viewMode === 'list' && (
+        <div className="flex-1 bg-surface-container-lowest rounded-[24px] shadow-ambient overflow-hidden flex flex-col min-h-0">
+          {/* Column headers — desktop */}
+          <div className="hidden md:grid items-center px-4 py-3 bg-surface-container-low/50 shrink-0 gap-x-0" style={{ gridTemplateColumns: gridTemplate }}>
+            <div className="flex items-center justify-center">
+              <button
+                onClick={toggleSelectAll}
+                className="w-5 h-5 rounded-md flex items-center justify-center transition-colors hover:bg-surface-container-high"
               >
-                {selectedTasks.size === sortedTasks.length && sortedTasks.length > 0 ? 'check_box' : 'check_box_outline_blank'}
-              </span>
+                <span className={`material-symbols-outlined text-base ${
+                  selectedTasks.size === sortedTasks.length && sortedTasks.length > 0 ? 'text-primary' : 'text-outline/40'
+                }`}
+                  style={selectedTasks.size === sortedTasks.length && sortedTasks.length > 0 ? { fontVariationSettings: "'FILL' 1" } : undefined}
+                >
+                  {selectedTasks.size === sortedTasks.length && sortedTasks.length > 0 ? 'check_box' : 'check_box_outline_blank'}
+                </span>
+              </button>
+            </div>
+            {visibleColumns.map((col) => (
+              <div key={col.field} className="relative group flex items-center gap-1 pr-2">
+                <button
+                  onClick={() => handleSort(col.field)}
+                  className="flex items-center gap-1 text-[11px] font-semibold uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-colors"
+                >
+                  {col.label}
+                  <span className={`material-symbols-outlined text-xs transition-all duration-200 ${
+                    sortField === col.field ? 'text-primary opacity-100' : 'opacity-0 group-hover:opacity-40'
+                  } ${sortField === col.field && sortDir === 'desc' ? 'rotate-180' : ''}`}>
+                    arrow_upward
+                  </span>
+                </button>
+                <ColumnHeaderDropdown
+                  column={col}
+                  sortField={sortField}
+                  sortDir={sortDir}
+                  onSort={handleSort}
+                  onHide={hideColumn}
+                  onResetWidth={resetColumnWidth}
+                />
+                {col.field !== 'title' && (
+                  <ResizeHandle onResize={(delta) => resizeColumn(col.field, delta)} />
+                )}
+              </div>
+            ))}
+            <div />
+          </div>
+
+          {/* Mobile header */}
+          <div className="flex md:hidden items-center justify-between px-4 py-3 bg-surface-container-low/50 shrink-0">
+            <div className="flex items-center gap-2">
+              <button onClick={toggleSelectAll} className="w-5 h-5 rounded-md flex items-center justify-center">
+                <span className={`material-symbols-outlined text-base ${
+                  selectedTasks.size === sortedTasks.length && sortedTasks.length > 0 ? 'text-primary' : 'text-outline/40'
+                }`}
+                  style={selectedTasks.size === sortedTasks.length && sortedTasks.length > 0 ? { fontVariationSettings: "'FILL' 1" } : undefined}
+                >
+                  {selectedTasks.size === sortedTasks.length && sortedTasks.length > 0 ? 'check_box' : 'check_box_outline_blank'}
+                </span>
+              </button>
+              <span className="text-[11px] font-semibold uppercase tracking-wider text-on-surface-variant">{sortedTasks.length} Tasks</span>
+            </div>
+            <button onClick={() => handleSort(sortField)} className="flex items-center gap-1 text-[11px] font-semibold text-on-surface-variant">
+              Sort
+              <span className={`material-symbols-outlined text-xs ${sortDir === 'desc' ? 'rotate-180' : ''}`}>arrow_upward</span>
             </button>
           </div>
-          <SortableHeader field="title" label="Task" />
-          <SortableHeader field="status" label="Status" />
-          <SortableHeader field="priority" label="Priority" />
-          <SortableHeader field="task_type" label="Type" />
-          <SortableHeader field="project" label="Project" />
-          <SortableHeader field="due_date" label="Due Date" />
-          <SortableHeader field="assignee" label="Assignee" />
-          <div /> {/* Chevron column */}
-        </div>
 
-        {/* Mobile header */}
-        <div className="flex md:hidden items-center justify-between px-4 py-3 bg-surface-container-low/50 shrink-0">
-          <div className="flex items-center gap-2">
-            <button
-              onClick={toggleSelectAll}
-              className="w-5 h-5 rounded-md flex items-center justify-center"
-            >
-              <span className={`material-symbols-outlined text-base ${
-                selectedTasks.size === sortedTasks.length && sortedTasks.length > 0 ? 'text-primary' : 'text-outline/40'
-              }`}
-                style={selectedTasks.size === sortedTasks.length && sortedTasks.length > 0 ? { fontVariationSettings: "'FILL' 1" } : undefined}
-              >
-                {selectedTasks.size === sortedTasks.length && sortedTasks.length > 0 ? 'check_box' : 'check_box_outline_blank'}
-              </span>
-            </button>
-            <span className="text-[11px] font-semibold uppercase tracking-wider text-on-surface-variant">
-              {sortedTasks.length} Tasks
-            </span>
+          {/* Scrollable rows */}
+          <div className="flex-1 overflow-y-auto overflow-x-hidden">
+            {loading ? (
+              <div className="py-16 text-center text-outline">
+                <span className="material-symbols-outlined text-3xl animate-spin block mb-2">progress_activity</span>
+                Loading tasks…
+              </div>
+            ) : sortedTasks.length === 0 ? (
+              <div className="py-16 text-center">
+                <span className="material-symbols-outlined text-4xl text-outline/40 block mb-2" style={{ fontVariationSettings: "'FILL' 1" }}>task_alt</span>
+                <p className="text-sm text-outline">No tasks found</p>
+                <button onClick={() => setModalOpen(true)} className="mt-4 text-sm font-semibold text-primary hover:underline">
+                  Create your first task →
+                </button>
+              </div>
+            ) : (
+              <div>
+                {sortedTasks.map((task, idx) => (
+                  <div key={task.id}>
+                    {/* Desktop row */}
+                    <div
+                      onClick={() => router.push(`/tasks/${task.id}`)}
+                      className={`hidden md:grid items-center px-4 py-3 gap-x-0 cursor-pointer transition-all duration-150 group ${
+                        selectedTasks.has(task.id)
+                          ? 'bg-primary/[0.04]'
+                          : idx % 2 === 0
+                            ? 'bg-transparent hover:bg-surface-container-high/60'
+                            : 'bg-surface-container-low/30 hover:bg-surface-container-high/60'
+                      }`}
+                      style={{ gridTemplateColumns: gridTemplate }}
+                    >
+                      <div className="flex items-center justify-center" onClick={e => { e.stopPropagation(); toggleSelect(task.id) }}>
+                        <span className={`material-symbols-outlined text-base transition-colors ${
+                          selectedTasks.has(task.id) ? 'text-primary' : 'text-outline/30 group-hover:text-outline/60'
+                        }`}
+                          style={selectedTasks.has(task.id) ? { fontVariationSettings: "'FILL' 1" } : undefined}
+                        >
+                          {selectedTasks.has(task.id) ? 'check_box' : 'check_box_outline_blank'}
+                        </span>
+                      </div>
+                      {visibleColumns.map(col => (
+                        <div key={col.field} className="overflow-hidden pr-2">
+                          {renderCellContent(task, col.field)}
+                        </div>
+                      ))}
+                      <span className="material-symbols-outlined text-base text-outline/30 group-hover:text-outline transition-colors">chevron_right</span>
+                    </div>
+
+                    {/* Mobile card row */}
+                    <div
+                      onClick={() => router.push(`/tasks/${task.id}`)}
+                      className={`flex md:hidden items-start gap-3 px-4 py-3 cursor-pointer transition-all duration-150 group ${
+                        selectedTasks.has(task.id)
+                          ? 'bg-primary/[0.04]'
+                          : idx % 2 === 0
+                            ? 'bg-transparent active:bg-surface-container-high/60'
+                            : 'bg-surface-container-low/30 active:bg-surface-container-high/60'
+                      }`}
+                    >
+                      <div className="pt-0.5" onClick={e => { e.stopPropagation(); toggleSelect(task.id) }}>
+                        <span className={`material-symbols-outlined text-base ${selectedTasks.has(task.id) ? 'text-primary' : 'text-outline/30'}`}
+                          style={selectedTasks.has(task.id) ? { fontVariationSettings: "'FILL' 1" } : undefined}
+                        >
+                          {selectedTasks.has(task.id) ? 'check_box' : 'check_box_outline_blank'}
+                        </span>
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-1">
+                          <div className={`w-1 h-4 rounded-full shrink-0 ${PRIORITY_DOT[task.priority] ?? 'bg-outline'}`} />
+                          <p className={`text-sm font-medium text-on-surface truncate ${task.status === 'done' ? 'line-through text-outline' : ''}`}>{task.title}</p>
+                        </div>
+                        <div className="flex items-center gap-3 flex-wrap">
+                          <div className="flex items-center gap-1">
+                            <span className={`w-1.5 h-1.5 rounded-full ${STATUS_DOT[task.status]}`} />
+                            <span className="text-[11px] text-on-surface-variant">{STATUS_LABEL[task.status]}</span>
+                          </div>
+                          {task.due_date && <span className={`text-[11px] ${isOverdue(task) ? 'text-error' : 'text-outline'}`}>{formatDate(task.due_date)}</span>}
+                          {task.project && <span className="text-[11px] text-outline">{task.project.name}</span>}
+                        </div>
+                      </div>
+                      {task.assignee && (
+                        <div className="w-6 h-6 rounded-full bg-primary-container flex items-center justify-center shrink-0">
+                          <span className="text-[10px] font-bold text-on-primary-container">{task.assignee.name.charAt(0).toUpperCase()}</span>
+                        </div>
+                      )}
+                      <span className="material-symbols-outlined text-base text-outline/30 pt-0.5">chevron_right</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
-          <button
-            onClick={() => handleSort(sortField)}
-            className="flex items-center gap-1 text-[11px] font-semibold text-on-surface-variant"
-          >
-            Sort
-            <span className={`material-symbols-outlined text-xs ${sortDir === 'desc' ? 'rotate-180' : ''}`}>arrow_upward</span>
-          </button>
-        </div>
 
-        {/* Scrollable rows */}
-        <div className="flex-1 overflow-y-auto overflow-x-hidden">
+          {/* Table footer */}
+          {!loading && sortedTasks.length > 0 && (
+            <div className="px-4 py-2.5 bg-surface-container-low/50 flex items-center justify-between text-[11px] text-outline font-medium shrink-0">
+              <span>Showing {sortedTasks.length} of {tasks.length} tasks</span>
+              <div className="flex items-center gap-3">
+                {selectedTasks.size > 0 && <span className="text-primary font-semibold">{selectedTasks.size} selected</span>}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* ═══════════ KANBAN VIEW ═══════════ */}
+      {viewMode === 'kanban' && (
+        <div className="flex-1 min-h-0 overflow-x-auto overflow-y-hidden">
           {loading ? (
             <div className="py-16 text-center text-outline">
               <span className="material-symbols-outlined text-3xl animate-spin block mb-2">progress_activity</span>
               Loading tasks…
             </div>
-          ) : sortedTasks.length === 0 ? (
-            <div className="py-16 text-center">
-              <span className="material-symbols-outlined text-4xl text-outline/40 block mb-2" style={{ fontVariationSettings: "'FILL' 1" }}>task_alt</span>
-              <p className="text-sm text-outline">No tasks found</p>
-              <button
-                onClick={() => setModalOpen(true)}
-                className="mt-4 text-sm font-semibold text-primary hover:underline"
-              >
-                Create your first task →
-              </button>
-            </div>
           ) : (
-            <div className="divide-transparent">
-              {sortedTasks.map((task, idx) => (
-                <div key={task.id}>
-                  {/* Desktop row */}
-                  <div
-                    onClick={() => router.push(`/tasks/${task.id}`)}
-                    className={`hidden md:grid grid-cols-[40px_minmax(0,2fr)_120px_100px_100px_120px_120px_100px_40px] items-center px-4 py-3 gap-x-2 cursor-pointer transition-all duration-150 group ${
-                      selectedTasks.has(task.id)
-                        ? 'bg-primary/[0.04]'
-                        : idx % 2 === 0
-                          ? 'bg-transparent hover:bg-surface-container-high/60'
-                          : 'bg-surface-container-low/30 hover:bg-surface-container-high/60'
-                    }`}
-                  >
-                    {/* Checkbox */}
-                    <div className="flex items-center justify-center" onClick={e => { e.stopPropagation(); toggleSelect(task.id) }}>
-                      <span className={`material-symbols-outlined text-base transition-colors ${
-                        selectedTasks.has(task.id) ? 'text-primary' : 'text-outline/30 group-hover:text-outline/60'
-                      }`}
-                        style={selectedTasks.has(task.id) ? { fontVariationSettings: "'FILL' 1" } : undefined}
-                      >
-                        {selectedTasks.has(task.id) ? 'check_box' : 'check_box_outline_blank'}
+            <div className="flex gap-4 h-full pb-2 min-w-min">
+              {KANBAN_COLUMNS.map(col => {
+                const columnTasks = kanbanData[col.key] ?? []
+                return (
+                  <div key={col.key} className="flex flex-col w-72 sm:w-80 shrink-0">
+                    {/* Column header */}
+                    <div className="flex items-center gap-2.5 px-3 py-3 mb-2">
+                      <span className={`w-2.5 h-2.5 rounded-full ${col.color}`} />
+                      <span className="text-sm font-semibold text-on-surface">{col.label}</span>
+                      <span className="text-xs font-medium text-outline bg-surface-container rounded-full px-2 py-0.5">
+                        {columnTasks.length}
                       </span>
                     </div>
 
-                    {/* Task title */}
-                    <div className="min-w-0 flex items-center gap-2.5">
-                      <div className={`w-1 h-6 rounded-full shrink-0 ${PRIORITY_DOT[task.priority] ?? 'bg-outline'}`} />
-                      <p className={`text-sm font-medium text-on-surface truncate group-hover:text-primary transition-colors ${task.status === 'done' ? 'line-through text-outline' : ''}`}>
-                        {task.title}
-                      </p>
-                    </div>
-
-                    {/* Status */}
-                    <div className="flex items-center gap-1.5">
-                      <span className={`w-2 h-2 rounded-full shrink-0 ${STATUS_DOT[task.status] ?? 'bg-outline'}`} />
-                      <span className="text-xs text-on-surface-variant font-medium truncate">
-                        {STATUS_LABEL[task.status] ?? task.status}
-                      </span>
-                    </div>
-
-                    {/* Priority */}
-                    <div className="flex items-center gap-1.5">
-                      <span className={`w-2 h-2 rounded-full shrink-0 ${PRIORITY_DOT[task.priority] ?? 'bg-outline'}`} />
-                      <span className="text-xs text-on-surface-variant font-medium">
-                        {PRIORITY_LABEL[task.priority] ?? task.priority}
-                      </span>
-                    </div>
-
-                    {/* Type */}
-                    <span className="text-xs text-on-surface-variant font-medium capitalize truncate">
-                      {task.task_type === 'adhoc' ? 'Ad Hoc' : task.task_type}
-                    </span>
-
-                    {/* Project */}
-                    <span className="text-xs text-on-surface-variant font-medium truncate">
-                      {task.project?.name ?? '—'}
-                    </span>
-
-                    {/* Due date */}
-                    <span className={`text-xs font-medium flex items-center gap-1 ${
-                      isOverdue(task)
-                        ? 'text-error'
-                        : task.due_date
-                          ? 'text-on-surface-variant'
-                          : 'text-outline/40'
-                    }`}>
-                      {task.due_date && <span className="material-symbols-outlined text-xs">event</span>}
-                      {formatDate(task.due_date)}
-                    </span>
-
-                    {/* Assignee */}
-                    <div className="flex items-center gap-2">
-                      {task.assignee ? (
-                        <>
-                          <div className="w-6 h-6 rounded-full bg-primary-container flex items-center justify-center shrink-0">
-                            <span className="text-[10px] font-bold text-on-primary-container">
-                              {task.assignee.name.charAt(0).toUpperCase()}
-                            </span>
-                          </div>
-                          <span className="text-xs text-on-surface-variant font-medium truncate hidden xl:block">
-                            {task.assignee.name.split(' ')[0]}
-                          </span>
-                        </>
+                    {/* Cards container */}
+                    <div className="flex-1 overflow-y-auto space-y-2 px-1 pb-4">
+                      {columnTasks.length === 0 ? (
+                        <div className="rounded-[20px] bg-surface-container-lowest/60 py-8 text-center">
+                          <span className="material-symbols-outlined text-2xl text-outline/30 block mb-1">inbox</span>
+                          <p className="text-xs text-outline/60">No tasks</p>
+                        </div>
                       ) : (
-                        <span className="text-xs text-outline/40">—</span>
+                        columnTasks.map(task => (
+                          <div
+                            key={task.id}
+                            onClick={() => router.push(`/tasks/${task.id}`)}
+                            className="group bg-surface-container-lowest rounded-[20px] p-4 shadow-ambient-sm hover:shadow-ambient cursor-pointer transition-all duration-200 hover:-translate-y-0.5"
+                          >
+                            {/* Priority + title */}
+                            <div className="flex items-start gap-2 mb-3">
+                              <div className={`w-1 h-5 rounded-full shrink-0 mt-0.5 ${PRIORITY_DOT[task.priority] ?? 'bg-outline'}`} />
+                              <p className={`text-sm font-medium text-on-surface leading-snug group-hover:text-primary transition-colors ${task.status === 'done' ? 'line-through text-outline' : ''}`}>
+                                {task.title}
+                              </p>
+                            </div>
+
+                            {/* Metadata row */}
+                            <div className="flex items-center gap-2 flex-wrap mb-2">
+                              <span className={`px-2 py-0.5 rounded-full text-[10px] font-semibold ${
+                                task.priority === 'high' ? 'bg-error/10 text-error' :
+                                task.priority === 'medium' ? 'bg-tertiary-container text-on-tertiary-container' :
+                                'bg-surface-container text-on-surface-variant'
+                              }`}>
+                                {PRIORITY_LABEL[task.priority]}
+                              </span>
+                              <span className="text-[10px] text-on-surface-variant font-medium capitalize">
+                                {task.task_type === 'adhoc' ? 'Ad Hoc' : task.task_type}
+                              </span>
+                              {task.billable && (
+                                <span className="material-symbols-outlined text-xs text-tertiary" title="Billable">attach_money</span>
+                              )}
+                            </div>
+
+                            {/* Footer: project, date, assignee */}
+                            <div className="flex items-center justify-between">
+                              <div className="flex items-center gap-2 min-w-0 flex-1">
+                                {task.project && (
+                                  <span className="text-[10px] text-outline truncate">{task.project.name}</span>
+                                )}
+                                {task.due_date && (
+                                  <span className={`flex items-center gap-0.5 text-[10px] font-medium shrink-0 ${isOverdue(task) ? 'text-error' : 'text-outline'}`}>
+                                    <span className="material-symbols-outlined text-xs">event</span>
+                                    {formatDate(task.due_date)}
+                                  </span>
+                                )}
+                              </div>
+                              {task.assignee && (
+                                <div className="w-6 h-6 rounded-full bg-primary-container flex items-center justify-center shrink-0 ml-2">
+                                  <span className="text-[10px] font-bold text-on-primary-container">{task.assignee.name.charAt(0).toUpperCase()}</span>
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        ))
                       )}
                     </div>
-
-                    {/* Chevron */}
-                    <span className="material-symbols-outlined text-base text-outline/30 group-hover:text-outline transition-colors">
-                      chevron_right
-                    </span>
                   </div>
-
-                  {/* Mobile card row */}
-                  <div
-                    onClick={() => router.push(`/tasks/${task.id}`)}
-                    className={`flex md:hidden items-start gap-3 px-4 py-3 cursor-pointer transition-all duration-150 group ${
-                      selectedTasks.has(task.id)
-                        ? 'bg-primary/[0.04]'
-                        : idx % 2 === 0
-                          ? 'bg-transparent active:bg-surface-container-high/60'
-                          : 'bg-surface-container-low/30 active:bg-surface-container-high/60'
-                    }`}
-                  >
-                    <div className="pt-0.5" onClick={e => { e.stopPropagation(); toggleSelect(task.id) }}>
-                      <span className={`material-symbols-outlined text-base ${
-                        selectedTasks.has(task.id) ? 'text-primary' : 'text-outline/30'
-                      }`}
-                        style={selectedTasks.has(task.id) ? { fontVariationSettings: "'FILL' 1" } : undefined}
-                      >
-                        {selectedTasks.has(task.id) ? 'check_box' : 'check_box_outline_blank'}
-                      </span>
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-1">
-                        <div className={`w-1 h-4 rounded-full shrink-0 ${PRIORITY_DOT[task.priority] ?? 'bg-outline'}`} />
-                        <p className={`text-sm font-medium text-on-surface truncate ${task.status === 'done' ? 'line-through text-outline' : ''}`}>
-                          {task.title}
-                        </p>
-                      </div>
-                      <div className="flex items-center gap-3 flex-wrap">
-                        <div className="flex items-center gap-1">
-                          <span className={`w-1.5 h-1.5 rounded-full ${STATUS_DOT[task.status]}`} />
-                          <span className="text-[11px] text-on-surface-variant">{STATUS_LABEL[task.status]}</span>
-                        </div>
-                        {task.due_date && (
-                          <span className={`text-[11px] ${isOverdue(task) ? 'text-error' : 'text-outline'}`}>
-                            {formatDate(task.due_date)}
-                          </span>
-                        )}
-                        {task.project && (
-                          <span className="text-[11px] text-outline">{task.project.name}</span>
-                        )}
-                      </div>
-                    </div>
-                    {task.assignee && (
-                      <div className="w-6 h-6 rounded-full bg-primary-container flex items-center justify-center shrink-0">
-                        <span className="text-[10px] font-bold text-on-primary-container">
-                          {task.assignee.name.charAt(0).toUpperCase()}
-                        </span>
-                      </div>
-                    )}
-                    <span className="material-symbols-outlined text-base text-outline/30 pt-0.5">chevron_right</span>
-                  </div>
-                </div>
-              ))}
+                )
+              })}
             </div>
           )}
         </div>
-
-        {/* Table footer */}
-        {!loading && sortedTasks.length > 0 && (
-          <div className="px-4 py-2.5 bg-surface-container-low/50 flex items-center justify-between text-[11px] text-outline font-medium shrink-0">
-            <span>
-              Showing {sortedTasks.length} of {tasks.length} tasks
-            </span>
-            <div className="flex items-center gap-3">
-              {selectedTasks.size > 0 && (
-                <span className="text-primary font-semibold">{selectedTasks.size} selected</span>
-              )}
-            </div>
-          </div>
-        )}
-      </div>
+      )}
 
       <QuickTaskModal
         open={modalOpen}
