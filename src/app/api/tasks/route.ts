@@ -57,7 +57,7 @@ export async function GET(request: NextRequest) {
       id, title, status, priority, task_type, task_nature, billable,
       due_date, estimated_hours, actual_hours, creator_id, assignee_id,
       reviewer_id, project_id, parent_task_id, completed_at, created_at, updated_at,
-      assignee:profiles!tasks_assignee_id_fkey(id, name, email),
+      assignee:profiles!tasks_assignee_id_fkey(id, name),
       project:projects(id, name)
     `)
     .is('parent_task_id', parentTaskId ?? null)

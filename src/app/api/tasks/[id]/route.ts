@@ -31,9 +31,9 @@ export async function GET(_: NextRequest, { params }: Params) {
     .from('tasks')
     .select(`
       *,
-      creator:profiles!tasks_creator_id_fkey(id, name, email),
-      assignee:profiles!tasks_assignee_id_fkey(id, name, email),
-      reviewer:profiles!tasks_reviewer_id_fkey(id, name, email),
+      creator:profiles!tasks_creator_id_fkey(id, name),
+      assignee:profiles!tasks_assignee_id_fkey(id, name),
+      reviewer:profiles!tasks_reviewer_id_fkey(id, name),
       project:projects(id, name),
       subtasks:tasks!tasks_parent_task_id_fkey(
         id, title, status, priority, assignee_id,
