@@ -2,6 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import { createAdminClient } from '@/lib/supabase/admin'
 import { NextResponse } from 'next/server'
 import { z } from 'zod'
+import { checkRateLimit, getClientIP } from '@/lib/rate-limit'
 
 const schema = z.object({
   token: z.string().min(1),
@@ -9,6 +10,16 @@ const schema = z.object({
 })
 
 export async function POST(request: Request) {
+  // Rate limit: 5 attempts per minute per IP
+  const ip = getClientIP(request)
+  const rl = checkRateLimit(`invite:${ip}`, 5, 60_000)
+  if (!rl.allowed) {
+    return NextResponse.json(
+      { error: 'Too many attempts. Please try again later.' },
+      { status: 429, headers: { 'Retry-After': String(rl.resetIn) } }
+    )
+  }
+
   const body = await request.json()
   const parsed = schema.safeParse(body)
 
@@ -60,12 +71,6 @@ export async function POST(request: Request) {
 
   // Sign the user in automatically
   const supabase = await createClient()
-  const { data: authData, error: signInError } = await supabase.auth.signInWithPassword({
-    email: invite.profiles?.email || '',
-    password: parsed.data.password,
-  })
-
-  // Get user email from auth.users
   const { data: userData } = await adminClient.auth.admin.getUserById(invite.user_id)
 
   const { error: signInErr } = await supabase.auth.signInWithPassword({

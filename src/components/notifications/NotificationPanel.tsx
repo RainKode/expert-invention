@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { type Notification, NOTIFICATION_TYPE_META } from '@/types'
+import { createClient } from '@/lib/supabase/client'
 
 interface NotificationPanelProps {
   open: boolean
@@ -44,11 +45,25 @@ export default function NotificationPanel({
     if (open) fetchNotifications()
   }, [open, fetchNotifications])
 
-  // Poll for new notifications every 30s while panel is open
+  // Real-time subscription + fallback poll while panel is open
   useEffect(() => {
     if (!open) return
+
+    const supabase = createClient()
+    const channel = supabase
+      .channel('notifications-panel')
+      .on(
+        'postgres_changes',
+        { event: 'INSERT', schema: 'public', table: 'notifications' },
+        () => fetchNotifications()
+      )
+      .subscribe()
+
     const interval = setInterval(fetchNotifications, 30000)
-    return () => clearInterval(interval)
+    return () => {
+      clearInterval(interval)
+      supabase.removeChannel(channel)
+    }
   }, [open, fetchNotifications])
 
   // Close on escape

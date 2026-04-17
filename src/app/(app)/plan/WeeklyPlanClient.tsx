@@ -295,11 +295,13 @@ function CommentsSection({
 }) {
   const [text, setText] = useState('')
   const [submitting, setSubmitting] = useState(false)
+  const [commentError, setCommentError] = useState<string | null>(null)
   const router = useRouter()
 
   async function handleSubmit() {
     if (!text.trim()) return
     setSubmitting(true)
+    setCommentError(null)
     try {
       const res = await fetch(`/api/plans/${planId}/comments`, {
         method: 'POST',
@@ -310,7 +312,7 @@ function CommentsSection({
         setText('')
         router.refresh()
       } else {
-        alert('Failed to post comment. Please try again.')
+        setCommentError('Failed to post comment. Please try again.')
       }
     } finally {
       setSubmitting(false)
@@ -356,7 +358,11 @@ function CommentsSection({
       </div>
 
       {canComment && (
-        <div className="mt-6 flex gap-3">
+        <div className="mt-6">
+          {commentError && (
+            <p className="text-xs text-error mb-2 ml-1">{commentError}</p>
+          )}
+          <div className="flex gap-3">
           <textarea
             value={text}
             onChange={(e) => setText(e.target.value)}
@@ -372,6 +378,7 @@ function CommentsSection({
           >
             {submitting ? 'Sending…' : 'Comment'}
           </button>
+          </div>
         </div>
       )}
     </div>
@@ -665,8 +672,6 @@ export default function WeeklyPlanClient({
                       const res = await fetch(`/api/plans/${planId}/unlock`, { method: 'POST' })
                       if (res.ok) {
                         router.refresh()
-                      } else {
-                        alert('Failed to unlock plan.')
                       }
                     }}
                     className="px-6 py-2.5 rounded-full bg-surface-container-high font-bold text-sm hover:bg-surface-container-highest transition-all"

@@ -31,7 +31,7 @@ export default function ResetPasswordPage() {
   } = useForm<FormData>({ resolver: zodResolver(schema) })
 
   const password = watch('password', '')
-  const strength = password.length === 0 ? 0 : password.length < 8 ? 1 : password.length < 12 ? 2 : 3
+  const strength = password.length === 0 ? 0 : password.length < 8 ? 1 : password.length < 12 ? 2 : password.length < 16 ? 3 : 4
 
   async function onSubmit(data: FormData) {
     setServerError(null)
@@ -101,7 +101,7 @@ export default function ResetPasswordPage() {
               {/* Strength indicator */}
               {password.length > 0 && (
                 <div className="flex gap-1.5 px-4 pt-1">
-                  {[1, 2, 3].map((level) => (
+                  {[1, 2, 3, 4].map((level) => (
                     <div
                       key={level}
                       className={`h-1 flex-1 rounded-full transition-colors ${
@@ -110,6 +110,8 @@ export default function ResetPasswordPage() {
                             ? 'bg-error'
                             : level === 2
                             ? 'bg-tertiary-fixed-dim'
+                            : level === 3
+                            ? 'bg-tertiary'
                             : 'bg-primary'
                           : 'bg-surface-container-high'
                       }`}

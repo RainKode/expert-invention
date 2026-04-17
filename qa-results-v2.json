@@ -1,0 +1,1263 @@
+{
+  "run_date": "2026-04-17T12:42:00.238511",
+  "summary": {
+    "total": 168,
+    "passed": 156,
+    "failed": 9,
+    "warnings": 3,
+    "skipped": 0,
+    "score_pct": 93
+  },
+  "segments": {
+    "S1-Auth": {
+      "pass": 10,
+      "fail": 1,
+      "warn": 0,
+      "skip": 0
+    },
+    "S2-RouteProtection": {
+      "pass": 19,
+      "fail": 0,
+      "warn": 0,
+      "skip": 0
+    },
+    "S3-API-Auth": {
+      "pass": 40,
+      "fail": 1,
+      "warn": 0,
+      "skip": 0
+    },
+    "S4-API-Mutations": {
+      "pass": 6,
+      "fail": 2,
+      "warn": 0,
+      "skip": 0
+    },
+    "S5-PageStructure": {
+      "pass": 9,
+      "fail": 0,
+      "warn": 0,
+      "skip": 0
+    },
+    "S6-FileChecks": {
+      "pass": 40,
+      "fail": 0,
+      "warn": 0,
+      "skip": 0
+    },
+    "S7-DeployConfig": {
+      "pass": 6,
+      "fail": 0,
+      "warn": 0,
+      "skip": 0
+    },
+    "S8-DBSchema": {
+      "pass": 17,
+      "fail": 5,
+      "warn": 0,
+      "skip": 0
+    },
+    "S9-CronAPIs": {
+      "pass": 2,
+      "fail": 0,
+      "warn": 0,
+      "skip": 0
+    },
+    "S10-Mobile": {
+      "pass": 2,
+      "fail": 0,
+      "warn": 0,
+      "skip": 0
+    },
+    "S11-A11y": {
+      "pass": 4,
+      "fail": 0,
+      "warn": 0,
+      "skip": 0
+    },
+    "S12-Security": {
+      "pass": 1,
+      "fail": 0,
+      "warn": 3,
+      "skip": 0
+    }
+  },
+  "results": [
+    {
+      "segment": "S1-Auth",
+      "test": "Login page has email/password/submit",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:15.007457"
+    },
+    {
+      "segment": "S1-Auth",
+      "test": "Login page shows Sunday branding",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:15.007457"
+    },
+    {
+      "segment": "S1-Auth",
+      "test": "Empty login form prevented",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:16.077029"
+    },
+    {
+      "segment": "S1-Auth",
+      "test": "Wrong credentials show error",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:18.150078"
+    },
+    {
+      "segment": "S1-Auth",
+      "test": "Forgot password page renders correctly",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:19.001818"
+    },
+    {
+      "segment": "S1-Auth",
+      "test": "Forgot password shows success state",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:21.131847"
+    },
+    {
+      "segment": "S1-Auth",
+      "test": "Set password page loads",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:21.785518"
+    },
+    {
+      "segment": "S1-Auth",
+      "test": "Set password page has password fields",
+      "status": "fail",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:23.024899"
+    },
+    {
+      "segment": "S1-Auth",
+      "test": "Reset password page loads with form",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:23.731795"
+    },
+    {
+      "segment": "S1-Auth",
+      "test": "Reset-password has 4-segment strength meter",
+      "status": "pass",
+      "detail": "Found 4 segments",
+      "timestamp": "2026-04-17T12:41:24.243637"
+    },
+    {
+      "segment": "S1-Auth",
+      "test": "Password visibility toggle present",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:24.883526"
+    },
+    {
+      "segment": "S2-RouteProtection",
+      "test": "Dashboard (/dashboard) redirects to login",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:25.973461"
+    },
+    {
+      "segment": "S2-RouteProtection",
+      "test": "My Tasks (/tasks) redirects to login",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:27.100183"
+    },
+    {
+      "segment": "S2-RouteProtection",
+      "test": "Kanban Board (/board) redirects to login",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:28.206254"
+    },
+    {
+      "segment": "S2-RouteProtection",
+      "test": "Weekly Plan (/plan) redirects to login",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:29.326553"
+    },
+    {
+      "segment": "S2-RouteProtection",
+      "test": "Daily Check-in (/checkin) redirects to login",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:30.433428"
+    },
+    {
+      "segment": "S2-RouteProtection",
+      "test": "EOD Wrap-up (/wrapup) redirects to login",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:31.553446"
+    },
+    {
+      "segment": "S2-RouteProtection",
+      "test": "Reports (/reports) redirects to login",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:32.660416"
+    },
+    {
+      "segment": "S2-RouteProtection",
+      "test": "Admin Users (/admin/users) redirects to login",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:33.793747"
+    },
+    {
+      "segment": "S2-RouteProtection",
+      "test": "Admin Teams (/admin/teams) redirects to login",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:34.900447"
+    },
+    {
+      "segment": "S2-RouteProtection",
+      "test": "Audit Trail (/admin/audit-trail) redirects to login",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:36.033086"
+    },
+    {
+      "segment": "S2-RouteProtection",
+      "test": "Settings (/settings) redirects to login",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:37.139918"
+    },
+    {
+      "segment": "S2-RouteProtection",
+      "test": "Team Settings (/settings/team) redirects to login",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:38.260001"
+    },
+    {
+      "segment": "S2-RouteProtection",
+      "test": "System Settings (/settings/system) redirects to login",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:39.380365"
+    },
+    {
+      "segment": "S2-RouteProtection",
+      "test": "Custom Fields (/settings/custom-fields) redirects to login",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:40.513130"
+    },
+    {
+      "segment": "S2-RouteProtection",
+      "test": "Team Tasks (/team/tasks) redirects to login",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:41.620297"
+    },
+    {
+      "segment": "S2-RouteProtection",
+      "test": "Team Plans (/team/plans) redirects to login",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:42.753457"
+    },
+    {
+      "segment": "S2-RouteProtection",
+      "test": "Team Pulse (/dashboard/team-pulse) redirects to login",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:43.846362"
+    },
+    {
+      "segment": "S2-RouteProtection",
+      "test": "Workload (/dashboard/workload) redirects to login",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:44.953525"
+    },
+    {
+      "segment": "S2-RouteProtection",
+      "test": "Activity Feed (/dashboard/activity) redirects to login",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:46.047275"
+    },
+    {
+      "segment": "S3-API-Auth",
+      "test": "Auth me returns 401",
+      "status": "pass",
+      "detail": "HTTP 401",
+      "timestamp": "2026-04-17T12:41:46.105372"
+    },
+    {
+      "segment": "S3-API-Auth",
+      "test": "Auth me returns 401 returns JSON (not HTML)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:46.105372"
+    },
+    {
+      "segment": "S3-API-Auth",
+      "test": "Tasks returns 401",
+      "status": "pass",
+      "detail": "HTTP 401",
+      "timestamp": "2026-04-17T12:41:46.332129"
+    },
+    {
+      "segment": "S3-API-Auth",
+      "test": "Tasks returns 401 returns JSON (not HTML)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:46.332129"
+    },
+    {
+      "segment": "S3-API-Auth",
+      "test": "Projects returns 401",
+      "status": "pass",
+      "detail": "HTTP 401",
+      "timestamp": "2026-04-17T12:41:46.518430"
+    },
+    {
+      "segment": "S3-API-Auth",
+      "test": "Projects returns 401 returns JSON (not HTML)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:46.518430"
+    },
+    {
+      "segment": "S3-API-Auth",
+      "test": "Notifications returns 401",
+      "status": "pass",
+      "detail": "HTTP 401",
+      "timestamp": "2026-04-17T12:41:46.678704"
+    },
+    {
+      "segment": "S3-API-Auth",
+      "test": "Notifications returns 401 returns JSON (not HTML)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:46.678704"
+    },
+    {
+      "segment": "S3-API-Auth",
+      "test": "Custom fields returns 401",
+      "status": "pass",
+      "detail": "HTTP 401",
+      "timestamp": "2026-04-17T12:41:46.865259"
+    },
+    {
+      "segment": "S3-API-Auth",
+      "test": "Custom fields returns 401 returns JSON (not HTML)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:46.865259"
+    },
+    {
+      "segment": "S3-API-Auth",
+      "test": "Saved views returns 401",
+      "status": "pass",
+      "detail": "HTTP 401",
+      "timestamp": "2026-04-17T12:41:47.025121"
+    },
+    {
+      "segment": "S3-API-Auth",
+      "test": "Saved views returns 401 returns JSON (not HTML)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:47.037758"
+    },
+    {
+      "segment": "S3-API-Auth",
+      "test": "Activity feed returns 401",
+      "status": "pass",
+      "detail": "HTTP 401",
+      "timestamp": "2026-04-17T12:41:47.200658"
+    },
+    {
+      "segment": "S3-API-Auth",
+      "test": "Activity feed returns 401 returns JSON (not HTML)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:47.200658"
+    },
+    {
+      "segment": "S3-API-Auth",
+      "test": "Checkin returns 401",
+      "status": "pass",
+      "detail": "HTTP 401",
+      "timestamp": "2026-04-17T12:41:47.358446"
+    },
+    {
+      "segment": "S3-API-Auth",
+      "test": "Checkin returns 401 returns JSON (not HTML)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:47.358446"
+    },
+    {
+      "segment": "S3-API-Auth",
+      "test": "My overview returns 401",
+      "status": "pass",
+      "detail": "HTTP 401",
+      "timestamp": "2026-04-17T12:41:47.492994"
+    },
+    {
+      "segment": "S3-API-Auth",
+      "test": "My overview returns 401 returns JSON (not HTML)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:47.492994"
+    },
+    {
+      "segment": "S3-API-Auth",
+      "test": "Team pulse returns 401",
+      "status": "pass",
+      "detail": "HTTP 401",
+      "timestamp": "2026-04-17T12:41:47.625094"
+    },
+    {
+      "segment": "S3-API-Auth",
+      "test": "Team pulse returns 401 returns JSON (not HTML)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:47.625094"
+    },
+    {
+      "segment": "S3-API-Auth",
+      "test": "Workload returns 401",
+      "status": "pass",
+      "detail": "HTTP 401",
+      "timestamp": "2026-04-17T12:41:47.750143"
+    },
+    {
+      "segment": "S3-API-Auth",
+      "test": "Workload returns 401 returns JSON (not HTML)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:47.750143"
+    },
+    {
+      "segment": "S3-API-Auth",
+      "test": "Admin users returns 401",
+      "status": "pass",
+      "detail": "HTTP 401",
+      "timestamp": "2026-04-17T12:41:47.905072"
+    },
+    {
+      "segment": "S3-API-Auth",
+      "test": "Admin users returns 401 returns JSON (not HTML)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:47.905072"
+    },
+    {
+      "segment": "S3-API-Auth",
+      "test": "Admin teams returns 401",
+      "status": "pass",
+      "detail": "HTTP 401",
+      "timestamp": "2026-04-17T12:41:48.065320"
+    },
+    {
+      "segment": "S3-API-Auth",
+      "test": "Admin teams returns 401 returns JSON (not HTML)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:48.065320"
+    },
+    {
+      "segment": "S3-API-Auth",
+      "test": "Audit trail returns 401",
+      "status": "pass",
+      "detail": "HTTP 401",
+      "timestamp": "2026-04-17T12:41:48.198514"
+    },
+    {
+      "segment": "S3-API-Auth",
+      "test": "Audit trail returns 401 returns JSON (not HTML)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:48.198514"
+    },
+    {
+      "segment": "S3-API-Auth",
+      "test": "Plans returns 401",
+      "status": "pass",
+      "detail": "HTTP 401",
+      "timestamp": "2026-04-17T12:41:48.345196"
+    },
+    {
+      "segment": "S3-API-Auth",
+      "test": "Plans returns 401 returns JSON (not HTML)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:48.347204"
+    },
+    {
+      "segment": "S3-API-Auth",
+      "test": "Search returns 401",
+      "status": "pass",
+      "detail": "HTTP 401",
+      "timestamp": "2026-04-17T12:41:48.494040"
+    },
+    {
+      "segment": "S3-API-Auth",
+      "test": "Search returns 401 returns JSON (not HTML)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:48.496331"
+    },
+    {
+      "segment": "S3-API-Auth",
+      "test": "Weekly team report returns 401",
+      "status": "fail",
+      "detail": "Expected HTTP 401, got 405",
+      "timestamp": "2026-04-17T12:41:49.178307"
+    },
+    {
+      "segment": "S3-API-Auth",
+      "test": "User prefs returns 401",
+      "status": "pass",
+      "detail": "HTTP 401",
+      "timestamp": "2026-04-17T12:41:49.346311"
+    },
+    {
+      "segment": "S3-API-Auth",
+      "test": "User prefs returns 401 returns JSON (not HTML)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:49.347310"
+    },
+    {
+      "segment": "S3-API-Auth",
+      "test": "Team settings returns 401",
+      "status": "pass",
+      "detail": "HTTP 401",
+      "timestamp": "2026-04-17T12:41:49.499612"
+    },
+    {
+      "segment": "S3-API-Auth",
+      "test": "Team settings returns 401 returns JSON (not HTML)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:49.500613"
+    },
+    {
+      "segment": "S3-API-Auth",
+      "test": "System settings returns 401",
+      "status": "pass",
+      "detail": "HTTP 401",
+      "timestamp": "2026-04-17T12:41:49.652283"
+    },
+    {
+      "segment": "S3-API-Auth",
+      "test": "System settings returns 401 returns JSON (not HTML)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:49.652283"
+    },
+    {
+      "segment": "S3-API-Auth",
+      "test": "Files returns 401",
+      "status": "pass",
+      "detail": "HTTP 401",
+      "timestamp": "2026-04-17T12:41:49.771817"
+    },
+    {
+      "segment": "S3-API-Auth",
+      "test": "Files returns 401 returns JSON (not HTML)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:49.771817"
+    },
+    {
+      "segment": "S4-API-Mutations",
+      "test": "Create task blocked",
+      "status": "pass",
+      "detail": "HTTP 401 (unauthorized as expected)",
+      "timestamp": "2026-04-17T12:41:49.798451"
+    },
+    {
+      "segment": "S4-API-Mutations",
+      "test": "Login API exists",
+      "status": "fail",
+      "detail": "HTTP 500",
+      "timestamp": "2026-04-17T12:41:49.985269"
+    },
+    {
+      "segment": "S4-API-Mutations",
+      "test": "Forgot password API exists",
+      "status": "fail",
+      "detail": "HTTP 500",
+      "timestamp": "2026-04-17T12:41:50.118674"
+    },
+    {
+      "segment": "S4-API-Mutations",
+      "test": "Submit checkin blocked",
+      "status": "pass",
+      "detail": "HTTP 401 (unauthorized as expected)",
+      "timestamp": "2026-04-17T12:41:50.139192"
+    },
+    {
+      "segment": "S4-API-Mutations",
+      "test": "Submit wrapup blocked",
+      "status": "pass",
+      "detail": "HTTP 401 (unauthorized as expected)",
+      "timestamp": "2026-04-17T12:41:50.305028"
+    },
+    {
+      "segment": "S4-API-Mutations",
+      "test": "Create user blocked",
+      "status": "pass",
+      "detail": "HTTP 401 (unauthorized as expected)",
+      "timestamp": "2026-04-17T12:41:50.329059"
+    },
+    {
+      "segment": "S4-API-Mutations",
+      "test": "Create custom field blocked",
+      "status": "pass",
+      "detail": "HTTP 401 (unauthorized as expected)",
+      "timestamp": "2026-04-17T12:41:50.346863"
+    },
+    {
+      "segment": "S4-API-Mutations",
+      "test": "Mark all read blocked",
+      "status": "pass",
+      "detail": "HTTP 401 (unauthorized as expected)",
+      "timestamp": "2026-04-17T12:41:50.478505"
+    },
+    {
+      "segment": "S5-PageStructure",
+      "test": "Login has logo/brand",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:51.100383"
+    },
+    {
+      "segment": "S5-PageStructure",
+      "test": "Login has email label",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:51.100383"
+    },
+    {
+      "segment": "S5-PageStructure",
+      "test": "Login has forgot password link",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:51.100383"
+    },
+    {
+      "segment": "S5-PageStructure",
+      "test": "Login has gradient button",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:51.100383"
+    },
+    {
+      "segment": "S5-PageStructure",
+      "test": "Login uses Plus Jakarta Sans or system font",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:51.100383"
+    },
+    {
+      "segment": "S5-PageStructure",
+      "test": "Forgot-pw has email input",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:51.793749"
+    },
+    {
+      "segment": "S5-PageStructure",
+      "test": "Forgot-pw has submit button",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:51.793749"
+    },
+    {
+      "segment": "S5-PageStructure",
+      "test": "Forgot-pw has back to login link",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:51.793749"
+    },
+    {
+      "segment": "S5-PageStructure",
+      "test": "Onboarding page accessible or redirects",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:52.412102"
+    },
+    {
+      "segment": "S6-FileChecks",
+      "test": "Proxy middleware file exists (src/proxy.ts)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:52.412102"
+    },
+    {
+      "segment": "S6-FileChecks",
+      "test": "Supabase session helper exists (src/lib/supabase/middleware.ts)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:52.412102"
+    },
+    {
+      "segment": "S6-FileChecks",
+      "test": "Supabase server client exists (src/lib/supabase/server.ts)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:52.412102"
+    },
+    {
+      "segment": "S6-FileChecks",
+      "test": "Supabase admin client exists (src/lib/supabase/admin.ts)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:52.412102"
+    },
+    {
+      "segment": "S6-FileChecks",
+      "test": "Permissions module exists (src/lib/permissions.ts)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:52.412102"
+    },
+    {
+      "segment": "S6-FileChecks",
+      "test": "Task timeline logger exists (src/lib/task-timeline.ts)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:52.412102"
+    },
+    {
+      "segment": "S6-FileChecks",
+      "test": "Notification system exists (src/lib/notifications.ts)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:52.412102"
+    },
+    {
+      "segment": "S6-FileChecks",
+      "test": "Type definitions exists (src/types/index.ts)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:52.412102"
+    },
+    {
+      "segment": "S6-FileChecks",
+      "test": "Root layout exists (src/app/layout.tsx)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:52.412102"
+    },
+    {
+      "segment": "S6-FileChecks",
+      "test": "Global styles exists (src/app/globals.css)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:52.412102"
+    },
+    {
+      "segment": "S6-FileChecks",
+      "test": "Vercel deployment config exists (vercel.json)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:52.412102"
+    },
+    {
+      "segment": "S6-FileChecks",
+      "test": "Task comments API exists (src/app/api/tasks/[id]/comments/route.ts)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:52.412102"
+    },
+    {
+      "segment": "S6-FileChecks",
+      "test": "Cron notifications exists (src/app/api/cron/notifications/route.ts)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:52.412102"
+    },
+    {
+      "segment": "S6-FileChecks",
+      "test": "Cron archive tasks exists (src/app/api/cron/archive-tasks/route.ts)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:52.412102"
+    },
+    {
+      "segment": "S6-FileChecks",
+      "test": "Global search API exists (src/app/api/search/route.ts)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:52.412102"
+    },
+    {
+      "segment": "S6-FileChecks",
+      "test": "File management API exists (src/app/api/files/route.ts)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:52.412102"
+    },
+    {
+      "segment": "S6-FileChecks",
+      "test": "Weekly team report API exists (src/app/api/reports/weekly-team/route.ts)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:52.412102"
+    },
+    {
+      "segment": "S6-FileChecks",
+      "test": "Billable hours report API exists (src/app/api/reports/billable-hours/route.ts)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:52.412102"
+    },
+    {
+      "segment": "S6-FileChecks",
+      "test": "Individual report API exists (src/app/api/reports/individual-employee/route.ts)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:52.412102"
+    },
+    {
+      "segment": "S6-FileChecks",
+      "test": "Task export API exists (src/app/api/reports/task-export/route.ts)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:52.412102"
+    },
+    {
+      "segment": "S6-FileChecks",
+      "test": "System activity report API exists (src/app/api/reports/system-activity/route.ts)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:52.412102"
+    },
+    {
+      "segment": "S6-FileChecks",
+      "test": "Migration 001 exists (supabase/migrations/001_sprint1_schema.sql)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:52.412102"
+    },
+    {
+      "segment": "S6-FileChecks",
+      "test": "Migration 002 exists (supabase/migrations/002_sprint2_schema.sql)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:52.412102"
+    },
+    {
+      "segment": "S6-FileChecks",
+      "test": "Migration 003 exists (supabase/migrations/003_sprint3_schema.sql)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:52.412102"
+    },
+    {
+      "segment": "S6-FileChecks",
+      "test": "Migration 004 exists (supabase/migrations/004_sprint4_schema.sql)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:52.412102"
+    },
+    {
+      "segment": "S6-FileChecks",
+      "test": "Migration 005 exists (supabase/migrations/005_sprint5_schema.sql)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:52.412102"
+    },
+    {
+      "segment": "S6-FileChecks",
+      "test": "Migration 006 exists (supabase/migrations/006_sprint6_schema.sql)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:52.412102"
+    },
+    {
+      "segment": "S6-FileChecks",
+      "test": "Migration 007 exists (supabase/migrations/007_sprint7_search.sql)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:52.412102"
+    },
+    {
+      "segment": "S6-FileChecks",
+      "test": "Migration 008 exists (supabase/migrations/008_sprint8_files.sql)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:52.412102"
+    },
+    {
+      "segment": "S6-FileChecks",
+      "test": "Migration 009 exists (supabase/migrations/009_sprint10_settings_archiving.sql)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:52.412102"
+    },
+    {
+      "segment": "S6-FileChecks",
+      "test": "Migration 010 (comments) exists (supabase/migrations/010_task_comments.sql)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:52.412102"
+    },
+    {
+      "segment": "S6-FileChecks",
+      "test": "App loading skeleton exists (src/app/(app)/loading.tsx)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:52.412102"
+    },
+    {
+      "segment": "S6-FileChecks",
+      "test": "Tasks loading skeleton exists (src/app/(app)/tasks/loading.tsx)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:52.412102"
+    },
+    {
+      "segment": "S6-FileChecks",
+      "test": "Board loading skeleton exists (src/app/(app)/board/loading.tsx)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:52.412102"
+    },
+    {
+      "segment": "S6-FileChecks",
+      "test": "Plan loading skeleton exists (src/app/(app)/plan/loading.tsx)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:52.412102"
+    },
+    {
+      "segment": "S6-FileChecks",
+      "test": "Dashboard loading skeleton exists (src/app/(app)/dashboard/loading.tsx)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:52.412102"
+    },
+    {
+      "segment": "S6-FileChecks",
+      "test": "Admin loading skeleton exists (src/app/(app)/admin/loading.tsx)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:52.412102"
+    },
+    {
+      "segment": "S6-FileChecks",
+      "test": "Activity loading skeleton exists (src/app/(app)/dashboard/activity/loading.tsx)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:52.412102"
+    },
+    {
+      "segment": "S6-FileChecks",
+      "test": "Task detail loading skeleton exists (src/app/(app)/tasks/[id]/loading.tsx)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:52.412102"
+    },
+    {
+      "segment": "S6-FileChecks",
+      "test": "Confirm dialog component exists (src/components/shell/ConfirmDialog.tsx)",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:52.412102"
+    },
+    {
+      "segment": "S7-DeployConfig",
+      "test": "vercel.json has crons config",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:52.412102"
+    },
+    {
+      "segment": "S7-DeployConfig",
+      "test": "Cron: notifications scheduled",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:52.412102"
+    },
+    {
+      "segment": "S7-DeployConfig",
+      "test": "Cron: archive-tasks scheduled",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:52.412102"
+    },
+    {
+      "segment": "S7-DeployConfig",
+      "test": "ENV: SUPABASE_URL set",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:52.422778"
+    },
+    {
+      "segment": "S7-DeployConfig",
+      "test": "ENV: SUPABASE_ANON_KEY set",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:52.422778"
+    },
+    {
+      "segment": "S7-DeployConfig",
+      "test": "ENV: SERVICE_ROLE_KEY set",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:52.422778"
+    },
+    {
+      "segment": "S8-DBSchema",
+      "test": "Table 'profiles' in migrations",
+      "status": "pass",
+      "detail": "Expected in migration 001",
+      "timestamp": "2026-04-17T12:41:52.425382"
+    },
+    {
+      "segment": "S8-DBSchema",
+      "test": "Table 'tasks' in migrations",
+      "status": "pass",
+      "detail": "Expected in migration 002",
+      "timestamp": "2026-04-17T12:41:52.425382"
+    },
+    {
+      "segment": "S8-DBSchema",
+      "test": "Table 'projects' in migrations",
+      "status": "pass",
+      "detail": "Expected in migration 002",
+      "timestamp": "2026-04-17T12:41:52.425382"
+    },
+    {
+      "segment": "S8-DBSchema",
+      "test": "Table 'task_timeline' in migrations",
+      "status": "pass",
+      "detail": "Expected in migration 002",
+      "timestamp": "2026-04-17T12:41:52.425382"
+    },
+    {
+      "segment": "S8-DBSchema",
+      "test": "Table 'task_dependencies' in migrations",
+      "status": "pass",
+      "detail": "Expected in migration 002",
+      "timestamp": "2026-04-17T12:41:52.425382"
+    },
+    {
+      "segment": "S8-DBSchema",
+      "test": "Table 'custom_field_definitions' in migrations",
+      "status": "fail",
+      "detail": "Expected in migration 003",
+      "timestamp": "2026-04-17T12:41:52.425382"
+    },
+    {
+      "segment": "S8-DBSchema",
+      "test": "Table 'custom_field_values' in migrations",
+      "status": "fail",
+      "detail": "Expected in migration 003",
+      "timestamp": "2026-04-17T12:41:52.425382"
+    },
+    {
+      "segment": "S8-DBSchema",
+      "test": "Table 'saved_views' in migrations",
+      "status": "fail",
+      "detail": "Expected in migration 003",
+      "timestamp": "2026-04-17T12:41:52.425382"
+    },
+    {
+      "segment": "S8-DBSchema",
+      "test": "Table 'weekly_plans' in migrations",
+      "status": "pass",
+      "detail": "Expected in migration 004",
+      "timestamp": "2026-04-17T12:41:52.425382"
+    },
+    {
+      "segment": "S8-DBSchema",
+      "test": "Table 'plan_entries' in migrations",
+      "status": "pass",
+      "detail": "Expected in migration 004",
+      "timestamp": "2026-04-17T12:41:52.425382"
+    },
+    {
+      "segment": "S8-DBSchema",
+      "test": "Table 'daily_checkins' in migrations",
+      "status": "pass",
+      "detail": "Expected in migration 004",
+      "timestamp": "2026-04-17T12:41:52.425382"
+    },
+    {
+      "segment": "S8-DBSchema",
+      "test": "Table 'eod_wrapups' in migrations",
+      "status": "pass",
+      "detail": "Expected in migration 004",
+      "timestamp": "2026-04-17T12:41:52.425382"
+    },
+    {
+      "segment": "S8-DBSchema",
+      "test": "Table 'plan_comments' in migrations",
+      "status": "pass",
+      "detail": "Expected in migration 004",
+      "timestamp": "2026-04-17T12:41:52.425382"
+    },
+    {
+      "segment": "S8-DBSchema",
+      "test": "Table 'activity_events' in migrations",
+      "status": "fail",
+      "detail": "Expected in migration 005",
+      "timestamp": "2026-04-17T12:41:52.429453"
+    },
+    {
+      "segment": "S8-DBSchema",
+      "test": "Table 'warning_acknowledgements' in migrations",
+      "status": "fail",
+      "detail": "Expected in migration 005",
+      "timestamp": "2026-04-17T12:41:52.429453"
+    },
+    {
+      "segment": "S8-DBSchema",
+      "test": "Table 'notifications' in migrations",
+      "status": "pass",
+      "detail": "Expected in migration 006",
+      "timestamp": "2026-04-17T12:41:52.429453"
+    },
+    {
+      "segment": "S8-DBSchema",
+      "test": "Table 'notification_preferences' in migrations",
+      "status": "pass",
+      "detail": "Expected in migration 006",
+      "timestamp": "2026-04-17T12:41:52.429453"
+    },
+    {
+      "segment": "S8-DBSchema",
+      "test": "Table 'task_comments' in migrations",
+      "status": "pass",
+      "detail": "Expected in migration 010",
+      "timestamp": "2026-04-17T12:41:52.429453"
+    },
+    {
+      "segment": "S8-DBSchema",
+      "test": "RLS enabled on 'profiles'",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:52.429453"
+    },
+    {
+      "segment": "S8-DBSchema",
+      "test": "RLS enabled on 'tasks'",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:52.429453"
+    },
+    {
+      "segment": "S8-DBSchema",
+      "test": "RLS enabled on 'notifications'",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:52.429453"
+    },
+    {
+      "segment": "S8-DBSchema",
+      "test": "RLS enabled on 'task_comments'",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:52.429453"
+    },
+    {
+      "segment": "S9-CronAPIs",
+      "test": "Notification cron endpoint reachable",
+      "status": "pass",
+      "detail": "HTTP 200",
+      "timestamp": "2026-04-17T12:41:54.938443"
+    },
+    {
+      "segment": "S9-CronAPIs",
+      "test": "Archive cron endpoint reachable",
+      "status": "pass",
+      "detail": "HTTP 405",
+      "timestamp": "2026-04-17T12:41:55.051777"
+    },
+    {
+      "segment": "S10-Mobile",
+      "test": "Login page mobile-responsive",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:57.251131"
+    },
+    {
+      "segment": "S10-Mobile",
+      "test": "Forgot password mobile-responsive",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:58.912559"
+    },
+    {
+      "segment": "S11-A11y",
+      "test": "Login has label elements",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:59.604353"
+    },
+    {
+      "segment": "S11-A11y",
+      "test": "Inputs have type attributes",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:59.605352"
+    },
+    {
+      "segment": "S11-A11y",
+      "test": "Buttons have type attributes",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:59.605352"
+    },
+    {
+      "segment": "S11-A11y",
+      "test": "Material Symbols icons loaded",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:41:59.607353"
+    },
+    {
+      "segment": "S12-Security",
+      "test": "Content-Security-Policy header",
+      "status": "warn",
+      "detail": "Can add in next.config",
+      "timestamp": "2026-04-17T12:41:59.665440"
+    },
+    {
+      "segment": "S12-Security",
+      "test": "X-Frame-Options header",
+      "status": "warn",
+      "detail": "Can add in next.config",
+      "timestamp": "2026-04-17T12:41:59.665440"
+    },
+    {
+      "segment": "S12-Security",
+      "test": "X-Content-Type-Options header",
+      "status": "warn",
+      "detail": "Can add in next.config",
+      "timestamp": "2026-04-17T12:41:59.665440"
+    },
+    {
+      "segment": "S12-Security",
+      "test": "Login does not leak user existence",
+      "status": "pass",
+      "detail": "",
+      "timestamp": "2026-04-17T12:42:00.105264"
+    }
+  ]
+}

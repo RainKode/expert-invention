@@ -71,7 +71,7 @@ const SAMPLE_ROW = [
   'manager@company.com',
   'Mon,Tue,Wed,Thu,Fri',
   '8',
-  'full',
+  'both',
 ];
 
 function downloadTemplate() {
@@ -89,8 +89,8 @@ function downloadTemplate() {
 // Client-side row validation (mirrors API but faster feedback)
 // ---------------------------------------------------------------------------
 
-const VALID_ROLES = ['admin', 'planner', 'senior_manager', 'manager', 'team_leader', 'employee'];
-const VALID_BILLABLE = ['full', 'partial', 'none'];
+const VALID_ROLES = ['admin', 'senior_manager', 'manager', 'assistant_manager', 'senior_employee', 'employee'];
+const VALID_BILLABLE = ['billable', 'non_billable', 'both'];
 const VALID_DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
 function validateRow(row: RawRow, index: number, seenEmails: Set<string>): string[] {

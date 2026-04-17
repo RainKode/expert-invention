@@ -32,7 +32,10 @@ export default function QuickTaskModal({
   const isManager = ['manager', 'senior_manager', 'admin', 'assistant_manager'].includes(userRole)
 
   const [title, setTitle] = useState('')
+  const [description, setDescription] = useState('')
+  const [showDescription, setShowDescription] = useState(false)
   const [assigneeId, setAssigneeId] = useState(currentUserId)
+  const [reviewerId, setReviewerId] = useState('')
   const [dueDate, setDueDate] = useState('')
   const [priority, setPriority] = useState<'low' | 'medium' | 'high'>('medium')
   const [estimatedHours, setEstimatedHours] = useState(1)
@@ -62,7 +65,10 @@ export default function QuickTaskModal({
   useEffect(() => {
     if (open) {
       setTitle('')
+      setDescription('')
+      setShowDescription(false)
       setAssigneeId(currentUserId)
+      setReviewerId('')
       setDueDate('')
       setPriority('medium')
       setEstimatedHours(1)
@@ -90,7 +96,9 @@ export default function QuickTaskModal({
     try {
       const payload: Record<string, unknown> = {
         title: title.trim(),
+        description: description.trim() || null,
         assignee_id: assigneeId || currentUserId,
+        reviewer_id: reviewerId || null,
         due_date: dueDate || null,
         priority,
         estimated_hours: estimatedHours,
@@ -187,8 +195,29 @@ export default function QuickTaskModal({
             />
           </div>
 
-          {/* Assignee + Due Date */}
-          <div className="grid grid-cols-2 gap-4">
+          {/* Description (collapsible) */}
+          <div>
+            <button
+              type="button"
+              onClick={() => setShowDescription(d => !d)}
+              className="flex items-center gap-2 text-xs font-semibold text-on-surface-variant hover:text-on-surface transition-colors"
+            >
+              <span className="material-symbols-outlined text-sm">{showDescription ? 'expand_less' : 'expand_more'}</span>
+              {showDescription ? 'Hide description' : 'Add description'}
+            </button>
+            {showDescription && (
+              <textarea
+                value={description}
+                onChange={e => setDescription(e.target.value)}
+                placeholder="Optional task description…"
+                rows={3}
+                className="mt-2 w-full px-4 py-3 bg-surface-container-low rounded-2xl text-sm text-on-surface placeholder:text-outline/60 focus:outline-none focus:ring-2 focus:ring-primary/30 resize-none"
+              />
+            )}
+          </div>
+
+          {/* Assignee + Reviewer + Due Date */}
+          <div className="grid grid-cols-3 gap-4">
             <div className="relative">
               <label className="absolute left-4 top-3 text-[10px] font-bold uppercase tracking-widest text-outline z-10">
                 Assignee
@@ -204,6 +233,23 @@ export default function QuickTaskModal({
                       <option key={m.id} value={m.id}>{m.name}</option>
                     ))
                   : <option value={currentUserId}>Me</option>}
+              </select>
+            </div>
+            <div className="relative">
+              <label className="absolute left-4 top-3 text-[10px] font-bold uppercase tracking-widest text-outline z-10">
+                Reviewer
+              </label>
+              <select
+                value={reviewerId}
+                onChange={e => setReviewerId(e.target.value)}
+                className="w-full pt-8 pb-3 px-4 bg-surface-container-low rounded-2xl text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/30 appearance-none"
+              >
+                <option value="">None</option>
+                {teamMembers
+                  .filter(m => m.id !== assigneeId)
+                  .map(m => (
+                    <option key={m.id} value={m.id}>{m.name}</option>
+                  ))}
               </select>
             </div>
             <div className="relative">

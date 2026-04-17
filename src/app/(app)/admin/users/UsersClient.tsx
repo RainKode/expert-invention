@@ -5,9 +5,10 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { ROLE_LABELS, ROLE_OPTIONS } from '@/lib/permissions'
-import { type Role, type UserStatus } from '@/types'
+import { type Role, type UserStatus, type BillablePermission } from '@/types'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
+import ConfirmDialog from '@/components/shell/ConfirmDialog'
 
 const DeactivationModal = dynamic(() => import('@/components/admin/DeactivationModal'), { ssr: false })
 
@@ -22,6 +23,9 @@ interface UserRow {
   timezone: string
   status: UserStatus
   invite_accepted: boolean
+  available_hours: number
+  work_week: number[]
+  billable_permission: BillablePermission
 }
 
 interface Team {
@@ -86,7 +90,7 @@ function UserFormModal({
 
   useEffect(() => {
     if (editUser) {
-      // Populate form for edit — fetch full details not available on row
+      // Populate form for edit — use actual user values
       reset({
         name: editUser.name,
         email: editUser.email,
@@ -94,9 +98,9 @@ function UserFormModal({
         team_id: editUser.teams?.id ?? null,
         manager_id: editUser.manager?.id ?? null,
         timezone: editUser.timezone,
-        available_hours: 8,
-        billable_permission: 'both',
-        work_week: [1, 2, 3, 4, 5],
+        available_hours: editUser.available_hours ?? 8,
+        billable_permission: editUser.billable_permission ?? 'both',
+        work_week: editUser.work_week ?? [1, 2, 3, 4, 5],
       })
     } else {
       reset({ role: 'employee', work_week: [1,2,3,4,5], timezone: 'Asia/Dhaka', available_hours: 8, billable_permission: 'both' })
@@ -286,6 +290,7 @@ export default function UsersClient({ teams, managers }: { teams: Team[]; manage
   const [editUser, setEditUser] = useState<UserRow | null>(null)
   const [actionLoading, setActionLoading] = useState<string | null>(null)
   const [deactivateUser, setDeactivateUser] = useState<UserRow | null>(null)
+  const [reactivateUser, setReactivateUser] = useState<UserRow | null>(null)
 
   const fetchUsers = useCallback(async () => {
     setLoading(true)
@@ -306,12 +311,17 @@ export default function UsersClient({ teams, managers }: { teams: Team[]; manage
       setDeactivateUser(user)
       return
     }
-    // Reactivate directly
-    if (!confirm(`Reactivate ${user.name}?`)) return
-    setActionLoading(user.id)
-    await fetch(`/api/admin/users/${user.id}?reactivate=true`, { method: 'DELETE' })
+    // Reactivate — show confirm dialog
+    setReactivateUser(user)
+  }
+
+  async function handleReactivateConfirm() {
+    if (!reactivateUser) return
+    setActionLoading(reactivateUser.id)
+    await fetch(`/api/admin/users/${reactivateUser.id}?reactivate=true`, { method: 'DELETE' })
     await fetchUsers()
     setActionLoading(null)
+    setReactivateUser(null)
   }
 
   return (
@@ -494,6 +504,16 @@ export default function UsersClient({ teams, managers }: { teams: Team[]; manage
         userId={deactivateUser?.id ?? ''}
         onClose={() => setDeactivateUser(null)}
         onDeactivated={() => { setDeactivateUser(null); fetchUsers() }}
+      />
+
+      {/* Reactivation Confirm */}
+      <ConfirmDialog
+        open={!!reactivateUser}
+        title="Reactivate User"
+        message={`Reactivate ${reactivateUser?.name ?? 'this user'}?`}
+        confirmLabel="Reactivate"
+        onConfirm={handleReactivateConfirm}
+        onCancel={() => setReactivateUser(null)}
       />
     </div>
   )

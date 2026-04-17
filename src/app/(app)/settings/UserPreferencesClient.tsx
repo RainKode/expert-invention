@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import {
   type NotificationType,
   OPTIONAL_NOTIFICATION_TYPES,
@@ -66,21 +66,31 @@ export default function UserPreferencesClient() {
 
   useEffect(() => { loadData() }, [loadData])
 
+  const notifDebounce = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const latestPrefs = useRef(notifPrefs)
+  latestPrefs.current = notifPrefs
+
   async function toggleNotif(type: NotificationType) {
     const updated = { ...notifPrefs, [type]: !notifPrefs[type] }
     setNotifPrefs(updated)
-    setSavingNotif(true)
-    await fetch('/api/notifications/preferences', {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        preferences: OPTIONAL_NOTIFICATION_TYPES.map((t) => ({
-          notification_type: t,
-          enabled: updated[t] ?? true,
-        })),
-      }),
-    })
-    setSavingNotif(false)
+    latestPrefs.current = updated
+
+    // Debounce: wait 600ms before saving to batch rapid toggles
+    if (notifDebounce.current) clearTimeout(notifDebounce.current)
+    notifDebounce.current = setTimeout(async () => {
+      setSavingNotif(true)
+      await fetch('/api/notifications/preferences', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          preferences: OPTIONAL_NOTIFICATION_TYPES.map((t) => ({
+            notification_type: t,
+            enabled: latestPrefs.current[t] ?? true,
+          })),
+        }),
+      })
+      setSavingNotif(false)
+    }, 600)
   }
 
   async function changeView(view: 'list' | 'kanban') {

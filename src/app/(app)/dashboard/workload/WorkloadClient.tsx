@@ -40,6 +40,14 @@ function varianceBadge(variance: number) {
   return { cls: 'bg-primary-container/20 text-primary', label: 'On Track' }
 }
 
+function dateFromDow(dow: number, weekStart: string): string {
+  const monday = new Date(weekStart)
+  const diff = dow === 0 ? 6 : dow - 1
+  const d = new Date(monday)
+  d.setDate(monday.getDate() + diff)
+  return d.toISOString().split('T')[0]
+}
+
 interface Props {
   data: WorkloadData
   weekStart: string
@@ -186,12 +194,16 @@ export default function WorkloadClient({ data, weekStart, workingDays }: Props) 
                         const isUnder = cell.utilisation_pct < 60 && cell.planned_hours > 0
                         return (
                           <td key={dow} className="p-2">
-                            <div className={`rounded-[24px] p-4 text-center ${style} transition-all`}>
+                            <button
+                              onClick={() => router.push(`/tasks?assignee=${row.user.id}&date=${dateFromDow(dow, weekStart)}`)}
+                              title={`View ${row.user.name}'s tasks for ${formatDate(dow, weekStart)}`}
+                              className={`rounded-[24px] p-4 text-center ${style} transition-all w-full cursor-pointer hover:ring-2 hover:ring-primary/30 hover:scale-[1.03]`}
+                            >
                               <div className="text-xs font-bold">{cell.planned_hours}h / {cell.actual_hours}h</div>
                               {isUnder && (
                                 <div className="text-[10px] font-medium mt-0.5 opacity-70">Underload</div>
                               )}
-                            </div>
+                            </button>
                           </td>
                         )
                       })}

@@ -5,6 +5,8 @@ import { requirePermission } from '@/lib/permissions'
 import { type Role } from '@/types'
 import { z } from 'zod'
 import crypto from 'crypto'
+import { sanitizeFilterInput } from '@/lib/sanitize'
+import { sendEmail, inviteEmailHtml } from '@/lib/email'
 
 // ─── GET /api/admin/users ─────────────────────────────────────────────────────
 
@@ -34,7 +36,7 @@ export async function GET(request: Request) {
     `)
     .order('name')
 
-  if (q) query = query.or(`name.ilike.%${q}%`)
+  if (q) query = query.or(`name.ilike.%${sanitizeFilterInput(q)}%`)
   if (role) query = query.eq('role', role)
   if (team) query = query.eq('team_id', team)
   if (status) query = query.eq('status', status)
@@ -130,6 +132,16 @@ export async function POST(request: Request) {
   })
 
   const inviteUrl = `${process.env.NEXT_PUBLIC_APP_URL}/set-password?token=${token}`
+
+  // Send invite email
+  const teamName = team_id
+    ? (await adminClient.from('teams').select('name').eq('id', team_id).single()).data?.name
+    : null
+  await sendEmail({
+    to: email,
+    subject: 'You\'ve been invited to Sunday',
+    html: inviteEmailHtml({ recipientName: name, teamName, setPasswordUrl: inviteUrl }),
+  })
 
   return NextResponse.json({
     user: { id: newUser.user.id, email, name, role },

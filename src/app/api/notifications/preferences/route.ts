@@ -52,18 +52,17 @@ export async function PUT(request: NextRequest) {
     OPTIONAL_NOTIFICATION_TYPES.includes(p.notification_type as NotificationType)
   )
 
-  // Upsert each preference
-  for (const pref of validUpdates) {
+  // Bulk upsert all preferences atomically
+  const rows = validUpdates.map((pref: { notification_type: string; enabled: boolean }) => ({
+    user_id: user.id,
+    notification_type: pref.notification_type,
+    enabled: pref.enabled,
+  }))
+
+  if (rows.length > 0) {
     await adminClient
       .from('notification_preferences')
-      .upsert(
-        {
-          user_id: user.id,
-          notification_type: pref.notification_type,
-          enabled: pref.enabled,
-        },
-        { onConflict: 'user_id,notification_type' }
-      )
+      .upsert(rows, { onConflict: 'user_id,notification_type' })
   }
 
   return NextResponse.json({ success: true })

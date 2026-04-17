@@ -36,6 +36,7 @@ const NOTIFICATION_DESCRIPTIONS: Record<NotificationType, string> = {
   zero_tasks_planned: 'Urgent alert when an employee has no tasks planned for the week.',
   comment_on_plan: 'Notified when someone comments on your weekly plan.',
   comment_on_task: 'Notified when someone comments on a task you are involved in.',
+  task_carryover: 'Notified when a task is carried over to the next week.',
 }
 
 // Icons for optional types grouped by theme
@@ -225,7 +226,7 @@ export default function NotificationPreferencesClient() {
                           <ToggleSwitch
                             enabled={isEnabled}
                             onChange={() => togglePreference(type)}
-                            loading={loading}
+                            loading={loading || saving}
                           />
                         </>
                       )}
@@ -261,7 +262,7 @@ export default function NotificationPreferencesClient() {
                       <ToggleSwitch
                         enabled={isEnabled}
                         onChange={() => togglePreference(type)}
-                        loading={loading}
+                        loading={loading || saving}
                         large
                       />
                     )}

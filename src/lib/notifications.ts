@@ -1,4 +1,5 @@
 import { createAdminClient } from '@/lib/supabase/admin'
+import { sendEmail, notificationEmailHtml } from '@/lib/email'
 import {
   type NotificationType,
   type NotificationChannel,
@@ -52,6 +53,30 @@ export async function createNotification(params: CreateNotificationParams): Prom
     channel,
     metadata: metadata ?? null,
   })
+
+  // Send email for urgent notification types
+  if (channel === 'both') {
+    const { data: recipient } = await adminClient
+      .from('profiles')
+      .select('email, name')
+      .eq('id', recipientId)
+      .single()
+
+    if (recipient?.email) {
+      const baseUrl = process.env.NEXT_PUBLIC_APP_URL ?? ''
+      const fullLink = link ? `${baseUrl}${link}` : null
+      await sendEmail({
+        to: recipient.email,
+        subject: title,
+        html: notificationEmailHtml({
+          title,
+          message,
+          link: fullLink,
+          recipientName: recipient.name ?? undefined,
+        }),
+      })
+    }
+  }
 }
 
 /**

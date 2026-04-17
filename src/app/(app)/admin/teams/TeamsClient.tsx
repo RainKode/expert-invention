@@ -4,6 +4,7 @@ import { useEffect, useState, useCallback } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
+import ConfirmDialog from '@/components/shell/ConfirmDialog'
 
 interface Manager { id: string; name: string; role: string }
 interface TeamRow {
@@ -255,6 +256,7 @@ export default function TeamsClient({ managers }: { managers: Manager[] }) {
   const [teamModalOpen, setTeamModalOpen] = useState(false)
   const [editDept, setEditDept] = useState<DepartmentRow | null>(null)
   const [editTeam, setEditTeam] = useState<any>(null)
+  const [deleteTarget, setDeleteTarget] = useState<{ id: string; type: 'department' | 'team'; message: string } | null>(null)
 
   const fetchData = useCallback(async () => {
     setLoading(true)
@@ -277,14 +279,17 @@ export default function TeamsClient({ managers }: { managers: Manager[] }) {
   }
 
   async function deleteDept(id: string) {
-    if (!confirm('Delete this department? All teams inside it will also be deleted.')) return
-    await fetch(`/api/admin/teams/${id}?type=department`, { method: 'DELETE' })
-    fetchData()
+    setDeleteTarget({ id, type: 'department', message: 'Delete this department? All teams inside it will also be deleted.' })
   }
 
   async function deleteTeam(id: string) {
-    if (!confirm('Delete this team?')) return
-    await fetch(`/api/admin/teams/${id}?type=team`, { method: 'DELETE' })
+    setDeleteTarget({ id, type: 'team', message: 'Delete this team?' })
+  }
+
+  async function handleDeleteConfirm() {
+    if (!deleteTarget) return
+    await fetch(`/api/admin/teams/${deleteTarget.id}?type=${deleteTarget.type}`, { method: 'DELETE' })
+    setDeleteTarget(null)
     fetchData()
   }
 
@@ -420,6 +425,15 @@ export default function TeamsClient({ managers }: { managers: Manager[] }) {
 
       <DepartmentModal open={deptModalOpen} onClose={() => setDeptModalOpen(false)} onSaved={fetchData} editDept={editDept} managers={managers} />
       <TeamModal open={teamModalOpen} onClose={() => setTeamModalOpen(false)} onSaved={fetchData} editTeam={editTeam} departments={departments} managers={managers} />
+      <ConfirmDialog
+        open={!!deleteTarget}
+        title="Confirm Delete"
+        message={deleteTarget?.message ?? ''}
+        confirmLabel="Delete"
+        destructive
+        onConfirm={handleDeleteConfirm}
+        onCancel={() => setDeleteTarget(null)}
+      />
     </div>
   )
 }

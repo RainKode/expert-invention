@@ -82,7 +82,7 @@ export default function SetPasswordClient() {
       return
     }
 
-    router.push('/dashboard')
+    router.push('/onboarding')
     router.refresh()
   }
 

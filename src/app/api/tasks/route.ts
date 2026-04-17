@@ -6,6 +6,7 @@ import { logTimelineEvent } from '@/lib/task-timeline'
 import { createNotification } from '@/lib/notifications'
 import { z } from 'zod'
 import type { Role, TaskStatus, CustomFieldType } from '@/types'
+import { sanitizeFilterInput } from '@/lib/sanitize'
 
 const createTaskSchema = z.object({
   title: z.string().min(1, 'Title is required').max(255),
@@ -78,10 +79,10 @@ export async function GET(request: NextRequest) {
   if (taskType) query = query.eq('task_type', taskType)
   if (taskNature) query = query.eq('task_nature', taskNature)
   if (projectId) query = query.eq('project_id', projectId)
-  if (billable !== null) query = query.eq('billable', billable === 'true')
+  if (billable === 'true' || billable === 'false') query = query.eq('billable', billable === 'true')
   if (dueBefore) query = query.lte('due_date', dueBefore)
   if (dueAfter) query = query.gte('due_date', dueAfter)
-  if (search) query = query.ilike('title', `%${search}%`)
+  if (search) query = query.ilike('title', `%${sanitizeFilterInput(search)}%`)
 
   // --- Custom field filtering ---
   // Custom field params use prefix "cf_" e.g. ?cf_<fieldId>=value

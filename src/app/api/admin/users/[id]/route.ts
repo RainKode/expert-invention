@@ -5,6 +5,7 @@ import { requirePermission } from '@/lib/permissions'
 import { type Role } from '@/types'
 import { z } from 'zod'
 import crypto from 'crypto'
+import { sendEmail, inviteEmailHtml } from '@/lib/email'
 
 type Params = { params: Promise<{ id: string }> }
 
@@ -127,6 +128,28 @@ export async function POST(request: Request, { params }: Params) {
   })
 
   const inviteUrl = `${process.env.NEXT_PUBLIC_APP_URL}/set-password?token=${token}`
+
+  // Send invite email
+  const { data: profile } = await adminClient
+    .from('profiles')
+    .select('name, email, team_id')
+    .eq('id', id)
+    .single()
+
+  if (profile?.email) {
+    const teamName = profile.team_id
+      ? (await adminClient.from('teams').select('name').eq('id', profile.team_id).single()).data?.name
+      : null
+    await sendEmail({
+      to: profile.email,
+      subject: 'You\'ve been invited to Sunday',
+      html: inviteEmailHtml({
+        recipientName: profile.name ?? 'there',
+        teamName,
+        setPasswordUrl: inviteUrl,
+      }),
+    })
+  }
 
   return NextResponse.json({ inviteUrl })
 }

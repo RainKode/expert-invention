@@ -516,6 +516,7 @@ export type NotificationType =
   | 'task_in_review'
   | 'task_sent_back'
   | 'task_marked_done'
+  | 'task_carryover'
   | 'dependency_unblocked'
   | 'plan_not_submitted'
   | 'checkin_not_submitted'
@@ -573,6 +574,7 @@ export const NOTIFICATION_TYPE_META: Record<NotificationType, { icon: string; la
   plan_not_submitted: { icon: 'calendar_today', label: 'Plan Overdue' },
   checkin_not_submitted: { icon: 'assignment_turned_in', label: 'Check-in Missing' },
   zero_tasks_planned: { icon: 'event_busy', label: 'No Tasks Planned' },
+  task_carryover: { icon: 'next_plan', label: 'Task Carried Over' },
   comment_on_plan: { icon: 'chat_bubble_outline', label: 'Plan Comment' },
   comment_on_task: { icon: 'comment', label: 'Task Comment' },
 }

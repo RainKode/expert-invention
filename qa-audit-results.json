@@ -1,0 +1,218 @@
+[
+  {
+    "module": "Auth",
+    "test": "Login page renders",
+    "status": "fail",
+    "detail": "Page.goto: Timeout 8000ms exceeded.\nCall log:\n  - navigating to \"http://localhost:3000/login\", waiting until \"networkidle\"\n"
+  },
+  {
+    "module": "Auth",
+    "test": "Login form fields present",
+    "status": "pass",
+    "detail": ""
+  },
+  {
+    "module": "Auth",
+    "test": "Login validation prevents empty submit",
+    "status": "pass",
+    "detail": ""
+  },
+  {
+    "module": "Auth",
+    "test": "Login rejects wrong credentials",
+    "status": "pass",
+    "detail": ""
+  },
+  {
+    "module": "Auth",
+    "test": "Forgot password page renders",
+    "status": "pass",
+    "detail": ""
+  },
+  {
+    "module": "Auth",
+    "test": "Forgot password form has email field",
+    "status": "pass",
+    "detail": ""
+  },
+  {
+    "module": "Auth",
+    "test": "Set password page loads",
+    "status": "pass",
+    "detail": ""
+  },
+  {
+    "module": "Auth",
+    "test": "Reset password page loads",
+    "status": "pass",
+    "detail": ""
+  },
+  {
+    "module": "Auth",
+    "test": "Set password validates token",
+    "status": "pass",
+    "detail": ""
+  },
+  {
+    "module": "Auth",
+    "test": "Route /dashboard redirects to login",
+    "status": "pass",
+    "detail": ""
+  },
+  {
+    "module": "Auth",
+    "test": "Route /tasks redirects to login",
+    "status": "pass",
+    "detail": ""
+  },
+  {
+    "module": "Auth",
+    "test": "Route /board redirects to login",
+    "status": "pass",
+    "detail": ""
+  },
+  {
+    "module": "Auth",
+    "test": "Route /plan redirects to login",
+    "status": "pass",
+    "detail": ""
+  },
+  {
+    "module": "Auth",
+    "test": "Route /checkin redirects to login",
+    "status": "pass",
+    "detail": ""
+  },
+  {
+    "module": "Auth",
+    "test": "Route /wrapup redirects to login",
+    "status": "pass",
+    "detail": ""
+  },
+  {
+    "module": "Auth",
+    "test": "Route /reports redirects to login",
+    "status": "pass",
+    "detail": ""
+  },
+  {
+    "module": "Auth",
+    "test": "Route /admin/users redirects to login",
+    "status": "pass",
+    "detail": ""
+  },
+  {
+    "module": "Auth",
+    "test": "Route /admin/teams redirects to login",
+    "status": "pass",
+    "detail": ""
+  },
+  {
+    "module": "Auth",
+    "test": "Route /settings redirects to login",
+    "status": "pass",
+    "detail": ""
+  },
+  {
+    "module": "Auth",
+    "test": "Route /team/tasks redirects to login",
+    "status": "pass",
+    "detail": ""
+  },
+  {
+    "module": "Auth",
+    "test": "Route /team/plans redirects to login",
+    "status": "pass",
+    "detail": ""
+  },
+  {
+    "module": "API",
+    "test": "Auth ME endpoint",
+    "status": "pass",
+    "detail": "Returns 401 (auth required)"
+  },
+  {
+    "module": "API",
+    "test": "Tasks list endpoint",
+    "status": "warn",
+    "detail": "Returns 200 without auth (check RLS)"
+  },
+  {
+    "module": "API",
+    "test": "Projects endpoint",
+    "status": "warn",
+    "detail": "Returns 200 without auth (check RLS)"
+  },
+  {
+    "module": "API",
+    "test": "Notifications endpoint",
+    "status": "warn",
+    "detail": "Returns 200 without auth (check RLS)"
+  },
+  {
+    "module": "API",
+    "test": "Search endpoint",
+    "status": "warn",
+    "detail": "Returns 200 without auth (check RLS)"
+  },
+  {
+    "module": "API",
+    "test": "Check-in endpoint",
+    "status": "warn",
+    "detail": "Returns 200 without auth (check RLS)"
+  },
+  {
+    "module": "API",
+    "test": "Dashboard overview endpoint",
+    "status": "warn",
+    "detail": "Returns 200 without auth (check RLS)"
+  },
+  {
+    "module": "API",
+    "test": "Custom fields endpoint",
+    "status": "warn",
+    "detail": "Returns 200 without auth (check RLS)"
+  },
+  {
+    "module": "API",
+    "test": "Saved views endpoint",
+    "status": "warn",
+    "detail": "Returns 200 without auth (check RLS)"
+  },
+  {
+    "module": "API",
+    "test": "Activity feed endpoint",
+    "status": "warn",
+    "detail": "Returns 200 without auth (check RLS)"
+  },
+  {
+    "module": "Middleware",
+    "test": "src/middleware.ts exists",
+    "status": "fail",
+    "detail": "CRITICAL: No middleware.ts found \u2014 auth protection not enforced by Next.js"
+  },
+  {
+    "module": "Cron",
+    "test": "Cron route notifications exists",
+    "status": "pass",
+    "detail": ""
+  },
+  {
+    "module": "Cron",
+    "test": "Cron route archive-tasks exists",
+    "status": "pass",
+    "detail": ""
+  },
+  {
+    "module": "API",
+    "test": "Task comments API exists",
+    "status": "fail",
+    "detail": "QA Guide says this is deferred"
+  },
+  {
+    "module": "API",
+    "test": "Departments API exists",
+    "status": "fail",
+    "detail": "Product guide requires department CRUD"
+  }
+]

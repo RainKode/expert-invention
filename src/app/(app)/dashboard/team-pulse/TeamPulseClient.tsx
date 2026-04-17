@@ -73,6 +73,7 @@ export default function TeamPulseClient({ data, weekStart, workingDays }: Props)
   })
   const [ackNote, setAckNote] = useState('')
   const [ackSaving, setAckSaving] = useState(false)
+  const [toastError, setToastError] = useState<string | null>(null)
 
   const todayDow = new Date().getDay()
 
@@ -91,7 +92,7 @@ export default function TeamPulseClient({ data, weekStart, workingDays }: Props)
       })
       if (!res.ok) {
         const d = await res.json().catch(() => ({}))
-        alert(d.error ?? 'Failed to acknowledge. Please try again.')
+        setToastError(d.error ?? 'Failed to acknowledge. Please try again.')
         return
       }
       setAckModal({ open: false, employeeId: '', employeeName: '', unplannedDays: [] })
@@ -415,6 +416,19 @@ export default function TeamPulseClient({ data, weekStart, workingDays }: Props)
                 {ackSaving ? 'Saving…' : 'Acknowledge'}
               </button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Error toast */}
+      {toastError && (
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 px-6 py-3 rounded-full text-sm font-semibold shadow-lg bg-error-container text-on-error-container">
+          <div className="flex items-center gap-2">
+            <span className="material-symbols-outlined text-base">error</span>
+            {toastError}
+            <button onClick={() => setToastError(null)} className="ml-2 opacity-60 hover:opacity-100">
+              <span className="material-symbols-outlined text-base">close</span>
+            </button>
           </div>
         </div>
       )}

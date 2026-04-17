@@ -10,10 +10,10 @@ import { createAdminClient } from '@/lib/supabase/admin'
 const DEFAULT_ARCHIVE_MONTHS = 6
 
 export async function POST(request: NextRequest) {
-  // Verify cron secret
-  const authHeader = request.headers.get('authorization')
+  // Verify cron secret — fail closed when CRON_SECRET is not set
+  const secret = request.headers.get('x-cron-secret') || request.headers.get('authorization')?.replace('Bearer ', '')
   const cronSecret = process.env.CRON_SECRET
-  if (cronSecret && authHeader !== `Bearer ${cronSecret}`) {
+  if (!cronSecret || secret !== cronSecret) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 

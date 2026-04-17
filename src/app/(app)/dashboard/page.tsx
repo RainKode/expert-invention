@@ -2,7 +2,7 @@
 // My Overview — personal dashboard
 // Server component: fetches overview data, passes to client
 
-import { createAdminClient } from '@/lib/supabase/admin'
+import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import { getAuthUser, getProfile } from '@/lib/auth-cache'
 import DashboardClient from './DashboardClient'
@@ -26,31 +26,31 @@ export default async function DashboardPage() {
   const user = await getAuthUser()
   if (!user) redirect('/login')
 
-  const admin = createAdminClient()
+  const supabase = await createClient()
   const today = new Date().toISOString().split('T')[0]
   const weekStart = getMondayISO()
   const weekEnd = getSundayISO(weekStart)
 
   const [profile, todayResult, overdueResult, doneResult, deadlineResult, weekPlanResult] = await Promise.all([
     getProfile(user.id),
-    admin.from('tasks')
+    supabase.from('tasks')
       .select('id, title, status, priority, due_date, estimated_hours, project:projects(name)')
       .eq('assignee_id', user.id)
       .eq('due_date', today)
       .neq('status', 'done'),
-    admin.from('tasks')
+    supabase.from('tasks')
       .select('id, title, status, priority, due_date, estimated_hours, project:projects(name)')
       .eq('assignee_id', user.id)
       .lt('due_date', today)
       .neq('status', 'done')
       .order('due_date', { ascending: true }),
-    admin.from('tasks')
+    supabase.from('tasks')
       .select('id')
       .eq('assignee_id', user.id)
       .eq('status', 'done')
       .gte('completed_at', weekStart + 'T00:00:00Z')
       .lte('completed_at', weekEnd + 'T23:59:59Z'),
-    admin.from('tasks')
+    supabase.from('tasks')
       .select('id, title, due_date, project:projects(name)')
       .eq('assignee_id', user.id)
       .gt('due_date', today)
@@ -60,7 +60,7 @@ export default async function DashboardPage() {
       .neq('status', 'done')
       .order('due_date', { ascending: true })
       .limit(5),
-    admin.from('weekly_plans')
+    supabase.from('weekly_plans')
       .select('id')
       .eq('user_id', user.id)
       .eq('week_start_date', weekStart)
@@ -73,7 +73,7 @@ export default async function DashboardPage() {
   let carryOvers: MyOverviewData['carry_overs'] = []
 
   if (weekPlan) {
-    const { data: entries } = await admin
+    const { data: entries } = await supabase
       .from('plan_entries')
       .select('id, day_of_week, is_carryover, original_date, task:tasks(id, title)')
       .eq('plan_id', weekPlan.id)

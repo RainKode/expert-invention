@@ -1,0 +1,132 @@
+[
+  {
+    "page": "dashboard",
+    "url": "http://localhost:3000/dashboard",
+    "status": "error",
+    "errors": [
+      "Page.goto: Timeout 20000ms exceeded.\nCall log:\n  - navigating to \"http://localhost:3000/dashboard\", waiting until \"domcontentloaded\"\n"
+    ],
+    "console_errors": [
+      "WebSocket is already in CLOSING or CLOSED state.",
+      "WebSocket is already in CLOSING or CLOSED state.",
+      "WebSocket is already in CLOSING or CLOSED state.",
+      "WebSocket is already in CLOSING or CLOSED state.",
+      "WebSocket is already in CLOSING or CLOSED state."
+    ]
+  },
+  {
+    "page": "tasks",
+    "url": "http://localhost:3000/tasks",
+    "status": "warning",
+    "errors": [],
+    "console_errors": [
+      "A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.\n- Date formatting in a user's locale which doesn't match the server.\n- External changing data without sending a snapshot of it along with the HTML.\n- Invalid HTML tag nesting.\n\nIt can also happen if the client has a browser extension installed which messes with the HTML before React loaded.\n\n%s%s https://react.dev/link/hydration-mismatch \n\n  ...\n    <RedirectErrorBoundary router={{...}}>\n      <InnerLayoutRouter url=\"/dashboard\" tree={[...]} params={{}} cacheNode={{rsc:{...}, ...}} segmentPath={[...]} ...>\n        <LoadingBoundaryProvider loading={[...]}>\n          <SegmentViewNode type=\"layout\" pagePath=\"(app)/layo...\">\n            <SegmentTrieNode>\n            <script>\n            <script>\n            <script>\n            <AppLayout>\n              <AppShellClient userName=\"Admin\" userRole=\"admin\" userId=\"9f6443f4-6...\">\n                <div className=\"min-h-scre...\">\n                  <Sidebar>\n                  <TopBar userName=\"Admin\" userRole=\"admin\" unreadNotificationCount={0} ...>\n                    <header className=\"fixed top-...\">\n                      <button>\n                      <GlobalSearchBar>\n                        <div ref={{current:null}} className=\"hidden md:...\">\n                          <div className={\"relative...\"}>\n                            <span>\n                            <input\n                              ref={{current:null}}\n                              type=\"text\"\n                              value=\"\"\n                              onChange={function onChange}\n                              onFocus={function onFocus}\n                              onKeyDown={function handleKeyDown}\n                              placeholder=\"Search tasks, projects, people\u2026\"\n                              className=\"w-full h-full pl-12 pr-20 bg-transparent border-none focus:ring-0 text-sm tex...\"\n-                             style={{caret-color:\"transparent\"}}\n                            >\n                            ...\n                      ...\n                  ...\n      ...\n",
+      "WebSocket is already in CLOSING or CLOSED state.",
+      "WebSocket is already in CLOSING or CLOSED state.",
+      "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+      "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+    ],
+    "http_status": 200,
+    "screenshot": "D:\\New folder (24)\\Nest-Task Managment\\expert-invention\\scripts\\..\\qa-playwright-screenshots\\authenticated\\tasks.png"
+  },
+  {
+    "page": "board",
+    "url": "http://localhost:3000/board",
+    "status": "error",
+    "errors": [
+      "Page.goto: net::ERR_ABORTED at http://localhost:3000/board\nCall log:\n  - navigating to \"http://localhost:3000/board\", waiting until \"domcontentloaded\"\n"
+    ],
+    "console_errors": []
+  },
+  {
+    "page": "team",
+    "url": "http://localhost:3000/team",
+    "status": "warning",
+    "errors": [],
+    "console_errors": [
+      "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+      "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+    ],
+    "http_status": 200,
+    "screenshot": "D:\\New folder (24)\\Nest-Task Managment\\expert-invention\\scripts\\..\\qa-playwright-screenshots\\authenticated\\team.png"
+  },
+  {
+    "page": "plan",
+    "url": "http://localhost:3000/plan",
+    "status": "error",
+    "errors": [
+      "Page.goto: Timeout 20000ms exceeded.\nCall log:\n  - navigating to \"http://localhost:3000/plan\", waiting until \"domcontentloaded\"\n"
+    ],
+    "console_errors": [
+      "WebSocket is already in CLOSING or CLOSED state.",
+      "WebSocket is already in CLOSING or CLOSED state.",
+      "WebSocket is already in CLOSING or CLOSED state.",
+      "WebSocket is already in CLOSING or CLOSED state.",
+      "WebSocket is already in CLOSING or CLOSED state."
+    ]
+  },
+  {
+    "page": "reports",
+    "url": "http://localhost:3000/reports",
+    "status": "warning",
+    "errors": [],
+    "console_errors": [
+      "WebSocket is already in CLOSING or CLOSED state."
+    ],
+    "http_status": 200,
+    "screenshot": "D:\\New folder (24)\\Nest-Task Managment\\expert-invention\\scripts\\..\\qa-playwright-screenshots\\authenticated\\reports.png"
+  },
+  {
+    "page": "settings",
+    "url": "http://localhost:3000/settings",
+    "status": "ok",
+    "errors": [],
+    "console_errors": [],
+    "http_status": 200,
+    "screenshot": "D:\\New folder (24)\\Nest-Task Managment\\expert-invention\\scripts\\..\\qa-playwright-screenshots\\authenticated\\settings.png"
+  },
+  {
+    "page": "checkin",
+    "url": "http://localhost:3000/checkin",
+    "status": "ok",
+    "errors": [],
+    "console_errors": [],
+    "http_status": 200,
+    "screenshot": "D:\\New folder (24)\\Nest-Task Managment\\expert-invention\\scripts\\..\\qa-playwright-screenshots\\authenticated\\checkin.png"
+  },
+  {
+    "page": "wrapup",
+    "url": "http://localhost:3000/wrapup",
+    "status": "ok",
+    "errors": [],
+    "console_errors": [],
+    "http_status": 200,
+    "screenshot": "D:\\New folder (24)\\Nest-Task Managment\\expert-invention\\scripts\\..\\qa-playwright-screenshots\\authenticated\\wrapup.png"
+  },
+  {
+    "page": "admin",
+    "url": "http://localhost:3000/admin",
+    "status": "warning",
+    "errors": [],
+    "console_errors": [
+      "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+    ],
+    "http_status": 200,
+    "screenshot": "D:\\New folder (24)\\Nest-Task Managment\\expert-invention\\scripts\\..\\qa-playwright-screenshots\\authenticated\\admin.png"
+  },
+  {
+    "page": "onboarding",
+    "url": "http://localhost:3000/onboarding",
+    "status": "error",
+    "errors": [
+      "Page.goto: Timeout 20000ms exceeded.\nCall log:\n  - navigating to \"http://localhost:3000/onboarding\", waiting until \"domcontentloaded\"\n"
+    ],
+    "console_errors": [
+      "WebSocket is already in CLOSING or CLOSED state.",
+      "WebSocket is already in CLOSING or CLOSED state.",
+      "WebSocket is already in CLOSING or CLOSED state.",
+      "WebSocket is already in CLOSING or CLOSED state.",
+      "WebSocket is already in CLOSING or CLOSED state."
+    ]
+  }
+]

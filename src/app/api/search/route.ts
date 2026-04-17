@@ -3,6 +3,7 @@ import { createClient } from '@/lib/supabase/server'
 import { createAdminClient } from '@/lib/supabase/admin'
 import { can } from '@/lib/permissions'
 import type { Role } from '@/types'
+import { sanitizeFilterInput } from '@/lib/sanitize'
 
 // GET /api/search?q=keyword&limit=5
 export async function GET(request: NextRequest) {
@@ -61,7 +62,7 @@ export async function GET(request: NextRequest) {
         assignee:profiles!tasks_assignee_id_fkey(id, name),
         project:projects(id, name)
       `)
-      .ilike('title', `%${q}%`)
+      .ilike('title', `%${sanitizeFilterInput(q)}%`)
       .neq('status', 'archived')
       .limit(limit)
 
@@ -126,7 +127,7 @@ async function searchPeople(
   let query = admin
     .from('profiles')
     .select('id, name, email, role, team_id')
-    .or(`name.ilike.%${q}%,email.ilike.%${q}%`)
+    .or(`name.ilike.%${sanitizeFilterInput(q)}%,email.ilike.%${sanitizeFilterInput(q)}%`)
     .eq('status', 'active')
     .limit(limit)
 

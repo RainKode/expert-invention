@@ -44,7 +44,7 @@ export async function POST(request: NextRequest, { params }: Params) {
   if (!parsed.success) return NextResponse.json({ error: parsed.error.issues[0].message }, { status: 400 })
 
   // Verify parent task exists and user can access it
-  const { data: parent } = await supabase.from('tasks').select('id, team_id').eq('id', id).single()
+  const { data: parent } = await supabase.from('tasks').select('id, team_id, project_id').eq('id', id).single()
   if (!parent) return NextResponse.json({ error: 'Parent task not found' }, { status: 404 })
 
   const admin = createAdminClient()
@@ -56,6 +56,7 @@ export async function POST(request: NextRequest, { params }: Params) {
       creator_id: user.id,
       assignee_id: user.id,
       team_id: parent.team_id,
+      project_id: parent.project_id,
       status: 'todo',
       task_type: 'planned',
       task_nature: 'supporting',

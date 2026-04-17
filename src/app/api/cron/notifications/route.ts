@@ -8,9 +8,9 @@ import { createNotification } from '@/lib/notifications'
 
 // Simple auth via a secret header to prevent public triggering
 function verifyCronSecret(request: NextRequest): boolean {
-  const secret = request.headers.get('x-cron-secret')
+  const secret = request.headers.get('x-cron-secret') || request.headers.get('authorization')?.replace('Bearer ', '')
   const expected = process.env.CRON_SECRET
-  if (!expected) return true // If no secret configured, allow (dev mode)
+  if (!expected) return false // Fail closed — CRON_SECRET must be set in production
   return secret === expected
 }
 
@@ -239,6 +239,52 @@ export async function GET(request: NextRequest) {
     }
   }
   results.zero_tasks_planned = zeroPlannedCount
+
+  // ── 6. task_carryover ─────────────────────────────────────────────────────
+  // Find plan entries marked as carry-overs that haven't been notified yet
+  // (entries with is_carryover=true created today via the planning page or background job)
+  const { data: carryoverEntries } = await admin
+    .from('plan_entries')
+    .select(`
+      id, task_id, is_carryover, original_date,
+      plan:weekly_plans!inner(user_id)
+    `)
+    .eq('is_carryover', true)
+
+  let carryoverCount = 0
+  for (const entry of carryoverEntries ?? []) {
+    const userId = (entry.plan as unknown as { user_id: string })?.user_id
+    if (!userId || !entry.task_id) continue
+
+    // Check if we already notified for this task carry-over today
+    const { count: existingCount } = await admin
+      .from('notifications')
+      .select('*', { count: 'exact', head: true })
+      .eq('recipient_id', userId)
+      .eq('type', 'task_carryover')
+      .gte('created_at', today)
+      .contains('metadata', { task_id: entry.task_id })
+
+    if ((existingCount ?? 0) > 0) continue
+
+    // Get task title
+    const { data: task } = await admin
+      .from('tasks')
+      .select('title')
+      .eq('id', entry.task_id)
+      .single()
+
+    await createNotification({
+      recipientId: userId,
+      type: 'task_carryover',
+      title: 'Task Carried Over',
+      message: `"${task?.title ?? 'Untitled task'}" was carried over from ${entry.original_date ?? 'a previous day'}`,
+      link: '/plan',
+      metadata: { task_id: entry.task_id, original_date: entry.original_date },
+    })
+    carryoverCount++
+  }
+  results.task_carryover = carryoverCount
 
   return NextResponse.json({ success: true, results, date: today })
 }

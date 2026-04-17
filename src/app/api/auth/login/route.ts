@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { NextResponse } from 'next/server'
 import { z } from 'zod'
+import { checkRateLimit, getClientIP } from '@/lib/rate-limit'
 
 const schema = z.object({
   email: z.string().email(),
@@ -8,44 +9,58 @@ const schema = z.object({
 })
 
 export async function POST(request: Request) {
-  const body = await request.json()
-  const parsed = schema.safeParse(body)
+  try {
+    // Rate limit: 10 attempts per minute per IP
+    const ip = getClientIP(request)
+    const rl = checkRateLimit(`login:${ip}`, 10, 60_000)
+    if (!rl.allowed) {
+      return NextResponse.json(
+        { error: 'Too many login attempts. Please try again later.' },
+        { status: 429, headers: { 'Retry-After': String(rl.resetIn) } }
+      )
+    }
 
-  if (!parsed.success) {
-    return NextResponse.json({ error: 'Invalid credentials' }, { status: 400 })
+    const body = await request.json()
+    const parsed = schema.safeParse(body)
+
+    if (!parsed.success) {
+      return NextResponse.json({ error: 'Invalid credentials' }, { status: 400 })
+    }
+
+    const supabase = await createClient()
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: parsed.data.email,
+      password: parsed.data.password,
+    })
+
+    if (error) {
+      return NextResponse.json({ error: error.message }, { status: 401 })
+    }
+
+    // Check profile status — deactivated accounts cannot log in
+    const { data: profile } = await supabase
+      .from('profiles')
+      .select('status, role, name')
+      .eq('id', data.user.id)
+      .single()
+
+    if (profile?.status === 'deactivated') {
+      await supabase.auth.signOut()
+      return NextResponse.json(
+        { error: 'This account has been deactivated. Contact your administrator.' },
+        { status: 403 }
+      )
+    }
+
+    return NextResponse.json({
+      user: {
+        id: data.user.id,
+        email: data.user.email,
+        name: profile?.name,
+        role: profile?.role,
+      },
+    })
+  } catch {
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
-
-  const supabase = await createClient()
-  const { data, error } = await supabase.auth.signInWithPassword({
-    email: parsed.data.email,
-    password: parsed.data.password,
-  })
-
-  if (error) {
-    return NextResponse.json({ error: error.message }, { status: 401 })
-  }
-
-  // Check profile status — deactivated accounts cannot log in
-  const { data: profile } = await supabase
-    .from('profiles')
-    .select('status, role, name')
-    .eq('id', data.user.id)
-    .single()
-
-  if (profile?.status === 'deactivated') {
-    await supabase.auth.signOut()
-    return NextResponse.json(
-      { error: 'This account has been deactivated. Contact your administrator.' },
-      { status: 403 }
-    )
-  }
-
-  return NextResponse.json({
-    user: {
-      id: data.user.id,
-      email: data.user.email,
-      name: profile?.name,
-      role: profile?.role,
-    },
-  })
 }

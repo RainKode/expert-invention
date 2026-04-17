@@ -79,6 +79,21 @@ export default function ActivityClient({ initialEvents, initialCursor, userRole 
 
   const filtered = filter === 'all' ? events : events.filter(e => e.event_type === filter)
 
+  function handleFilterChange(newFilter: ActivityEventType | 'all') {
+    if (newFilter === filter) return
+    setFilter(newFilter)
+    // Reset to initial data + refetch with new filter from server
+    startTransition(async () => {
+      const params = new URLSearchParams({ limit: '20' })
+      if (newFilter !== 'all') params.set('type', newFilter)
+      const res = await fetch(`/api/activity-feed?${params}`)
+      if (!res.ok) return
+      const json = await res.json()
+      setEvents(json.events ?? [])
+      setCursor(json.next_cursor ?? null)
+    })
+  }
+
   function loadMore() {
     if (!cursor) return
     startTransition(async () => {
@@ -108,7 +123,7 @@ export default function ActivityClient({ initialEvents, initialCursor, userRole 
           {FILTER_PILLS.map(pill => (
             <button
               key={pill.value}
-              onClick={() => setFilter(pill.value)}
+              onClick={() => handleFilterChange(pill.value)}
               className={`px-6 py-2.5 rounded-full text-sm font-semibold whitespace-nowrap transition-all ${
                 filter === pill.value
                   ? 'bg-gradient-to-br from-[#4d556a] to-[#656d84] text-white shadow-md'
@@ -150,7 +165,7 @@ export default function ActivityClient({ initialEvents, initialCursor, userRole 
               }`}>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
-                    <div className={`relative w-12 h-12 rounded-full flex items-center justify-center text-on-surface font-bold text-lg shrink-0 bg-gradient-to-br from-[#4d556a] to-[#656d84] text-white`}>
+                    <div className={`relative w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg shrink-0 bg-gradient-to-br from-[#4d556a] to-[#656d84] text-white`}>
                       {userName.charAt(0)}
                       {/* Event type dot */}
                       <div className={`absolute -bottom-1 -right-1 w-5 h-5 rounded-full flex items-center justify-center border-2 border-white ${color.split(' ')[0]}`}>

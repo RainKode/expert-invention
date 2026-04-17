@@ -7,6 +7,7 @@ import Sidebar from '@/components/shell/Sidebar'
 import TopBar from '@/components/shell/TopBar'
 import { type Role } from '@/types'
 import { invalidateCache } from '@/lib/fetch-cache'
+import { createClient } from '@/lib/supabase/client'
 
 // Lazy-load heavy modals — only downloaded when user opens them
 const QuickTaskModal = dynamic(() => import('@/components/tasks/QuickTaskModal'), { ssr: false })
@@ -46,10 +47,33 @@ export default function AppShellClient({
 
   useEffect(() => {
     fetchUnreadCount()
-    // Poll every 60s for badge updates when panel is closed
+
+    // Subscribe to real-time notification inserts for this user
+    const supabase = createClient()
+    const channel = supabase
+      .channel(`notifications:${userId}`)
+      .on(
+        'postgres_changes',
+        {
+          event: 'INSERT',
+          schema: 'public',
+          table: 'notifications',
+          filter: `recipient_id=eq.${userId}`,
+        },
+        () => {
+          // New notification arrived — refresh the count
+          fetchUnreadCount()
+        }
+      )
+      .subscribe()
+
+    // Fallback poll every 60s in case realtime drops
     const interval = setInterval(fetchUnreadCount, 60000)
-    return () => clearInterval(interval)
-  }, [fetchUnreadCount])
+    return () => {
+      clearInterval(interval)
+      supabase.removeChannel(channel)
+    }
+  }, [fetchUnreadCount, userId])
 
   async function handleLogout() {
     await fetch('/api/auth/logout', { method: 'POST' })

@@ -18,7 +18,9 @@ export async function GET(request: NextRequest) {
   const teamId = searchParams.get('team_id')
 
   let query = supabase.from('projects').select('id, name, team_id, created_by, created_at').order('name')
-  if (teamId) query = query.or(`team_id.eq.${teamId},team_id.is.null`)
+  if (teamId && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(teamId)) {
+    query = query.or(`team_id.eq.${teamId},team_id.is.null`)
+  }
 
   const { data, error } = await query
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })

@@ -36,6 +36,7 @@ export async function updateSession(request: NextRequest) {
     '/forgot-password',
     '/reset-password',
     '/set-password',
+    '/setup',
   ]
 
   const isPublicPath = publicPaths.some((path) =>

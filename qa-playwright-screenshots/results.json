@@ -1,0 +1,180 @@
+[
+  {
+    "page": "login",
+    "url": "http://localhost:3000/login",
+    "status": "ok",
+    "errors": [],
+    "console_errors": [],
+    "http_status": 200,
+    "screenshot": "D:\\New folder (24)\\Nest-Task Managment\\expert-invention\\scripts\\..\\qa-playwright-screenshots\\login.png"
+  },
+  {
+    "page": "forgot_password",
+    "url": "http://localhost:3000/forgot-password",
+    "status": "ok",
+    "errors": [],
+    "console_errors": [],
+    "http_status": 200,
+    "screenshot": "D:\\New folder (24)\\Nest-Task Managment\\expert-invention\\scripts\\..\\qa-playwright-screenshots\\forgot_password.png"
+  },
+  {
+    "page": "set_password",
+    "url": "http://localhost:3000/set-password",
+    "status": "ok",
+    "errors": [],
+    "console_errors": [],
+    "http_status": 200,
+    "screenshot": "D:\\New folder (24)\\Nest-Task Managment\\expert-invention\\scripts\\..\\qa-playwright-screenshots\\set_password.png"
+  },
+  {
+    "page": "reset_password",
+    "url": "http://localhost:3000/reset-password",
+    "status": "ok",
+    "errors": [],
+    "console_errors": [],
+    "http_status": 200,
+    "screenshot": "D:\\New folder (24)\\Nest-Task Managment\\expert-invention\\scripts\\..\\qa-playwright-screenshots\\reset_password.png"
+  },
+  {
+    "page": "home",
+    "url": "http://localhost:3000/",
+    "status": "ok",
+    "errors": [],
+    "console_errors": [],
+    "http_status": 200,
+    "screenshot": "D:\\New folder (24)\\Nest-Task Managment\\expert-invention\\scripts\\..\\qa-playwright-screenshots\\home.png"
+  },
+  {
+    "page": "dashboard",
+    "url": "http://localhost:3000/dashboard",
+    "status": "ok",
+    "errors": [],
+    "console_errors": [],
+    "http_status": 200,
+    "screenshot": "D:\\New folder (24)\\Nest-Task Managment\\expert-invention\\scripts\\..\\qa-playwright-screenshots\\dashboard.png"
+  },
+  {
+    "page": "tasks",
+    "url": "http://localhost:3000/tasks",
+    "status": "ok",
+    "errors": [],
+    "console_errors": [],
+    "http_status": 200,
+    "screenshot": "D:\\New folder (24)\\Nest-Task Managment\\expert-invention\\scripts\\..\\qa-playwright-screenshots\\tasks.png"
+  },
+  {
+    "page": "board",
+    "url": "http://localhost:3000/board",
+    "status": "ok",
+    "errors": [],
+    "console_errors": [],
+    "http_status": 200,
+    "screenshot": "D:\\New folder (24)\\Nest-Task Managment\\expert-invention\\scripts\\..\\qa-playwright-screenshots\\board.png"
+  },
+  {
+    "page": "team",
+    "url": "http://localhost:3000/team",
+    "status": "ok",
+    "errors": [],
+    "console_errors": [],
+    "http_status": 200,
+    "screenshot": "D:\\New folder (24)\\Nest-Task Managment\\expert-invention\\scripts\\..\\qa-playwright-screenshots\\team.png"
+  },
+  {
+    "page": "plan",
+    "url": "http://localhost:3000/plan",
+    "status": "ok",
+    "errors": [],
+    "console_errors": [],
+    "http_status": 200,
+    "screenshot": "D:\\New folder (24)\\Nest-Task Managment\\expert-invention\\scripts\\..\\qa-playwright-screenshots\\plan.png"
+  },
+  {
+    "page": "reports",
+    "url": "http://localhost:3000/reports",
+    "status": "ok",
+    "errors": [],
+    "console_errors": [],
+    "http_status": 200,
+    "screenshot": "D:\\New folder (24)\\Nest-Task Managment\\expert-invention\\scripts\\..\\qa-playwright-screenshots\\reports.png"
+  },
+  {
+    "page": "settings",
+    "url": "http://localhost:3000/settings",
+    "status": "ok",
+    "errors": [],
+    "console_errors": [],
+    "http_status": 200,
+    "screenshot": "D:\\New folder (24)\\Nest-Task Managment\\expert-invention\\scripts\\..\\qa-playwright-screenshots\\settings.png"
+  },
+  {
+    "page": "checkin",
+    "url": "http://localhost:3000/checkin",
+    "status": "ok",
+    "errors": [],
+    "console_errors": [],
+    "http_status": 200,
+    "screenshot": "D:\\New folder (24)\\Nest-Task Managment\\expert-invention\\scripts\\..\\qa-playwright-screenshots\\checkin.png"
+  },
+  {
+    "page": "wrapup",
+    "url": "http://localhost:3000/wrapup",
+    "status": "ok",
+    "errors": [],
+    "console_errors": [],
+    "http_status": 200,
+    "screenshot": "D:\\New folder (24)\\Nest-Task Managment\\expert-invention\\scripts\\..\\qa-playwright-screenshots\\wrapup.png"
+  },
+  {
+    "page": "admin",
+    "url": "http://localhost:3000/admin",
+    "status": "ok",
+    "errors": [],
+    "console_errors": [],
+    "http_status": 200,
+    "screenshot": "D:\\New folder (24)\\Nest-Task Managment\\expert-invention\\scripts\\..\\qa-playwright-screenshots\\admin.png"
+  },
+  {
+    "page": "onboarding",
+    "url": "http://localhost:3000/onboarding",
+    "status": "ok",
+    "errors": [],
+    "console_errors": [],
+    "http_status": 200,
+    "screenshot": "D:\\New folder (24)\\Nest-Task Managment\\expert-invention\\scripts\\..\\qa-playwright-screenshots\\onboarding.png"
+  },
+  {
+    "page": "API: api/health",
+    "url": "http://localhost:3000/api/health",
+    "status": "ok",
+    "http_status": 404,
+    "errors": [],
+    "console_errors": []
+  },
+  {
+    "page": "API: api/auth",
+    "url": "http://localhost:3000/api/auth",
+    "status": "ok",
+    "http_status": 404,
+    "errors": [],
+    "console_errors": []
+  },
+  {
+    "page": "mobile_login",
+    "url": "http://localhost:3000/login",
+    "status": "ok",
+    "errors": [],
+    "console_errors": [],
+    "http_status": 200,
+    "screenshot": "D:\\New folder (24)\\Nest-Task Managment\\expert-invention\\scripts\\..\\qa-playwright-screenshots\\mobile_login.png"
+  },
+  {
+    "page": "mobile_home",
+    "url": "http://localhost:3000/",
+    "status": "ok",
+    "errors": [],
+    "console_errors": [],
+    "http_status": 200,
+    "screenshot": "D:\\New folder (24)\\Nest-Task Managment\\expert-invention\\scripts\\..\\qa-playwright-screenshots\\mobile_home.png"
+  }
+]

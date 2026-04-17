@@ -43,7 +43,7 @@ export default function AdminSetupClient({
   const [step, setStep] = useState(0)
   const [departments, setDepartments] = useState(initialDepts)
   const [teams, setTeams] = useState(initialTeams)
-  const [employees] = useState(initialEmployees)
+  const [employees, setEmployees] = useState(initialEmployees)
 
   // Department form
   const [deptName, setDeptName] = useState('')
@@ -53,6 +53,13 @@ export default function AdminSetupClient({
   const [teamName, setTeamName] = useState('')
   const [teamDeptId, setTeamDeptId] = useState('')
   const [teamLoading, setTeamLoading] = useState(false)
+
+  // Employee form
+  const [empName, setEmpName] = useState('')
+  const [empEmail, setEmpEmail] = useState('')
+  const [empRole, setEmpRole] = useState('employee')
+  const [empTeamId, setEmpTeamId] = useState('')
+  const [empLoading, setEmpLoading] = useState(false)
 
   const progress = Math.round(((step + 1) / STEPS.length) * 100)
 
@@ -93,6 +100,39 @@ export default function AdminSetupClient({
       }
     } finally {
       setTeamLoading(false)
+    }
+  }
+
+  async function addEmployee() {
+    if (!empName.trim() || !empEmail.trim()) return
+    setEmpLoading(true)
+    try {
+      const res = await fetch('/api/admin/users', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: empName.trim(),
+          email: empEmail.trim(),
+          role: empRole,
+          team_id: empTeamId || undefined,
+        }),
+      })
+      if (res.ok) {
+        const data = await res.json()
+        setEmployees((prev) => [...prev, {
+          id: data.user.id,
+          name: data.user.name,
+          role: data.user.role,
+          team_id: empTeamId || null,
+          status: 'active',
+        }])
+        setEmpName('')
+        setEmpEmail('')
+        setEmpRole('employee')
+        setEmpTeamId('')
+      }
+    } finally {
+      setEmpLoading(false)
     }
   }
 
@@ -291,45 +331,116 @@ export default function AdminSetupClient({
 
         {/* Step 2: Employees */}
         {step === 2 && (
-          <div className="flex flex-col gap-8">
-            <div className="flex items-center justify-between">
-              <div>
-                <h3 className="text-lg font-bold text-on-surface">Employees</h3>
-                <p className="text-sm text-on-surface-variant">{employees.length} employees in the system</p>
+          <div className="grid grid-cols-12 gap-8">
+            <div className="col-span-12 lg:col-span-5">
+              <div className="bg-surface-container-lowest rounded-xl p-8 shadow-[0px_24px_48px_rgba(77,85,106,0.06)] flex flex-col gap-6">
+                <h3 className="text-lg font-bold text-on-surface">Add Employee</h3>
+                <div className="flex flex-col gap-3">
+                  <label className="text-sm font-bold text-on-surface-variant ml-2">Full Name</label>
+                  <input
+                    value={empName}
+                    onChange={(e) => setEmpName(e.target.value)}
+                    placeholder="e.g. Jane Smith"
+                    className="w-full bg-surface-container-low border-none rounded-full py-4 px-6 font-medium focus:ring-2 focus:ring-primary/10 text-on-surface"
+                  />
+                </div>
+                <div className="flex flex-col gap-3">
+                  <label className="text-sm font-bold text-on-surface-variant ml-2">Email</label>
+                  <input
+                    type="email"
+                    value={empEmail}
+                    onChange={(e) => setEmpEmail(e.target.value)}
+                    placeholder="jane@company.com"
+                    className="w-full bg-surface-container-low border-none rounded-full py-4 px-6 font-medium focus:ring-2 focus:ring-primary/10 text-on-surface"
+                  />
+                </div>
+                <div className="flex flex-col gap-3">
+                  <label className="text-sm font-bold text-on-surface-variant ml-2">Role</label>
+                  <select
+                    value={empRole}
+                    onChange={(e) => setEmpRole(e.target.value)}
+                    className="w-full bg-surface-container-low border-none rounded-full py-4 px-6 font-medium focus:ring-2 focus:ring-primary/10 text-on-surface appearance-none cursor-pointer"
+                  >
+                    <option value="employee">Employee</option>
+                    <option value="manager">Manager</option>
+                    <option value="assistant_manager">Assistant Manager</option>
+                    <option value="senior_manager">Senior Manager</option>
+                  </select>
+                </div>
+                <div className="flex flex-col gap-3">
+                  <label className="text-sm font-bold text-on-surface-variant ml-2">Team</label>
+                  <select
+                    value={empTeamId}
+                    onChange={(e) => setEmpTeamId(e.target.value)}
+                    className="w-full bg-surface-container-low border-none rounded-full py-4 px-6 font-medium focus:ring-2 focus:ring-primary/10 text-on-surface appearance-none cursor-pointer"
+                  >
+                    <option value="">No team</option>
+                    {teams.map((t) => (
+                      <option key={t.id} value={t.id}>{t.name}</option>
+                    ))}
+                  </select>
+                </div>
+                <button
+                  onClick={addEmployee}
+                  disabled={empLoading || !empName.trim() || !empEmail.trim()}
+                  className="text-white font-bold py-4 rounded-full shadow-lg shadow-primary-container/20 hover:scale-[1.02] transition-transform active:scale-95 disabled:opacity-60 disabled:pointer-events-none flex items-center justify-center gap-2"
+                  style={{ background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }}
+                >
+                  <span className="material-symbols-outlined">person_add</span>
+                  Add &amp; Send Invite
+                </button>
               </div>
-              <button
-                onClick={() => router.push('/admin/users')}
-                className="px-6 py-3 rounded-full text-white font-bold shadow-lg shadow-primary-container/20 hover:scale-[1.02] transition-transform active:scale-95 flex items-center gap-2"
-                style={{ background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }}
-              >
-                <span className="material-symbols-outlined">person_add</span>
-                Manage Users
-              </button>
+              <div className="mt-6 bg-tertiary-fixed rounded-xl p-6 flex items-start gap-3">
+                <span className="material-symbols-outlined text-tertiary-container">lightbulb</span>
+                <p className="text-sm text-tertiary-container">
+                  Each new employee will receive an invite email to set their password. You can also bulk-import users from the <strong>Manage Users</strong> page.
+                </p>
+              </div>
             </div>
-            <div className="space-y-3">
-              {employees.map((emp) => {
-                const team = teams.find((t) => t.id === emp.team_id)
-                return (
-                  <div key={emp.id} className="bg-surface-container-lowest rounded-xl p-5 shadow-[0px_24px_48px_rgba(77,85,106,0.06)] flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center">
-                      <span className="text-on-primary-container text-sm font-bold">
-                        {emp.name.charAt(0).toUpperCase()}
+            <div className="col-span-12 lg:col-span-7">
+              <div className="flex items-center justify-between px-2 mb-4">
+                <h3 className="text-xs font-bold uppercase tracking-widest text-on-surface-variant">
+                  Employees ({employees.length})
+                </h3>
+                <button
+                  onClick={() => router.push('/admin/users')}
+                  className="text-xs font-bold text-primary hover:underline flex items-center gap-1"
+                >
+                  <span className="material-symbols-outlined text-sm">open_in_new</span>
+                  Manage Users
+                </button>
+              </div>
+              <div className="space-y-3">
+                {employees.map((emp) => {
+                  const team = teams.find((t) => t.id === emp.team_id)
+                  return (
+                    <div key={emp.id} className="bg-surface-container-lowest rounded-xl p-5 shadow-[0px_24px_48px_rgba(77,85,106,0.06)] flex items-center gap-4">
+                      <div className="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center">
+                        <span className="text-on-primary-container text-sm font-bold">
+                          {emp.name.charAt(0).toUpperCase()}
+                        </span>
+                      </div>
+                      <div className="flex-1">
+                        <p className="font-bold text-on-surface">{emp.name}</p>
+                        <p className="text-xs text-on-surface-variant capitalize">
+                          {emp.role.replace(/_/g, ' ')} • {team?.name ?? 'Unassigned'}
+                        </p>
+                      </div>
+                      <span className={`px-3 py-1 rounded-full text-xs font-bold ${
+                        emp.status === 'active' ? 'bg-emerald-50 text-emerald-700' : 'bg-surface-container text-on-surface-variant'
+                      }`}>
+                        {emp.status}
                       </span>
                     </div>
-                    <div className="flex-1">
-                      <p className="font-bold text-on-surface">{emp.name}</p>
-                      <p className="text-xs text-on-surface-variant capitalize">
-                        {emp.role.replace(/_/g, ' ')} • {team?.name ?? 'Unassigned'}
-                      </p>
-                    </div>
-                    <span className={`px-3 py-1 rounded-full text-xs font-bold ${
-                      emp.status === 'active' ? 'bg-emerald-50 text-emerald-700' : 'bg-surface-container text-on-surface-variant'
-                    }`}>
-                      {emp.status}
-                    </span>
+                  )
+                })}
+                {employees.length === 0 && (
+                  <div className="rounded-xl border-2 border-dashed border-outline-variant/30 p-8 text-center text-on-surface-variant">
+                    <p className="font-medium">No employees yet</p>
+                    <p className="text-sm">Add your first employee to get started.</p>
                   </div>
-                )
-              })}
+                )}
+              </div>
             </div>
           </div>
         )}

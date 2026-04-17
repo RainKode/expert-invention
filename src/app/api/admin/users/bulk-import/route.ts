@@ -4,9 +4,10 @@ import { createAdminClient } from '@/lib/supabase/admin';
 import { requirePermission } from '@/lib/permissions';
 import { z } from 'zod';
 
-const VALID_ROLES = ['admin', 'planner', 'senior_manager', 'manager', 'team_leader', 'employee'] as const;
-const VALID_BILLABLE = ['full', 'partial', 'none'] as const;
+const VALID_ROLES = ['admin', 'senior_manager', 'manager', 'assistant_manager', 'senior_employee', 'employee'] as const;
+const VALID_BILLABLE = ['billable', 'non_billable', 'both'] as const;
 const DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+const DAY_TO_NUM: Record<string, number> = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
 
 const BulkRowSchema = z.object({
   name: z.string().min(1, 'Name is required').max(100),
@@ -186,8 +187,8 @@ export async function POST(request: NextRequest) {
 
     const userId = authUser.user.id;
     const workWeek = data.work_week
-      ? data.work_week.split(',').map((d) => d.trim())
-      : ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
+      ? data.work_week.split(',').map((d) => DAY_TO_NUM[d.trim()]).filter((n) => n !== undefined)
+      : [1, 2, 3, 4, 5];
 
     // Update profile
     await admin.from('profiles').upsert({
@@ -200,7 +201,7 @@ export async function POST(request: NextRequest) {
       timezone: data.timezone,
       available_hours: data.available_hours ?? 8,
       work_week: workWeek,
-      billable_permission: data.billable_permission ?? 'full',
+      billable_permission: data.billable_permission ?? 'both',
       status: 'active',
       invite_accepted: false,
     });

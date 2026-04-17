@@ -122,6 +122,7 @@ export default function TaskDetailClient({
   const [statusChanging, setStatusChanging] = useState(false)
   const [customFieldValues, setCustomFieldValues] = useState<CustomFieldValue[]>([])
   const [savingField, setSavingField] = useState<string | null>(null)
+  const [errorToast, setErrorToast] = useState<string | null>(null)
 
   const isManager = ['manager', 'senior_manager', 'admin', 'assistant_manager'].includes(userRole)
   const isReviewer = task?.reviewer?.id === userId
@@ -167,7 +168,7 @@ export default function TaskDetailClient({
     if (res.ok) { await fetchTask() }
     else {
       const d = await res.json()
-      alert(d.error ?? 'Failed to update status')
+      setErrorToast(d.error ?? 'Failed to update status')
     }
     setStatusChanging(false)
   }, [taskId, fetchTask])
@@ -185,7 +186,7 @@ export default function TaskDetailClient({
       if (res.ok) await fetchTask()
       else {
         const d = await res.json()
-        alert(d.error ?? 'Failed to approve')
+        setErrorToast(d.error ?? 'Failed to approve')
       }
     } finally {
       setApproving(false)
@@ -604,6 +605,19 @@ export default function TaskDetailClient({
         currentUserId={userId}
         userRole={userRole}
       />
+
+      {/* Error toast */}
+      {errorToast && (
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 px-6 py-3 rounded-full text-sm font-semibold shadow-lg bg-error-container text-on-error-container">
+          <div className="flex items-center gap-2">
+            <span className="material-symbols-outlined text-base">error</span>
+            {errorToast}
+            <button onClick={() => setErrorToast(null)} className="ml-2 opacity-60 hover:opacity-100">
+              <span className="material-symbols-outlined text-base">close</span>
+            </button>
+          </div>
+        </div>
+      )}
     </>
   )
 }
