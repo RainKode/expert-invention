@@ -83,8 +83,8 @@ export default function TasksClient({ userId, userRole, projects }: TasksClientP
     try {
       const data = await cachedFetch<{ tasks: Task[] }>(`/api/tasks?${params}`)
       setTasks(data.tasks ?? [])
-    } catch {
-      // Fallback: already showing previous data or empty
+    } catch (err) {
+      console.error('Failed to fetch tasks:', err)
     }
     setLoading(false)
   }, [activeStatus, filterPriority, filterType, filterNature, filterProject, filterBillable])
@@ -295,7 +295,7 @@ export default function TasksClient({ userId, userRole, projects }: TasksClientP
       <QuickTaskModal
         open={modalOpen}
         onClose={() => setModalOpen(false)}
-        onCreated={fetchTasks}
+        onCreated={() => { invalidateCache('/api/tasks'); fetchTasks() }}
         projects={projects}
         currentUserId={userId}
         userRole={userRole}
