@@ -15,9 +15,9 @@ const QuickTaskModal = dynamic(() => import('@/components/tasks/QuickTaskModal')
 
 const STATUS_BADGE: Record<string, string> = {
   todo: 'bg-surface-container text-on-surface-variant',
-  in_progress: 'bg-secondary-container text-on-secondary-container',
-  in_review: 'bg-tertiary-container text-on-tertiary-container',
-  done: 'bg-primary-container text-on-primary-container',
+  in_progress: 'bg-energetic-10 text-energetic',
+  in_review: 'bg-integrity-10 text-integrity',
+  done: 'bg-kindness-10 text-kindness',
 }
 
 const STATUS_LABEL: Record<string, string> = {
@@ -34,8 +34,8 @@ const PRIORITY_LABEL: Record<string, string> = {
 }
 
 const PRIORITY_COLOR: Record<string, string> = {
-  high: 'bg-error-container text-on-error-container',
-  medium: 'bg-tertiary-container text-on-tertiary-container',
+  high: 'bg-excitement-10 text-excitement',
+  medium: 'bg-energetic-10 text-energetic',
   low: 'bg-surface-container text-on-surface-variant',
 }
 
@@ -262,7 +262,7 @@ export default function TaskDetailClient({
               </span>
             )}
             {task.billable && (
-              <span className="px-3 py-1 rounded-full text-xs font-bold bg-tertiary-container text-on-tertiary-container">Billable</span>
+              <span className="px-3 py-1 rounded-full text-xs font-bold bg-kindness-10 text-kindness">Billable</span>
             )}
           </div>
 
@@ -306,7 +306,7 @@ export default function TaskDetailClient({
                 </button>
                 <button
                   onClick={() => setSendBackOpen(true)}
-                  className="px-5 py-2 rounded-full text-sm font-bold text-error hover:bg-error-container transition-colors"
+                  className="px-5 py-2 rounded-full text-sm font-bold text-excitement hover:bg-excitement-10 transition-colors"
                 >
                   Send Back
                 </button>
@@ -363,8 +363,8 @@ export default function TaskDetailClient({
 
                 {/* Completion report */}
                 {task.completion_report_text && (
-                  <div className="bg-tertiary-container/20 rounded-2xl p-5">
-                    <h3 className="text-[10px] font-bold uppercase tracking-widest text-tertiary mb-3">Completion Report</h3>
+                  <div className="bg-kindness-10 rounded-2xl p-5">
+                    <h3 className="text-[10px] font-bold uppercase tracking-widest text-kindness mb-3">Completion Report</h3>
                     <p className="text-sm text-on-surface whitespace-pre-wrap">{task.completion_report_text}</p>
                   </div>
                 )}
@@ -448,8 +448,8 @@ export default function TaskDetailClient({
                   ) : (
                     <div className="grid grid-cols-1 gap-2">
                       {task.task_dependencies.map(dep => dep.depends_on && (
-                        <div key={dep.depends_on_task_id} className="flex items-center gap-3 p-3 bg-error-container/30 rounded-xl">
-                          <span className="material-symbols-outlined text-sm text-error">block</span>
+                        <div key={dep.depends_on_task_id} className="flex items-center gap-3 p-3 bg-excitement-10 rounded-xl">
+                          <span className="material-symbols-outlined text-sm text-excitement">block</span>
                           <Link href={`/tasks/${dep.depends_on.id}`} className="text-sm flex-1 font-medium text-on-surface hover:text-primary truncate">
                             {dep.depends_on.title}
                           </Link>
@@ -459,7 +459,7 @@ export default function TaskDetailClient({
                           {(isCreator || isManager) && (
                             <button
                               onClick={() => handleRemoveDep(dep.depends_on_task_id)}
-                              className="p-1 text-outline hover:text-error transition-colors"
+                              className="p-1 text-outline hover:text-excitement transition-colors"
                             >
                               <span className="material-symbols-outlined text-sm">close</span>
                             </button>
@@ -608,7 +608,7 @@ export default function TaskDetailClient({
 
       {/* Error toast */}
       {errorToast && (
-        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 px-6 py-3 rounded-full text-sm font-semibold shadow-lg bg-error-container text-on-error-container">
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 px-6 py-3 rounded-full text-sm font-semibold shadow-lg bg-excitement-10 text-excitement">
           <div className="flex items-center gap-2">
             <span className="material-symbols-outlined text-base">error</span>
             {errorToast}

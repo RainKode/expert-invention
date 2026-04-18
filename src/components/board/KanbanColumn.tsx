@@ -32,7 +32,7 @@ export default function KanbanColumn({ id, label, color, tasks, loading, userId 
       <div
         ref={setNodeRef}
         className={`flex flex-col gap-3 flex-1 rounded-2xl transition-colors min-h-[120px] p-2 ${
-          isOver ? 'bg-primary-container/10 ring-2 ring-primary/20' : 'bg-surface-container-low'
+          isOver ? 'bg-integrity-10 ring-2 ring-integrity/20' : 'bg-surface-container-low'
         }`}
         style={{ height: 'calc(100vh - 280px)', overflowY: 'auto', scrollbarWidth: 'none' }}
       >

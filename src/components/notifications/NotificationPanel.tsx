@@ -117,20 +117,20 @@ export default function NotificationPanel({
 
   function getIconBgClass(type: string, read: boolean): string {
     if (read) return 'bg-surface-container'
-    // Group 1: task events — primary-fixed
-    if (type.startsWith('task_') || type === 'dependency_unblocked') return 'bg-primary-fixed'
-    // Group 2: plan events — tertiary-fixed
-    if (type.startsWith('plan_') || type.startsWith('checkin_') || type === 'zero_tasks_planned') return 'bg-tertiary-fixed'
-    // Group 3: comments — secondary-fixed
-    if (type.startsWith('comment_')) return 'bg-secondary-fixed'
+    // Task events — integrity
+    if (type.startsWith('task_') || type === 'dependency_unblocked') return 'bg-integrity-10'
+    // Plan events — natural
+    if (type.startsWith('plan_') || type.startsWith('checkin_') || type === 'zero_tasks_planned') return 'bg-natural-10'
+    // Comments — originality
+    if (type.startsWith('comment_')) return 'bg-originality-10'
     return 'bg-surface-container'
   }
 
   function getIconTextClass(type: string, read: boolean): string {
     if (read) return 'text-on-surface-variant'
-    if (type.startsWith('task_') || type === 'dependency_unblocked') return 'text-on-primary-fixed'
-    if (type.startsWith('plan_') || type.startsWith('checkin_') || type === 'zero_tasks_planned') return 'text-on-tertiary-fixed'
-    if (type.startsWith('comment_')) return 'text-on-secondary-fixed'
+    if (type.startsWith('task_') || type === 'dependency_unblocked') return 'text-integrity'
+    if (type.startsWith('plan_') || type.startsWith('checkin_') || type === 'zero_tasks_planned') return 'text-natural'
+    if (type.startsWith('comment_')) return 'text-originality'
     return 'text-on-surface-variant'
   }
 
@@ -157,7 +157,7 @@ export default function NotificationPanel({
                 Notifications
               </h2>
               {unreadCount > 0 && (
-                <span className="bg-primary-container text-on-primary-container text-xs font-bold px-2.5 py-1 rounded-full">
+                <span className="bg-excitement-10 text-excitement text-xs font-bold px-2.5 py-1 rounded-full">
                   {unreadCount}
                 </span>
               )}
@@ -178,7 +178,7 @@ export default function NotificationPanel({
                 onClick={() => setActiveTab(tab)}
                 className={
                   activeTab === tab
-                    ? 'bg-primary-container text-on-primary-container px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap'
+                    ? 'bg-integrity-10 text-integrity px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap'
                     : 'bg-surface-container-low text-on-surface-variant px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap hover:bg-surface-container-high transition-colors'
                 }
               >
@@ -274,7 +274,7 @@ export default function NotificationPanel({
 
                   {/* Unread dot */}
                   {!n.read && (
-                    <div className="absolute right-4 top-1/2 -translate-y-1/2 w-2 h-2 bg-primary rounded-full" />
+                    <div className="absolute right-4 top-1/2 -translate-y-1/2 w-2 h-2 bg-integrity rounded-full" />
                   )}
                 </div>
               )

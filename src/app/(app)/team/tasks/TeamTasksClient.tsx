@@ -35,9 +35,9 @@ const STATUS_TABS = [
 
 const STATUS_BADGE: Record<string, string> = {
   todo: 'bg-surface-container text-on-surface-variant',
-  in_progress: 'bg-secondary-container text-on-secondary-container',
-  in_review: 'bg-tertiary-container text-on-tertiary-container',
-  done: 'bg-primary-container text-on-primary-container',
+  in_progress: 'bg-energetic-10 text-energetic',
+  in_review: 'bg-integrity-10 text-integrity',
+  done: 'bg-kindness-10 text-kindness',
 }
 
 const STATUS_LABEL: Record<string, string> = {
@@ -48,8 +48,8 @@ const STATUS_LABEL: Record<string, string> = {
 }
 
 const PRIORITY_BAR: Record<string, string> = {
-  high: 'bg-error',
-  medium: 'bg-tertiary',
+  high: 'bg-excitement',
+  medium: 'bg-energetic',
   low: 'bg-outline',
 }
 
@@ -198,8 +198,8 @@ export default function TeamTasksClient({ userId, userRole, projects, teamMember
           onClick={() => setOverdueOnly(b => !b)}
           className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold transition-colors ${
             overdueOnly
-              ? 'bg-error text-white'
-              : 'bg-error-container text-on-error-container hover:bg-error/20'
+              ? 'bg-excitement text-white'
+              : 'bg-excitement-10 text-excitement hover:bg-excitement-20'
           }`}
         >
           <span className="material-symbols-outlined text-sm">warning</span>
@@ -270,13 +270,13 @@ export default function TeamTasksClient({ userId, userRole, projects, teamMember
                     </span>
 
                     {task.billable && (
-                      <span className="w-6 h-6 rounded-full bg-tertiary-container flex items-center justify-center" title="Billable">
-                        <span className="material-symbols-outlined text-xs text-tertiary">attach_money</span>
+                      <span className="w-6 h-6 rounded-full bg-kindness-10 flex items-center justify-center" title="Billable">
+                        <span className="material-symbols-outlined text-xs text-kindness">attach_money</span>
                       </span>
                     )}
 
                     {task.due_date && (
-                      <span className={`flex items-center gap-1 text-[11px] font-semibold ${isOverdue(task) ? 'text-error' : 'text-outline'}`}>
+                      <span className={`flex items-center gap-1 text-[11px] font-semibold ${isOverdue(task) ? 'text-excitement' : 'text-outline'}`}>
                         <span className="material-symbols-outlined text-sm">event</span>
                         {formatDate(task.due_date)}
                       </span>

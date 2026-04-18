@@ -62,7 +62,7 @@ export default function ConfirmDialog({
             onClick={onConfirm}
             className={`px-5 py-2.5 rounded-full text-sm font-semibold text-white transition-colors ${
               destructive
-                ? 'bg-error hover:bg-error/90'
+                ? 'bg-excitement hover:bg-excitement/90'
                 : 'bg-gradient-to-br from-[#4d556a] to-[#656d84] hover:opacity-90'
             }`}
           >
@@ -94,8 +94,8 @@ export function InlineToast({ message, type = 'error', onDismiss }: ToastProps) 
     <div
       className={`fixed bottom-6 left-1/2 -translate-x-1/2 z-50 px-6 py-3 rounded-full text-sm font-semibold shadow-lg animate-in slide-in-from-bottom-4 ${
         type === 'error'
-          ? 'bg-error-container text-on-error-container'
-          : 'bg-primary-container text-on-primary-container'
+          ? 'bg-excitement-10 text-excitement'
+          : 'bg-kindness-10 text-kindness'
       }`}
     >
       <div className="flex items-center gap-2">

@@ -29,15 +29,15 @@ function nextWeek(weekStart: string) {
 
 function cellStyle(utilisation_pct: number, planned_hours: number): string {
   if (planned_hours === 0) return 'bg-surface-container text-on-surface-variant/40'
-  if (utilisation_pct >= 90) return 'bg-primary-container/20 text-primary'
-  if (utilisation_pct >= 60) return 'bg-tertiary-container/20 text-tertiary'
-  return 'bg-error-container/40 text-error'
+  if (utilisation_pct >= 90) return 'bg-natural-10 text-natural'
+  if (utilisation_pct >= 60) return 'bg-energetic-10 text-energetic'
+  return 'bg-excitement-10 text-excitement'
 }
 
 function varianceBadge(variance: number) {
-  if (variance > 0.5) return { cls: 'bg-tertiary-container text-tertiary', label: `+${variance}h` }
-  if (variance < -0.5) return { cls: 'bg-error-container text-error', label: `${variance}h` }
-  return { cls: 'bg-primary-container/20 text-primary', label: 'On Track' }
+  if (variance > 0.5) return { cls: 'bg-energetic-10 text-energetic', label: `+${variance}h` }
+  if (variance < -0.5) return { cls: 'bg-excitement-10 text-excitement', label: `${variance}h` }
+  return { cls: 'bg-natural-10 text-natural', label: 'On Track' }
 }
 
 function dateFromDow(dow: number, weekStart: string): string {
@@ -76,9 +76,9 @@ export default function WorkloadClient({ data, weekStart, workingDays }: Props) 
         <div className="flex items-center gap-4 flex-wrap">
           {/* Legend */}
           <div className="flex gap-3 text-xs font-bold text-on-surface-variant">
-            <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-primary" /> ≥90%</span>
-            <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-tertiary" /> 60–89%</span>
-            <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-error" /> &lt;60%</span>
+            <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-natural" /> ≥90%</span>
+            <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-energetic" /> 60–89%</span>
+            <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-excitement" /> &lt;60%</span>
           </div>
           {/* Week nav */}
           <div className="flex items-center gap-2 bg-surface-container-lowest rounded-full px-4 py-2 shadow-sm">
@@ -101,13 +101,13 @@ export default function WorkloadClient({ data, weekStart, workingDays }: Props) 
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
           <div className="bg-surface-container-lowest rounded-xl p-6 shadow-[0px_24px_48px_rgba(77,85,106,0.06)]">
             <p className="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-1">Avg Variance</p>
-            <div className={`text-2xl font-extrabold ${avgVariance > 0.5 ? 'text-tertiary' : avgVariance < -0.5 ? 'text-error' : 'text-primary'}`}>
+            <div className={`text-2xl font-extrabold ${avgVariance > 0.5 ? 'text-energetic' : avgVariance < -0.5 ? 'text-excitement' : 'text-natural'}`}>
               {avgVariance > 0 ? '+' : ''}{avgVariance}h
             </div>
           </div>
           <div className="bg-surface-container-lowest rounded-xl p-6 shadow-[0px_24px_48px_rgba(77,85,106,0.06)]">
             <p className="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-1">Bottlenecks</p>
-            <div className={`text-2xl font-extrabold ${bottlenecks > 0 ? 'text-error' : 'text-primary'}`}>{bottlenecks}</div>
+            <div className={`text-2xl font-extrabold ${bottlenecks > 0 ? 'text-excitement' : 'text-natural'}`}>{bottlenecks}</div>
           </div>
           <div className="bg-surface-container-lowest rounded-xl p-6 shadow-[0px_24px_48px_rgba(77,85,106,0.06)]">
             <p className="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-1">Team Members</p>

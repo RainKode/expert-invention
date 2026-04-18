@@ -7,9 +7,9 @@ import FileAttachments from '@/components/files/FileAttachments'
 
 const STATUS_BADGE: Record<TaskStatus, string> = {
   todo: 'bg-surface-container-high text-outline',
-  in_progress: 'bg-secondary-container text-on-secondary-container',
-  in_review: 'bg-tertiary-container text-on-tertiary-container',
-  done: 'bg-primary-container/20 text-primary',
+  in_progress: 'bg-energetic-10 text-energetic',
+  in_review: 'bg-integrity-10 text-integrity',
+  done: 'bg-kindness-10 text-kindness',
 }
 
 const STATUS_LABEL: Record<TaskStatus, string> = {

@@ -277,9 +277,9 @@ export default function QuickTaskModal({
                   className={`flex-1 py-2.5 px-4 rounded-xl text-sm font-semibold transition-all ${
                     priority === p
                       ? p === 'high'
-                        ? 'bg-error text-on-error shadow-sm'
+                        ? 'bg-excitement text-white shadow-sm'
                         : p === 'medium'
-                        ? 'bg-tertiary-container text-on-tertiary-container shadow-sm'
+                        ? 'bg-energetic-10 text-energetic shadow-sm'
                         : 'bg-secondary text-on-secondary shadow-sm'
                       : 'bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high'
                   }`}
@@ -389,8 +389,8 @@ export default function QuickTaskModal({
 
           {/* Conditional: Already completed fields */}
           {alreadyCompleted && (
-            <div className="space-y-4 p-4 bg-tertiary-container/30 rounded-2xl">
-              <p className="text-[10px] font-bold uppercase tracking-widest text-tertiary">Completion Details</p>
+            <div className="space-y-4 p-4 bg-kindness-10 rounded-2xl">
+              <p className="text-[10px] font-bold uppercase tracking-widest text-kindness">Completion Details</p>
               <div>
                 <label className="block text-[10px] font-bold uppercase tracking-widest text-outline mb-2">Actual Hours</label>
                 <div className="flex items-center gap-3">
@@ -482,7 +482,7 @@ export default function QuickTaskModal({
           )}
 
           {error && (
-            <p className="text-sm text-error bg-error-container rounded-xl px-4 py-2">{error}</p>
+            <p className="text-sm text-excitement bg-excitement-10 rounded-xl px-4 py-2">{error}</p>
           )}
         </form>
 

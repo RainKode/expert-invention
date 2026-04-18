@@ -41,9 +41,9 @@ const STATUS_LABELS: Record<string, string> = {
 
 const STATUS_COLORS: Record<string, string> = {
   todo: 'bg-surface-variant text-on-surface-variant',
-  in_progress: 'bg-tertiary-container text-on-tertiary-container',
-  in_review: 'bg-secondary-container text-on-secondary-container',
-  done: 'bg-primary-fixed text-on-primary-fixed',
+  in_progress: 'bg-energetic-10 text-energetic',
+  in_review: 'bg-integrity-10 text-integrity',
+  done: 'bg-kindness-10 text-kindness',
 }
 
 export default function GlobalSearchBar() {
@@ -264,7 +264,7 @@ export default function GlobalSearchBar() {
                             {STATUS_LABELS[task.status] ?? task.status}
                           </span>
                           {assignee && (
-                            <div className="w-6 h-6 rounded-full bg-secondary-container flex items-center justify-center text-[10px] text-on-secondary-container font-medium">
+                            <div className="w-6 h-6 rounded-full bg-integrity-10 flex items-center justify-center text-[10px] text-integrity font-medium">
                               {assignee.name.charAt(0).toUpperCase()}
                             </div>
                           )}

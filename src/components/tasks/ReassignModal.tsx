@@ -106,12 +106,12 @@ export default function ReassignModal({
                 onClick={() => setSelectedId(m.id)}
                 className={`w-full flex items-center gap-3 p-3 rounded-xl transition-colors text-left ${
                   selectedId === m.id
-                    ? 'bg-primary-container text-on-primary-container'
+                    ? 'bg-integrity-10 text-integrity'
                     : 'hover:bg-surface-container-high text-on-surface'
                 }`}
               >
-                <div className="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center shrink-0">
-                  <span className="text-xs font-bold text-on-secondary-container">{m.name.charAt(0).toUpperCase()}</span>
+                <div className="w-8 h-8 rounded-full bg-integrity-10 flex items-center justify-center shrink-0">
+                  <span className="text-xs font-bold text-integrity">{m.name.charAt(0).toUpperCase()}</span>
                 </div>
                 <div>
                   <p className="text-sm font-semibold">{m.name}</p>

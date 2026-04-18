@@ -20,8 +20,8 @@ import type { WeeklyPlan, PlanEntry, PlanComment, TaskPriority, PlanningMode } f
 const DAY_NAMES = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 const DAY_LABELS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 const PRIORITY_COLORS: Record<TaskPriority, string> = {
-  high: 'bg-error-container text-error',
-  medium: 'bg-secondary-container text-on-secondary-container',
+  high: 'bg-excitement-10 text-excitement',
+  medium: 'bg-energetic-10 text-energetic',
   low: 'bg-surface-container-high text-outline',
 }
 
@@ -49,18 +49,18 @@ function nextMonday(weekStartISO: string) {
 function capacityColor(planned: number, available: number) {
   if (available === 0) return 'bg-surface-container-high'
   const pct = (planned / available) * 100
-  if (pct >= 80 && pct <= 100) return 'bg-primary'
-  if (pct > 100) return 'bg-tertiary'
-  if (pct >= 50) return 'bg-tertiary'
-  return 'bg-error'
+  if (pct >= 80 && pct <= 100) return 'bg-natural'
+  if (pct > 100) return 'bg-excitement'
+  if (pct >= 50) return 'bg-energetic'
+  return 'bg-excitement'
 }
 
 function capacityTextColor(planned: number, available: number) {
   if (available === 0) return 'text-outline'
   const pct = (planned / available) * 100
-  if (pct >= 80 && pct <= 100) return 'text-primary'
-  if (pct > 100 || pct > 0) return 'text-tertiary'
-  return 'text-error'
+  if (pct >= 80 && pct <= 100) return 'text-natural'
+  if (pct > 100 || pct > 0) return 'text-energetic'
+  return 'text-excitement'
 }
 
 // ─── Entry / Pool Task types ──────────────────────────────────────────────────

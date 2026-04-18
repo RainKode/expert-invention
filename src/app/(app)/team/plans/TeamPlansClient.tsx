@@ -36,16 +36,16 @@ function getDayDate(weekStartISO: string, dow: number): Date {
 function cellStyle(hours: number, available: number) {
   if (hours === 0) return { bg: 'bg-surface-container-lowest', label: '', text: 'text-outline' }
   const pct = (hours / available) * 100
-  if (pct >= 80 && pct <= 100) return { bg: 'bg-primary-container/20', label: 'Healthy', text: 'text-primary' }
-  if (pct > 100) return { bg: 'bg-error-container', label: 'Over', text: 'text-error' }
-  if (pct >= 50) return { bg: 'bg-tertiary-container/40', label: 'Low', text: 'text-tertiary' }
+  if (pct >= 80 && pct <= 100) return { bg: 'bg-natural-10', label: 'Healthy', text: 'text-natural' }
+  if (pct > 100) return { bg: 'bg-excitement-10', label: 'Over', text: 'text-excitement' }
+  if (pct >= 50) return { bg: 'bg-energetic-10', label: 'Low', text: 'text-energetic' }
   return { bg: 'bg-surface-container-lowest', label: 'Empty', text: 'text-outline' }
 }
 
 const STATUS_BADGE: Record<string, string> = {
-  submitted: 'bg-primary-container/20 text-primary',
-  fluid: 'bg-secondary-container text-on-secondary-container',
-  draft: 'bg-tertiary-container text-on-tertiary-container',
+  submitted: 'bg-kindness-10 text-kindness',
+  fluid: 'bg-integrity-10 text-integrity',
+  draft: 'bg-energetic-10 text-energetic',
 }
 
 interface MemberSummary {

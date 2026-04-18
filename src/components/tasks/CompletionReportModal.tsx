@@ -98,9 +98,9 @@ export default function CompletionReportModal({
       <div className="relative w-full max-w-sm bg-surface-container rounded-3xl shadow-2xl overflow-hidden">
         {/* Header with checkmark icon */}
         <div className="px-6 pt-8 pb-5 flex flex-col items-center text-center">
-          <div className="w-14 h-14 rounded-full bg-tertiary-container flex items-center justify-center mb-4">
+          <div className="w-14 h-14 rounded-full bg-kindness-10 flex items-center justify-center mb-4">
             <span
-              className="material-symbols-outlined text-3xl text-tertiary"
+              className="material-symbols-outlined text-3xl text-kindness"
               style={{ fontVariationSettings: "'FILL' 1" }}
             >
               task_alt
@@ -136,7 +136,7 @@ export default function CompletionReportModal({
               </div>
               <button
                 onClick={() => setSelectedFile(null)}
-                className="p-1 text-outline hover:text-error transition-colors"
+                className="p-1 text-outline hover:text-excitement transition-colors"
               >
                 <span className="material-symbols-outlined text-sm">close</span>
               </button>
@@ -159,7 +159,7 @@ export default function CompletionReportModal({
             onChange={e => handleFileSelect(e.target.files?.[0] ?? null)}
           />
 
-          {error && <p className="text-sm text-error bg-error-container rounded-xl px-4 py-2">{error}</p>}
+          {error && <p className="text-sm text-excitement bg-excitement-10 rounded-xl px-4 py-2">{error}</p>}
         </div>
 
         <div className="px-6 py-4 flex gap-3 bg-surface-container-low/50">

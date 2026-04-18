@@ -21,9 +21,9 @@ const CompletionReportModal = dynamic(() => import('@/components/tasks/Completio
 
 const COLUMNS = [
   { id: 'todo', label: 'To Do', color: 'bg-outline' },
-  { id: 'in_progress', label: 'In Progress', color: 'bg-secondary' },
-  { id: 'in_review', label: 'In Review', color: 'bg-tertiary' },
-  { id: 'done', label: 'Done', color: 'bg-primary' },
+  { id: 'in_progress', label: 'In Progress', color: 'bg-energetic' },
+  { id: 'in_review', label: 'In Review', color: 'bg-integrity' },
+  { id: 'done', label: 'Done', color: 'bg-kindness' },
 ] as const
 
 type ColumnId = typeof COLUMNS[number]['id']
@@ -388,7 +388,7 @@ export default function BoardClient({ userId, userRole, teamId, projects, teamMe
                 })
                 setFilters(cleared)
               }}
-              className="text-[10px] font-bold text-error/60 hover:text-error transition-colors px-2 underline underline-offset-2"
+              className="text-[10px] font-bold text-excitement/60 hover:text-excitement transition-colors px-2 underline underline-offset-2"
             >
               Clear all
             </button>
@@ -512,7 +512,7 @@ function SaveViewModal({ isManager, filters, onClose, onSaved }: {
             <span className="material-symbols-outlined text-[18px] text-on-surface-variant">close</span>
           </button>
         </div>
-        {error && <p className="text-sm text-error mb-4">{error}</p>}
+        {error && <p className="text-sm text-excitement mb-4">{error}</p>}
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
             value={name}
@@ -551,7 +551,7 @@ function FilterChip({ label, onRemove }: { label: string; onRemove: () => void }
   return (
     <div className="flex items-center gap-2 px-3 py-1 bg-primary/5 rounded-full cursor-default">
       <span className="text-[10px] font-semibold text-primary/80">{label}</span>
-      <button onClick={onRemove} className="hover:text-error transition-colors">
+      <button onClick={onRemove} className="hover:text-excitement transition-colors">
         <span className="material-symbols-outlined text-[14px]">close</span>
       </button>
     </div>

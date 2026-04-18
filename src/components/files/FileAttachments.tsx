@@ -184,7 +184,7 @@ export default function FileAttachments({
           )}
 
           {uploadError && (
-            <p className="text-sm text-error bg-error-container rounded-xl px-4 py-2">{uploadError}</p>
+            <p className="text-sm text-excitement bg-excitement-10 rounded-xl px-4 py-2">{uploadError}</p>
           )}
 
           {/* File list */}

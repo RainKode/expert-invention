@@ -32,25 +32,25 @@ function nextWeek(weekStart: string) {
 function capacityColor(planned: number, available: number) {
   if (available === 0) return 'bg-surface-container text-on-surface-variant'
   const pct = (planned / available) * 100
-  if (pct >= 80 && pct <= 110) return 'bg-primary-container/20 text-primary'
-  if (pct > 110) return 'bg-error-container text-error'
-  if (pct >= 50) return 'bg-tertiary-container/20 text-tertiary'
-  return 'bg-error-container/20 text-error'
+  if (pct >= 80 && pct <= 110) return 'bg-natural-10 text-natural'
+  if (pct > 110) return 'bg-excitement-10 text-excitement'
+  if (pct >= 50) return 'bg-energetic-10 text-energetic'
+  return 'bg-excitement-10 text-excitement'
 }
 
 function capacityBar(planned: number, available: number) {
   if (available === 0) return 'bg-surface-container-high'
   const pct = (planned / available) * 100
-  if (pct >= 80 && pct <= 110) return 'bg-primary'
-  if (pct > 110) return 'bg-error'
-  if (pct >= 50) return 'bg-tertiary'
-  return 'bg-error'
+  if (pct >= 80 && pct <= 110) return 'bg-natural'
+  if (pct > 110) return 'bg-excitement'
+  if (pct >= 50) return 'bg-energetic'
+  return 'bg-excitement'
 }
 
 const STATUS_BADGE: Record<PlanSubmissionStatus, { label: string; cls: string }> = {
-  submitted: { label: 'Submitted', cls: 'bg-primary-container/20 text-primary' },
-  draft: { label: 'Draft', cls: 'bg-tertiary-container text-on-tertiary-container' },
-  fluid: { label: 'Fluid', cls: 'bg-secondary-container text-on-secondary-container' },
+  submitted: { label: 'Submitted', cls: 'bg-kindness-10 text-kindness' },
+  draft: { label: 'Draft', cls: 'bg-energetic-10 text-energetic' },
+  fluid: { label: 'Fluid', cls: 'bg-integrity-10 text-integrity' },
 }
 
 interface Props {
@@ -129,16 +129,16 @@ export default function TeamPulseClient({ data, weekStart, workingDays }: Props)
 
         {/* ── Big Fat Warning Banner ─────────────────────────────────────── */}
         {data.unplanned_members.length > 0 && (
-          <section className="rounded-xl bg-[#d4820a]/10 overflow-hidden shadow-[0px_24px_48px_rgba(212,130,10,0.06)] relative">
-            <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-[#d4820a]" />
+          <section className="rounded-xl bg-energetic-10 overflow-hidden shadow-[0px_24px_48px_rgba(254,94,32,0.06)] relative">
+            <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-energetic" />
             <div className="p-8 flex items-start gap-6">
-              <div className="w-12 h-12 rounded-full bg-[#d4820a] flex items-center justify-center text-white shrink-0">
+              <div className="w-12 h-12 rounded-full bg-energetic flex items-center justify-center text-white shrink-0">
                 <span className="material-symbols-outlined"
                   style={{ fontVariationSettings: "'FILL' 1" }}>warning</span>
               </div>
               <div className="flex-1">
-                <h3 className="text-[#d4820a] font-bold text-lg mb-1">Unplanned Capacity Detected</h3>
-                <p className="text-[#d4820a]/80 font-medium text-sm mb-4">
+                <h3 className="text-energetic font-bold text-lg mb-1">Unplanned Capacity Detected</h3>
+                <p className="text-energetic/80 font-medium text-sm mb-4">
                   The following team members have no tasks allocated for upcoming working days.
                   This may result in critical workflow bottlenecks.
                 </p>
@@ -150,10 +150,10 @@ export default function TeamPulseClient({ data, weekStart, workingDays }: Props)
                         <div className="w-6 h-6 rounded-full bg-surface-container-high flex items-center justify-center text-[10px] font-bold text-on-surface">
                           {m.name.charAt(0)}
                         </div>
-                        <span className="text-xs font-bold text-[#d4820a]">{m.name}</span>
+                        <span className="text-xs font-bold text-energetic">{m.name}</span>
                         <div className="flex gap-1">
                           {(memberRow?.unplanned_days ?? []).map(dow => (
-                            <span key={dow} className="text-[10px] font-bold bg-[#d4820a]/20 text-[#d4820a] px-2 py-0.5 rounded-full">
+                            <span key={dow} className="text-[10px] font-bold bg-energetic-20 text-energetic px-2 py-0.5 rounded-full">
                               {DAY_SHORT[dow]}
                             </span>
                           ))}
@@ -165,7 +165,7 @@ export default function TeamPulseClient({ data, weekStart, workingDays }: Props)
                             employeeName: m.name,
                             unplannedDays: memberRow?.unplanned_days ?? [],
                           })}
-                          className="text-[10px] font-bold text-[#d4820a] underline hover:no-underline">
+                          className="text-[10px] font-bold text-energetic underline hover:no-underline">
                           Acknowledge
                         </button>
                       </div>

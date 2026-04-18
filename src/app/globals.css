@@ -16,6 +16,24 @@
   }
 }
 
+/* === Psychology of Color — shadcn/ui theme token mapping === */
+:root {
+  --color-excitement: #F72226;
+  --color-energetic: #FE5E20;
+  --color-happiness: #FFD527;
+  --color-natural: #24D56D;
+  --color-kindness: #00D6A3;
+  --color-integrity: #2226F7;
+  --color-originality: #FF3797;
+
+  /* shadcn/ui semantic mapping */
+  --primary: #2226F7;         /* Integrity */
+  --destructive: #F72226;     /* Excitement */
+  --success: #00D6A3;         /* Kindness */
+  --warning: #FE5E20;         /* Energetic */
+  --reward: #FFD527;          /* Happiness */
+}
+
 @layer base {
   .material-symbols-outlined {
     font-variation-settings:
@@ -90,5 +108,71 @@
   /* Role badges */
   .badge {
     @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium;
+  }
+
+  /* === Psychology of Color — Status Badges === */
+  .badge-overdue {
+    @apply bg-excitement-10 text-excitement border border-excitement/20;
+  }
+  .badge-due-today {
+    @apply bg-energetic-10 text-energetic border border-energetic/20;
+  }
+  .badge-on-track {
+    @apply bg-natural-10 text-natural border border-natural/20;
+  }
+  .badge-completed {
+    @apply bg-kindness-10 text-kindness border border-kindness/20;
+  }
+  .badge-focused {
+    @apply bg-integrity-10 text-integrity border border-integrity/20;
+  }
+  .badge-blocked {
+    @apply bg-excitement-10 text-excitement border border-excitement/30;
+  }
+  .badge-in-progress {
+    @apply bg-energetic-10 text-on-surface;
+  }
+  .badge-creative {
+    @apply bg-originality-10 text-originality border border-originality/20;
+  }
+  .badge-missed {
+    @apply bg-excitement-10 text-excitement line-through;
+  }
+
+  /* === Priority Border — left 4px bar on task cards === */
+  .priority-border-overdue    { @apply border-l-4 border-l-excitement; }
+  .priority-border-due-today  { @apply border-l-4 border-l-energetic; }
+  .priority-border-due-week   { @apply border-l-4 border-l-happiness; }
+  .priority-border-scheduled  { @apply border-l-4 border-l-natural; }
+  .priority-border-someday    { border-left: 4px solid transparent; }
+
+  /* === Button augmentations (overlay on existing system) === */
+  .btn-focus {
+    @apply bg-integrity text-white rounded-full px-6 py-3 font-semibold text-sm transition-all hover:opacity-90;
+  }
+  .btn-destructive {
+    @apply bg-excitement text-white rounded-full px-6 py-3 font-semibold text-sm transition-all hover:opacity-90;
+  }
+  .btn-success {
+    @apply bg-kindness text-on-surface rounded-full px-6 py-3 font-semibold text-sm transition-all hover:opacity-90;
+  }
+  .btn-celebrate {
+    @apply bg-happiness text-on-surface rounded-full px-6 py-3 font-semibold text-sm transition-all hover:opacity-90;
+  }
+  .btn-creative {
+    @apply bg-originality text-white rounded-full px-6 py-3 font-semibold text-sm transition-all hover:opacity-90;
+  }
+
+  /* === Progress bar segments === */
+  .progress-bar {
+    @apply h-2 rounded-full overflow-hidden bg-surface-container;
+  }
+  .progress-fill {
+    @apply h-full rounded-full transition-all duration-200 ease-out;
+  }
+
+  /* === Critical state — subtle red glow (overdue + blocked) === */
+  .critical-glow {
+    box-shadow: 0 0 0 1px rgba(247, 34, 38, 0.20), 0 0 12px rgba(247, 34, 38, 0.10);
   }
 }

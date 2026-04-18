@@ -104,13 +104,13 @@ export default function AddDependencyModal({
                     onClick={() => setSelectedId(t.id)}
                     className={`w-full flex items-center gap-3 p-3 rounded-xl transition-colors text-left ${
                       selectedId === t.id
-                        ? 'bg-primary-container text-on-primary-container'
+                        ? 'bg-integrity-10 text-integrity'
                         : 'hover:bg-surface-container-high text-on-surface'
                     }`}
                   >
                     <span
                       className={`w-2 h-2 rounded-full shrink-0 ${
-                        t.status === 'done' ? 'bg-primary' : t.status === 'in_progress' ? 'bg-secondary' : 'bg-outline'
+                        t.status === 'done' ? 'bg-kindness' : t.status === 'in_progress' ? 'bg-energetic' : 'bg-outline'
                       }`}
                     />
                     <span className="text-sm flex-1">{t.title}</span>
@@ -121,7 +121,7 @@ export default function AddDependencyModal({
                 ))}
           </div>
 
-          {error && <p className="text-sm text-error bg-error-container rounded-xl px-4 py-2">{error}</p>}
+          {error && <p className="text-sm text-excitement bg-excitement-10 rounded-xl px-4 py-2">{error}</p>}
         </div>
 
         <div className="px-6 py-4 flex gap-3 bg-surface-container-low/50">

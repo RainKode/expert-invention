@@ -34,9 +34,9 @@ const STATUS_TABS = [
 
 const STATUS_DOT: Record<string, string> = {
   todo: 'bg-outline',
-  in_progress: 'bg-secondary',
-  in_review: 'bg-tertiary',
-  done: 'bg-primary',
+  in_progress: 'bg-energetic',
+  in_review: 'bg-integrity',
+  done: 'bg-kindness',
 }
 
 const STATUS_LABEL: Record<string, string> = {
@@ -54,8 +54,8 @@ const STATUS_ICON: Record<string, string> = {
 }
 
 const PRIORITY_DOT: Record<string, string> = {
-  high: 'bg-error',
-  medium: 'bg-tertiary',
+  high: 'bg-excitement',
+  medium: 'bg-energetic',
   low: 'bg-outline',
 }
 
@@ -67,9 +67,9 @@ const PRIORITY_LABEL: Record<string, string> = {
 
 const KANBAN_COLUMNS = [
   { key: 'todo', label: 'To Do', color: 'bg-outline' },
-  { key: 'in_progress', label: 'In Progress', color: 'bg-secondary' },
-  { key: 'in_review', label: 'In Review', color: 'bg-tertiary' },
-  { key: 'done', label: 'Done', color: 'bg-primary' },
+  { key: 'in_progress', label: 'In Progress', color: 'bg-energetic' },
+  { key: 'in_review', label: 'In Review', color: 'bg-integrity' },
+  { key: 'done', label: 'Done', color: 'bg-kindness' },
 ]
 
 type SortField = 'title' | 'status' | 'priority' | 'due_date' | 'assignee' | 'project' | 'task_type' | 'task_nature'
@@ -882,8 +882,8 @@ export default function TasksClient({ userId, userRole, projects }: TasksClientP
                             {/* Metadata row */}
                             <div className="flex items-center gap-2 flex-wrap mb-2">
                               <span className={`px-2 py-0.5 rounded-full text-[10px] font-semibold ${
-                                task.priority === 'high' ? 'bg-error/10 text-error' :
-                                task.priority === 'medium' ? 'bg-tertiary-container text-on-tertiary-container' :
+                                task.priority === 'high' ? 'bg-excitement-10 text-excitement' :
+                                task.priority === 'medium' ? 'bg-energetic-10 text-energetic' :
                                 'bg-surface-container text-on-surface-variant'
                               }`}>
                                 {PRIORITY_LABEL[task.priority]}
@@ -892,7 +892,7 @@ export default function TasksClient({ userId, userRole, projects }: TasksClientP
                                 {task.task_type === 'adhoc' ? 'Ad Hoc' : task.task_type}
                               </span>
                               {task.billable && (
-                                <span className="material-symbols-outlined text-xs text-tertiary" title="Billable">attach_money</span>
+                                <span className="material-symbols-outlined text-xs text-kindness" title="Billable">attach_money</span>
                               )}
                             </div>
 

@@ -20,16 +20,16 @@ function todayLabel() {
 }
 
 const PRIORITY_DOT: Record<TaskPriority, string> = {
-  high: 'bg-error',
-  medium: 'bg-secondary',
-  low: 'bg-primary-fixed-dim',
+  high: 'bg-excitement',
+  medium: 'bg-energetic',
+  low: 'bg-outline',
 }
 
 const STATUS_LABEL: Record<TaskStatus, { label: string; cls: string }> = {
   todo: { label: 'To Do', cls: 'bg-surface-container-high text-on-surface-variant' },
-  in_progress: { label: 'In Progress', cls: 'bg-secondary-container text-on-secondary-container' },
-  in_review: { label: 'In Review', cls: 'bg-tertiary-fixed text-on-tertiary-fixed' },
-  done: { label: 'Done', cls: 'bg-surface-container-high text-on-surface-variant' },
+  in_progress: { label: 'In Progress', cls: 'bg-energetic-10 text-energetic' },
+  in_review: { label: 'In Review', cls: 'bg-integrity-10 text-integrity' },
+  done: { label: 'Done', cls: 'bg-kindness-10 text-kindness' },
 }
 
 interface Props {
@@ -66,7 +66,7 @@ export default function DashboardClient({ data, role }: Props) {
           </div>
 
           {data.overdue_tasks.length > 0 && (
-            <div className="mb-4 px-3 py-2 bg-error-container rounded-xl flex items-center gap-2 text-on-error-container text-xs font-bold">
+            <div className="mb-4 px-3 py-2 bg-excitement-10 rounded-xl flex items-center gap-2 text-excitement text-xs font-bold">
               <span className="material-symbols-outlined text-sm"
                 style={{ fontVariationSettings: "'FILL' 1" }}>warning</span>
               {data.overdue_tasks.length} overdue task{data.overdue_tasks.length > 1 ? 's' : ''}
@@ -77,13 +77,13 @@ export default function DashboardClient({ data, role }: Props) {
             {data.overdue_tasks.map(t => (
               <Link key={t.id} href={`/tasks/${t.id}`}
                 className="group flex items-center gap-4 p-4 hover:bg-surface-container-low rounded-xl transition-all duration-300">
-                <div className="w-2 h-2 rounded-full bg-error shrink-0" />
+                <div className="w-2 h-2 rounded-full bg-excitement shrink-0" />
                 <div className="flex-1 min-w-0">
                   <h3 className="font-semibold text-on-surface truncate">{t.title}</h3>
                   {t.project_name && <p className="text-sm text-on-surface-variant">{t.project_name}</p>}
                 </div>
                 <div className="flex items-center gap-3 shrink-0">
-                  <span className="bg-error-container text-on-error-container text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full">
+                  <span className="bg-excitement-10 text-excitement text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full">
                     Overdue
                   </span>
                   <span className="text-sm font-medium text-on-surface-variant">{formatDate(t.due_date!)}</span>

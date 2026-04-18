@@ -4,12 +4,15 @@ import Link from 'next/link'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import { TaskWithRelations as Task } from '@/types'
-
-const PRIORITY_BAR: Record<string, string> = {
-  high: 'bg-error',
-  medium: 'bg-tertiary',
-  low: 'bg-outline',
-}
+import {
+  derivePriorityState,
+  deriveBehaviourState,
+  PRIORITY_BORDER_CLASS,
+  STATE_BADGE_CLASS,
+  STATE_LABEL,
+  STATE_ICON,
+  isCriticalState,
+} from '@/lib/colours'
 
 interface Props {
   task: Task
@@ -29,17 +32,22 @@ export default function KanbanCard({ task, userId: _userId, isDragging }: Props)
     opacity: isSortableDragging ? 0.4 : 1,
   }
 
-  const isOverdue = task.due_date && new Date(task.due_date) < new Date() && task.status !== 'done'
+  const priorityState = derivePriorityState(task.due_date, task.status)
+  const behaviourState = deriveBehaviourState(task.status)
+  const critical = isCriticalState(priorityState, behaviourState)
 
   return (
     <div
       ref={setNodeRef}
       style={style}
-      className={`bg-surface-container-lowest rounded-2xl p-4 shadow-ambient-sm hover:shadow-ambient transition-shadow select-none ${isDragging ? 'shadow-ambient rotate-1' : ''}`}
+      className={`bg-surface-container-lowest rounded-2xl p-4 shadow-ambient-sm hover:shadow-ambient transition-shadow select-none ${PRIORITY_BORDER_CLASS[priorityState]} ${critical ? 'critical-glow' : ''} ${isDragging ? 'shadow-ambient rotate-1' : ''}`}
     >
-      {/* Priority bar + drag handle */}
+      {/* State badge + drag handle */}
       <div className="flex items-center justify-between mb-3">
-        <div className={`w-10 h-1.5 rounded-full ${PRIORITY_BAR[task.priority] ?? 'bg-outline'}`} />
+        <span className={`${STATE_BADGE_CLASS[behaviourState]} text-[11px] gap-1`}>
+          <span className="material-symbols-outlined text-[12px]">{STATE_ICON[behaviourState]}</span>
+          {STATE_LABEL[behaviourState]}
+        </span>
         <div
           {...attributes}
           {...listeners}
@@ -72,7 +80,7 @@ export default function KanbanCard({ task, userId: _userId, isDragging }: Props)
           </span>
         )}
         {task.billable && (
-          <span className="w-5 h-5 rounded-full bg-tertiary-container text-on-tertiary-container flex items-center justify-center text-[10px] font-bold">$</span>
+          <span className="w-5 h-5 rounded-full bg-kindness-10 text-kindness flex items-center justify-center text-[10px] font-bold">$</span>
         )}
       </div>
 
@@ -91,8 +99,8 @@ export default function KanbanCard({ task, userId: _userId, isDragging }: Props)
 
         {/* Due date */}
         {task.due_date && (
-          <span className={`text-[10px] font-medium ${isOverdue ? 'text-error' : 'text-on-surface-variant'}`}>
-            {isOverdue && <span className="material-symbols-outlined text-[10px] mr-0.5">warning</span>}
+          <span className={`text-[10px] font-medium flex items-center gap-0.5 ${priorityState === 'overdue' ? 'text-excitement' : priorityState === 'due-today' ? 'text-energetic' : 'text-on-surface-variant'}`}>
+            {priorityState === 'overdue' && <span className="material-symbols-outlined text-[10px]">warning</span>}
             {new Date(task.due_date).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}
           </span>
         )}

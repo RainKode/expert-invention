@@ -5,14 +5,14 @@ import { useRouter } from 'next/navigation'
 import type { CheckinTaskSnapshot, TaskPriority } from '@/types'
 
 const PRIORITY_BAR: Record<TaskPriority, string> = {
-  high: 'bg-error',
-  medium: 'bg-tertiary-container',
+  high: 'bg-excitement',
+  medium: 'bg-energetic',
   low: 'bg-outline-variant',
 }
 
 const PRIORITY_BADGE: Record<TaskPriority, string> = {
-  high: 'text-error bg-error-container',
-  medium: 'text-on-secondary-container bg-secondary-container',
+  high: 'text-excitement bg-excitement-10',
+  medium: 'text-energetic bg-energetic-10',
   low: 'text-outline bg-surface-container-high',
 }
 
@@ -118,9 +118,9 @@ export default function CheckinClient({ checkin, alreadySubmitted }: Props) {
       </header>
 
       {submitted && (
-        <div className="mb-8 bg-primary-container/20 text-primary p-5 rounded-2xl flex items-center gap-4">
+        <div className="mb-8 bg-kindness-10 text-kindness p-5 rounded-2xl flex items-center gap-4">
           <span
-            className="material-symbols-outlined text-primary"
+            className="material-symbols-outlined text-kindness"
             style={{ fontVariationSettings: "'FILL' 1" }}
           >
             check_circle
@@ -188,15 +188,15 @@ export default function CheckinClient({ checkin, alreadySubmitted }: Props) {
 
         {/* Insight bento */}
         <div className="grid grid-cols-3 gap-6 mt-6">
-          <div className="col-span-2 bg-tertiary-container/20 p-8 rounded-2xl flex flex-col justify-between overflow-hidden relative">
+          <div className="col-span-2 bg-integrity-10 p-8 rounded-2xl flex flex-col justify-between overflow-hidden relative">
             <div className="relative z-10">
-              <h4 className="text-tertiary font-bold text-xl mb-2">Today&apos;s Load</h4>
-              <p className="text-on-tertiary-fixed-variant max-w-sm">
+              <h4 className="text-integrity font-bold text-xl mb-2">Today&apos;s Load</h4>
+              <p className="text-on-surface-variant max-w-sm">
                 {tasks.filter((t) => t.confirmed).length} of {tasks.length} tasks confirmed for today.
                 Total planned time: <span className="font-bold">{totalPlanned}h</span>.
               </p>
             </div>
-            <span className="material-symbols-outlined absolute -right-4 -bottom-4 text-[120px] opacity-10 text-tertiary rotate-12">
+            <span className="material-symbols-outlined absolute -right-4 -bottom-4 text-[120px] opacity-10 text-integrity rotate-12">
               psychology
             </span>
           </div>

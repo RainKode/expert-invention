@@ -32,19 +32,19 @@ const EVENT_ICON: Record<ActivityEventType, string> = {
 }
 
 const EVENT_COLOR: Record<ActivityEventType, string> = {
-  task_created: 'bg-primary-container text-on-surface',
-  task_status_changed: 'bg-secondary-container text-on-secondary-container',
-  task_assigned: 'bg-tertiary-fixed text-on-tertiary-fixed-variant',
-  task_reassigned: 'bg-tertiary-fixed text-on-tertiary-fixed-variant',
-  task_completed: 'bg-primary-container/40 text-primary',
-  task_commented: 'bg-primary-container/60 text-on-surface',
-  plan_submitted: 'bg-secondary-container/60 text-secondary',
-  plan_unlocked: 'bg-tertiary-container text-tertiary',
-  checkin_submitted: 'bg-secondary-container text-on-secondary-container',
-  wrapup_submitted: 'bg-secondary-container/60 text-secondary',
+  task_created: 'bg-integrity-10 text-integrity',
+  task_status_changed: 'bg-energetic-10 text-energetic',
+  task_assigned: 'bg-integrity-10 text-integrity',
+  task_reassigned: 'bg-energetic-10 text-energetic',
+  task_completed: 'bg-kindness-10 text-kindness',
+  task_commented: 'bg-originality-10 text-originality',
+  plan_submitted: 'bg-natural-10 text-natural',
+  plan_unlocked: 'bg-energetic-10 text-energetic',
+  checkin_submitted: 'bg-natural-10 text-natural',
+  wrapup_submitted: 'bg-natural-10 text-natural',
   field_updated: 'bg-surface-container text-on-surface-variant',
-  user_joined: 'bg-primary-container/30 text-primary',
-  warning_acknowledged: 'bg-tertiary-container text-[#d4820a]',
+  user_joined: 'bg-integrity-10 text-integrity',
+  warning_acknowledged: 'bg-excitement-10 text-excitement',
 }
 
 function timeAgo(iso: string): string {
@@ -158,7 +158,7 @@ export default function ActivityClient({ initialEvents, initialCursor, userRole 
               onMouseEnter={() => setHovered(event.id)}
               onMouseLeave={() => setHovered(null)}>
               {/* Timeline dot */}
-              <div className="w-2 h-2 rounded-full bg-primary-container absolute -left-[26px] top-6 group-hover:scale-125 transition-transform" />
+              <div className="w-2 h-2 rounded-full bg-integrity absolute -left-[26px] top-6 group-hover:scale-125 transition-transform" />
 
               <div className={`flex-1 bg-surface-container-lowest rounded-xl p-6 transition-shadow duration-300 ${
                 isHovered ? 'shadow-[0px_24px_48px_rgba(77,85,106,0.12)]' : 'shadow-[0px_24px_48px_rgba(77,85,106,0.06)]'

@@ -60,7 +60,7 @@ export default function ReviewerSendBackModal({
         {/* Header */}
         <div className="px-6 py-5 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <span className="material-symbols-outlined text-xl text-error">undo</span>
+            <span className="material-symbols-outlined text-xl text-excitement">undo</span>
             <h2 className="text-base font-bold text-on-surface">Send back for revision</h2>
           </div>
           <button onClick={onClose} className="p-1.5 rounded-full text-on-surface-variant hover:bg-surface-container-high transition-colors">
