@@ -28,11 +28,11 @@ export default function SettingsLayout({ children }: { children: React.ReactNode
                 href={item.href}
                 className={`flex items-center gap-3 px-6 py-3 text-sm transition-colors ${
                   isActive
-                    ? 'font-semibold text-on-surface bg-[#4d556a]/10 border-l-[3px] border-[#4d556a]'
+                    ? 'font-semibold text-on-surface bg-integrity/10 border-l-[3px] border-integrity'
                     : 'text-on-surface-variant hover:bg-[#e6e8ea]'
                 }`}
               >
-                <svg className={`w-5 h-5 flex-shrink-0 ${isActive ? 'text-[#4d556a]' : 'text-on-surface-variant'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                <svg className={`w-5 h-5 flex-shrink-0 ${isActive ? 'text-integrity' : 'text-on-surface-variant'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d={item.icon} />
                 </svg>
                 {item.label}
@@ -57,7 +57,7 @@ export default function SettingsLayout({ children }: { children: React.ReactNode
                   href={item.href}
                   className={`flex-shrink-0 px-4 py-2 rounded-full text-sm font-semibold transition-colors ${
                     isActive
-                      ? 'bg-gradient-to-br from-[#4d556a] to-[#656d84] text-white'
+                      ? 'bg-gradient-to-br from-[#2226F7] to-[#00D6A3] text-white'
                       : 'bg-[#f2f4f6] text-on-surface-variant'
                   }`}
                 >

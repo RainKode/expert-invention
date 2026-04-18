@@ -48,7 +48,7 @@ export default function SystemSettingsClient() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-20">
-        <div className="w-8 h-8 border-2 border-[#4d556a] border-t-transparent rounded-full animate-spin" />
+        <div className="w-8 h-8 border-2 border-integrity border-t-transparent rounded-full animate-spin" />
       </div>
     )
   }
@@ -90,7 +90,7 @@ export default function SystemSettingsClient() {
                 type="text"
                 value={settings.company_name}
                 onChange={(e) => setSettings({ ...settings, company_name: e.target.value })}
-                className="flex-1 bg-[#f2f4f6] border-0 rounded-full px-6 py-4 text-on-surface font-semibold focus:ring-2 focus:ring-[#4d556a]/20 transition-all"
+                className="flex-1 bg-[#f2f4f6] border-0 rounded-full px-6 py-4 text-on-surface font-semibold focus:ring-2 focus:ring-integrity/20 transition-all"
               />
               <button
                 onClick={() => save({ company_name: settings.company_name })}

@@ -15,7 +15,7 @@ interface TopBarProps {
 
 export default memo(function TopBar({ userName, userRole, unreadNotificationCount = 0, onNotificationClick, onMenuOpen }: TopBarProps) {
   return (
-    <header className="fixed top-0 right-0 left-0 md:left-72 h-16 z-30 px-4 md:px-6 flex items-center justify-between bg-surface-container-lowest/80 backdrop-blur-xl shadow-[0px_2px_15px_rgba(77,85,106,0.04)]">
+    <header className="fixed top-0 right-0 left-0 md:left-72 h-16 z-30 px-4 md:px-6 flex items-center justify-between bg-white/80 backdrop-blur-xl shadow-[0px_2px_15px_rgba(77,85,106,0.04)]">
       {/* Mobile hamburger */}
       <button
         onClick={onMenuOpen}
@@ -33,13 +33,13 @@ export default memo(function TopBar({ userName, userRole, unreadNotificationCoun
         {/* Notifications Bell */}
         <button
           onClick={onNotificationClick}
-          className="relative p-2 hover:bg-[#4d556a]/5 rounded-full transition-all active:scale-90"
+          className="relative p-2 hover:bg-integrity/5 rounded-full transition-all active:scale-90"
         >
-          <span className="material-symbols-outlined text-[24px] text-[#4d556a]" style={{ fontVariationSettings: unreadNotificationCount > 0 ? "'FILL' 1" : "'FILL' 0" }}>
+          <span className="material-symbols-outlined text-[24px] text-integrity" style={{ fontVariationSettings: unreadNotificationCount > 0 ? "'FILL' 1" : "'FILL' 0" }}>
             notifications
           </span>
           {unreadNotificationCount > 0 && (
-            <span className="absolute top-1 right-1 flex items-center justify-center min-w-[18px] h-[18px] px-1 bg-gradient-to-br from-[#4d556a] to-[#656d84] rounded-full border-2 border-surface-container-lowest text-[10px] font-bold text-on-primary">
+            <span className="absolute top-1 right-1 flex items-center justify-center min-w-[18px] h-[18px] px-1 bg-gradient-to-br from-[#2226F7] to-[#00D6A3] rounded-full border-2 border-surface-container-lowest text-[10px] font-bold text-on-primary">
               {unreadNotificationCount > 99 ? '99+' : unreadNotificationCount}
             </span>
           )}

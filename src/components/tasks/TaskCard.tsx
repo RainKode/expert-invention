@@ -75,8 +75,8 @@ export default function TaskCard({
       transition={{ duration: 0.2, ease: 'easeOut' }}
       onClick={onClick}
       className={`
-        bg-surface-container-lowest rounded-2xl p-4
-        shadow-ambient-sm hover:shadow-ambient
+        bg-white rounded-2xl p-4
+        shadow-[0px_2px_8px_rgba(77,85,106,0.06)] hover:shadow-[0px_4px_24px_rgba(77,85,106,0.08)]
         transition-shadow cursor-pointer
         ${PRIORITY_BORDER_CLASS[priorityState]}
         ${critical ? 'critical-glow' : ''}
@@ -159,7 +159,7 @@ export default function TaskCard({
         <div className="flex items-center gap-2">
           <div
             className="w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold text-white flex-shrink-0"
-            style={{ background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }}
+            style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
           >
             {assigneeName.charAt(0).toUpperCase()}
           </div>

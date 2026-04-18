@@ -126,8 +126,8 @@ export default function ActivityClient({ initialEvents, initialCursor, userRole 
               onClick={() => handleFilterChange(pill.value)}
               className={`px-6 py-2.5 rounded-full text-sm font-semibold whitespace-nowrap transition-all ${
                 filter === pill.value
-                  ? 'bg-gradient-to-br from-[#4d556a] to-[#656d84] text-white shadow-md'
-                  : 'bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container-high border border-outline-variant/15'
+                  ? 'bg-gradient-to-br from-[#2226F7] to-[#00D6A3] text-white shadow-md'
+                  : 'bg-white text-on-surface-variant hover:bg-surface-container-high border border-outline-variant/15'
               }`}>
               {pill.label}
             </button>
@@ -160,12 +160,12 @@ export default function ActivityClient({ initialEvents, initialCursor, userRole 
               {/* Timeline dot */}
               <div className="w-2 h-2 rounded-full bg-integrity absolute -left-[26px] top-6 group-hover:scale-125 transition-transform" />
 
-              <div className={`flex-1 bg-surface-container-lowest rounded-xl p-6 transition-shadow duration-300 ${
+              <div className={`flex-1 bg-white rounded-xl p-6 transition-shadow duration-300 ${
                 isHovered ? 'shadow-[0px_24px_48px_rgba(77,85,106,0.12)]' : 'shadow-[0px_24px_48px_rgba(77,85,106,0.06)]'
               }`}>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
-                    <div className={`relative w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg shrink-0 bg-gradient-to-br from-[#4d556a] to-[#656d84] text-white`}>
+                    <div className={`relative w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg shrink-0 bg-gradient-to-br from-[#2226F7] to-[#00D6A3] text-white`}>
                       {userName.charAt(0)}
                       {/* Event type dot */}
                       <div className={`absolute -bottom-1 -right-1 w-5 h-5 rounded-full flex items-center justify-center border-2 border-white ${color.split(' ')[0]}`}>
@@ -205,7 +205,7 @@ export default function ActivityClient({ initialEvents, initialCursor, userRole 
           <button
             onClick={loadMore}
             disabled={isPending}
-            className="px-8 py-3.5 rounded-full bg-surface-container-lowest border border-outline-variant/20 text-sm font-semibold text-on-surface hover:bg-surface-container-low transition-all disabled:opacity-50 shadow-sm">
+            className="px-8 py-3.5 rounded-full bg-white border border-outline-variant/20 text-sm font-semibold text-on-surface hover:bg-surface-container-low transition-all disabled:opacity-50 shadow-sm">
             {isPending ? 'Loading…' : 'Load earlier activity'}
           </button>
         </div>

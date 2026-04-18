@@ -120,8 +120,8 @@ function FilterDropdown({ label, icon, value, options, onChange }: {
         onClick={() => setOpen(o => !o)}
         className={`flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-semibold transition-all duration-200 ${
           value
-            ? 'bg-primary text-white shadow-ambient-sm'
-            : 'bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container-high'
+            ? 'bg-primary text-white shadow-[0px_2px_8px_rgba(77,85,106,0.06)]'
+            : 'bg-white text-on-surface-variant hover:bg-surface-container-high'
         }`}
       >
         <span className="material-symbols-outlined text-sm">{icon}</span>
@@ -129,7 +129,7 @@ function FilterDropdown({ label, icon, value, options, onChange }: {
         <span className={`material-symbols-outlined text-sm transition-transform duration-200 ${open ? 'rotate-180' : ''}`}>expand_more</span>
       </button>
       {open && (
-        <div className="absolute top-full left-0 mt-2 min-w-[180px] bg-surface-container-lowest/80 backdrop-blur-[20px] rounded-[20px] shadow-ambient overflow-hidden z-50 animate-in fade-in slide-in-from-top-1 duration-200">
+        <div className="absolute top-full left-0 mt-2 min-w-[180px] bg-white/80 backdrop-blur-[20px] rounded-[20px] shadow-[0px_4px_24px_rgba(77,85,106,0.08)] overflow-hidden z-50 animate-in fade-in slide-in-from-top-1 duration-200">
           <div className="py-2">
             <button
               onClick={() => { onChange(''); setOpen(false) }}
@@ -188,7 +188,7 @@ function ColumnHeaderDropdown({ column, sortField, sortDir, onSort, onHide, onRe
         more_vert
       </button>
       {open && (
-        <div className="absolute top-full right-0 mt-1 min-w-[160px] bg-surface-container-lowest/90 backdrop-blur-[20px] rounded-[16px] shadow-ambient overflow-hidden z-50">
+        <div className="absolute top-full right-0 mt-1 min-w-[160px] bg-white/90 backdrop-blur-[20px] rounded-[16px] shadow-[0px_4px_24px_rgba(77,85,106,0.08)] overflow-hidden z-50">
           <div className="py-1.5">
             <button
               onClick={() => { onSort(column.field, 'asc'); setOpen(false) }}
@@ -502,15 +502,15 @@ export default function TasksClient({ userId, userRole, projects }: TasksClientP
         </div>
         <div className="flex items-center gap-3">
           {/* View switcher */}
-          <div className="hidden sm:flex items-center bg-surface-container-lowest rounded-full p-1 shadow-ambient-sm">
+          <div className="hidden sm:flex items-center bg-white rounded-full p-1 shadow-[0px_2px_8px_rgba(77,85,106,0.06)]">
             <button
               onClick={() => setViewMode('list')}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 ${
                 viewMode === 'list'
-                  ? 'text-white shadow-ambient-sm'
+                  ? 'text-white shadow-[0px_2px_8px_rgba(77,85,106,0.06)]'
                   : 'text-on-surface-variant hover:text-on-surface'
               }`}
-              style={viewMode === 'list' ? { background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' } : undefined}
+              style={viewMode === 'list' ? { background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' } : undefined}
             >
               <span className="material-symbols-outlined text-sm">view_list</span>
               List
@@ -519,10 +519,10 @@ export default function TasksClient({ userId, userRole, projects }: TasksClientP
               onClick={() => setViewMode('kanban')}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 ${
                 viewMode === 'kanban'
-                  ? 'text-white shadow-ambient-sm'
+                  ? 'text-white shadow-sm'
                   : 'text-on-surface-variant hover:text-on-surface'
               }`}
-              style={viewMode === 'kanban' ? { background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' } : undefined}
+              style={viewMode === 'kanban' ? { background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' } : undefined}
             >
               <span className="material-symbols-outlined text-sm">view_kanban</span>
               Board
@@ -531,8 +531,8 @@ export default function TasksClient({ userId, userRole, projects }: TasksClientP
 
           <button
             onClick={() => setModalOpen(true)}
-            className="flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold text-white shadow-ambient-sm transition-all duration-200 hover:opacity-90 hover:shadow-ambient hover:scale-[1.02] active:scale-[0.98]"
-            style={{ background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }}
+            className="flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold text-white shadow-[0px_4px_16px_rgba(34,38,247,0.25)] transition-all duration-200 hover:opacity-90 hover:shadow-[0px_8px_24px_rgba(34,38,247,0.3)] hover:scale-[1.02] active:scale-[0.98]"
+            style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
           >
             <span className="material-symbols-outlined text-lg">add</span>
             New Task
@@ -544,25 +544,29 @@ export default function TasksClient({ userId, userRole, projects }: TasksClientP
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 shrink-0">
         {/* Status tabs — only show in list view */}
         {viewMode === 'list' && (
-          <div className="flex gap-0.5 bg-surface-container-lowest rounded-full p-1 shadow-ambient-sm">
-            {STATUS_TABS.map(tab => (
-              <button
-                key={tab.key}
-                onClick={() => setActiveStatus(tab.key)}
-                className={`px-4 py-2 text-xs font-semibold rounded-full transition-all duration-200 ${
-                  activeStatus === tab.key
-                    ? 'text-white shadow-ambient-sm'
-                    : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high'
-                }`}
-                style={
-                  activeStatus === tab.key
-                    ? { background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }
-                    : undefined
-                }
-              >
-                {tab.label}
-              </button>
-            ))}
+          <div className="flex gap-0.5 bg-white rounded-full p-1 shadow-[0px_2px_12px_rgba(77,85,106,0.08)]">
+            {STATUS_TABS.map(tab => {
+              const tabColor: Record<string, string> = {
+                '': 'bg-gradient-to-r from-[#2226F7] to-[#00D6A3]',
+                'todo': 'bg-[#76777d]',
+                'in_progress': 'bg-energetic',
+                'in_review': 'bg-integrity',
+                'done': 'bg-kindness',
+              }
+              return (
+                <button
+                  key={tab.key}
+                  onClick={() => setActiveStatus(tab.key)}
+                  className={`px-4 py-2 text-xs font-semibold rounded-full transition-all duration-200 ${
+                    activeStatus === tab.key
+                      ? `text-white shadow-sm ${tabColor[tab.key] ?? ''}`
+                      : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high'
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              )
+            })}
           </div>
         )}
 
@@ -570,7 +574,7 @@ export default function TasksClient({ userId, userRole, projects }: TasksClientP
         <div className="flex sm:hidden items-center gap-2">
           <button
             onClick={() => setViewMode(v => v === 'list' ? 'kanban' : 'list')}
-            className="flex items-center gap-1.5 px-3 py-2 rounded-full text-xs font-semibold bg-surface-container-lowest text-on-surface-variant shadow-ambient-sm"
+            className="flex items-center gap-1.5 px-3 py-2 rounded-full text-xs font-semibold bg-white text-on-surface-variant shadow-[0px_2px_8px_rgba(77,85,106,0.06)]"
           >
             <span className="material-symbols-outlined text-sm">{viewMode === 'list' ? 'view_kanban' : 'view_list'}</span>
             {viewMode === 'list' ? 'Board' : 'List'}
@@ -621,8 +625,8 @@ export default function TasksClient({ userId, userRole, projects }: TasksClientP
             onClick={() => setFilterBillable(b => !b)}
             className={`flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-semibold transition-all duration-200 ${
               filterBillable
-                ? 'bg-primary text-white shadow-ambient-sm'
-                : 'bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container-high'
+                ? 'bg-primary text-white shadow-[0px_2px_8px_rgba(77,85,106,0.06)]'
+                : 'bg-white text-on-surface-variant hover:bg-surface-container-high'
             }`}
           >
             <span className="material-symbols-outlined text-sm">attach_money</span>
@@ -663,7 +667,7 @@ export default function TasksClient({ userId, userRole, projects }: TasksClientP
 
       {/* ═══════════ LIST VIEW ═══════════ */}
       {viewMode === 'list' && (
-        <div className="flex-1 bg-surface-container-lowest rounded-[24px] shadow-ambient overflow-hidden flex flex-col min-h-0">
+        <div className="flex-1 bg-white rounded-[24px] shadow-[0px_4px_24px_rgba(77,85,106,0.08)] overflow-hidden flex flex-col min-h-0">
           {/* Column headers — desktop */}
           <div className="hidden md:grid items-center px-4 py-3 bg-surface-container-low/50 shrink-0 gap-x-0" style={{ gridTemplateColumns: gridTemplate }}>
             <div className="flex items-center justify-center">
@@ -850,17 +854,17 @@ export default function TasksClient({ userId, userRole, projects }: TasksClientP
                   <div key={col.key} className="flex flex-col w-72 sm:w-80 shrink-0">
                     {/* Column header */}
                     <div className="flex items-center gap-2.5 px-3 py-3 mb-2">
-                      <span className={`w-2.5 h-2.5 rounded-full ${col.color}`} />
-                      <span className="text-sm font-semibold text-on-surface">{col.label}</span>
-                      <span className="text-xs font-medium text-outline bg-surface-container rounded-full px-2 py-0.5">
+                      <span className={`w-3 h-3 rounded-full ${col.color} shadow-sm`} />
+                      <span className="text-sm font-bold text-on-surface">{col.label}</span>
+                      <span className="text-xs font-bold text-on-surface-variant bg-white rounded-full px-2.5 py-0.5 shadow-[0px_1px_4px_rgba(77,85,106,0.1)]">
                         {columnTasks.length}
                       </span>
                     </div>
 
                     {/* Cards container */}
-                    <div className="flex-1 overflow-y-auto space-y-2 px-1 pb-4">
+                    <div className="flex-1 overflow-y-auto space-y-2.5 px-1 pb-4">
                       {columnTasks.length === 0 ? (
-                        <div className="rounded-[20px] bg-surface-container-lowest/60 py-8 text-center">
+                        <div className="rounded-[20px] bg-white/60 py-8 text-center shadow-[0px_1px_4px_rgba(77,85,106,0.04)]">
                           <span className="material-symbols-outlined text-2xl text-outline/30 block mb-1">inbox</span>
                           <p className="text-xs text-outline/60">No tasks</p>
                         </div>
@@ -869,7 +873,7 @@ export default function TasksClient({ userId, userRole, projects }: TasksClientP
                           <div
                             key={task.id}
                             onClick={() => router.push(`/tasks/${task.id}`)}
-                            className="group bg-surface-container-lowest rounded-[20px] p-4 shadow-ambient-sm hover:shadow-ambient cursor-pointer transition-all duration-200 hover:-translate-y-0.5"
+                            className="group bg-white rounded-[20px] p-4 shadow-[0px_2px_8px_rgba(77,85,106,0.06)] hover:shadow-[0px_4px_24px_rgba(77,85,106,0.08)] cursor-pointer transition-all duration-200 hover:-translate-y-0.5"
                           >
                             {/* Priority + title */}
                             <div className="flex items-start gap-2 mb-3">

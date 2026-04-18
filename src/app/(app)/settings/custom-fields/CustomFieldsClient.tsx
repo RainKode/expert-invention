@@ -84,7 +84,7 @@ export default function CustomFieldsClient({ initialFields, teamId }: Props) {
         <button
           onClick={() => setShowAddModal(true)}
           className="flex items-center gap-2 px-5 py-2.5 rounded-full text-white font-medium text-sm shadow-sm"
-          style={{ background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }}
+          style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
         >
           <span className="material-symbols-outlined text-[18px]">add</span>
           Add Field
@@ -103,7 +103,7 @@ export default function CustomFieldsClient({ initialFields, teamId }: Props) {
             onClick={() => setActiveTab(t.key)}
             className={`px-5 py-2 rounded-full text-sm font-medium transition-all ${
               activeTab === t.key
-                ? 'bg-surface-container-lowest shadow-ambient-sm text-on-surface font-semibold'
+                ? 'bg-white shadow-[0px_2px_8px_rgba(77,85,106,0.06)] text-on-surface font-semibold'
                 : 'text-on-surface-variant hover:text-on-surface'
             }`}
           >
@@ -135,7 +135,7 @@ export default function CustomFieldsClient({ initialFields, teamId }: Props) {
               {/* Field name + type icon */}
               <div className="col-span-5 flex items-center gap-4">
                 <div className="w-12 h-12 rounded-lg bg-[#f7f9fb] flex items-center justify-center flex-shrink-0">
-                  <span className="material-symbols-outlined text-[22px] text-[#4d556a]">
+                  <span className="material-symbols-outlined text-[22px] text-integrity">
                     {TYPE_ICONS[field.field_type]}
                   </span>
                 </div>
@@ -259,7 +259,7 @@ function AddFieldModal({ teamId, onCreated, onClose }: {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-on-surface/40 backdrop-blur-[20px]" onClick={onClose} />
-      <div className="relative bg-surface-container-lowest rounded-2xl shadow-ambient w-full max-w-md p-8">
+      <div className="relative bg-white rounded-2xl shadow-[0px_4px_24px_rgba(77,85,106,0.08)] w-full max-w-md p-8">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-xl font-bold text-on-surface">Add Custom Field</h2>
           <button onClick={onClose} className="p-2 rounded-full hover:bg-surface-container">
@@ -275,7 +275,7 @@ function AddFieldModal({ teamId, onCreated, onClose }: {
               onChange={e => setName(e.target.value)}
               required
               placeholder="e.g. Estimated Hours"
-              className="w-full px-4 py-2.5 rounded-full bg-[#f7f9fb] text-[#191c1e] text-sm outline-none focus:ring-2 focus:ring-[#4d556a]/30"
+              className="w-full px-4 py-2.5 rounded-full bg-[#f7f9fb] text-[#191c1e] text-sm outline-none focus:ring-2 focus:ring-integrity/30"
             />
           </div>
           <div>
@@ -286,7 +286,7 @@ function AddFieldModal({ teamId, onCreated, onClose }: {
                   key={t} type="button"
                   onClick={() => setType(t)}
                   className={`flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                    type === t ? 'bg-[#4d556a] text-white' : 'bg-[#f7f9fb] text-[#434655] hover:bg-[#eef0f4]'
+                    type === t ? 'bg-integrity text-white' : 'bg-[#f7f9fb] text-[#434655] hover:bg-[#eef0f4]'
                   }`}
                 >
                   <span className="material-symbols-outlined text-[14px]">{TYPE_ICONS[t]}</span>
@@ -303,7 +303,7 @@ function AddFieldModal({ teamId, onCreated, onClose }: {
                   key={s} type="button"
                   onClick={() => setScope(s)}
                   className={`px-4 py-2 rounded-full text-sm font-medium capitalize transition-colors ${
-                    scope === s ? 'bg-[#4d556a] text-white' : 'bg-[#f7f9fb] text-[#434655] hover:bg-[#eef0f4]'
+                    scope === s ? 'bg-integrity text-white' : 'bg-[#f7f9fb] text-[#434655] hover:bg-[#eef0f4]'
                   }`}
                 >
                   {s}
@@ -321,7 +321,7 @@ function AddFieldModal({ teamId, onCreated, onClose }: {
                       value={opt}
                       onChange={e => setOptions(prev => prev.map((o, idx) => idx === i ? e.target.value : o))}
                       placeholder={`Option ${i + 1}`}
-                      className="flex-1 px-4 py-2 rounded-full bg-[#f7f9fb] text-sm text-[#191c1e] outline-none focus:ring-2 focus:ring-[#4d556a]/30"
+                      className="flex-1 px-4 py-2 rounded-full bg-[#f7f9fb] text-sm text-[#191c1e] outline-none focus:ring-2 focus:ring-integrity/30"
                     />
                     {options.length > 1 && (
                       <button type="button" onClick={() => setOptions(prev => prev.filter((_, idx) => idx !== i))} className="text-on-surface-variant hover:text-error">
@@ -342,7 +342,7 @@ function AddFieldModal({ teamId, onCreated, onClose }: {
               type="submit"
               disabled={loading}
               className="flex-1 py-2.5 rounded-full text-white font-medium text-sm"
-              style={{ background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }}
+              style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
             >
               {loading ? 'Creating…' : 'Create Field'}
             </button>
@@ -387,7 +387,7 @@ function EditFieldModal({ field, onUpdated, onClose }: {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-on-surface/40 backdrop-blur-[20px]" onClick={onClose} />
-      <div className="relative bg-surface-container-lowest rounded-2xl shadow-ambient w-full max-w-md p-8">
+      <div className="relative bg-white rounded-2xl shadow-[0px_4px_24px_rgba(77,85,106,0.08)] w-full max-w-md p-8">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-xl font-bold text-on-surface">Edit Field</h2>
           <button onClick={onClose} className="p-2 rounded-full hover:bg-surface-container">
@@ -402,7 +402,7 @@ function EditFieldModal({ field, onUpdated, onClose }: {
               value={name}
               onChange={e => setName(e.target.value)}
               required
-              className="w-full px-4 py-2.5 rounded-full bg-[#f7f9fb] text-[#191c1e] text-sm outline-none focus:ring-2 focus:ring-[#4d556a]/30"
+              className="w-full px-4 py-2.5 rounded-full bg-[#f7f9fb] text-[#191c1e] text-sm outline-none focus:ring-2 focus:ring-integrity/30"
             />
           </div>
           {field.field_type === 'dropdown' && (
@@ -414,7 +414,7 @@ function EditFieldModal({ field, onUpdated, onClose }: {
                     <input
                       value={opt}
                       onChange={e => setOptions(prev => prev.map((o, idx) => idx === i ? e.target.value : o))}
-                      className="flex-1 px-4 py-2 rounded-full bg-[#f7f9fb] text-sm text-[#191c1e] outline-none focus:ring-2 focus:ring-[#4d556a]/30"
+                      className="flex-1 px-4 py-2 rounded-full bg-[#f7f9fb] text-sm text-[#191c1e] outline-none focus:ring-2 focus:ring-integrity/30"
                     />
                     {options.length > 1 && (
                       <button type="button" onClick={() => setOptions(prev => prev.filter((_, idx) => idx !== i))} className="text-on-surface-variant hover:text-error">
@@ -435,7 +435,7 @@ function EditFieldModal({ field, onUpdated, onClose }: {
               type="submit"
               disabled={loading}
               className="flex-1 py-2.5 rounded-full text-white font-medium text-sm"
-              style={{ background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }}
+              style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
             >
               {loading ? 'Saving…' : 'Save Changes'}
             </button>

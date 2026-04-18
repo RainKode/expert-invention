@@ -34,7 +34,7 @@ export default function WeeklyReviewHeader({
   className = '',
 }: WeeklyReviewHeaderProps) {
   return (
-    <div className={`bg-surface-container-lowest rounded-2xl p-6 shadow-ambient ${className}`}>
+    <div className={`bg-white rounded-2xl p-6 shadow-[0px_4px_24px_rgba(77,85,106,0.08)] ${className}`}>
       {/* Top section: title + week label */}
       <div className="flex items-center justify-between mb-6">
         <div>

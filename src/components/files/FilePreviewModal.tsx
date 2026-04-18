@@ -160,7 +160,7 @@ export default function FilePreviewModal({
               <button
                 onClick={handleDownload}
                 className="px-6 py-2.5 rounded-full text-sm font-bold text-white"
-                style={{ background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }}
+                style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
               >
                 Download Instead
               </button>
@@ -195,7 +195,7 @@ export default function FilePreviewModal({
               <button
                 onClick={handleDownload}
                 className="px-6 py-2.5 rounded-full text-sm font-bold text-white"
-                style={{ background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }}
+                style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
               >
                 <span className="material-symbols-outlined text-lg mr-1 align-middle">download</span>
                 Download File

@@ -161,7 +161,7 @@ export default function NotificationPreferencesClient() {
                 return (
                   <div
                     key={type}
-                    className="flex items-center justify-between p-6 bg-surface-container-lowest rounded-[24px] shadow-[0px_8px_24px_rgba(77,85,106,0.03)]"
+                    className="flex items-center justify-between p-6 bg-white rounded-[24px] shadow-[0px_8px_24px_rgba(77,85,106,0.03)]"
                   >
                     <div className="flex items-center gap-4">
                       <div className="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center">
@@ -207,7 +207,7 @@ export default function NotificationPreferencesClient() {
                     key={type}
                     className={`${
                       isWide ? 'md:col-span-2' : ''
-                    } p-6 bg-surface-container-lowest rounded-[24px] shadow-[0px_24px_48px_rgba(77,85,106,0.06)] flex ${
+                    } p-6 bg-white rounded-[24px] shadow-[0px_24px_48px_rgba(77,85,106,0.06)] flex ${
                       isWide ? 'items-center justify-between' : 'flex-col justify-between'
                     } group hover:shadow-xl transition-shadow`}
                   >
@@ -284,7 +284,7 @@ export default function NotificationPreferencesClient() {
               <button
                 onClick={handleSave}
                 disabled={saving}
-                className="px-10 py-3 rounded-full text-sm font-bold text-white bg-gradient-to-br from-[#4d556a] to-[#656d84] shadow-[0px_24px_48px_rgba(77,85,106,0.06)] hover:scale-[1.02] active:scale-95 transition-all disabled:opacity-50"
+                className="px-10 py-3 rounded-full text-sm font-bold text-white bg-gradient-to-br from-[#2226F7] to-[#00D6A3] shadow-[0px_24px_48px_rgba(77,85,106,0.06)] hover:scale-[1.02] active:scale-95 transition-all disabled:opacity-50"
               >
                 {saving ? 'Saving...' : 'Save Preferences'}
               </button>

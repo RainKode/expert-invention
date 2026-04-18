@@ -34,12 +34,12 @@ function getDayDate(weekStartISO: string, dow: number): Date {
 }
 
 function cellStyle(hours: number, available: number) {
-  if (hours === 0) return { bg: 'bg-surface-container-lowest', label: '', text: 'text-outline' }
+  if (hours === 0) return { bg: 'bg-white', label: '', text: 'text-outline' }
   const pct = (hours / available) * 100
   if (pct >= 80 && pct <= 100) return { bg: 'bg-natural-10', label: 'Healthy', text: 'text-natural' }
   if (pct > 100) return { bg: 'bg-excitement-10', label: 'Over', text: 'text-excitement' }
   if (pct >= 50) return { bg: 'bg-energetic-10', label: 'Low', text: 'text-energetic' }
-  return { bg: 'bg-surface-container-lowest', label: 'Empty', text: 'text-outline' }
+  return { bg: 'bg-white', label: 'Empty', text: 'text-outline' }
 }
 
 const STATUS_BADGE: Record<string, string> = {
@@ -92,17 +92,17 @@ export default function TeamPlansClient({ members, weekStartISO, teamName }: Pro
         </div>
 
         {/* Week Navigation */}
-        <div className="flex items-center gap-2 bg-surface-container-lowest px-4 py-2 rounded-full shadow-sm">
+        <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm">
           <button
             onClick={() => router.push(`/team/plans?week=${prevMonday(weekStartISO)}`)}
-            className="material-symbols-outlined text-sm hover:text-[#4d556a] transition-colors"
+            className="material-symbols-outlined text-sm hover:text-integrity transition-colors"
           >
             chevron_left
           </button>
           <span className="text-sm font-semibold tracking-tight">{formatWeekRange(weekStartISO)}</span>
           <button
             onClick={() => router.push(`/team/plans?week=${nextMonday(weekStartISO)}`)}
-            className="material-symbols-outlined text-sm hover:text-[#4d556a] transition-colors"
+            className="material-symbols-outlined text-sm hover:text-integrity transition-colors"
           >
             chevron_right
           </button>
@@ -111,7 +111,7 @@ export default function TeamPlansClient({ members, weekStartISO, teamName }: Pro
 
       {/* Big Fat Warning Banner */}
       {membersWithIssues.length > 0 && (
-        <div className="bg-error-container/10 rounded-2xl p-6 flex flex-col gap-4 shadow-2xl shadow-[#4d556a]/5">
+        <div className="bg-error-container/10 rounded-2xl p-6 flex flex-col gap-4 shadow-2xl shadow-[#2226F7]/5">
           <div className="flex items-center gap-3 text-error">
             <span
               className="material-symbols-outlined"
@@ -127,9 +127,9 @@ export default function TeamPlansClient({ members, weekStartISO, teamName }: Pro
             {membersWithIssues.map((m) => (
               <div
                 key={m.user.id}
-                className="bg-surface-container-lowest p-4 rounded-2xl flex items-center gap-4"
+                className="bg-white p-4 rounded-2xl flex items-center gap-4"
               >
-                <div className="w-12 h-12 rounded-full bg-[#4d556a] flex items-center justify-center text-white font-bold text-sm shrink-0">
+                <div className="w-12 h-12 rounded-full bg-integrity flex items-center justify-center text-white font-bold text-sm shrink-0">
                   {m.user.name.charAt(0).toUpperCase()}
                 </div>
                 <div className="flex-1 min-w-0">
@@ -147,7 +147,7 @@ export default function TeamPlansClient({ members, weekStartISO, teamName }: Pro
                 </div>
                 <button
                   onClick={() => router.push(`/plan?user=${m.user.id}`)}
-                  className="text-[#4d556a] hover:bg-surface-container-high p-2 rounded-full transition-colors shrink-0"
+                  className="text-integrity hover:bg-surface-container-high p-2 rounded-full transition-colors shrink-0"
                   title="View plan"
                 >
                   <span className="material-symbols-outlined">edit_calendar</span>
@@ -164,7 +164,7 @@ export default function TeamPlansClient({ members, weekStartISO, teamName }: Pro
           No team members found for this period.
         </div>
       ) : (
-        <div className="bg-surface-container-low rounded-2xl overflow-hidden shadow-2xl shadow-[#4d556a]/5">
+        <div className="bg-surface-container-low rounded-2xl overflow-hidden shadow-2xl shadow-[#2226F7]/5">
           {/* Grid Header */}
           <div
             className="grid"
@@ -194,8 +194,8 @@ export default function TeamPlansClient({ members, weekStartISO, teamName }: Pro
               style={{ gridTemplateColumns: `1fr repeat(${displayDays.length}, 1fr) auto` }}
             >
               {/* Name */}
-              <div className="p-6 bg-surface-container-lowest flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-[#4d556a] flex items-center justify-center text-white font-bold text-xs shrink-0">
+              <div className="p-6 bg-white flex items-center gap-3">
+                <div className="w-8 h-8 rounded-full bg-integrity flex items-center justify-center text-white font-bold text-xs shrink-0">
                   {member.user.name.charAt(0).toUpperCase()}
                 </div>
                 <span className="font-semibold text-sm truncate">{member.user.name}</span>
@@ -231,7 +231,7 @@ export default function TeamPlansClient({ members, weekStartISO, teamName }: Pro
               })}
 
               {/* Status Badge */}
-              <div className="p-6 bg-surface-container-lowest flex items-center justify-center">
+              <div className="p-6 bg-white flex items-center justify-center">
                 <span
                   className={`px-4 py-1.5 text-[10px] font-extrabold uppercase tracking-wider rounded-full ${STATUS_BADGE[member.submission_status] ?? STATUS_BADGE.draft}`}
                 >
@@ -245,7 +245,7 @@ export default function TeamPlansClient({ members, weekStartISO, teamName }: Pro
 
       {/* Completion Stats */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="bg-surface-container-lowest p-8 rounded-2xl shadow-2xl shadow-[#4d556a]/5">
+        <div className="bg-white p-8 rounded-2xl shadow-2xl shadow-[#2226F7]/5">
           <div className="flex items-center justify-between mb-6">
             <div>
               <span className="text-outline text-[10px] font-bold uppercase tracking-widest">
@@ -253,14 +253,14 @@ export default function TeamPlansClient({ members, weekStartISO, teamName }: Pro
               </span>
               <p className="text-xl font-bold">{teamName} Overall</p>
             </div>
-            <span className="text-2xl font-black text-[#4d556a]">{completionPct}%</span>
+            <span className="text-2xl font-black text-integrity">{completionPct}%</span>
           </div>
           <div className="h-3 w-full bg-surface-container-low rounded-full overflow-hidden">
             <div
               className="h-full rounded-full"
               style={{
                 width: `${completionPct}%`,
-                background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)',
+                background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)',
               }}
             />
           </div>
@@ -269,7 +269,7 @@ export default function TeamPlansClient({ members, weekStartISO, teamName }: Pro
           </p>
         </div>
 
-        <div className="bg-surface-container-lowest p-8 rounded-2xl shadow-2xl shadow-[#4d556a]/5">
+        <div className="bg-white p-8 rounded-2xl shadow-2xl shadow-[#2226F7]/5">
           <div className="flex items-center justify-between mb-6">
             <div>
               <span className="text-outline text-[10px] font-bold uppercase tracking-widest">

@@ -165,7 +165,7 @@ export default function FileAttachments({
                   <p className="text-sm text-on-surface-variant">
                     {uploading
                       ? 'Uploading…'
-                      : <>Drag files here or <span className="text-[#4d556a] font-semibold hover:underline">browse</span></>}
+                      : <>Drag files here or <span className="text-integrity font-semibold hover:underline">browse</span></>}
                   </p>
                 </div>
                 <input
@@ -200,7 +200,7 @@ export default function FileAttachments({
                 return (
                   <div
                     key={f.id}
-                    className="flex items-center justify-between p-3 bg-surface-container-lowest rounded-[8px] shadow-[0px_2px_8px_rgba(77,85,106,0.04)] hover:bg-surface-container-high transition-colors group cursor-pointer"
+                    className="flex items-center justify-between p-3 bg-white rounded-[8px] shadow-[0px_2px_8px_rgba(77,85,106,0.04)] hover:bg-surface-container-high transition-colors group cursor-pointer"
                     onClick={() => canPreview ? setPreviewFile(f) : window.open(`/api/files/${f.id}`, '_blank')}
                   >
                     <div className="flex items-center gap-3">

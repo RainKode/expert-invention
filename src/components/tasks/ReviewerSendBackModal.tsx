@@ -115,7 +115,7 @@ export default function ReviewerSendBackModal({
           <button
             onClick={handleSubmit}
             disabled={submitting || !reason.trim()}
-            className="flex-1 py-2.5 rounded-full text-sm font-bold text-white bg-error shadow-ambient-sm disabled:opacity-60 transition-opacity"
+            className="flex-1 py-2.5 rounded-full text-sm font-bold text-white bg-error shadow-[0px_2px_8px_rgba(77,85,106,0.06)] disabled:opacity-60 transition-opacity"
           >
             {submitting ? 'Sending…' : 'Send Back'}
           </button>

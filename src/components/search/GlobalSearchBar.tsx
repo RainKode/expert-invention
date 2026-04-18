@@ -204,7 +204,7 @@ export default function GlobalSearchBar() {
             <span className="material-symbols-outlined text-xl">close</span>
           </button>
         ) : (
-          <div className={`absolute right-4 px-2 py-1 bg-surface-container-lowest/50 rounded-md text-[10px] font-bold text-on-surface-variant tracking-wider pointer-events-none ${open ? 'hidden' : ''}`}>
+          <div className={`absolute right-4 px-2 py-1 bg-white/50 rounded-md text-[10px] font-bold text-on-surface-variant tracking-wider pointer-events-none ${open ? 'hidden' : ''}`}>
             Ctrl K
           </div>
         )}
@@ -212,7 +212,7 @@ export default function GlobalSearchBar() {
 
       {/* Glassmorphism Dropdown */}
       {showDropdown && (
-        <div className="absolute top-14 left-0 w-[480px] bg-surface-container-lowest/80 backdrop-blur-[20px] rounded-2xl shadow-[0px_24px_48px_rgba(77,85,106,0.06)] overflow-hidden flex flex-col z-50 py-2">
+        <div className="absolute top-14 left-0 w-[480px] bg-white/80 backdrop-blur-[20px] rounded-2xl shadow-[0px_24px_48px_rgba(77,85,106,0.06)] overflow-hidden flex flex-col z-50 py-2">
           {loading && !results && (
             <div className="px-4 py-6 space-y-3">
               {[1, 2, 3].map(i => (

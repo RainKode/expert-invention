@@ -139,12 +139,12 @@ export default function AdminSetupClient({
   return (
     <div className="min-h-screen bg-background">
       {/* Progress header */}
-      <header className="fixed top-0 left-0 right-0 z-30 bg-surface-container-lowest/80 backdrop-blur-xl shadow-[0px_2px_15px_rgba(77,85,106,0.04)]">
+      <header className="fixed top-0 left-0 right-0 z-30 bg-white/80 backdrop-blur-xl shadow-[0px_2px_15px_rgba(77,85,106,0.04)]">
         <div className="max-w-7xl mx-auto px-8 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div
               className="w-8 h-8 rounded-lg flex items-center justify-center"
-              style={{ background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }}
+              style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
             >
               <span className="material-symbols-outlined text-white text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>hub</span>
             </div>
@@ -155,7 +155,7 @@ export default function AdminSetupClient({
             <div className="w-32 h-2 rounded-full bg-surface-container-high overflow-hidden">
               <div
                 className="h-full rounded-full transition-all duration-500"
-                style={{ width: `${progress}%`, background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }}
+                style={{ width: `${progress}%`, background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
               />
             </div>
           </div>
@@ -175,7 +175,7 @@ export default function AdminSetupClient({
                       ? 'bg-primary-container/60 text-white'
                       : 'bg-surface-container-highest text-on-surface-variant'
                 }`}
-                style={i === step ? { background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' } : undefined}
+                style={i === step ? { background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' } : undefined}
               >
                 {i < step ? (
                   <span className="material-symbols-outlined text-lg">check</span>
@@ -195,7 +195,7 @@ export default function AdminSetupClient({
         {step === 0 && (
           <div className="grid grid-cols-12 gap-8">
             <div className="col-span-12 lg:col-span-5">
-              <div className="bg-surface-container-lowest rounded-xl p-8 shadow-[0px_24px_48px_rgba(77,85,106,0.06)] flex flex-col gap-6">
+              <div className="bg-white rounded-xl p-8 shadow-[0px_24px_48px_rgba(77,85,106,0.06)] flex flex-col gap-6">
                 <h3 className="text-lg font-bold text-on-surface">Create Department</h3>
                 <div className="flex flex-col gap-3">
                   <label className="text-sm font-bold text-on-surface-variant ml-2">Department Name</label>
@@ -211,7 +211,7 @@ export default function AdminSetupClient({
                   onClick={addDepartment}
                   disabled={deptLoading || !deptName.trim()}
                   className="text-white font-bold py-4 rounded-full shadow-lg shadow-primary-container/20 hover:scale-[1.02] transition-transform active:scale-95 disabled:opacity-60 disabled:pointer-events-none flex items-center justify-center gap-2"
-                  style={{ background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }}
+                  style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
                 >
                   <span className="material-symbols-outlined">add</span>
                   Add Department
@@ -232,7 +232,7 @@ export default function AdminSetupClient({
                 {departments.map((dept) => {
                   const teamCount = teams.filter((t) => t.department_id === dept.id).length
                   return (
-                    <div key={dept.id} className="bg-surface-container-lowest rounded-xl p-5 shadow-[0px_24px_48px_rgba(77,85,106,0.06)] flex items-center gap-4">
+                    <div key={dept.id} className="bg-white rounded-xl p-5 shadow-[0px_24px_48px_rgba(77,85,106,0.06)] flex items-center gap-4">
                       <div className="w-10 h-10 rounded-xl bg-secondary-container flex items-center justify-center">
                         <span className="material-symbols-outlined text-on-secondary-container">apartment</span>
                       </div>
@@ -261,7 +261,7 @@ export default function AdminSetupClient({
         {step === 1 && (
           <div className="grid grid-cols-12 gap-8">
             <div className="col-span-12 lg:col-span-5">
-              <div className="bg-surface-container-lowest rounded-xl p-8 shadow-[0px_24px_48px_rgba(77,85,106,0.06)] flex flex-col gap-6">
+              <div className="bg-white rounded-xl p-8 shadow-[0px_24px_48px_rgba(77,85,106,0.06)] flex flex-col gap-6">
                 <h3 className="text-lg font-bold text-on-surface">Create Team</h3>
                 <div className="flex flex-col gap-3">
                   <label className="text-sm font-bold text-on-surface-variant ml-2">Team Name</label>
@@ -290,7 +290,7 @@ export default function AdminSetupClient({
                   onClick={addTeam}
                   disabled={teamLoading || !teamName.trim()}
                   className="text-white font-bold py-4 rounded-full shadow-lg shadow-primary-container/20 hover:scale-[1.02] transition-transform active:scale-95 disabled:opacity-60 disabled:pointer-events-none flex items-center justify-center gap-2"
-                  style={{ background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }}
+                  style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
                 >
                   <span className="material-symbols-outlined">add</span>
                   Add Team
@@ -305,7 +305,7 @@ export default function AdminSetupClient({
                 {teams.map((team) => {
                   const dept = departments.find((d) => d.id === team.department_id)
                   return (
-                    <div key={team.id} className="bg-surface-container-lowest rounded-xl p-5 shadow-[0px_24px_48px_rgba(77,85,106,0.06)] flex items-center gap-4">
+                    <div key={team.id} className="bg-white rounded-xl p-5 shadow-[0px_24px_48px_rgba(77,85,106,0.06)] flex items-center gap-4">
                       <div className="w-10 h-10 rounded-xl bg-primary-fixed flex items-center justify-center">
                         <span className="material-symbols-outlined text-on-primary-fixed">groups</span>
                       </div>
@@ -333,7 +333,7 @@ export default function AdminSetupClient({
         {step === 2 && (
           <div className="grid grid-cols-12 gap-8">
             <div className="col-span-12 lg:col-span-5">
-              <div className="bg-surface-container-lowest rounded-xl p-8 shadow-[0px_24px_48px_rgba(77,85,106,0.06)] flex flex-col gap-6">
+              <div className="bg-white rounded-xl p-8 shadow-[0px_24px_48px_rgba(77,85,106,0.06)] flex flex-col gap-6">
                 <h3 className="text-lg font-bold text-on-surface">Add Employee</h3>
                 <div className="flex flex-col gap-3">
                   <label className="text-sm font-bold text-on-surface-variant ml-2">Full Name</label>
@@ -384,7 +384,7 @@ export default function AdminSetupClient({
                   onClick={addEmployee}
                   disabled={empLoading || !empName.trim() || !empEmail.trim()}
                   className="text-white font-bold py-4 rounded-full shadow-lg shadow-primary-container/20 hover:scale-[1.02] transition-transform active:scale-95 disabled:opacity-60 disabled:pointer-events-none flex items-center justify-center gap-2"
-                  style={{ background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }}
+                  style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
                 >
                   <span className="material-symbols-outlined">person_add</span>
                   Add &amp; Send Invite
@@ -414,7 +414,7 @@ export default function AdminSetupClient({
                 {employees.map((emp) => {
                   const team = teams.find((t) => t.id === emp.team_id)
                   return (
-                    <div key={emp.id} className="bg-surface-container-lowest rounded-xl p-5 shadow-[0px_24px_48px_rgba(77,85,106,0.06)] flex items-center gap-4">
+                    <div key={emp.id} className="bg-white rounded-xl p-5 shadow-[0px_24px_48px_rgba(77,85,106,0.06)] flex items-center gap-4">
                       <div className="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center">
                         <span className="text-on-primary-container text-sm font-bold">
                           {emp.name.charAt(0).toUpperCase()}
@@ -447,7 +447,7 @@ export default function AdminSetupClient({
       </main>
 
       {/* Footer nav */}
-      <footer className="fixed bottom-0 left-0 right-0 z-30 bg-surface-container-lowest/80 backdrop-blur-xl shadow-[0_-2px_15px_rgba(77,85,106,0.04)]">
+      <footer className="fixed bottom-0 left-0 right-0 z-30 bg-white/80 backdrop-blur-xl shadow-[0_-2px_15px_rgba(77,85,106,0.04)]">
         <div className="max-w-7xl mx-auto px-8 py-4 flex items-center justify-between">
           <button
             onClick={() => router.push('/dashboard')}
@@ -467,7 +467,7 @@ export default function AdminSetupClient({
               <button
                 onClick={() => setStep((s) => s + 1)}
                 className="px-6 py-3 rounded-full text-white font-bold text-sm flex items-center gap-2 hover:scale-[1.02] transition-transform active:scale-95"
-                style={{ background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }}
+                style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
               >
                 Continue to {STEPS[step + 1]}
                 <span className="material-symbols-outlined text-lg">arrow_forward</span>
@@ -476,7 +476,7 @@ export default function AdminSetupClient({
               <button
                 onClick={() => router.push('/dashboard')}
                 className="px-6 py-3 rounded-full text-white font-bold text-sm flex items-center gap-2 hover:scale-[1.02] transition-transform active:scale-95"
-                style={{ background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }}
+                style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
               >
                 Complete Setup
                 <span className="material-symbols-outlined text-lg">check</span>

@@ -77,7 +77,7 @@ export default function StreakCounter({
 
       <div
         className={`
-          bg-surface-container-lowest rounded-2xl p-5 shadow-ambient-sm
+          bg-white rounded-2xl p-5 shadow-[0px_2px_8px_rgba(77,85,106,0.06)]
           transition-all duration-200
           ${milestoneLevel === 'epic' ? 'animate-streak-pulse' : ''}
           ${showResumeGlow ? 'shadow-glow-kindness' : ''}

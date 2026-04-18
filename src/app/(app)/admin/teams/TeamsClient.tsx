@@ -64,7 +64,7 @@ function DepartmentModal({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-on-surface/40 backdrop-blur-sm" onClick={onClose} />
-      <div className="relative w-full max-w-lg bg-surface-container-lowest rounded-2xl shadow-ambient p-8">
+      <div className="relative w-full max-w-lg bg-white rounded-2xl shadow-[0px_4px_24px_rgba(77,85,106,0.08)] p-8">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-xl font-bold text-on-surface">{editDept ? 'Edit Department' : 'New Department'}</h2>
           <button onClick={onClose}><span className="material-symbols-outlined text-on-surface-variant">close</span></button>
@@ -88,7 +88,7 @@ function DepartmentModal({
           <div className="flex gap-3 pt-2">
             <button type="submit" disabled={saving}
               className="flex-1 py-3 rounded-full text-white font-semibold disabled:opacity-60 flex items-center justify-center gap-2"
-              style={{ background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }}>
+              style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}>
               {saving && <span className="material-symbols-outlined animate-spin text-xl">progress_activity</span>}
               {editDept ? 'Save Changes' : 'Create Department'}
             </button>
@@ -161,7 +161,7 @@ function TeamModal({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-on-surface/40 backdrop-blur-sm" onClick={onClose} />
-      <div className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-surface-container-lowest rounded-2xl shadow-ambient p-8">
+      <div className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-white rounded-2xl shadow-[0px_4px_24px_rgba(77,85,106,0.08)] p-8">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-xl font-bold text-on-surface">{editTeam ? 'Edit Team' : 'New Team'}</h2>
           <button onClick={onClose}><span className="material-symbols-outlined text-on-surface-variant">close</span></button>
@@ -234,7 +234,7 @@ function TeamModal({
           <div className="flex gap-3 pt-2">
             <button type="submit" disabled={saving}
               className="flex-1 py-3 rounded-full text-white font-semibold disabled:opacity-60 flex items-center justify-center gap-2"
-              style={{ background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }}>
+              style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}>
               {saving && <span className="material-symbols-outlined animate-spin text-xl">progress_activity</span>}
               {editTeam ? 'Save Changes' : 'Create Team'}
             </button>
@@ -311,8 +311,8 @@ export default function TeamsClient({ managers }: { managers: Manager[] }) {
           </button>
           <button
             onClick={() => { setEditTeam(null); setTeamModalOpen(true) }}
-            className="px-6 py-3 rounded-full text-white text-sm font-semibold hover:opacity-90 shadow-ambient transition-all flex items-center gap-2"
-            style={{ background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }}
+            className="px-6 py-3 rounded-full text-white text-sm font-semibold hover:opacity-90 shadow-[0px_4px_24px_rgba(77,85,106,0.08)] transition-all flex items-center gap-2"
+            style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
           >
             <span className="material-symbols-outlined text-lg">group_add</span>
             Add Team
@@ -334,7 +334,7 @@ export default function TeamsClient({ managers }: { managers: Manager[] }) {
       ) : (
         <div className="space-y-4">
           {departments.map(dept => (
-            <div key={dept.id} className="bg-surface-container-lowest rounded-2xl shadow-ambient overflow-hidden">
+            <div key={dept.id} className="bg-white rounded-2xl shadow-[0px_4px_24px_rgba(77,85,106,0.08)] overflow-hidden">
               {/* Department row */}
               <div className="flex items-center gap-4 px-6 py-5">
                 <button

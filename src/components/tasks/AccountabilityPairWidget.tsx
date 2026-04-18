@@ -44,7 +44,7 @@ function AvatarRing({ member, state, side }: {
           text-lg font-bold text-white ring-3 ${ringColour}
           transition-all duration-200
         `}
-        style={{ background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }}
+        style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
       >
         {member.avatarInitial}
       </motion.div>
@@ -72,7 +72,7 @@ export default function AccountabilityPairWidget({
   const stateColour = PAIR_STATE_COLOUR[pairState]
 
   return (
-    <div className={`bg-surface-container-lowest rounded-2xl p-5 shadow-ambient-sm ${className}`}>
+    <div className={`bg-white rounded-2xl p-5 shadow-[0px_2px_8px_rgba(77,85,106,0.06)] ${className}`}>
       {/* Warning banner for both-slipping */}
       {pairState === 'both-slipping' && (
         <motion.div

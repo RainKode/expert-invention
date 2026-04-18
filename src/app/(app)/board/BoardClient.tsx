@@ -202,14 +202,14 @@ export default function BoardClient({ userId, userRole, teamId, projects, teamMe
           <div className="relative" ref={savedViewsRef}>
             <button
               onClick={() => setSavedViewsOpen(o => !o)}
-              className="flex items-center gap-2 px-4 py-2 rounded-full bg-surface-container-lowest shadow-ambient-sm text-sm font-medium text-on-surface-variant hover:bg-surface-container-low transition-colors"
+              className="flex items-center gap-2 px-4 py-2 rounded-full bg-white shadow-[0px_2px_8px_rgba(77,85,106,0.06)] text-sm font-medium text-on-surface-variant hover:bg-surface-container-low transition-colors"
             >
               <span className="material-symbols-outlined text-[16px]">bookmark</span>
               Saved Views
               <span className="material-symbols-outlined text-[14px]">expand_more</span>
             </button>
             {savedViewsOpen && (
-              <div className="absolute right-0 mt-2 w-56 bg-surface-container-lowest/90 backdrop-blur-[20px] rounded-2xl shadow-ambient py-2 z-50">
+              <div className="absolute right-0 mt-2 w-56 bg-white/90 backdrop-blur-[20px] rounded-2xl shadow-[0px_4px_24px_rgba(77,85,106,0.08)] py-2 z-50">
                 {savedViews.length === 0 ? (
                   <p className="text-xs text-on-surface-variant px-4 py-3">No saved views yet</p>
                 ) : (
@@ -232,7 +232,7 @@ export default function BoardClient({ userId, userRole, teamId, projects, teamMe
           <button
             onClick={() => setSaveViewOpen(true)}
             className="flex items-center gap-2 px-5 py-2 rounded-full text-white font-medium text-sm shadow-sm"
-            style={{ background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }}
+            style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
           >
             <span className="material-symbols-outlined text-[16px]">save</span>
             Save View
@@ -242,7 +242,7 @@ export default function BoardClient({ userId, userRole, teamId, projects, teamMe
 
       {/* Filter bar */}
       <div className="px-6 pb-4">
-        <div className="flex flex-wrap items-center gap-3 bg-surface-container-lowest/80 backdrop-blur-[20px] rounded-2xl p-4 shadow-ambient-sm">
+        <div className="flex flex-wrap items-center gap-3 bg-white/80 backdrop-blur-[20px] rounded-2xl p-4 shadow-[0px_2px_8px_rgba(77,85,106,0.06)]">
           {/* Search */}
           <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-surface flex-1 min-w-[180px] max-w-[260px]">
             <span className="material-symbols-outlined text-[16px] text-on-surface-variant">search</span>
@@ -505,7 +505,7 @@ function SaveViewModal({ isManager, filters, onClose, onSaved }: {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-on-surface/30 backdrop-blur-[20px]">
-      <div className="bg-surface-container-lowest rounded-2xl shadow-ambient w-full max-w-sm p-8">
+      <div className="bg-white rounded-2xl shadow-[0px_4px_24px_rgba(77,85,106,0.08)] w-full max-w-sm p-8">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-lg font-bold text-on-surface">Save Current View</h2>
           <button onClick={onClose} className="p-2 rounded-full hover:bg-surface-container-high">
@@ -528,7 +528,7 @@ function SaveViewModal({ isManager, filters, onClose, onSaved }: {
                   key={s} type="button"
                   onClick={() => setScope(s)}
                   className={`flex-1 py-2 rounded-full text-sm font-medium capitalize transition-colors ${scope === s ? 'text-on-primary' : 'bg-surface text-on-surface-variant hover:bg-surface-container-high'}`}
-                  style={scope === s ? { background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' } : undefined}
+                  style={scope === s ? { background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' } : undefined}
                 >
                   {s}
                 </button>
@@ -537,7 +537,7 @@ function SaveViewModal({ isManager, filters, onClose, onSaved }: {
           )}
           <div className="flex gap-3 pt-1">
             <button type="button" onClick={onClose} className="flex-1 py-2.5 rounded-full bg-surface text-on-surface-variant text-sm font-medium">Cancel</button>
-            <button type="submit" disabled={loading} className="flex-1 py-2.5 rounded-full text-white text-sm font-medium" style={{ background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }}>
+            <button type="submit" disabled={loading} className="flex-1 py-2.5 rounded-full text-white text-sm font-medium" style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}>
               {loading ? 'Saving…' : 'Save View'}
             </button>
           </div>
@@ -595,7 +595,7 @@ function CustomFieldFilter({ field, value, minValue, maxValue, onChange, onRange
             value={minValue}
             onChange={e => onRangeChange(e.target.value, maxValue)}
             placeholder="Min"
-            className="bg-surface-container-lowest/50 border-none rounded-md px-1.5 py-0.5 text-[10px] w-12 focus:ring-1 focus:ring-primary-container outline-none"
+            className="bg-white/50 border-none rounded-md px-1.5 py-0.5 text-[10px] w-12 focus:ring-1 focus:ring-primary-container outline-none"
           />
           <span className="text-[10px] text-outline opacity-50">–</span>
           <input
@@ -603,7 +603,7 @@ function CustomFieldFilter({ field, value, minValue, maxValue, onChange, onRange
             value={maxValue}
             onChange={e => onRangeChange(minValue, e.target.value)}
             placeholder="Max"
-            className="bg-surface-container-lowest/50 border-none rounded-md px-1.5 py-0.5 text-[10px] w-12 focus:ring-1 focus:ring-primary-container outline-none"
+            className="bg-white/50 border-none rounded-md px-1.5 py-0.5 text-[10px] w-12 focus:ring-1 focus:ring-primary-container outline-none"
           />
         </div>
       </div>
@@ -665,7 +665,7 @@ function CustomFieldFilter({ field, value, minValue, maxValue, onChange, onRange
             onClick={() => onChange(v)}
             className={`px-3 py-1 text-[10px] font-bold rounded-full transition-colors ${
               value === v
-                ? 'bg-surface-container-lowest shadow-sm text-primary'
+                ? 'bg-white shadow-sm text-primary'
                 : 'text-outline hover:text-on-surface'
             }`}
           >

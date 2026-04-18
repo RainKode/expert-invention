@@ -91,7 +91,7 @@ function PoolPill({ task }: { task: TaskInfo }) {
       ref={setNodeRef}
       {...listeners}
       {...attributes}
-      className={`bg-surface-container-lowest px-5 py-3 rounded-full flex items-center gap-3 shadow-ambient-sm hover:shadow-ambient transition-all cursor-grab active:cursor-grabbing group select-none ${isDragging ? 'opacity-40' : ''}`}
+      className={`bg-white px-5 py-3 rounded-full flex items-center gap-3 shadow-[0px_2px_8px_rgba(77,85,106,0.06)] hover:shadow-[0px_4px_24px_rgba(77,85,106,0.08)] transition-all cursor-grab active:cursor-grabbing group select-none ${isDragging ? 'opacity-40' : ''}`}
     >
       <span className="text-sm font-semibold text-on-surface truncate max-w-[160px]">{task.title}</span>
       {task.project?.name && (
@@ -128,9 +128,9 @@ function TaskCard({
   return (
     <div
       ref={setNodeRef}
-      className={`bg-surface-container-lowest p-5 rounded-3xl shadow-sm group hover:shadow-md transition-all relative overflow-hidden ${isDragging ? 'opacity-40' : ''}`}
+      className={`bg-white p-5 rounded-3xl shadow-sm group hover:shadow-md transition-all relative overflow-hidden ${isDragging ? 'opacity-40' : ''}`}
     >
-      <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-[#4d556a] rounded-l-3xl" />
+      <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-integrity rounded-l-3xl" />
       <div className="flex justify-between items-start mb-3">
         <span className={`text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider ${PRIORITY_COLORS[entry.task.priority]}`}>
           {entry.task.priority}
@@ -171,7 +171,7 @@ function TaskCard({
             min={0}
             max={24}
             step={0.5}
-            className="w-12 bg-transparent border-none p-0 text-right font-bold focus:ring-0 text-[#4d556a] text-sm"
+            className="w-12 bg-transparent border-none p-0 text-right font-bold focus:ring-0 text-integrity text-sm"
             value={entry.planned_hours}
             disabled={locked}
             onChange={(e) => onHoursChange(entry.id, parseFloat(e.target.value) || 0)}
@@ -234,8 +234,8 @@ function DayColumn({
     <div className="flex flex-col gap-4 min-h-0">
       {/* Day Header */}
       <div
-        className={`p-5 rounded-[32px] ${isToday ? 'text-white shadow-xl shadow-[#4d556a]/10' : 'bg-surface-container-low text-on-surface-variant'}`}
-        style={isToday ? { background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' } : undefined}
+        className={`p-5 rounded-[32px] ${isToday ? 'text-white shadow-xl shadow-[#2226F7]/10' : 'bg-surface-container-low text-on-surface-variant'}`}
+        style={isToday ? { background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' } : undefined}
       >
         <p className={`text-xs font-bold uppercase tracking-widest ${isToday ? 'opacity-70' : 'opacity-50'}`}>
           {relLabel}
@@ -246,7 +246,7 @@ function DayColumn({
       {/* Drop Zone */}
       <div
         ref={setNodeRef}
-        className={`flex flex-col gap-3 flex-1 min-h-[80px] p-2 rounded-2xl transition-colors ${isOver ? 'bg-[#4d556a]/5 ring-2 ring-[#4d556a]/20' : ''}`}
+        className={`flex flex-col gap-3 flex-1 min-h-[80px] p-2 rounded-2xl transition-colors ${isOver ? 'bg-integrity/5 ring-2 ring-integrity/20' : ''}`}
       >
         {entries.map((entry) => (
           <TaskCard
@@ -322,7 +322,7 @@ function CommentsSection({
   return (
     <div className="pt-8 border-t border-outline-variant/20">
       <h4 className="font-bold text-lg tracking-tight mb-6 flex items-center gap-2">
-        <span className="material-symbols-outlined text-[#4d556a]">comment</span>
+        <span className="material-symbols-outlined text-integrity">comment</span>
         Manager Comments
       </h4>
 
@@ -335,7 +335,7 @@ function CommentsSection({
           const author = Array.isArray(comment.author) ? comment.author[0] : comment.author
           return (
             <div key={comment.id} className="flex items-start gap-4">
-              <div className="w-10 h-10 rounded-2xl bg-[#4d556a] flex items-center justify-center text-white font-bold text-sm shrink-0">
+              <div className="w-10 h-10 rounded-2xl bg-integrity flex items-center justify-center text-white font-bold text-sm shrink-0">
                 {author?.name?.charAt(0).toUpperCase() ?? 'M'}
               </div>
               <div className="flex-1">
@@ -367,14 +367,14 @@ function CommentsSection({
             value={text}
             onChange={(e) => setText(e.target.value)}
             placeholder="Leave a comment..."
-            className="flex-1 bg-surface-container-lowest border-none rounded-2xl p-4 text-sm focus:ring-2 focus:ring-[#4d556a]/20 resize-none"
+            className="flex-1 bg-white border-none rounded-2xl p-4 text-sm focus:ring-2 focus:ring-integrity/20 resize-none"
             rows={3}
           />
           <button
             onClick={handleSubmit}
             disabled={submitting || !text.trim()}
             className="px-6 py-2 rounded-full font-bold text-sm text-white disabled:opacity-50 transition-all self-end"
-            style={{ background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }}
+            style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
           >
             {submitting ? 'Sending…' : 'Comment'}
           </button>
@@ -626,17 +626,17 @@ export default function WeeklyPlanClient({
               <h2 className="text-3xl font-extrabold text-on-surface tracking-[-0.02em] mb-1">My Plan</h2>
               <div className="flex items-center gap-3">
                 {/* Week Navigation */}
-                <div className="flex items-center gap-2 bg-surface-container-lowest px-4 py-1.5 rounded-full shadow-sm">
+                <div className="flex items-center gap-2 bg-white px-4 py-1.5 rounded-full shadow-sm">
                   <button
                     onClick={() => router.push(`/plan?week=${prevMonday(weekStartISO)}`)}
-                    className="material-symbols-outlined text-sm hover:text-[#4d556a] transition-colors"
+                    className="material-symbols-outlined text-sm hover:text-integrity transition-colors"
                   >
                     chevron_left
                   </button>
                   <span className="text-sm font-semibold tracking-tight">{formatWeekRange(weekStartISO)}</span>
                   <button
                     onClick={() => router.push(`/plan?week=${nextMonday(weekStartISO)}`)}
-                    className="material-symbols-outlined text-sm hover:text-[#4d556a] transition-colors"
+                    className="material-symbols-outlined text-sm hover:text-integrity transition-colors"
                   >
                     chevron_right
                   </button>
@@ -653,8 +653,8 @@ export default function WeeklyPlanClient({
                 <button
                   onClick={handleSubmitPlan}
                   disabled={submitting}
-                  className="px-8 py-2.5 rounded-full font-bold text-sm text-white shadow-lg shadow-[#4d556a]/20 transition-all hover:-translate-y-px disabled:opacity-60"
-                  style={{ background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }}
+                  className="px-8 py-2.5 rounded-full font-bold text-sm text-white shadow-lg shadow-[#2226F7]/20 transition-all hover:-translate-y-px disabled:opacity-60"
+                  style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
                 >
                   {submitting ? 'Submitting…' : 'Submit Week'}
                 </button>
@@ -720,7 +720,7 @@ export default function WeeklyPlanClient({
             {!locked && (
               <div>
                 <div className="flex items-center gap-3 mb-6">
-                  <span className="material-symbols-outlined text-[#4d556a]">inventory_2</span>
+                  <span className="material-symbols-outlined text-integrity">inventory_2</span>
                   <h4 className="font-bold text-lg tracking-tight">Unplanned Task Pool</h4>
                 </div>
                 {poolTasks.length === 0 ? (
@@ -748,7 +748,7 @@ export default function WeeklyPlanClient({
       {/* Drag Overlay */}
       <DragOverlay>
         {activeDragData ? (
-          <div className="bg-surface-container-lowest px-5 py-3 rounded-full shadow-xl text-sm font-semibold text-on-surface opacity-90">
+          <div className="bg-white px-5 py-3 rounded-full shadow-xl text-sm font-semibold text-on-surface opacity-90">
             {activeDragData.title}
           </div>
         ) : null}

@@ -20,10 +20,10 @@ export default function KanbanColumn({ id, label, color, tasks, loading, userId 
   return (
     <div className="flex flex-col">
       {/* Column header */}
-      <div className="flex items-center gap-2 mb-4">
-        <span className={`w-2.5 h-2.5 rounded-full ${color}`} />
+      <div className="flex items-center gap-2.5 mb-4 px-1">
+        <span className={`w-3 h-3 rounded-full ${color} shadow-sm`} />
         <h2 className="text-sm font-bold text-on-surface">{label}</h2>
-        <span className="ml-auto text-xs font-semibold text-on-surface-variant bg-surface px-2.5 py-0.5 rounded-full">
+        <span className="ml-auto text-xs font-bold text-on-surface-variant bg-white px-2.5 py-0.5 rounded-full shadow-[0px_1px_4px_rgba(77,85,106,0.1)]">
           {tasks.length}
         </span>
       </div>

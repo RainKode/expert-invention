@@ -163,7 +163,7 @@ function StepIndicator({ current }: { current: Step }) {
                   ? 'bg-primary text-white'
                   : 'bg-surface-container text-outline'
               }`}
-              style={isActive ? { background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' } : {}}
+              style={isActive ? { background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' } : {}}
             >
               {isDone ? (
                 <span className="material-symbols-outlined text-base">check</span>
@@ -356,7 +356,7 @@ export default function BulkImportPage() {
         {step === 1 && (
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             {/* Instructions card */}
-            <div className="lg:col-span-8 bg-surface-container-lowest rounded-2xl p-10 shadow-ambient relative overflow-hidden">
+            <div className="lg:col-span-8 bg-white rounded-2xl p-10 shadow-[0px_4px_24px_rgba(77,85,106,0.08)] relative overflow-hidden">
               <div className="absolute top-0 right-0 p-8 opacity-5">
                 <span className="material-symbols-outlined" style={{ fontSize: 96 }}>description</span>
               </div>
@@ -400,7 +400,7 @@ export default function BulkImportPage() {
                 <button
                   onClick={downloadTemplate}
                   className="px-8 py-4 text-white rounded-full font-bold flex items-center gap-3 shadow-lg hover:opacity-90 transition-all active:scale-95"
-                  style={{ background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }}
+                  style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
                 >
                   <span className="material-symbols-outlined">download</span>
                   Download CSV Template
@@ -411,7 +411,7 @@ export default function BulkImportPage() {
             {/* Upload zone preview */}
             <div className="lg:col-span-4 space-y-6">
               <div className="bg-surface-container rounded-2xl p-8 flex flex-col items-center justify-center text-center min-h-[300px]">
-                <div className="w-16 h-16 bg-surface-container-lowest rounded-full flex items-center justify-center text-on-surface-variant shadow-sm mb-4">
+                <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center text-on-surface-variant shadow-sm mb-4">
                   <span className="material-symbols-outlined text-3xl">cloud_upload</span>
                 </div>
                 <p className="font-bold text-on-surface mb-1">Ready to upload?</p>
@@ -445,7 +445,7 @@ export default function BulkImportPage() {
               onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
               onDragLeave={() => setIsDragging(false)}
               onDrop={handleFileDrop}
-              className={`bg-surface-container-lowest rounded-2xl p-16 flex flex-col items-center justify-center text-center shadow-ambient transition-all cursor-pointer ${
+              className={`bg-white rounded-2xl p-16 flex flex-col items-center justify-center text-center shadow-[0px_4px_24px_rgba(77,85,106,0.08)] transition-all cursor-pointer ${
                 isDragging ? 'bg-surface-container-high' : ''
               }`}
               onClick={() => fileInputRef.current?.click()}
@@ -453,7 +453,7 @@ export default function BulkImportPage() {
               <div
                 className="w-20 h-20 rounded-full flex items-center justify-center text-white shadow-lg mb-6"
                 style={isDragging
-                  ? { background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }
+                  ? { background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }
                   : { background: 'linear-gradient(135deg, #88909e 0%, #9ca3af 100%)' }}
               >
                 <span className="material-symbols-outlined text-4xl">cloud_upload</span>
@@ -490,7 +490,7 @@ export default function BulkImportPage() {
         {step === 3 && (
           <div className="space-y-6">
             {/* Summary bar */}
-            <div className="flex flex-wrap items-center gap-4 p-6 bg-surface-container-lowest rounded-2xl shadow-ambient-sm">
+            <div className="flex flex-wrap items-center gap-4 p-6 bg-white rounded-2xl shadow-[0px_2px_8px_rgba(77,85,106,0.06)]">
               <span className="material-symbols-outlined text-on-surface-variant">insert_drive_file</span>
               <span className="font-medium text-on-surface text-sm">{fileName}</span>
               <span className="ml-auto flex items-center gap-4 text-sm">
@@ -541,7 +541,7 @@ export default function BulkImportPage() {
             )}
 
             {/* Preview table */}
-            <div className="bg-surface-container-lowest rounded-2xl shadow-ambient-sm overflow-hidden">
+            <div className="bg-white rounded-2xl shadow-[0px_2px_8px_rgba(77,85,106,0.06)] overflow-hidden">
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead>
@@ -602,7 +602,7 @@ export default function BulkImportPage() {
           <div className="max-w-lg mx-auto text-center py-16">
             <div
               className="w-24 h-24 rounded-full flex items-center justify-center text-white shadow-xl mx-auto mb-8"
-              style={{ background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }}
+              style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
             >
               <span className="material-symbols-outlined text-5xl" style={{ fontVariationSettings: "'FILL' 1" }}>
                 task_alt
@@ -641,7 +641,7 @@ export default function BulkImportPage() {
               <button
                 onClick={() => router.push('/admin/users')}
                 className="px-8 py-3 text-white rounded-full font-bold shadow-lg hover:opacity-90 transition-all"
-                style={{ background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }}
+                style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
               >
                 View All Users
               </button>
@@ -654,7 +654,7 @@ export default function BulkImportPage() {
       {/* Bottom action bar                                                    */}
       {/* -------------------------------------------------------------------- */}
       {step !== 4 && (
-        <div className="fixed bottom-0 right-0 left-0 md:left-72 bg-surface-container-lowest/90 backdrop-blur-md px-8 py-5 flex items-center justify-between shadow-[0_-8px_24px_rgba(77,85,106,0.04)] z-30">
+        <div className="fixed bottom-0 right-0 left-0 md:left-72 bg-white/90 backdrop-blur-md px-8 py-5 flex items-center justify-between shadow-[0_-8px_24px_rgba(77,85,106,0.04)] z-30">
           <div className="flex items-center gap-3 text-sm text-outline">
             <span className="material-symbols-outlined text-outline">lock</span>
             Secure encrypted data transmission active.
@@ -674,7 +674,7 @@ export default function BulkImportPage() {
               <button
                 onClick={() => setStep(2)}
                 className="px-10 py-3 text-white rounded-full font-bold shadow-lg hover:opacity-90 active:scale-95 transition-all flex items-center gap-2"
-                style={{ background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }}
+                style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
               >
                 Continue to Upload
                 <span className="material-symbols-outlined text-sm">arrow_forward</span>
@@ -685,7 +685,7 @@ export default function BulkImportPage() {
               <button
                 onClick={() => fileInputRef.current?.click()}
                 className="px-10 py-3 text-white rounded-full font-bold shadow-lg hover:opacity-90 active:scale-95 transition-all flex items-center gap-2"
-                style={{ background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }}
+                style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
               >
                 Select CSV File
                 <span className="material-symbols-outlined text-sm">upload_file</span>
@@ -697,7 +697,7 @@ export default function BulkImportPage() {
                 onClick={handleImport}
                 disabled={errorCount > 0 || importing}
                 className="px-10 py-3 text-white rounded-full font-bold shadow-lg hover:opacity-90 active:scale-95 transition-all flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed"
-                style={{ background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }}
+                style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
               >
                 {importing ? (
                   <>

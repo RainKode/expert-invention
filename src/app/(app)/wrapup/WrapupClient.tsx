@@ -106,7 +106,7 @@ export default function WrapupClient({ wrapup, alreadySubmitted }: Props) {
     return (
       <div className="max-w-6xl mx-auto px-12 py-12">
         <header className="mb-12">
-          <h2 className="text-4xl font-extrabold text-[#4d556a] tracking-[-0.04em] mb-2">
+          <h2 className="text-4xl font-extrabold text-integrity tracking-[-0.04em] mb-2">
             End of Day Wrap-up
           </h2>
           <p className="text-on-surface-variant font-medium opacity-70">{today}</p>
@@ -128,7 +128,7 @@ export default function WrapupClient({ wrapup, alreadySubmitted }: Props) {
       <div className="fixed bottom-[-5%] left-[20%] w-[30vw] h-[30vw] rounded-full bg-secondary-fixed/30 blur-[100px] -z-10 pointer-events-none" />
 
       <header className="mb-12">
-        <h2 className="text-4xl font-extrabold text-[#4d556a] tracking-[-0.04em] mb-2">
+        <h2 className="text-4xl font-extrabold text-integrity tracking-[-0.04em] mb-2">
           End of Day Wrap-up
         </h2>
         <p className="text-on-surface-variant font-medium opacity-70">
@@ -173,10 +173,10 @@ export default function WrapupClient({ wrapup, alreadySubmitted }: Props) {
             return (
               <div
                 key={p.task_id}
-                className="grid grid-cols-12 items-center bg-surface-container-lowest p-6 rounded-2xl shadow-[0px_24px_48px_rgba(77,85,106,0.06)] group hover:-translate-y-0.5 transition-all"
+                className="grid grid-cols-12 items-center bg-white p-6 rounded-2xl shadow-[0px_24px_48px_rgba(77,85,106,0.06)] group hover:-translate-y-0.5 transition-all"
               >
                 <div className="col-span-5 flex items-center gap-4">
-                  <div className="w-2 h-10 bg-[#4d556a] rounded-full" />
+                  <div className="w-2 h-10 bg-integrity rounded-full" />
                   <div>
                     <h4 className="font-bold text-on-surface">{p.title}</h4>
                     <p className="text-xs text-on-surface-variant opacity-60">
@@ -198,7 +198,7 @@ export default function WrapupClient({ wrapup, alreadySubmitted }: Props) {
                       step={0.5}
                       min={0}
                       max={24}
-                      className="w-16 h-10 bg-surface-container-low border-none rounded-xl text-center font-bold focus:ring-2 focus:ring-[#4d556a]/20"
+                      className="w-16 h-10 bg-surface-container-low border-none rounded-xl text-center font-bold focus:ring-2 focus:ring-integrity/20"
                       value={a.actual_hours}
                       onChange={(e) => updateActualHours(p.task_id, e.target.value)}
                     />
@@ -228,9 +228,9 @@ export default function WrapupClient({ wrapup, alreadySubmitted }: Props) {
       {/* Notes + Attachments */}
       <section className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
         <div className="flex flex-col gap-4">
-          <label className="text-sm font-bold text-[#4d556a] ml-2">Wrap-up Notes</label>
+          <label className="text-sm font-bold text-integrity ml-2">Wrap-up Notes</label>
           <textarea
-            className="w-full h-44 bg-surface-container-lowest border-none rounded-2xl p-6 shadow-[0px_24px_48px_rgba(77,85,106,0.06)] focus:ring-2 focus:ring-[#4d556a]/20 resize-none text-on-surface placeholder:opacity-40"
+            className="w-full h-44 bg-white border-none rounded-2xl p-6 shadow-[0px_24px_48px_rgba(77,85,106,0.06)] focus:ring-2 focus:ring-integrity/20 resize-none text-on-surface placeholder:opacity-40"
             placeholder="Summarize your key wins, blockers, or items carried over to tomorrow..."
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
@@ -238,7 +238,7 @@ export default function WrapupClient({ wrapup, alreadySubmitted }: Props) {
           />
         </div>
         <div className="flex flex-col gap-4">
-          <label className="text-sm font-bold text-[#4d556a] ml-2">Attachments</label>
+          <label className="text-sm font-bold text-integrity ml-2">Attachments</label>
           {wrapup?.id ? (
             <FileAttachments
               wrapUpId={wrapup.id}
@@ -246,7 +246,7 @@ export default function WrapupClient({ wrapup, alreadySubmitted }: Props) {
               readOnly={submitted}
             />
           ) : (
-            <div className="flex-1 border-2 border-dashed border-outline-variant/30 rounded-2xl bg-surface-container-lowest flex flex-col items-center justify-center p-8 transition-colors">
+            <div className="flex-1 border-2 border-dashed border-outline-variant/30 rounded-2xl bg-white flex flex-col items-center justify-center p-8 transition-colors">
               <span className="material-symbols-outlined text-4xl text-outline mb-4">cloud_upload</span>
               <p className="text-sm font-bold text-on-surface mb-1">Upload progress files</p>
               <p className="text-xs text-on-surface-variant opacity-60 text-center">
@@ -275,8 +275,8 @@ export default function WrapupClient({ wrapup, alreadySubmitted }: Props) {
           <button
             onClick={handleSubmit}
             disabled={submitting}
-            className="text-white font-extrabold text-lg px-16 py-6 rounded-full shadow-2xl shadow-[#4d556a]/30 hover:scale-[1.02] active:scale-95 transition-all disabled:opacity-60"
-            style={{ background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }}
+            className="text-white font-extrabold text-lg px-16 py-6 rounded-full shadow-2xl shadow-[#2226F7]/30 hover:scale-[1.02] active:scale-95 transition-all disabled:opacity-60"
+            style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
           >
             {submitting ? 'Submitting…' : 'Submit Wrap-up'}
           </button>

@@ -48,7 +48,7 @@ export default function ConfirmDialog({
       onClose={onCancel}
       className="backdrop:bg-black/40 bg-transparent p-0 m-auto rounded-2xl outline-none"
     >
-      <div className="bg-surface-container-lowest rounded-2xl shadow-ambient w-[min(420px,90vw)] p-8">
+      <div className="bg-white rounded-2xl shadow-[0px_4px_24px_rgba(77,85,106,0.08)] w-[min(420px,90vw)] p-8">
         <h2 className="text-lg font-bold text-on-surface mb-2">{title}</h2>
         <p className="text-sm text-on-surface-variant leading-relaxed mb-8">{message}</p>
         <div className="flex justify-end gap-3">
@@ -63,7 +63,7 @@ export default function ConfirmDialog({
             className={`px-5 py-2.5 rounded-full text-sm font-semibold text-white transition-colors ${
               destructive
                 ? 'bg-excitement hover:bg-excitement/90'
-                : 'bg-gradient-to-br from-[#4d556a] to-[#656d84] hover:opacity-90'
+                : 'bg-gradient-to-br from-[#2226F7] to-[#00D6A3] hover:opacity-90'
             }`}
           >
             {confirmLabel}

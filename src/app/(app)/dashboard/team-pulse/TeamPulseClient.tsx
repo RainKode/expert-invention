@@ -112,7 +112,7 @@ export default function TeamPulseClient({ data, weekStart, workingDays }: Props)
           <p className="text-on-surface-variant font-medium mt-1">Week of {weekStart}</p>
         </div>
         {/* Week navigation */}
-        <div className="flex items-center gap-2 bg-surface-container-lowest rounded-full px-4 py-2 shadow-sm">
+        <div className="flex items-center gap-2 bg-white rounded-full px-4 py-2 shadow-sm">
           <button onClick={() => router.push(`/dashboard/team-pulse?week=${prevWeek(weekStart)}`)}
             className="hover:text-primary transition-colors">
             <span className="material-symbols-outlined text-sm">chevron_left</span>
@@ -194,7 +194,7 @@ export default function TeamPulseClient({ data, weekStart, workingDays }: Props)
             </div>
           </div>
 
-          <div className="bg-surface-container-lowest rounded-xl overflow-hidden shadow-[0px_24px_48px_rgba(77,85,106,0.06)]">
+          <div className="bg-white rounded-xl overflow-hidden shadow-[0px_24px_48px_rgba(77,85,106,0.06)]">
             <div className={`grid`} style={{
               gridTemplateColumns: `240px repeat(${workingDays.length + 1}, 1fr)`
             }}>
@@ -205,7 +205,7 @@ export default function TeamPulseClient({ data, weekStart, workingDays }: Props)
               {workingDays.map(dow => (
                 <div key={dow}
                   className={`p-6 text-center ${dow === todayDow
-                    ? 'bg-gradient-to-br from-[#4d556a] to-[#656d84] text-white shadow-xl'
+                    ? 'bg-gradient-to-br from-[#2226F7] to-[#00D6A3] text-white shadow-xl'
                     : 'bg-surface-container-low'
                   }`}>
                   <span className={`block text-[10px] font-bold uppercase ${dow === todayDow ? 'opacity-70' : 'text-on-surface-variant/60'}`}>
@@ -225,8 +225,8 @@ export default function TeamPulseClient({ data, weekStart, workingDays }: Props)
               {data.members.map((row, i) => (
                 <>
                   <div key={`${row.user.id}-name`}
-                    className={`p-6 flex items-center gap-4 bg-surface-container-lowest`}>
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#4d556a] to-[#656d84] flex items-center justify-center text-white font-bold text-sm shrink-0">
+                    className={`p-6 flex items-center gap-4 bg-white`}>
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#2226F7] to-[#00D6A3] flex items-center justify-center text-white font-bold text-sm shrink-0">
                       {row.user.name.charAt(0)}
                     </div>
                     <div className="overflow-hidden">
@@ -292,7 +292,7 @@ export default function TeamPulseClient({ data, weekStart, workingDays }: Props)
                 </span>
               )}
             </div>
-            <div className="bg-surface-container-lowest rounded-xl p-4 shadow-[0px_24px_48px_rgba(77,85,106,0.06)] space-y-2">
+            <div className="bg-white rounded-xl p-4 shadow-[0px_24px_48px_rgba(77,85,106,0.06)] space-y-2">
               {data.overdue_tasks.length === 0 ? (
                 <div className="text-center py-8 text-on-surface-variant text-sm font-medium">
                   No overdue tasks — team is on track.
@@ -321,23 +321,23 @@ export default function TeamPulseClient({ data, weekStart, workingDays }: Props)
               <h3 className="text-lg font-bold text-on-surface tracking-tight">Task Completion Rate</h3>
               <span className="text-xs font-bold text-on-surface-variant">This Week</span>
             </div>
-            <div className="bg-surface-container-lowest rounded-xl p-8 shadow-[0px_24px_48px_rgba(77,85,106,0.06)] space-y-6">
+            <div className="bg-white rounded-xl p-8 shadow-[0px_24px_48px_rgba(77,85,106,0.06)] space-y-6">
               {data.members.length === 0 ? (
                 <p className="text-on-surface-variant text-sm text-center py-4">No team members found.</p>
               ) : data.members.map(row => (
                 <div key={row.user.id} className="space-y-2">
                   <div className="flex justify-between items-end">
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#4d556a] to-[#656d84] flex items-center justify-center text-white text-[10px] font-bold shrink-0">
+                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#2226F7] to-[#00D6A3] flex items-center justify-center text-white text-[10px] font-bold shrink-0">
                         {row.user.name.charAt(0)}
                       </div>
                       <span className="text-sm font-bold">{row.user.name}</span>
                     </div>
-                    <span className="text-sm font-extrabold text-[#4d556a]">{row.completion_rate}%</span>
+                    <span className="text-sm font-extrabold text-integrity">{row.completion_rate}%</span>
                   </div>
                   <div className="w-full h-3 bg-surface-container-low rounded-full overflow-hidden">
                     <div
-                      className="h-full bg-gradient-to-r from-[#4d556a] to-[#656d84] rounded-full transition-all duration-500"
+                      className="h-full bg-gradient-to-r from-[#2226F7] to-[#00D6A3] rounded-full transition-all duration-500"
                       style={{ width: `${row.completion_rate}%` }}
                     />
                   </div>
@@ -354,13 +354,13 @@ export default function TeamPulseClient({ data, weekStart, workingDays }: Props)
       {/* ── Acknowledge Warning Modal ────────────────────────────────────── */}
       {ackModal.open && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-surface/80 backdrop-blur-[20px] p-6">
-          <div className="bg-surface-container-lowest w-full max-w-[480px] rounded-[24px] shadow-[0px_24px_48px_rgba(77,85,106,0.06)] overflow-hidden flex flex-col">
+          <div className="bg-white w-full max-w-[480px] rounded-[24px] shadow-[0px_24px_48px_rgba(77,85,106,0.06)] overflow-hidden flex flex-col">
             <div className="pt-10 px-8 pb-6">
               <h2 className="text-xl font-bold tracking-tight text-on-surface">Acknowledge Unplanned Days</h2>
             </div>
             <div className="px-8 pb-8 flex flex-col gap-6">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#4d556a] to-[#656d84] flex items-center justify-center text-white font-bold text-lg shrink-0">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#2226F7] to-[#00D6A3] flex items-center justify-center text-white font-bold text-lg shrink-0">
                   {ackModal.employeeName.charAt(0)}
                 </div>
                 <div>
@@ -412,7 +412,7 @@ export default function TeamPulseClient({ data, weekStart, workingDays }: Props)
               <button
                 onClick={handleAcknowledge}
                 disabled={ackSaving}
-                className="flex-1 py-3.5 rounded-full bg-gradient-to-br from-[#4d556a] to-[#656d84] text-white text-sm font-bold hover:opacity-90 transition-all disabled:opacity-50">
+                className="flex-1 py-3.5 rounded-full bg-gradient-to-br from-[#2226F7] to-[#00D6A3] text-white text-sm font-bold hover:opacity-90 transition-all disabled:opacity-50">
                 {ackSaving ? 'Saving…' : 'Acknowledge'}
               </button>
             </div>

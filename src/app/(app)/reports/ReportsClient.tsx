@@ -197,7 +197,7 @@ export default function ReportsClient({
                 className={`relative w-full text-left flex items-center gap-6 p-6 rounded-lg transition-all group overflow-hidden ${
                   isSelected
                     ? 'bg-surface-container-low'
-                    : 'bg-surface-container-lowest hover:bg-surface-container'
+                    : 'bg-white hover:bg-surface-container'
                 }`}
               >
                 {isSelected && <div className="active-tab-indicator" />}
@@ -229,7 +229,7 @@ export default function ReportsClient({
         {/* Right: Parameters and Action */}
         <div className="col-span-12 lg:col-span-7 flex flex-col gap-8">
           {/* Parameters Card */}
-          <div className="bg-surface-container-lowest rounded-xl p-10 shadow-[0px_24px_48px_rgba(77,85,106,0.06)] flex flex-col gap-10">
+          <div className="bg-white rounded-xl p-10 shadow-[0px_24px_48px_rgba(77,85,106,0.06)] flex flex-col gap-10">
             <h3 className="text-lg font-bold text-on-surface">Report Parameters</h3>
 
             {/* Date Range */}

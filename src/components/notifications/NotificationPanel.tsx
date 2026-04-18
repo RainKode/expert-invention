@@ -147,7 +147,7 @@ export default function NotificationPanel({
       {/* Panel */}
       <aside
         ref={panelRef}
-        className="fixed right-0 top-0 h-full w-[400px] max-w-full z-[60] bg-surface-container-lowest shadow-[0px_0px_48px_rgba(77,85,106,0.10)] flex flex-col overflow-hidden"
+        className="fixed right-0 top-0 h-full w-[400px] max-w-full z-[60] bg-white shadow-[0px_0px_48px_rgba(77,85,106,0.10)] flex flex-col overflow-hidden"
       >
         {/* Header */}
         <header className="flex flex-col p-8 gap-6">
@@ -226,7 +226,7 @@ export default function NotificationPanel({
                   onClick={() => handleNotificationClick(n)}
                   className={`${
                     n.read
-                      ? 'bg-surface-container-lowest hover:bg-surface-container-low'
+                      ? 'bg-white hover:bg-surface-container-low'
                       : 'bg-surface-container-low hover:bg-surface-container-high'
                   } rounded-[24px] p-4 flex gap-4 relative group cursor-pointer transition-all`}
                 >

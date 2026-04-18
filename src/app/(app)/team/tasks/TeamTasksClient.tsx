@@ -123,8 +123,8 @@ export default function TeamTasksClient({ userId, userRole, projects, teamMember
         </div>
         <button
           onClick={() => setModalOpen(true)}
-          className="flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold text-white shadow-ambient-sm hover:opacity-90 transition-opacity"
-          style={{ background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }}
+          className="flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold text-white shadow-[0px_2px_8px_rgba(77,85,106,0.06)] hover:opacity-90 transition-opacity"
+          style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
         >
           <span className="material-symbols-outlined text-lg">add</span>
           New Task
@@ -145,7 +145,7 @@ export default function TeamTasksClient({ userId, userRole, projects, teamMember
             {activeStatus === tab.key && (
               <span
                 className="absolute bottom-0 left-0 right-0 h-0.5 rounded-t"
-                style={{ background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }}
+                style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
               />
             )}
           </button>
@@ -232,7 +232,7 @@ export default function TeamTasksClient({ userId, userRole, projects, teamMember
               onClick={() => router.push(`/tasks/${task.id}`)}
               className="w-full group"
             >
-              <div className="flex items-center gap-0 bg-surface-container-lowest rounded-2xl overflow-hidden hover:shadow-ambient-sm transition-shadow">
+              <div className="flex items-center gap-0 bg-white rounded-2xl overflow-hidden hover:shadow-[0px_2px_8px_rgba(77,85,106,0.06)] transition-shadow">
                 <div className={`w-1 self-stretch ${PRIORITY_BAR[task.priority] ?? 'bg-outline'}`} />
 
                 <div className="flex-1 flex items-center gap-4 px-5 py-4">

@@ -30,6 +30,24 @@ const NAV_ITEMS: NavItem[] = [
   { label: 'Notifications', href: '/settings/notifications', icon: 'notifications' },
 ]
 
+// Map nav icons to palette colours for active state
+const NAV_ICON_COLOR: Record<string, string> = {
+  '/dashboard': 'text-integrity',
+  '/tasks': 'text-energetic',
+  '/board': 'text-kindness',
+  '/plan': 'text-natural',
+  '/checkin': 'text-integrity',
+  '/wrapup': 'text-originality',
+  '/team/tasks': 'text-energetic',
+  '/team/plans': 'text-integrity',
+  '/dashboard/team-pulse': 'text-excitement',
+  '/dashboard/workload': 'text-natural',
+  '/dashboard/activity': 'text-kindness',
+  '/reports': 'text-integrity',
+  '/settings/custom-fields': 'text-originality',
+  '/settings/notifications': 'text-energetic',
+}
+
 const ADMIN_NAV: NavItem[] = [
   { label: 'Users', href: '/admin/users', icon: 'manage_accounts' },
   { label: 'Teams', href: '/admin/teams', icon: 'corporate_fare' },
@@ -56,26 +74,27 @@ export default memo(function Sidebar({ userName, userRole, onLogout, mobileOpen 
 
   const isActive = useCallback((href: string) => pathname === href || pathname.startsWith(href + '/'), [pathname])
 
-  const NavLink = ({ item }: { item: NavItem }) => (
-    <Link
-      href={item.href}
-      onClick={() => onMobileClose?.()}
-      title={collapsed ? item.label : undefined}
-      className={
-        isActive(item.href)
-          ? `flex items-center ${collapsed ? 'justify-center' : ''} gap-4 px-4 py-3 text-white font-semibold rounded-2xl shadow-ambient-sm transition-all`
-          : `flex items-center ${collapsed ? 'justify-center' : ''} gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-2xl`
-      }
-      style={
-        isActive(item.href)
-          ? { background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }
-          : undefined
-      }
-    >
-      <span className="material-symbols-outlined text-xl shrink-0">{item.icon}</span>
-      {!collapsed && <span className="whitespace-nowrap">{item.label}</span>}
-    </Link>
-  )
+  const NavLink = ({ item }: { item: NavItem }) => {
+    const active = isActive(item.href)
+    const iconColor = NAV_ICON_COLOR[item.href] ?? 'text-integrity'
+    return (
+      <Link
+        href={item.href}
+        onClick={() => onMobileClose?.()}
+        title={collapsed ? item.label : undefined}
+        className={
+          active
+            ? `flex items-center ${collapsed ? 'justify-center' : ''} gap-4 px-4 py-3 bg-white font-semibold rounded-2xl shadow-[0px_2px_12px_rgba(77,85,106,0.1)] transition-all`
+            : `flex items-center ${collapsed ? 'justify-center' : ''} gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-2xl`
+        }
+      >
+        <span className={`material-symbols-outlined text-xl shrink-0 ${active ? iconColor : ''}`}
+          style={active ? { fontVariationSettings: "'FILL' 1" } : undefined}
+        >{item.icon}</span>
+        {!collapsed && <span className={`whitespace-nowrap ${active ? 'text-on-surface' : ''}`}>{item.label}</span>}
+      </Link>
+    )
+  }
 
   const SidebarContent = ({ isCollapsed = false }: { isCollapsed?: boolean }) => (
     <>
@@ -83,8 +102,8 @@ export default memo(function Sidebar({ userName, userRole, onLogout, mobileOpen 
       <div className={`${isCollapsed ? 'px-3 pt-8 pb-6' : 'px-8 pt-10 pb-12'} transition-all duration-300`}>
         <div className={`flex items-center ${isCollapsed ? 'justify-center' : 'gap-3'}`}>
           <div
-            className="w-10 h-10 rounded-xl flex items-center justify-center shadow-ambient shrink-0"
-            style={{ background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }}
+            className="w-10 h-10 rounded-xl flex items-center justify-center shadow-[0px_4px_24px_rgba(77,85,106,0.08)] shrink-0"
+            style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
           >
             <span
               className="material-symbols-outlined text-white"
@@ -157,8 +176,8 @@ export default memo(function Sidebar({ userName, userRole, onLogout, mobileOpen 
 
         <div className="pt-4 mt-2">
           <div className={`flex items-center ${isCollapsed ? 'justify-center' : 'gap-3'} px-4 py-2`}>
-            <div className="w-9 h-9 rounded-full bg-primary-container flex items-center justify-center shrink-0">
-              <span className="text-on-primary-container text-sm font-bold">
+            <div className="w-9 h-9 rounded-full flex items-center justify-center shrink-0" style={{ background: 'linear-gradient(135deg, #2226F7 0%, #FF3797 100%)' }}>
+              <span className="text-white text-sm font-bold">
                 {userName.charAt(0).toUpperCase()}
               </span>
             </div>
@@ -198,7 +217,7 @@ export default memo(function Sidebar({ userName, userRole, onLogout, mobileOpen 
     <>
       {/* Desktop Sidebar */}
       <aside
-        className={`fixed left-0 top-0 bottom-0 z-40 h-full hidden md:flex flex-col bg-surface-container-low shadow-ambient transition-all duration-300 ease-in-out ${
+        className={`fixed left-0 top-0 bottom-0 z-40 h-full hidden md:flex flex-col bg-surface-container-low shadow-[0px_4px_24px_rgba(77,85,106,0.08)] transition-all duration-300 ease-in-out ${
           collapsed ? 'w-[72px]' : 'w-72'
         }`}
       >
@@ -221,21 +240,27 @@ export default memo(function Sidebar({ userName, userRole, onLogout, mobileOpen 
       )}
 
       {/* Mobile bottom nav */}
-      <nav className="fixed bottom-0 left-0 w-full z-50 md:hidden flex justify-around items-center px-4 pb-safe pt-3 bg-surface-container-lowest rounded-t-[32px] shadow-[0_-8px_24px_rgba(77,85,106,0.08)]">
-        {visibleNav.slice(0, 4).map((item) => (
-          <Link
-            key={item.href}
-            href={item.href}
-            className={`flex flex-col items-center gap-1 px-3 py-1 rounded-full transition-all ${
-              isActive(item.href)
-                ? 'bg-surface-container text-primary'
-                : 'text-outline'
-            }`}
-          >
-            <span className="material-symbols-outlined text-xl">{item.icon}</span>
-            <span className="text-[9px] font-semibold uppercase tracking-widest">{item.label}</span>
-          </Link>
-        ))}
+      <nav className="fixed bottom-0 left-0 w-full z-50 md:hidden flex justify-around items-center px-4 pb-safe pt-3 bg-white rounded-t-[32px] shadow-[0_-8px_24px_rgba(77,85,106,0.1)]">
+        {visibleNav.slice(0, 4).map((item) => {
+          const active = isActive(item.href)
+          const iconColor = NAV_ICON_COLOR[item.href] ?? 'text-integrity'
+          return (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={`flex flex-col items-center gap-1 px-3 py-1 rounded-full transition-all ${
+                active
+                  ? 'bg-integrity-10 text-on-surface'
+                  : 'text-outline'
+              }`}
+            >
+              <span className={`material-symbols-outlined text-xl ${active ? iconColor : ''}`}
+                style={active ? { fontVariationSettings: "'FILL' 1" } : undefined}
+              >{item.icon}</span>
+              <span className="text-[9px] font-semibold uppercase tracking-widest">{item.label}</span>
+            </Link>
+          )
+        })}
       </nav>
     </>
   )

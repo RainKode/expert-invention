@@ -81,7 +81,7 @@ export default function WorkloadClient({ data, weekStart, workingDays }: Props) 
             <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-excitement" /> &lt;60%</span>
           </div>
           {/* Week nav */}
-          <div className="flex items-center gap-2 bg-surface-container-lowest rounded-full px-4 py-2 shadow-sm">
+          <div className="flex items-center gap-2 bg-white rounded-full px-4 py-2 shadow-sm">
             <button onClick={() => router.push(`/dashboard/workload?week=${prevWeek(weekStart)}`)}
               className="hover:text-primary transition-colors">
               <span className="material-symbols-outlined text-sm">chevron_left</span>
@@ -99,17 +99,17 @@ export default function WorkloadClient({ data, weekStart, workingDays }: Props) 
 
         {/* ── Utilization summary banner ─────────────────────────────────── */}
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-          <div className="bg-surface-container-lowest rounded-xl p-6 shadow-[0px_24px_48px_rgba(77,85,106,0.06)]">
+          <div className="bg-white rounded-xl p-6 shadow-[0px_24px_48px_rgba(77,85,106,0.06)]">
             <p className="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-1">Avg Variance</p>
             <div className={`text-2xl font-extrabold ${avgVariance > 0.5 ? 'text-energetic' : avgVariance < -0.5 ? 'text-excitement' : 'text-natural'}`}>
               {avgVariance > 0 ? '+' : ''}{avgVariance}h
             </div>
           </div>
-          <div className="bg-surface-container-lowest rounded-xl p-6 shadow-[0px_24px_48px_rgba(77,85,106,0.06)]">
+          <div className="bg-white rounded-xl p-6 shadow-[0px_24px_48px_rgba(77,85,106,0.06)]">
             <p className="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-1">Bottlenecks</p>
             <div className={`text-2xl font-extrabold ${bottlenecks > 0 ? 'text-excitement' : 'text-natural'}`}>{bottlenecks}</div>
           </div>
-          <div className="bg-surface-container-lowest rounded-xl p-6 shadow-[0px_24px_48px_rgba(77,85,106,0.06)]">
+          <div className="bg-white rounded-xl p-6 shadow-[0px_24px_48px_rgba(77,85,106,0.06)]">
             <p className="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-1">Team Members</p>
             <div className="text-2xl font-extrabold text-on-surface">{data.members.length}</div>
           </div>
@@ -120,7 +120,7 @@ export default function WorkloadClient({ data, weekStart, workingDays }: Props) 
         </div>
 
         {/* ── Workload Grid ─────────────────────────────────────────────── */}
-        <div className="bg-surface-container-lowest rounded-xl overflow-hidden shadow-[0px_24px_48px_rgba(77,85,106,0.06)]">
+        <div className="bg-white rounded-xl overflow-hidden shadow-[0px_24px_48px_rgba(77,85,106,0.06)]">
           <div className="overflow-x-auto">
             <table className="w-full min-w-[700px]">
               <thead>
@@ -131,7 +131,7 @@ export default function WorkloadClient({ data, weekStart, workingDays }: Props) 
                   {workingDays.map(dow => (
                     <th key={dow}
                       className={`text-center p-4 ${dow === todayDow
-                        ? 'bg-gradient-to-br from-[#4d556a] to-[#656d84] text-white'
+                        ? 'bg-gradient-to-br from-[#2226F7] to-[#00D6A3] text-white'
                         : ''
                       }`}>
                       <span className={`block text-[10px] font-bold uppercase ${dow === todayDow ? 'opacity-70' : 'text-on-surface-variant/60'}`}>
@@ -160,7 +160,7 @@ export default function WorkloadClient({ data, weekStart, workingDays }: Props) 
                     <tr key={row.user.id} className={`group ${i > 0 ? 'border-t border-surface-container-low/50' : ''}`}>
                       <td className="py-4 pl-6">
                         <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#4d556a] to-[#656d84] flex items-center justify-center text-white font-bold text-sm shrink-0">
+                          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#2226F7] to-[#00D6A3] flex items-center justify-center text-white font-bold text-sm shrink-0">
                             {row.user.name.charAt(0)}
                           </div>
                           <div>

@@ -40,7 +40,7 @@ export default function KanbanCard({ task, userId: _userId, isDragging }: Props)
     <div
       ref={setNodeRef}
       style={style}
-      className={`bg-surface-container-lowest rounded-2xl p-4 shadow-ambient-sm hover:shadow-ambient transition-shadow select-none ${PRIORITY_BORDER_CLASS[priorityState]} ${critical ? 'critical-glow' : ''} ${isDragging ? 'shadow-ambient rotate-1' : ''}`}
+      className={`bg-white rounded-2xl p-4 shadow-[0px_2px_12px_rgba(77,85,106,0.08)] hover:shadow-[0px_8px_24px_rgba(77,85,106,0.12)] transition-all duration-200 select-none ${PRIORITY_BORDER_CLASS[priorityState]} ${critical ? 'critical-glow' : ''} ${isDragging ? 'shadow-[0px_12px_32px_rgba(77,85,106,0.15)] rotate-1 scale-105' : ''}`}
     >
       {/* State badge + drag handle */}
       <div className="flex items-center justify-between mb-3">
@@ -88,7 +88,7 @@ export default function KanbanCard({ task, userId: _userId, isDragging }: Props)
       <div className="flex items-center justify-between gap-2">
         {/* Assignee avatar */}
         {task.assignee ? (
-          <div className="w-7 h-7 rounded-full flex items-center justify-center text-[10px] font-bold text-white flex-shrink-0" style={{ background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }}>
+          <div className="w-7 h-7 rounded-full flex items-center justify-center text-[10px] font-bold text-white flex-shrink-0" style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}>
             {task.assignee.name.charAt(0).toUpperCase()}
           </div>
         ) : (

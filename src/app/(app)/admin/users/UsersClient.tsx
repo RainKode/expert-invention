@@ -139,7 +139,7 @@ function UserFormModal({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-on-surface/40 backdrop-blur-sm" onClick={onClose} />
-      <div className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-surface-container-lowest rounded-2xl shadow-ambient p-8">
+      <div className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-white rounded-2xl shadow-[0px_4px_24px_rgba(77,85,106,0.08)] p-8">
         <div className="flex items-center justify-between mb-8">
           <h2 className="text-xl font-bold tracking-tight text-on-surface">
             {editUser ? 'Edit User' : 'Add New User'}
@@ -211,10 +211,10 @@ function UserFormModal({
                   onClick={() => toggleDay(index)}
                   className={`flex-1 py-2 rounded-xl text-xs font-semibold transition-all ${
                     workWeek?.includes(index)
-                      ? 'text-white shadow-ambient-sm'
+                      ? 'text-white shadow-[0px_2px_8px_rgba(77,85,106,0.06)]'
                       : 'bg-surface-container text-on-surface-variant'
                   }`}
-                  style={workWeek?.includes(index) ? { background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' } : {}}
+                  style={workWeek?.includes(index) ? { background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' } : {}}
                 >
                   {day}
                 </button>
@@ -252,7 +252,7 @@ function UserFormModal({
               type="submit"
               disabled={saving}
               className="flex-1 py-3 rounded-full text-white font-semibold transition-all disabled:opacity-60 flex items-center justify-center gap-2"
-              style={{ background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }}
+              style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
             >
               {saving && <span className="material-symbols-outlined animate-spin text-xl">progress_activity</span>}
               {editUser ? 'Save Changes' : 'Create & Send Invite'}
@@ -341,8 +341,8 @@ export default function UsersClient({ teams, managers }: { teams: Team[]; manage
           </Link>
           <button
             onClick={() => { setEditUser(null); setModalOpen(true) }}
-            className="px-8 py-3 rounded-full text-white font-bold shadow-ambient hover:opacity-90 transition-all active:scale-95"
-            style={{ background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }}
+            className="px-8 py-3 rounded-full text-white font-bold shadow-[0px_4px_24px_rgba(77,85,106,0.08)] hover:opacity-90 transition-all active:scale-95"
+            style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
           >
             Add User
           </button>
@@ -374,7 +374,7 @@ export default function UsersClient({ teams, managers }: { teams: Team[]; manage
                 onClick={() => setStatusFilter(s)}
                 className={`px-5 py-2 rounded-full text-sm font-medium transition-all capitalize ${
                   statusFilter === s
-                    ? 'bg-surface-container-lowest shadow-ambient-sm text-primary font-semibold'
+                    ? 'bg-white shadow-[0px_2px_8px_rgba(77,85,106,0.06)] text-primary font-semibold'
                     : 'text-on-surface-variant hover:text-on-surface'
                 }`}
               >
@@ -387,7 +387,7 @@ export default function UsersClient({ teams, managers }: { teams: Team[]; manage
           <select
             value={roleFilter}
             onChange={(e) => setRoleFilter(e.target.value)}
-            className="px-5 py-3 bg-surface-container-lowest border-none rounded-full text-sm font-semibold text-on-surface-variant shadow-ambient-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+            className="px-5 py-3 bg-white border-none rounded-full text-sm font-semibold text-on-surface-variant shadow-[0px_2px_8px_rgba(77,85,106,0.06)] focus:outline-none focus:ring-2 focus:ring-primary/20"
           >
             <option value="">All Roles</option>
             {ROLE_OPTIONS.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
@@ -396,7 +396,7 @@ export default function UsersClient({ teams, managers }: { teams: Team[]; manage
       </div>
 
       {/* User table */}
-      <div className="bg-surface-container-lowest rounded-2xl shadow-ambient overflow-hidden">
+      <div className="bg-white rounded-2xl shadow-[0px_4px_24px_rgba(77,85,106,0.08)] overflow-hidden">
         {loading ? (
           <div className="p-16 text-center">
             <span className="material-symbols-outlined text-4xl text-outline animate-spin">progress_activity</span>

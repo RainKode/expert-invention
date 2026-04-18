@@ -107,7 +107,7 @@ export default function UserPreferencesClient() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-20">
-        <div className="w-8 h-8 border-2 border-[#4d556a] border-t-transparent rounded-full animate-spin" />
+        <div className="w-8 h-8 border-2 border-integrity border-t-transparent rounded-full animate-spin" />
       </div>
     )
   }
@@ -164,7 +164,7 @@ export default function UserPreferencesClient() {
                   <button
                     onClick={() => toggleNotif(type)}
                     className={`w-12 h-6 rounded-full relative flex items-center px-1 transition-colors ${
-                      notifPrefs[type] ? 'bg-[#4d556a]' : 'bg-[#e0e3e5]'
+                      notifPrefs[type] ? 'bg-integrity' : 'bg-[#e0e3e5]'
                     }`}
                   >
                     <div className={`w-4 h-4 bg-white rounded-full shadow-sm transition-transform ${

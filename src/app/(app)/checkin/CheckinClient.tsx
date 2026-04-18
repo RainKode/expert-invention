@@ -89,7 +89,7 @@ export default function CheckinClient({ checkin, alreadySubmitted }: Props) {
     return (
       <div className="max-w-4xl mx-auto px-12 py-12">
         <header className="mb-12">
-          <h2 className="text-[2.5rem] font-extrabold text-[#4d556a] tracking-[-0.02em] leading-tight mb-2">
+          <h2 className="text-[2.5rem] font-extrabold text-integrity tracking-[-0.02em] leading-tight mb-2">
             Morning Check-in
           </h2>
           <p className="text-lg text-[#656d84] font-medium opacity-80">{today}</p>
@@ -111,7 +111,7 @@ export default function CheckinClient({ checkin, alreadySubmitted }: Props) {
       <div className="fixed bottom-[-10%] left-[20%] w-[30vw] h-[30vw] bg-secondary-fixed/20 blur-[100px] rounded-full pointer-events-none -z-10" />
 
       <header className="mb-12">
-        <h2 className="text-[2.5rem] font-extrabold text-[#4d556a] tracking-[-0.02em] leading-tight mb-2">
+        <h2 className="text-[2.5rem] font-extrabold text-integrity tracking-[-0.02em] leading-tight mb-2">
           Morning Check-in
         </h2>
         <p className="text-lg text-[#656d84] font-medium opacity-80">{today}</p>
@@ -141,7 +141,7 @@ export default function CheckinClient({ checkin, alreadySubmitted }: Props) {
         {tasks.map((task) => (
           <div
             key={task.task_id}
-            className={`bg-surface-container-lowest rounded-2xl p-6 shadow-[0px_24px_48px_rgba(77,85,106,0.06)] flex items-center justify-between group transition-all ${!task.confirmed ? 'opacity-60' : ''}`}
+            className={`bg-white rounded-2xl p-6 shadow-[0px_24px_48px_rgba(77,85,106,0.06)] flex items-center justify-between group transition-all ${!task.confirmed ? 'opacity-60' : ''}`}
           >
             <div className="flex items-center gap-6">
               <div className={`w-1.5 h-12 rounded-full ${PRIORITY_BAR[task.priority]}`} />
@@ -165,7 +165,7 @@ export default function CheckinClient({ checkin, alreadySubmitted }: Props) {
                     checked={task.confirmed}
                     onChange={() => toggleTask(task.task_id)}
                   />
-                  <div className="w-14 h-8 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:start-[4px] after:bg-white after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-[#4d556a]" />
+                  <div className="w-14 h-8 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:start-[4px] after:bg-white after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-integrity" />
                 </label>
               )}
             </div>
@@ -178,7 +178,7 @@ export default function CheckinClient({ checkin, alreadySubmitted }: Props) {
             Internal Notes &amp; Blockers
           </label>
           <textarea
-            className="w-full bg-surface-container-lowest border-none focus:ring-2 focus:ring-[#4d556a]/20 rounded-[1.5rem] p-8 min-h-[160px] shadow-[0px_12px_24px_rgba(77,85,106,0.03)] text-on-surface placeholder:text-outline/50 transition-all"
+            className="w-full bg-white border-none focus:ring-2 focus:ring-integrity/20 rounded-[1.5rem] p-8 min-h-[160px] shadow-[0px_12px_24px_rgba(77,85,106,0.03)] text-on-surface placeholder:text-outline/50 transition-all"
             placeholder="Anything else on your mind today?"
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
@@ -200,7 +200,7 @@ export default function CheckinClient({ checkin, alreadySubmitted }: Props) {
               psychology
             </span>
           </div>
-          <div className="p-8 rounded-2xl text-white flex flex-col justify-center items-center text-center" style={{ background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }}>
+          <div className="p-8 rounded-2xl text-white flex flex-col justify-center items-center text-center" style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}>
             <span className="text-4xl font-black mb-2">{capacityPct}%</span>
             <p className="text-xs uppercase tracking-widest opacity-70">Capacity Used</p>
             <div className="w-full h-1 bg-white/20 rounded-full mt-4 overflow-hidden">
@@ -218,8 +218,8 @@ export default function CheckinClient({ checkin, alreadySubmitted }: Props) {
             <button
               onClick={handleSubmit}
               disabled={submitting}
-              className="text-white px-12 py-5 rounded-full font-bold text-lg shadow-xl shadow-[#4d556a]/20 hover:scale-[1.02] active:scale-95 transition-all disabled:opacity-60"
-              style={{ background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }}
+              className="text-white px-12 py-5 rounded-full font-bold text-lg shadow-xl shadow-[#2226F7]/20 hover:scale-[1.02] active:scale-95 transition-all disabled:opacity-60"
+              style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
             >
               {submitting ? 'Submitting…' : 'Submit Check-in'}
             </button>

@@ -251,7 +251,7 @@ export default function TaskDetailClient({
         </Link>
 
         {/* Header */}
-        <div className="bg-surface-container-lowest rounded-3xl p-6 shadow-ambient-sm">
+        <div className="bg-white rounded-3xl p-6 shadow-[0px_2px_8px_rgba(77,85,106,0.06)]">
           <div className="flex flex-wrap items-start gap-3 mb-4">
             <span className={`px-3 py-1 rounded-full text-xs font-bold ${PRIORITY_COLOR[task.priority]}`}>
               {PRIORITY_LABEL[task.priority]} Priority
@@ -286,8 +286,8 @@ export default function TaskDetailClient({
                   }
                 }}
                 disabled={statusChanging}
-                className="px-5 py-2 rounded-full text-sm font-bold text-white shadow-ambient-sm disabled:opacity-60 transition-opacity"
-                style={{ background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }}
+                className="px-5 py-2 rounded-full text-sm font-bold text-white shadow-[0px_2px_8px_rgba(77,85,106,0.06)] disabled:opacity-60 transition-opacity"
+                style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
               >
                 {statusChanging ? '…' : next === 'in_review' ? 'Submit for Review' : 'Mark In Progress'}
               </button>
@@ -299,8 +299,8 @@ export default function TaskDetailClient({
                 <button
                   onClick={handleApprove}
                   disabled={approving}
-                  className="px-5 py-2 rounded-full text-sm font-bold text-on-primary shadow-ambient-sm transition-colors disabled:opacity-60"
-                  style={{ background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }}
+                  className="px-5 py-2 rounded-full text-sm font-bold text-on-primary shadow-[0px_2px_8px_rgba(77,85,106,0.06)] transition-colors disabled:opacity-60"
+                  style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
                 >
                   {approving ? 'Approving…' : 'Approve'}
                 </button>
@@ -344,7 +344,7 @@ export default function TaskDetailClient({
                   {activeTab === tab && (
                     <span
                       className="absolute bottom-0 left-0 right-0 h-0.5 rounded-t"
-                      style={{ background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }}
+                      style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
                     />
                   )}
                 </button>
@@ -355,7 +355,7 @@ export default function TaskDetailClient({
               <div className="space-y-6">
                 {/* Description */}
                 {task.description && (
-                  <div className="bg-surface-container-lowest rounded-2xl p-5 shadow-ambient-sm">
+                  <div className="bg-white rounded-2xl p-5 shadow-[0px_2px_8px_rgba(77,85,106,0.06)]">
                     <h3 className="text-[10px] font-bold uppercase tracking-widest text-outline mb-3">Description</h3>
                     <p className="text-sm text-on-surface whitespace-pre-wrap">{task.description}</p>
                   </div>
@@ -380,7 +380,7 @@ export default function TaskDetailClient({
                 )}
 
                 {/* Subtasks */}
-                <div className="bg-surface-container-lowest rounded-2xl p-5 border border-surface-container-high/50">
+                <div className="bg-white rounded-2xl p-5 border border-surface-container-high/50">
                   <div className="flex items-center justify-between mb-4">
                     <h3 className="text-[10px] font-bold uppercase tracking-widest text-outline">
                       Subtasks ({task.subtasks?.length ?? 0})
@@ -430,7 +430,7 @@ export default function TaskDetailClient({
                 </div>
 
                 {/* Dependencies */}
-                <div className="bg-surface-container-lowest rounded-2xl p-5 shadow-ambient-sm">
+                <div className="bg-white rounded-2xl p-5 shadow-[0px_2px_8px_rgba(77,85,106,0.06)]">
                   <div className="flex items-center justify-between mb-4">
                     <h3 className="text-[10px] font-bold uppercase tracking-widest text-outline">Dependencies</h3>
                     {task.status !== 'done' && (
@@ -471,7 +471,7 @@ export default function TaskDetailClient({
                 </div>
 
                 {/* Attachments */}
-                <div className="bg-surface-container-lowest rounded-2xl p-5 shadow-ambient-sm">
+                <div className="bg-white rounded-2xl p-5 shadow-[0px_2px_8px_rgba(77,85,106,0.06)]">
                   <FileAttachments
                     taskId={task.id}
                     context="attachment"
@@ -496,7 +496,7 @@ export default function TaskDetailClient({
                     {timeline.map((event, i) => (
                       <div key={event.id} className={`relative flex gap-4 ${i < timeline.length - 1 ? 'pb-5' : ''}`}>
                         <div className="absolute left-[-16px] w-4 h-4 rounded-full bg-surface-container flex items-center justify-center" />
-                          <div className="flex-1 bg-surface-container-lowest rounded-2xl p-4 shadow-ambient-sm">
+                          <div className="flex-1 bg-white rounded-2xl p-4 shadow-[0px_2px_8px_rgba(77,85,106,0.06)]">
                           <div className="flex items-center justify-between mb-1">
                             <p className="text-xs font-bold text-on-surface">{TIMELINE_LABELS[event.event_type] ?? event.event_type}</p>
                             <p className="text-[10px] text-outline">{formatDateTime(event.created_at)}</p>
@@ -522,7 +522,7 @@ export default function TaskDetailClient({
 
           {/* Right: metadata sidebar */}
           <div className="space-y-4">
-            <div className="bg-surface-container-lowest rounded-2xl p-5 shadow-ambient-sm space-y-5">
+            <div className="bg-white rounded-2xl p-5 shadow-[0px_2px_8px_rgba(77,85,106,0.06)] space-y-5">
               <MetaRow label="Assignee" value={task.assignee?.name ?? 'Unassigned'} />
               <MetaRow label="Creator" value={task.creator?.name ?? '—'} />
               {task.reviewer && <MetaRow label="Reviewer" value={task.reviewer.name} />}
@@ -542,7 +542,7 @@ export default function TaskDetailClient({
 
             {/* Custom Field Values */}
             {customFieldValues.length > 0 && (
-              <div className="bg-surface-container-lowest rounded-2xl p-5 shadow-ambient-sm space-y-4">
+              <div className="bg-white rounded-2xl p-5 shadow-[0px_2px_8px_rgba(77,85,106,0.06)] space-y-4">
                 <p className="text-[10px] font-bold uppercase tracking-widest text-outline">Custom Fields</p>
                 {customFieldValues.map(cfv => {
                   const def = cfv.field_definition
@@ -685,7 +685,7 @@ function CustomFieldEditor({ fieldValue, saving, onSave }: {
           onClick={() => { onSave(val); setEditing(false) }}
           disabled={saving}
           className="px-3 py-1 rounded-full text-xs font-semibold text-white"
-          style={{ background: 'linear-gradient(135deg, #4d556a 0%, #656d84 100%)' }}
+          style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
         >
           {saving ? '…' : 'Save'}
         </button>

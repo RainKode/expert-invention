@@ -119,7 +119,7 @@ export default function AuditTrailClient({ actors }: Props) {
             type="date"
             value={dateFrom}
             onChange={(e) => setDateFrom(e.target.value)}
-            className="w-full bg-white h-12 px-5 rounded-full shadow-[0px_4px_12px_rgba(77,85,106,0.04)] border-0 text-sm font-medium text-on-surface focus:ring-2 focus:ring-[#4d556a]/20"
+            className="w-full bg-white h-12 px-5 rounded-full shadow-[0px_4px_12px_rgba(77,85,106,0.04)] border-0 text-sm font-medium text-on-surface focus:ring-2 focus:ring-integrity/20"
           />
         </div>
         <div className="flex-1 min-w-[180px]">
@@ -130,7 +130,7 @@ export default function AuditTrailClient({ actors }: Props) {
             type="date"
             value={dateTo}
             onChange={(e) => setDateTo(e.target.value)}
-            className="w-full bg-white h-12 px-5 rounded-full shadow-[0px_4px_12px_rgba(77,85,106,0.04)] border-0 text-sm font-medium text-on-surface focus:ring-2 focus:ring-[#4d556a]/20"
+            className="w-full bg-white h-12 px-5 rounded-full shadow-[0px_4px_12px_rgba(77,85,106,0.04)] border-0 text-sm font-medium text-on-surface focus:ring-2 focus:ring-integrity/20"
           />
         </div>
         <div className="flex-1 min-w-[200px]">
@@ -140,7 +140,7 @@ export default function AuditTrailClient({ actors }: Props) {
           <select
             value={eventType}
             onChange={(e) => setEventType(e.target.value)}
-            className="w-full bg-white h-12 px-5 rounded-full shadow-[0px_4px_12px_rgba(77,85,106,0.04)] border-0 text-sm font-medium text-on-surface focus:ring-2 focus:ring-[#4d556a]/20 appearance-none"
+            className="w-full bg-white h-12 px-5 rounded-full shadow-[0px_4px_12px_rgba(77,85,106,0.04)] border-0 text-sm font-medium text-on-surface focus:ring-2 focus:ring-integrity/20 appearance-none"
           >
             <option value="">All Events</option>
             {eventTypes.map((t) => (
@@ -155,7 +155,7 @@ export default function AuditTrailClient({ actors }: Props) {
           <select
             value={actorId}
             onChange={(e) => setActorId(e.target.value)}
-            className="w-full bg-white h-12 px-5 rounded-full shadow-[0px_4px_12px_rgba(77,85,106,0.04)] border-0 text-sm font-medium text-on-surface focus:ring-2 focus:ring-[#4d556a]/20 appearance-none"
+            className="w-full bg-white h-12 px-5 rounded-full shadow-[0px_4px_12px_rgba(77,85,106,0.04)] border-0 text-sm font-medium text-on-surface focus:ring-2 focus:ring-integrity/20 appearance-none"
           >
             <option value="">Any Actor</option>
             {actors.map((a) => (
@@ -165,7 +165,7 @@ export default function AuditTrailClient({ actors }: Props) {
         </div>
         <button
           onClick={applyFilters}
-          className="h-12 px-8 bg-gradient-to-br from-[#4d556a] to-[#656d84] text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all active:scale-95 flex items-center gap-2"
+          className="h-12 px-8 bg-gradient-to-br from-[#2226F7] to-[#00D6A3] text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all active:scale-95 flex items-center gap-2"
         >
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
@@ -177,7 +177,7 @@ export default function AuditTrailClient({ actors }: Props) {
       {/* Audit Grid */}
       {loading ? (
         <div className="flex items-center justify-center py-20">
-          <div className="w-8 h-8 border-2 border-[#4d556a] border-t-transparent rounded-full animate-spin" />
+          <div className="w-8 h-8 border-2 border-integrity border-t-transparent rounded-full animate-spin" />
         </div>
       ) : entries.length === 0 ? (
         <div className="text-center py-20">
@@ -209,7 +209,7 @@ export default function AuditTrailClient({ actors }: Props) {
 
               {/* Actor */}
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#4d556a] to-[#656d84] flex items-center justify-center text-white font-bold text-xs flex-shrink-0">
+                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#2226F7] to-[#00D6A3] flex items-center justify-center text-white font-bold text-xs flex-shrink-0">
                   {entry.actor_name.charAt(0).toUpperCase()}
                 </div>
                 <div>
@@ -278,7 +278,7 @@ export default function AuditTrailClient({ actors }: Props) {
                   onClick={() => setPage(n)}
                   className={`w-10 h-10 flex items-center justify-center rounded-full font-bold transition-colors ${
                     n === page
-                      ? 'bg-gradient-to-br from-[#4d556a] to-[#656d84] text-white shadow-md'
+                      ? 'bg-gradient-to-br from-[#2226F7] to-[#00D6A3] text-white shadow-md'
                       : 'text-on-surface hover:bg-[#eceef0]'
                   }`}
                 >

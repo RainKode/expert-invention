@@ -51,7 +51,7 @@ export default function TeamSettingsClient() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-20">
-        <div className="w-8 h-8 border-2 border-[#4d556a] border-t-transparent rounded-full animate-spin" />
+        <div className="w-8 h-8 border-2 border-integrity border-t-transparent rounded-full animate-spin" />
       </div>
     )
   }
@@ -90,7 +90,7 @@ export default function TeamSettingsClient() {
                 <button
                   onClick={() => save({ planning_mode: 'fluid' })}
                   className={`px-6 py-2 rounded-full text-sm font-semibold transition-all ${
-                    !isLocked ? 'bg-gradient-to-br from-[#4d556a] to-[#656d84] text-white shadow-sm' : 'text-on-surface-variant hover:bg-[#e6e8ea]'
+                    !isLocked ? 'bg-gradient-to-br from-[#2226F7] to-[#00D6A3] text-white shadow-sm' : 'text-on-surface-variant hover:bg-[#e6e8ea]'
                   }`}
                 >
                   Flexible
@@ -98,7 +98,7 @@ export default function TeamSettingsClient() {
                 <button
                   onClick={() => save({ planning_mode: 'locked' })}
                   className={`px-6 py-2 rounded-full text-sm font-semibold transition-all ${
-                    isLocked ? 'bg-gradient-to-br from-[#4d556a] to-[#656d84] text-white shadow-sm' : 'text-on-surface-variant hover:bg-[#e6e8ea]'
+                    isLocked ? 'bg-gradient-to-br from-[#2226F7] to-[#00D6A3] text-white shadow-sm' : 'text-on-surface-variant hover:bg-[#e6e8ea]'
                   }`}
                 >
                   Locked
@@ -115,7 +115,7 @@ export default function TeamSettingsClient() {
                     <select
                       value={team.submission_deadline_day ?? 5}
                       onChange={(e) => save({ submission_deadline_day: Number(e.target.value) })}
-                      className="w-full h-12 px-6 rounded-full bg-[#f2f4f6] border-0 focus:ring-2 focus:ring-[#4d556a]/20 text-on-surface font-medium appearance-none"
+                      className="w-full h-12 px-6 rounded-full bg-[#f2f4f6] border-0 focus:ring-2 focus:ring-integrity/20 text-on-surface font-medium appearance-none"
                     >
                       {DAYS.map((day, i) => (
                         <option key={i} value={i}>{day}</option>
@@ -128,7 +128,7 @@ export default function TeamSettingsClient() {
                       type="time"
                       value={team.submission_deadline_time ?? '17:00'}
                       onChange={(e) => save({ submission_deadline_time: e.target.value })}
-                      className="w-full h-12 px-6 rounded-full bg-[#f2f4f6] border-0 focus:ring-2 focus:ring-[#4d556a]/20 text-on-surface font-medium"
+                      className="w-full h-12 px-6 rounded-full bg-[#f2f4f6] border-0 focus:ring-2 focus:ring-integrity/20 text-on-surface font-medium"
                     />
                   </div>
                 </div>
@@ -153,7 +153,7 @@ export default function TeamSettingsClient() {
           <button
             onClick={() => save({ check_in_mandatory: !team.check_in_mandatory })}
             className={`w-14 h-7 rounded-full relative flex items-center px-1 transition-colors flex-shrink-0 ${
-              team.check_in_mandatory ? 'bg-[#4d556a]' : 'bg-[#e0e3e5]'
+              team.check_in_mandatory ? 'bg-integrity' : 'bg-[#e0e3e5]'
             }`}
           >
             <div className={`w-5 h-5 bg-white rounded-full shadow-sm transition-transform ${
@@ -178,7 +178,7 @@ export default function TeamSettingsClient() {
           <button
             onClick={() => save({ eod_mandatory: !team.eod_mandatory })}
             className={`w-14 h-7 rounded-full relative flex items-center px-1 transition-colors flex-shrink-0 ${
-              team.eod_mandatory ? 'bg-[#4d556a]' : 'bg-[#e0e3e5]'
+              team.eod_mandatory ? 'bg-integrity' : 'bg-[#e0e3e5]'
             }`}
           >
             <div className={`w-5 h-5 bg-white rounded-full shadow-sm transition-transform ${
@@ -194,7 +194,7 @@ export default function TeamSettingsClient() {
             className="group bg-white p-6 rounded-2xl shadow-[0px_4px_12px_rgba(77,85,106,0.04)] hover:shadow-[0px_12px_32px_rgba(77,85,106,0.08)] transition-all flex items-center justify-between"
           >
             <div className="flex items-center gap-5">
-              <div className="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center text-[#565e74] group-hover:bg-[#4d556a] group-hover:text-white transition-colors">
+              <div className="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center text-[#565e74] group-hover:bg-integrity group-hover:text-white transition-colors">
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                 </svg>
