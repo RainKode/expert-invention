@@ -88,7 +88,7 @@ export default function KanbanCard({ task, userId: _userId, isDragging }: Props)
       <div className="flex items-center justify-between gap-2">
         {/* Assignee avatar */}
         {task.assignee ? (
-          <div className="w-7 h-7 rounded-full flex items-center justify-center text-[10px] font-bold text-white flex-shrink-0" style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}>
+          <div className="w-7 h-7 rounded-full flex items-center justify-center text-[10px] font-bold bg-integrity text-white flex-shrink-0">
             {task.assignee.name.charAt(0).toUpperCase()}
           </div>
         ) : (

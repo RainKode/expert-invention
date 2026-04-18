@@ -286,8 +286,7 @@ export default function TaskDetailClient({
                   }
                 }}
                 disabled={statusChanging}
-                className="px-5 py-2 rounded-full text-sm font-bold text-white shadow-[0px_2px_8px_rgba(77,85,106,0.06)] disabled:opacity-60 transition-opacity"
-                style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
+                className="px-5 py-2 rounded-full text-sm font-bold bg-integrity text-white shadow-[0px_2px_8px_rgba(77,85,106,0.06)] disabled:opacity-60 transition-opacity"
               >
                 {statusChanging ? '…' : next === 'in_review' ? 'Submit for Review' : 'Mark In Progress'}
               </button>
@@ -300,7 +299,6 @@ export default function TaskDetailClient({
                   onClick={handleApprove}
                   disabled={approving}
                   className="px-5 py-2 rounded-full text-sm font-bold text-on-primary shadow-[0px_2px_8px_rgba(77,85,106,0.06)] transition-colors disabled:opacity-60"
-                  style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
                 >
                   {approving ? 'Approving…' : 'Approve'}
                 </button>
@@ -344,7 +342,6 @@ export default function TaskDetailClient({
                   {activeTab === tab && (
                     <span
                       className="absolute bottom-0 left-0 right-0 h-0.5 rounded-t"
-                      style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
                     />
                   )}
                 </button>
@@ -684,8 +681,7 @@ function CustomFieldEditor({ fieldValue, saving, onSave }: {
         <button
           onClick={() => { onSave(val); setEditing(false) }}
           disabled={saving}
-          className="px-3 py-1 rounded-full text-xs font-semibold text-white"
-          style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
+          className="px-3 py-1 rounded-full text-xs font-semibold bg-integrity text-white"
         >
           {saving ? '…' : 'Save'}
         </button>

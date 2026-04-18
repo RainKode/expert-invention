@@ -57,7 +57,7 @@ export default function SettingsLayout({ children }: { children: React.ReactNode
                   href={item.href}
                   className={`flex-shrink-0 px-4 py-2 rounded-full text-sm font-semibold transition-colors ${
                     isActive
-                      ? 'bg-gradient-to-br from-[#2226F7] to-[#00D6A3] text-white'
+                      ? 'bg-integrity text-white'
                       : 'bg-[#f2f4f6] text-on-surface-variant'
                   }`}
                 >

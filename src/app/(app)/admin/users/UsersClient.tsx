@@ -211,10 +211,9 @@ function UserFormModal({
                   onClick={() => toggleDay(index)}
                   className={`flex-1 py-2 rounded-xl text-xs font-semibold transition-all ${
                     workWeek?.includes(index)
-                      ? 'text-white shadow-[0px_2px_8px_rgba(77,85,106,0.06)]'
+                      ? 'text-white shadow-[0px_2px_8px_rgba(77,85,106,0.06)] bg-integrity'
                       : 'bg-surface-container text-on-surface-variant'
                   }`}
-                  style={workWeek?.includes(index) ? { background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' } : {}}
                 >
                   {day}
                 </button>
@@ -251,8 +250,7 @@ function UserFormModal({
             <button
               type="submit"
               disabled={saving}
-              className="flex-1 py-3 rounded-full text-white font-semibold transition-all disabled:opacity-60 flex items-center justify-center gap-2"
-              style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
+              className="flex-1 py-3 rounded-full bg-integrity text-white font-semibold transition-all disabled:opacity-60 flex items-center justify-center gap-2"
             >
               {saving && <span className="material-symbols-outlined animate-spin text-xl">progress_activity</span>}
               {editUser ? 'Save Changes' : 'Create & Send Invite'}
@@ -341,8 +339,7 @@ export default function UsersClient({ teams, managers }: { teams: Team[]; manage
           </Link>
           <button
             onClick={() => { setEditUser(null); setModalOpen(true) }}
-            className="px-8 py-3 rounded-full text-white font-bold shadow-[0px_4px_24px_rgba(77,85,106,0.08)] hover:opacity-90 transition-all active:scale-95"
-            style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
+            className="px-8 py-3 rounded-full bg-integrity text-white font-bold shadow-[0px_4px_24px_rgba(77,85,106,0.08)] hover:opacity-90 transition-all active:scale-95"
           >
             Add User
           </button>

@@ -284,7 +284,7 @@ export default function NotificationPreferencesClient() {
               <button
                 onClick={handleSave}
                 disabled={saving}
-                className="px-10 py-3 rounded-full text-sm font-bold text-white bg-gradient-to-br from-[#2226F7] to-[#00D6A3] shadow-[0px_24px_48px_rgba(77,85,106,0.06)] hover:scale-[1.02] active:scale-95 transition-all disabled:opacity-50"
+                className="px-10 py-3 rounded-full text-sm font-bold text-white bg-integrity shadow-[0px_24px_48px_rgba(77,85,106,0.06)] hover:scale-[1.02] active:scale-95 transition-all disabled:opacity-50"
               >
                 {saving ? 'Saving...' : 'Save Preferences'}
               </button>

@@ -159,8 +159,7 @@ export default function FilePreviewModal({
               <p className="text-sm text-outline">{error}</p>
               <button
                 onClick={handleDownload}
-                className="px-6 py-2.5 rounded-full text-sm font-bold text-white"
-                style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
+                className="px-6 py-2.5 rounded-full text-sm font-bold bg-integrity text-white"
               >
                 Download Instead
               </button>
@@ -194,8 +193,7 @@ export default function FilePreviewModal({
               <p className="text-sm text-outline">This file type cannot be previewed in the browser.</p>
               <button
                 onClick={handleDownload}
-                className="px-6 py-2.5 rounded-full text-sm font-bold text-white"
-                style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
+                className="px-6 py-2.5 rounded-full text-sm font-bold bg-integrity text-white"
               >
                 <span className="material-symbols-outlined text-lg mr-1 align-middle">download</span>
                 Download File

@@ -144,9 +144,8 @@ export default function AdminSetupClient({
           <div className="flex items-center gap-3">
             <div
               className="w-8 h-8 rounded-lg flex items-center justify-center"
-              style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
             >
-              <span className="material-symbols-outlined text-white text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>hub</span>
+              <span className="material-symbols-outlined bg-integrity text-white text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>hub</span>
             </div>
             <span className="font-bold text-primary tracking-tight">Sunday</span>
           </div>
@@ -154,8 +153,8 @@ export default function AdminSetupClient({
             <span className="text-sm font-medium text-on-surface-variant">Setup Progress: {progress}%</span>
             <div className="w-32 h-2 rounded-full bg-surface-container-high overflow-hidden">
               <div
-                className="h-full rounded-full transition-all duration-500"
-                style={{ width: `${progress}%`, background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
+                className="h-full rounded-full transition-all duration-500 bg-integrity"
+                style={{ width: `${progress}%` }}
               />
             </div>
           </div>
@@ -170,12 +169,11 @@ export default function AdminSetupClient({
               <div
                 className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm ring-4 ring-background transition-all ${
                   i === step
-                    ? 'text-white shadow-lg'
+                    ? 'text-white shadow-lg bg-integrity'
                     : i < step
                       ? 'bg-primary-container/60 text-white'
                       : 'bg-surface-container-highest text-on-surface-variant'
                 }`}
-                style={i === step ? { background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' } : undefined}
               >
                 {i < step ? (
                   <span className="material-symbols-outlined text-lg">check</span>
@@ -210,8 +208,7 @@ export default function AdminSetupClient({
                 <button
                   onClick={addDepartment}
                   disabled={deptLoading || !deptName.trim()}
-                  className="text-white font-bold py-4 rounded-full shadow-lg shadow-primary-container/20 hover:scale-[1.02] transition-transform active:scale-95 disabled:opacity-60 disabled:pointer-events-none flex items-center justify-center gap-2"
-                  style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
+                  className="bg-integrity text-white font-bold py-4 rounded-full shadow-lg shadow-primary-container/20 hover:scale-[1.02] transition-transform active:scale-95 disabled:opacity-60 disabled:pointer-events-none flex items-center justify-center gap-2"
                 >
                   <span className="material-symbols-outlined">add</span>
                   Add Department
@@ -289,8 +286,7 @@ export default function AdminSetupClient({
                 <button
                   onClick={addTeam}
                   disabled={teamLoading || !teamName.trim()}
-                  className="text-white font-bold py-4 rounded-full shadow-lg shadow-primary-container/20 hover:scale-[1.02] transition-transform active:scale-95 disabled:opacity-60 disabled:pointer-events-none flex items-center justify-center gap-2"
-                  style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
+                  className="bg-integrity text-white font-bold py-4 rounded-full shadow-lg shadow-primary-container/20 hover:scale-[1.02] transition-transform active:scale-95 disabled:opacity-60 disabled:pointer-events-none flex items-center justify-center gap-2"
                 >
                   <span className="material-symbols-outlined">add</span>
                   Add Team
@@ -383,8 +379,7 @@ export default function AdminSetupClient({
                 <button
                   onClick={addEmployee}
                   disabled={empLoading || !empName.trim() || !empEmail.trim()}
-                  className="text-white font-bold py-4 rounded-full shadow-lg shadow-primary-container/20 hover:scale-[1.02] transition-transform active:scale-95 disabled:opacity-60 disabled:pointer-events-none flex items-center justify-center gap-2"
-                  style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
+                  className="bg-integrity text-white font-bold py-4 rounded-full shadow-lg shadow-primary-container/20 hover:scale-[1.02] transition-transform active:scale-95 disabled:opacity-60 disabled:pointer-events-none flex items-center justify-center gap-2"
                 >
                   <span className="material-symbols-outlined">person_add</span>
                   Add &amp; Send Invite
@@ -466,8 +461,7 @@ export default function AdminSetupClient({
             {step < STEPS.length - 1 ? (
               <button
                 onClick={() => setStep((s) => s + 1)}
-                className="px-6 py-3 rounded-full text-white font-bold text-sm flex items-center gap-2 hover:scale-[1.02] transition-transform active:scale-95"
-                style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
+                className="px-6 py-3 rounded-full bg-integrity text-white font-bold text-sm flex items-center gap-2 hover:scale-[1.02] transition-transform active:scale-95"
               >
                 Continue to {STEPS[step + 1]}
                 <span className="material-symbols-outlined text-lg">arrow_forward</span>
@@ -475,8 +469,7 @@ export default function AdminSetupClient({
             ) : (
               <button
                 onClick={() => router.push('/dashboard')}
-                className="px-6 py-3 rounded-full text-white font-bold text-sm flex items-center gap-2 hover:scale-[1.02] transition-transform active:scale-95"
-                style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
+                className="px-6 py-3 rounded-full bg-integrity text-white font-bold text-sm flex items-center gap-2 hover:scale-[1.02] transition-transform active:scale-95"
               >
                 Complete Setup
                 <span className="material-symbols-outlined text-lg">check</span>

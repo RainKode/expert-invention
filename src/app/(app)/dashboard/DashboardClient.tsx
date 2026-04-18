@@ -177,17 +177,10 @@ export default function DashboardClient({ data, role }: Props) {
                   <circle cx="50" cy="50" r="40" fill="transparent" stroke="currentColor"
                     strokeWidth="12" className="text-surface-container-high" />
                   <circle cx="50" cy="50" r="40" fill="transparent"
-                    stroke="url(#grad)" strokeWidth="12" strokeLinecap="round"
+                    stroke="#2226F7" strokeWidth="12" strokeLinecap="round"
                     strokeDasharray={circumference}
                     strokeDashoffset={dashOffset}
                     style={{ transition: 'stroke-dashoffset 0.5s ease' }} />
-                  <defs>
-                    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="#2226F7" />
-                      <stop offset="50%" stopColor="#00D6A3" />
-                      <stop offset="100%" stopColor="#24D56D" />
-                    </linearGradient>
-                  </defs>
                 </svg>
                 <div className="absolute inset-0 flex flex-col items-center justify-center">
                   <span className="text-2xl font-extrabold text-integrity">{data.completion_rate}%</span>
@@ -270,7 +263,7 @@ export default function DashboardClient({ data, role }: Props) {
 
         {/* ── Manager quick-links bento (bottom, 5 cols) ──────────────────── */}
         {isManager ? (
-          <div className="lg:col-span-5 bg-gradient-to-br from-[#2226F7] to-[#00D6A3] rounded-2xl p-6 md:p-8 shadow-[0px_8px_32px_rgba(34,38,247,0.15)] text-white">
+          <div className="lg:col-span-5 bg-integrity rounded-2xl p-6 md:p-8 shadow-[0px_8px_32px_rgba(34,38,247,0.15)] text-white">
             <div className="flex justify-between items-start mb-6">
               <h2 className="text-lg font-bold">Manager Views</h2>
               <span className="material-symbols-outlined"
@@ -299,7 +292,7 @@ export default function DashboardClient({ data, role }: Props) {
             </div>
           </div>
         ) : (
-          <div className="lg:col-span-5 bg-gradient-to-br from-[#2226F7] to-[#FF3797] rounded-2xl p-6 md:p-8 shadow-[0px_8px_32px_rgba(34,38,247,0.15)] text-white">
+          <div className="lg:col-span-5 bg-originality rounded-2xl p-6 md:p-8 shadow-[0px_8px_32px_rgba(34,38,247,0.15)] text-white">
             <div className="flex justify-between items-start mb-4">
               <h2 className="text-lg font-bold">Your Week</h2>
               <span className="material-symbols-outlined"

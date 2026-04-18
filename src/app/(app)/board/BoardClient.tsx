@@ -231,8 +231,7 @@ export default function BoardClient({ userId, userRole, teamId, projects, teamMe
           </div>
           <button
             onClick={() => setSaveViewOpen(true)}
-            className="flex items-center gap-2 px-5 py-2 rounded-full text-white font-medium text-sm shadow-sm"
-            style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
+            className="flex items-center gap-2 px-5 py-2 rounded-full bg-integrity text-white font-medium text-sm shadow-sm"
           >
             <span className="material-symbols-outlined text-[16px]">save</span>
             Save View
@@ -527,8 +526,7 @@ function SaveViewModal({ isManager, filters, onClose, onSaved }: {
                 <button
                   key={s} type="button"
                   onClick={() => setScope(s)}
-                  className={`flex-1 py-2 rounded-full text-sm font-medium capitalize transition-colors ${scope === s ? 'text-on-primary' : 'bg-surface text-on-surface-variant hover:bg-surface-container-high'}`}
-                  style={scope === s ? { background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' } : undefined}
+                  className={`flex-1 py-2 rounded-full text-sm font-medium capitalize transition-colors ${scope === s ? 'text-on-primary bg-integrity' : 'bg-surface text-on-surface-variant hover:bg-surface-container-high'}`}
                 >
                   {s}
                 </button>
@@ -537,7 +535,7 @@ function SaveViewModal({ isManager, filters, onClose, onSaved }: {
           )}
           <div className="flex gap-3 pt-1">
             <button type="button" onClick={onClose} className="flex-1 py-2.5 rounded-full bg-surface text-on-surface-variant text-sm font-medium">Cancel</button>
-            <button type="submit" disabled={loading} className="flex-1 py-2.5 rounded-full text-white text-sm font-medium" style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}>
+            <button type="submit" disabled={loading} className="flex-1 py-2.5 rounded-full bg-integrity text-white text-sm font-medium">
               {loading ? 'Saving…' : 'Save View'}
             </button>
           </div>

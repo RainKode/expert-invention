@@ -87,8 +87,7 @@ function DepartmentModal({
           </div>
           <div className="flex gap-3 pt-2">
             <button type="submit" disabled={saving}
-              className="flex-1 py-3 rounded-full text-white font-semibold disabled:opacity-60 flex items-center justify-center gap-2"
-              style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}>
+              className="flex-1 py-3 rounded-full bg-integrity text-white font-semibold disabled:opacity-60 flex items-center justify-center gap-2">
               {saving && <span className="material-symbols-outlined animate-spin text-xl">progress_activity</span>}
               {editDept ? 'Save Changes' : 'Create Department'}
             </button>
@@ -233,8 +232,7 @@ function TeamModal({
 
           <div className="flex gap-3 pt-2">
             <button type="submit" disabled={saving}
-              className="flex-1 py-3 rounded-full text-white font-semibold disabled:opacity-60 flex items-center justify-center gap-2"
-              style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}>
+              className="flex-1 py-3 rounded-full bg-integrity text-white font-semibold disabled:opacity-60 flex items-center justify-center gap-2">
               {saving && <span className="material-symbols-outlined animate-spin text-xl">progress_activity</span>}
               {editTeam ? 'Save Changes' : 'Create Team'}
             </button>
@@ -311,8 +309,7 @@ export default function TeamsClient({ managers }: { managers: Manager[] }) {
           </button>
           <button
             onClick={() => { setEditTeam(null); setTeamModalOpen(true) }}
-            className="px-6 py-3 rounded-full text-white text-sm font-semibold hover:opacity-90 shadow-[0px_4px_24px_rgba(77,85,106,0.08)] transition-all flex items-center gap-2"
-            style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
+            className="px-6 py-3 rounded-full bg-integrity text-white text-sm font-semibold hover:opacity-90 shadow-[0px_4px_24px_rgba(77,85,106,0.08)] transition-all flex items-center gap-2"
           >
             <span className="material-symbols-outlined text-lg">group_add</span>
             Add Team

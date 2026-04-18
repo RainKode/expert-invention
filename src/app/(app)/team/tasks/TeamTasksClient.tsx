@@ -123,8 +123,7 @@ export default function TeamTasksClient({ userId, userRole, projects, teamMember
         </div>
         <button
           onClick={() => setModalOpen(true)}
-          className="flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold text-white shadow-[0px_2px_8px_rgba(77,85,106,0.06)] hover:opacity-90 transition-opacity"
-          style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
+          className="flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold bg-integrity text-white shadow-[0px_2px_8px_rgba(77,85,106,0.06)] hover:opacity-90 transition-opacity"
         >
           <span className="material-symbols-outlined text-lg">add</span>
           New Task
@@ -145,7 +144,6 @@ export default function TeamTasksClient({ userId, userRole, projects, teamMember
             {activeStatus === tab.key && (
               <span
                 className="absolute bottom-0 left-0 right-0 h-0.5 rounded-t"
-                style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
               />
             )}
           </button>

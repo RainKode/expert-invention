@@ -111,8 +111,7 @@ export default function AppShellClient({
       <button
         onClick={() => setQuickTaskOpen(true)}
         title="New Task"
-        className="fixed bottom-6 right-6 z-40 w-14 h-14 rounded-full text-white shadow-[0px_4px_20px_rgba(34,38,247,0.3)] flex items-center justify-center hover:scale-105 transition-transform md:hidden"
-        style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
+        className="fixed bottom-6 right-6 z-40 w-14 h-14 rounded-full bg-integrity text-white shadow-[0px_4px_20px_rgba(34,38,247,0.3)] flex items-center justify-center hover:scale-105 transition-transform md:hidden"
       >
         <span className="material-symbols-outlined text-2xl">add</span>
       </button>

@@ -90,7 +90,7 @@ export default function TeamSettingsClient() {
                 <button
                   onClick={() => save({ planning_mode: 'fluid' })}
                   className={`px-6 py-2 rounded-full text-sm font-semibold transition-all ${
-                    !isLocked ? 'bg-gradient-to-br from-[#2226F7] to-[#00D6A3] text-white shadow-sm' : 'text-on-surface-variant hover:bg-[#e6e8ea]'
+                    !isLocked ? 'bg-integrity text-white shadow-sm' : 'text-on-surface-variant hover:bg-[#e6e8ea]'
                   }`}
                 >
                   Flexible
@@ -98,7 +98,7 @@ export default function TeamSettingsClient() {
                 <button
                   onClick={() => save({ planning_mode: 'locked' })}
                   className={`px-6 py-2 rounded-full text-sm font-semibold transition-all ${
-                    isLocked ? 'bg-gradient-to-br from-[#2226F7] to-[#00D6A3] text-white shadow-sm' : 'text-on-surface-variant hover:bg-[#e6e8ea]'
+                    isLocked ? 'bg-integrity text-white shadow-sm' : 'text-on-surface-variant hover:bg-[#e6e8ea]'
                   }`}
                 >
                   Locked

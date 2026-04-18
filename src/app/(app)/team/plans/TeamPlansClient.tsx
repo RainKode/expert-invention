@@ -257,11 +257,8 @@ export default function TeamPlansClient({ members, weekStartISO, teamName }: Pro
           </div>
           <div className="h-3 w-full bg-surface-container-low rounded-full overflow-hidden">
             <div
-              className="h-full rounded-full"
-              style={{
-                width: `${completionPct}%`,
-                background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)',
-              }}
+              className="h-full rounded-full bg-integrity"
+              style={{ width: `${completionPct}%` }}
             />
           </div>
           <p className="mt-4 text-xs text-[#434655] font-medium leading-relaxed">

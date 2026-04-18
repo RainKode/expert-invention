@@ -39,7 +39,7 @@ export default memo(function TopBar({ userName, userRole, unreadNotificationCoun
             notifications
           </span>
           {unreadNotificationCount > 0 && (
-            <span className="absolute top-1 right-1 flex items-center justify-center min-w-[18px] h-[18px] px-1 bg-gradient-to-br from-[#2226F7] to-[#00D6A3] rounded-full border-2 border-surface-container-lowest text-[10px] font-bold text-on-primary">
+            <span className="absolute top-1 right-1 flex items-center justify-center min-w-[18px] h-[18px] px-1 bg-integrity rounded-full border-2 border-surface-container-lowest text-[10px] font-bold text-on-primary">
               {unreadNotificationCount > 99 ? '99+' : unreadNotificationCount}
             </span>
           )}

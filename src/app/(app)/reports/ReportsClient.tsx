@@ -352,7 +352,7 @@ export default function ReportsClient({
             <button
               onClick={handleGenerate}
               disabled={loading}
-              className="primary-gradient text-white font-bold py-5 rounded-full shadow-lg shadow-primary-container/20 hover:scale-[1.02] transition-transform active:scale-95 flex items-center justify-center gap-3 disabled:opacity-60 disabled:pointer-events-none"
+              className="primary-gradient bg-integrity text-white font-bold py-5 rounded-full shadow-lg shadow-primary-container/20 hover:scale-[1.02] transition-transform active:scale-95 flex items-center justify-center gap-3 disabled:opacity-60 disabled:pointer-events-none"
             >
               {loading ? (
                 <>

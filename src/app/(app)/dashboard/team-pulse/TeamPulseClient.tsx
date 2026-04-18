@@ -205,13 +205,13 @@ export default function TeamPulseClient({ data, weekStart, workingDays }: Props)
               {workingDays.map(dow => (
                 <div key={dow}
                   className={`p-6 text-center ${dow === todayDow
-                    ? 'bg-gradient-to-br from-[#2226F7] to-[#00D6A3] text-white shadow-xl'
+                    ? 'bg-integrity text-white shadow-xl'
                     : 'bg-surface-container-low'
                   }`}>
                   <span className={`block text-[10px] font-bold uppercase ${dow === todayDow ? 'opacity-70' : 'text-on-surface-variant/60'}`}>
                     {DAY_SHORT[dow]}
                   </span>
-                  <span className={`text-sm font-bold ${dow === todayDow ? 'text-white' : 'text-on-surface'}`}>
+                  <span className={`text-sm font-bold ${dow === todayDow ? 'bg-integrity text-white' : 'text-on-surface'}`}>
                     {formatDate(dow, weekStart)}
                   </span>
                 </div>
@@ -226,7 +226,7 @@ export default function TeamPulseClient({ data, weekStart, workingDays }: Props)
                 <>
                   <div key={`${row.user.id}-name`}
                     className={`p-6 flex items-center gap-4 bg-white`}>
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#2226F7] to-[#00D6A3] flex items-center justify-center text-white font-bold text-sm shrink-0">
+                    <div className="w-10 h-10 rounded-full bg-integrity flex items-center justify-center text-white font-bold text-sm shrink-0">
                       {row.user.name.charAt(0)}
                     </div>
                     <div className="overflow-hidden">
@@ -328,7 +328,7 @@ export default function TeamPulseClient({ data, weekStart, workingDays }: Props)
                 <div key={row.user.id} className="space-y-2">
                   <div className="flex justify-between items-end">
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#2226F7] to-[#00D6A3] flex items-center justify-center text-white text-[10px] font-bold shrink-0">
+                      <div className="w-8 h-8 rounded-full bg-integrity flex items-center justify-center text-white text-[10px] font-bold shrink-0">
                         {row.user.name.charAt(0)}
                       </div>
                       <span className="text-sm font-bold">{row.user.name}</span>
@@ -337,7 +337,7 @@ export default function TeamPulseClient({ data, weekStart, workingDays }: Props)
                   </div>
                   <div className="w-full h-3 bg-surface-container-low rounded-full overflow-hidden">
                     <div
-                      className="h-full bg-gradient-to-r from-[#2226F7] to-[#00D6A3] rounded-full transition-all duration-500"
+                      className="h-full bg-integrity rounded-full transition-all duration-500"
                       style={{ width: `${row.completion_rate}%` }}
                     />
                   </div>
@@ -360,7 +360,7 @@ export default function TeamPulseClient({ data, weekStart, workingDays }: Props)
             </div>
             <div className="px-8 pb-8 flex flex-col gap-6">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#2226F7] to-[#00D6A3] flex items-center justify-center text-white font-bold text-lg shrink-0">
+                <div className="w-12 h-12 rounded-full bg-integrity flex items-center justify-center text-white font-bold text-lg shrink-0">
                   {ackModal.employeeName.charAt(0)}
                 </div>
                 <div>
@@ -412,7 +412,7 @@ export default function TeamPulseClient({ data, weekStart, workingDays }: Props)
               <button
                 onClick={handleAcknowledge}
                 disabled={ackSaving}
-                className="flex-1 py-3.5 rounded-full bg-gradient-to-br from-[#2226F7] to-[#00D6A3] text-white text-sm font-bold hover:opacity-90 transition-all disabled:opacity-50">
+                className="flex-1 py-3.5 rounded-full bg-integrity text-white text-sm font-bold hover:opacity-90 transition-all disabled:opacity-50">
                 {ackSaving ? 'Saving…' : 'Acknowledge'}
               </button>
             </div>

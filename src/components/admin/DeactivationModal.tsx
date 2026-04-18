@@ -226,7 +226,7 @@ export default function DeactivationModal({ open, userId, onClose, onDeactivated
                       <button
                         onClick={() => handleReassign(task.id)}
                         disabled={!reassignSelections[task.id] || actionLoading === task.id}
-                        className="h-10 px-6 bg-gradient-to-br from-[#2226F7] to-[#00D6A3] text-white rounded-full text-xs font-bold transition-transform active:scale-95 shadow-sm disabled:opacity-40"
+                        className="h-10 px-6 bg-integrity text-white rounded-full text-xs font-bold transition-transform active:scale-95 shadow-sm disabled:opacity-40"
                       >
                         {actionLoading === task.id ? 'Saving…' : 'Confirm'}
                       </button>
@@ -266,7 +266,7 @@ export default function DeactivationModal({ open, userId, onClose, onDeactivated
               disabled={!allResolved && totalTasks > 0}
               className={`px-8 py-3 rounded-full text-sm font-bold transition-all ${
                 allResolved || totalTasks === 0
-                  ? 'bg-gradient-to-br from-[#2226F7] to-[#00D6A3] text-white shadow-lg hover:shadow-xl active:scale-95'
+                  ? 'bg-integrity text-white shadow-lg hover:shadow-xl active:scale-95'
                   : 'bg-[#e0e3e5] text-on-surface-variant cursor-not-allowed opacity-50'
               }`}
             >

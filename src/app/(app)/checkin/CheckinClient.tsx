@@ -200,7 +200,7 @@ export default function CheckinClient({ checkin, alreadySubmitted }: Props) {
               psychology
             </span>
           </div>
-          <div className="p-8 rounded-2xl text-white flex flex-col justify-center items-center text-center" style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}>
+          <div className="p-8 rounded-2xl bg-integrity text-white flex flex-col justify-center items-center text-center">
             <span className="text-4xl font-black mb-2">{capacityPct}%</span>
             <p className="text-xs uppercase tracking-widest opacity-70">Capacity Used</p>
             <div className="w-full h-1 bg-white/20 rounded-full mt-4 overflow-hidden">
@@ -218,8 +218,7 @@ export default function CheckinClient({ checkin, alreadySubmitted }: Props) {
             <button
               onClick={handleSubmit}
               disabled={submitting}
-              className="text-white px-12 py-5 rounded-full font-bold text-lg shadow-xl shadow-[#2226F7]/20 hover:scale-[1.02] active:scale-95 transition-all disabled:opacity-60"
-              style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
+              className="bg-integrity text-white px-12 py-5 rounded-full font-bold text-lg shadow-xl shadow-[#2226F7]/20 hover:scale-[1.02] active:scale-95 transition-all disabled:opacity-60"
             >
               {submitting ? 'Submitting…' : 'Submit Check-in'}
             </button>

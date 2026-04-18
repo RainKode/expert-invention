@@ -161,16 +161,15 @@ export default function QuickTaskModal({
         {/* Header */}
         <div
           className="px-8 py-6 flex items-center justify-between"
-          style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
         >
           <div className="flex items-center gap-3">
             <span
-              className="material-symbols-outlined text-white text-2xl"
+              className="material-symbols-outlined bg-integrity text-white text-2xl"
               style={{ fontVariationSettings: "'FILL' 1" }}
             >
               add_task
             </span>
-            <h2 className="text-xl font-bold text-white">New Task</h2>
+            <h2 className="text-xl font-bold bg-integrity text-white">New Task</h2>
           </div>
           <button
             onClick={onClose}
@@ -498,8 +497,7 @@ export default function QuickTaskModal({
           <button
             onClick={handleSubmit}
             disabled={submitting}
-            className="px-6 py-2.5 rounded-full text-sm font-bold text-white shadow-[0px_2px_8px_rgba(77,85,106,0.06)] disabled:opacity-60 transition-opacity"
-            style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
+            className="px-6 py-2.5 rounded-full text-sm font-bold bg-integrity text-white shadow-[0px_2px_8px_rgba(77,85,106,0.06)] disabled:opacity-60 transition-opacity"
           >
             {submitting ? 'Creating…' : 'Create Task'}
           </button>

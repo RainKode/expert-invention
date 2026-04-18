@@ -158,12 +158,12 @@ function StepIndicator({ current }: { current: Step }) {
             <div
               className={`w-10 h-10 rounded-full flex items-center justify-center font-bold transition-all ${
                 isActive
-                  ? 'text-white shadow-lg ring-4 ring-white'
+                  ? 'text-white shadow-lg ring-4 ring-white bg-integrity'
                   : isDone
                   ? 'bg-primary text-white'
                   : 'bg-surface-container text-outline'
               }`}
-              style={isActive ? { background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' } : {}}
+
             >
               {isDone ? (
                 <span className="material-symbols-outlined text-base">check</span>
@@ -399,8 +399,7 @@ export default function BulkImportPage() {
               <div className="mt-12 flex flex-wrap items-center gap-4">
                 <button
                   onClick={downloadTemplate}
-                  className="px-8 py-4 text-white rounded-full font-bold flex items-center gap-3 shadow-lg hover:opacity-90 transition-all active:scale-95"
-                  style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
+                  className="px-8 py-4 bg-integrity text-white rounded-full font-bold flex items-center gap-3 shadow-lg hover:opacity-90 transition-all active:scale-95"
                 >
                   <span className="material-symbols-outlined">download</span>
                   Download CSV Template
@@ -451,10 +450,7 @@ export default function BulkImportPage() {
               onClick={() => fileInputRef.current?.click()}
             >
               <div
-                className="w-20 h-20 rounded-full flex items-center justify-center text-white shadow-lg mb-6"
-                style={isDragging
-                  ? { background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }
-                  : { background: 'linear-gradient(135deg, #88909e 0%, #9ca3af 100%)' }}
+                className={`w-20 h-20 rounded-full flex items-center justify-center text-white shadow-lg mb-6 ${isDragging ? 'bg-integrity' : 'bg-outline'}`}
               >
                 <span className="material-symbols-outlined text-4xl">cloud_upload</span>
               </div>
@@ -601,8 +597,7 @@ export default function BulkImportPage() {
         {step === 4 && importResult && (
           <div className="max-w-lg mx-auto text-center py-16">
             <div
-              className="w-24 h-24 rounded-full flex items-center justify-center text-white shadow-xl mx-auto mb-8"
-              style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
+              className="w-24 h-24 rounded-full flex items-center justify-center bg-integrity text-white shadow-xl mx-auto mb-8"
             >
               <span className="material-symbols-outlined text-5xl" style={{ fontVariationSettings: "'FILL' 1" }}>
                 task_alt
@@ -640,8 +635,7 @@ export default function BulkImportPage() {
               </button>
               <button
                 onClick={() => router.push('/admin/users')}
-                className="px-8 py-3 text-white rounded-full font-bold shadow-lg hover:opacity-90 transition-all"
-                style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
+                className="px-8 py-3 bg-integrity text-white rounded-full font-bold shadow-lg hover:opacity-90 transition-all"
               >
                 View All Users
               </button>
@@ -673,8 +667,7 @@ export default function BulkImportPage() {
             {step === 1 && (
               <button
                 onClick={() => setStep(2)}
-                className="px-10 py-3 text-white rounded-full font-bold shadow-lg hover:opacity-90 active:scale-95 transition-all flex items-center gap-2"
-                style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
+                className="px-10 py-3 bg-integrity text-white rounded-full font-bold shadow-lg hover:opacity-90 active:scale-95 transition-all flex items-center gap-2"
               >
                 Continue to Upload
                 <span className="material-symbols-outlined text-sm">arrow_forward</span>
@@ -684,8 +677,7 @@ export default function BulkImportPage() {
             {step === 2 && (
               <button
                 onClick={() => fileInputRef.current?.click()}
-                className="px-10 py-3 text-white rounded-full font-bold shadow-lg hover:opacity-90 active:scale-95 transition-all flex items-center gap-2"
-                style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
+                className="px-10 py-3 bg-integrity text-white rounded-full font-bold shadow-lg hover:opacity-90 active:scale-95 transition-all flex items-center gap-2"
               >
                 Select CSV File
                 <span className="material-symbols-outlined text-sm">upload_file</span>
@@ -696,8 +688,7 @@ export default function BulkImportPage() {
               <button
                 onClick={handleImport}
                 disabled={errorCount > 0 || importing}
-                className="px-10 py-3 text-white rounded-full font-bold shadow-lg hover:opacity-90 active:scale-95 transition-all flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed"
-                style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
+                className="px-10 py-3 bg-integrity text-white rounded-full font-bold shadow-lg hover:opacity-90 active:scale-95 transition-all flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed"
               >
                 {importing ? (
                   <>

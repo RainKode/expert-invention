@@ -158,8 +158,7 @@ export default function TaskCard({
       {assigneeName && (
         <div className="flex items-center gap-2">
           <div
-            className="w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold text-white flex-shrink-0"
-            style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
+            className="w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold bg-integrity text-white flex-shrink-0"
           >
             {assigneeName.charAt(0).toUpperCase()}
           </div>

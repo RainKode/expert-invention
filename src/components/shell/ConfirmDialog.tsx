@@ -60,10 +60,10 @@ export default function ConfirmDialog({
           </button>
           <button
             onClick={onConfirm}
-            className={`px-5 py-2.5 rounded-full text-sm font-semibold text-white transition-colors ${
+            className={`px-5 py-2.5 rounded-full text-sm font-semibold bg-integrity text-white transition-colors ${
               destructive
                 ? 'bg-excitement hover:bg-excitement/90'
-                : 'bg-gradient-to-br from-[#2226F7] to-[#00D6A3] hover:opacity-90'
+                : 'bg-integrity hover:opacity-90'
             }`}
           >
             {confirmLabel}

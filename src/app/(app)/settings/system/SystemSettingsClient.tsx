@@ -246,7 +246,7 @@ export default function SystemSettingsClient() {
                 </svg>
               </div>
               <div>
-                <p className="font-bold text-white">Sunday Setup Flow</p>
+                <p className="font-bold bg-integrity text-white">Sunday Setup Flow</p>
                 <p className="text-xs text-slate-400">Complete your organisation profile</p>
               </div>
             </div>

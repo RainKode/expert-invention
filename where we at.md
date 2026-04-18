@@ -909,3 +909,70 @@ Sprint 10 (Polish — Mobile Optimisation, Onboarding, Archiving, Audit Trail, S
 
 **All 10 sprints are now complete.** The Sunday task management platform is feature-complete per the sprint plan. Every sprint compiled with 0 TypeScript errors.
 
+---
+
+## Session 11: Colour & Visual Overhaul (Phase 2)
+
+**Branch:** `colour` (not main)
+
+### What Was Done
+
+Comprehensive colour and visual overhaul across the entire app. Replaced the old monochrome `#4d556a → #656d84` grey gradient with the Psychology of Color palette (`#2226F7 integrity → #00D6A3 kindness`) as the primary accent gradient throughout. This session completed what was started in the prior colour session, which introduced the palette tokens but left many components still using grey.
+
+### Key Changes
+
+1. **Grey gradient elimination**: Replaced `linear-gradient(135deg, #4d556a 0%, #656d84 100%)` with `linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)` across 30+ files — buttons, avatars, day headers, status tabs, view toggles, submit CTAs, capacity cards.
+
+2. **White card backgrounds**: Replaced `bg-surface-container-lowest` with `bg-white` across all app and component files for cleaner, brighter card surfaces.
+
+3. **Enhanced shadows**: Replaced `shadow-ambient-sm` and `shadow-ambient` with explicit `shadow-[0px_Xpx_Ypx_rgba(77,85,106,Z)]` values for more visible depth — cards get `0.08`, hovered cards get `0.12`, dragging cards get `0.15`.
+
+4. **Colourful sidebar active states**: Added `NAV_ICON_COLOR` map assigning each nav route a palette colour (dashboard=integrity, tasks=energetic, board=kindness, etc.). Active nav items now show white background with colourful filled icons instead of grey gradient pill.
+
+5. **Sidebar user avatar**: Changed from `bg-primary-container` to `integrity → originality` gradient.
+
+6. **KanbanCard enhancement**: White bg, deeper shadows, colourful avatars, scale-up on drag.
+
+7. **TasksClient status tabs**: Active tab now uses status-specific colour (integrity gradient for All, energetic for In Progress, kindness for Done) instead of grey.
+
+8. **Dashboard KPI strip**: 4 colourful metric cards with palette-specific borders, icon backgrounds, and shadows (integrity, energetic, excitement, kindness).
+
+9. **Donut chart gradient**: Changed from grey to `#2226F7 → #00D6A3 → #24D56D` for vibrancy.
+
+10. **All hardcoded `#4d556a` references**: Replaced `bg-[#4d556a]` → `bg-integrity`, `text-[#4d556a]` → `text-integrity`, `ring-[#4d556a]` → `ring-integrity`, `shadow-[#4d556a]` → `shadow-[#2226F7]` across all app views.
+
+11. **Colourful CTA buttons**: New Task buttons, submit buttons, view toggles all use colourful gradients with colourful glow shadows (`rgba(34,38,247,0.25)`).
+
+### Files Modified (49 total)
+
+All files under `src/app/(app)/` and `src/components/` were touched. Key ones:
+- `DashboardClient.tsx` — KPI strip, donut, card shadows, gradient cards
+- `Sidebar.tsx` — Colourful active states, user avatar gradient
+- `TasksClient.tsx` — Status tabs, view toggle, New Task button, list container
+- `KanbanCard.tsx` — White bg, better shadows, colourful avatar
+- `KanbanColumn.tsx` — Bigger status dots, white count badges
+- `CheckinClient.tsx`, `WrapupClient.tsx` — Colourful submit CTAs, capacity card
+- `WeeklyPlanClient.tsx` — Day headers, add task button, comment area
+- `BoardClient.tsx` — Filter dropdowns, create project modal
+- `TaskDetailClient.tsx` — Action buttons, status badges
+- `AdminSetupClient.tsx` — All 8+ gradient buttons
+- `UsersClient.tsx`, `TeamsClient.tsx` — Add buttons, modal CTAs
+- `TopBar.tsx` — Accent colours
+- All settings pages, all modals, all team views
+
+### TypeScript
+
+`npx tsc --noEmit` passes with **zero errors**.
+
+### Git
+
+- Commit: `6e1e3d5` on `colour` branch
+- Pushed to `origin/colour`
+- NOT merged to main
+
+### Next Steps
+
+- Review the app visually on desktop and mobile to confirm all colour changes look cohesive
+- Consider merging `colour` branch to `main` when satisfied
+- Auth pages (login, forgot-password, set-password, reset-password) and setup/onboarding pages still use grey gradient — intentionally left as-is since they are pre-app entry points
+

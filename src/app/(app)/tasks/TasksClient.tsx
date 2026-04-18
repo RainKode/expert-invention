@@ -507,10 +507,9 @@ export default function TasksClient({ userId, userRole, projects }: TasksClientP
               onClick={() => setViewMode('list')}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 ${
                 viewMode === 'list'
-                  ? 'text-white shadow-[0px_2px_8px_rgba(77,85,106,0.06)]'
+                  ? 'text-white shadow-[0px_2px_8px_rgba(77,85,106,0.06)] bg-integrity'
                   : 'text-on-surface-variant hover:text-on-surface'
               }`}
-              style={viewMode === 'list' ? { background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' } : undefined}
             >
               <span className="material-symbols-outlined text-sm">view_list</span>
               List
@@ -519,10 +518,9 @@ export default function TasksClient({ userId, userRole, projects }: TasksClientP
               onClick={() => setViewMode('kanban')}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 ${
                 viewMode === 'kanban'
-                  ? 'text-white shadow-sm'
+                  ? 'text-white shadow-sm bg-integrity'
                   : 'text-on-surface-variant hover:text-on-surface'
               }`}
-              style={viewMode === 'kanban' ? { background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' } : undefined}
             >
               <span className="material-symbols-outlined text-sm">view_kanban</span>
               Board
@@ -531,8 +529,7 @@ export default function TasksClient({ userId, userRole, projects }: TasksClientP
 
           <button
             onClick={() => setModalOpen(true)}
-            className="flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold text-white shadow-[0px_4px_16px_rgba(34,38,247,0.25)] transition-all duration-200 hover:opacity-90 hover:shadow-[0px_8px_24px_rgba(34,38,247,0.3)] hover:scale-[1.02] active:scale-[0.98]"
-            style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
+            className="flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold bg-integrity text-white shadow-[0px_4px_16px_rgba(34,38,247,0.25)] transition-all duration-200 hover:opacity-90 hover:shadow-[0px_8px_24px_rgba(34,38,247,0.3)] hover:scale-[1.02] active:scale-[0.98]"
           >
             <span className="material-symbols-outlined text-lg">add</span>
             New Task
@@ -547,7 +544,7 @@ export default function TasksClient({ userId, userRole, projects }: TasksClientP
           <div className="flex gap-0.5 bg-white rounded-full p-1 shadow-[0px_2px_12px_rgba(77,85,106,0.08)]">
             {STATUS_TABS.map(tab => {
               const tabColor: Record<string, string> = {
-                '': 'bg-gradient-to-r from-[#2226F7] to-[#00D6A3]',
+                '': 'bg-integrity',
                 'todo': 'bg-[#76777d]',
                 'in_progress': 'bg-energetic',
                 'in_review': 'bg-integrity',

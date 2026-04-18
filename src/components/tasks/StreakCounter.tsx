@@ -139,7 +139,7 @@ export default function StreakCounter({
             <div className="progress-bar">
               <motion.div
                 className={`progress-fill ${
-                  showResumeGlow ? 'bg-gradient-to-r from-natural to-kindness' :
+                  showResumeGlow ? 'bg-kindness' :
                   milestoneLevel === 'epic' ? 'bg-happiness' :
                   'bg-natural'
                 }`}

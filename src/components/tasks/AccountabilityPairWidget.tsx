@@ -44,7 +44,6 @@ function AvatarRing({ member, state, side }: {
           text-lg font-bold text-white ring-3 ${ringColour}
           transition-all duration-200
         `}
-        style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
       >
         {member.avatarInitial}
       </motion.div>

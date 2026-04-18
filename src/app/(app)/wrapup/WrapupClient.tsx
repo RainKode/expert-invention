@@ -275,8 +275,7 @@ export default function WrapupClient({ wrapup, alreadySubmitted }: Props) {
           <button
             onClick={handleSubmit}
             disabled={submitting}
-            className="text-white font-extrabold text-lg px-16 py-6 rounded-full shadow-2xl shadow-[#2226F7]/30 hover:scale-[1.02] active:scale-95 transition-all disabled:opacity-60"
-            style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
+            className="bg-integrity text-white font-extrabold text-lg px-16 py-6 rounded-full shadow-2xl shadow-[#2226F7]/30 hover:scale-[1.02] active:scale-95 transition-all disabled:opacity-60"
           >
             {submitting ? 'Submitting…' : 'Submit Wrap-up'}
           </button>

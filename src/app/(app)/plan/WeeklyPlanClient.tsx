@@ -234,8 +234,7 @@ function DayColumn({
     <div className="flex flex-col gap-4 min-h-0">
       {/* Day Header */}
       <div
-        className={`p-5 rounded-[32px] ${isToday ? 'text-white shadow-xl shadow-[#2226F7]/10' : 'bg-surface-container-low text-on-surface-variant'}`}
-        style={isToday ? { background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' } : undefined}
+        className={`p-5 rounded-[32px] ${isToday ? 'text-white shadow-xl shadow-[#2226F7]/10 bg-integrity' : 'bg-surface-container-low text-on-surface-variant'}`}
       >
         <p className={`text-xs font-bold uppercase tracking-widest ${isToday ? 'opacity-70' : 'opacity-50'}`}>
           {relLabel}
@@ -373,8 +372,7 @@ function CommentsSection({
           <button
             onClick={handleSubmit}
             disabled={submitting || !text.trim()}
-            className="px-6 py-2 rounded-full font-bold text-sm text-white disabled:opacity-50 transition-all self-end"
-            style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
+            className="px-6 py-2 rounded-full font-bold text-sm bg-integrity text-white disabled:opacity-50 transition-all self-end"
           >
             {submitting ? 'Sending…' : 'Comment'}
           </button>
@@ -653,8 +651,7 @@ export default function WeeklyPlanClient({
                 <button
                   onClick={handleSubmitPlan}
                   disabled={submitting}
-                  className="px-8 py-2.5 rounded-full font-bold text-sm text-white shadow-lg shadow-[#2226F7]/20 transition-all hover:-translate-y-px disabled:opacity-60"
-                  style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
+                  className="px-8 py-2.5 rounded-full font-bold text-sm bg-integrity text-white shadow-lg shadow-[#2226F7]/20 transition-all hover:-translate-y-px disabled:opacity-60"
                 >
                   {submitting ? 'Submitting…' : 'Submit Week'}
                 </button>

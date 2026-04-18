@@ -251,7 +251,7 @@ export default function GlobalSearchBar() {
                         }`}
                       >
                         {activeIndex === globalIdx && (
-                          <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-gradient-to-b from-primary-container to-secondary rounded-l-lg" />
+                          <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-integrity rounded-l-lg" />
                         )}
                         <div className="flex items-center justify-center w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant">
                           <span className="material-symbols-outlined text-[20px]">check_circle</span>

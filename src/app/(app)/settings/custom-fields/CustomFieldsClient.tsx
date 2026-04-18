@@ -83,8 +83,7 @@ export default function CustomFieldsClient({ initialFields, teamId }: Props) {
         </div>
         <button
           onClick={() => setShowAddModal(true)}
-          className="flex items-center gap-2 px-5 py-2.5 rounded-full text-white font-medium text-sm shadow-sm"
-          style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
+          className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-integrity text-white font-medium text-sm shadow-sm"
         >
           <span className="material-symbols-outlined text-[18px]">add</span>
           Add Field
@@ -341,8 +340,7 @@ function AddFieldModal({ teamId, onCreated, onClose }: {
             <button
               type="submit"
               disabled={loading}
-              className="flex-1 py-2.5 rounded-full text-white font-medium text-sm"
-              style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
+              className="flex-1 py-2.5 rounded-full bg-integrity text-white font-medium text-sm"
             >
               {loading ? 'Creating…' : 'Create Field'}
             </button>
@@ -434,8 +432,7 @@ function EditFieldModal({ field, onUpdated, onClose }: {
             <button
               type="submit"
               disabled={loading}
-              className="flex-1 py-2.5 rounded-full text-white font-medium text-sm"
-              style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
+              className="flex-1 py-2.5 rounded-full bg-integrity text-white font-medium text-sm"
             >
               {loading ? 'Saving…' : 'Save Changes'}
             </button>

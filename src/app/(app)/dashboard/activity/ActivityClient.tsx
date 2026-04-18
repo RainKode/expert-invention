@@ -126,7 +126,7 @@ export default function ActivityClient({ initialEvents, initialCursor, userRole 
               onClick={() => handleFilterChange(pill.value)}
               className={`px-6 py-2.5 rounded-full text-sm font-semibold whitespace-nowrap transition-all ${
                 filter === pill.value
-                  ? 'bg-gradient-to-br from-[#2226F7] to-[#00D6A3] text-white shadow-md'
+                  ? 'bg-integrity text-white shadow-md'
                   : 'bg-white text-on-surface-variant hover:bg-surface-container-high border border-outline-variant/15'
               }`}>
               {pill.label}
@@ -165,7 +165,7 @@ export default function ActivityClient({ initialEvents, initialCursor, userRole 
               }`}>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
-                    <div className={`relative w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg shrink-0 bg-gradient-to-br from-[#2226F7] to-[#00D6A3] text-white`}>
+                    <div className={`relative w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg shrink-0 bg-integrity text-white`}>
                       {userName.charAt(0)}
                       {/* Event type dot */}
                       <div className={`absolute -bottom-1 -right-1 w-5 h-5 rounded-full flex items-center justify-center border-2 border-white ${color.split(' ')[0]}`}>

@@ -289,7 +289,7 @@ export default function NotificationPanel({
               router.push('/settings/notifications')
               onClose()
             }}
-            className="w-full py-4 rounded-full bg-gradient-to-br from-primary-container to-secondary text-white font-bold text-sm shadow-[0px_24px_48px_rgba(77,85,106,0.06)] hover:shadow-primary-container/20 transition-all active:scale-95 flex items-center justify-center gap-2"
+            className="w-full py-4 rounded-full bg-integrity text-white font-bold text-sm shadow-[0px_24px_48px_rgba(77,85,106,0.06)] hover:shadow-primary-container/20 transition-all active:scale-95 flex items-center justify-center gap-2"
           >
             <span className="material-symbols-outlined text-[18px]">settings</span>
             Notification Preferences

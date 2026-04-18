@@ -131,13 +131,13 @@ export default function WorkloadClient({ data, weekStart, workingDays }: Props) 
                   {workingDays.map(dow => (
                     <th key={dow}
                       className={`text-center p-4 ${dow === todayDow
-                        ? 'bg-gradient-to-br from-[#2226F7] to-[#00D6A3] text-white'
+                        ? 'bg-integrity text-white'
                         : ''
                       }`}>
                       <span className={`block text-[10px] font-bold uppercase ${dow === todayDow ? 'opacity-70' : 'text-on-surface-variant/60'}`}>
                         {DAY_SHORT[dow]}
                       </span>
-                      <span className={`text-sm font-bold ${dow === todayDow ? 'text-white' : 'text-on-surface'}`}>
+                      <span className={`text-sm font-bold ${dow === todayDow ? 'bg-integrity text-white' : 'text-on-surface'}`}>
                         {formatDate(dow, weekStart)}
                       </span>
                     </th>
@@ -160,7 +160,7 @@ export default function WorkloadClient({ data, weekStart, workingDays }: Props) 
                     <tr key={row.user.id} className={`group ${i > 0 ? 'border-t border-surface-container-low/50' : ''}`}>
                       <td className="py-4 pl-6">
                         <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#2226F7] to-[#00D6A3] flex items-center justify-center text-white font-bold text-sm shrink-0">
+                          <div className="w-10 h-10 rounded-full bg-integrity flex items-center justify-center text-white font-bold text-sm shrink-0">
                             {row.user.name.charAt(0)}
                           </div>
                           <div>

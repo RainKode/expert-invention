@@ -102,8 +102,7 @@ export default memo(function Sidebar({ userName, userRole, onLogout, mobileOpen 
       <div className={`${isCollapsed ? 'px-3 pt-8 pb-6' : 'px-8 pt-10 pb-12'} transition-all duration-300`}>
         <div className={`flex items-center ${isCollapsed ? 'justify-center' : 'gap-3'}`}>
           <div
-            className="w-10 h-10 rounded-xl flex items-center justify-center shadow-[0px_4px_24px_rgba(77,85,106,0.08)] shrink-0"
-            style={{ background: 'linear-gradient(135deg, #2226F7 0%, #00D6A3 100%)' }}
+            className="w-10 h-10 rounded-xl bg-integrity flex items-center justify-center shadow-[0px_4px_24px_rgba(77,85,106,0.08)] shrink-0"
           >
             <span
               className="material-symbols-outlined text-white"
@@ -176,7 +175,7 @@ export default memo(function Sidebar({ userName, userRole, onLogout, mobileOpen 
 
         <div className="pt-4 mt-2">
           <div className={`flex items-center ${isCollapsed ? 'justify-center' : 'gap-3'} px-4 py-2`}>
-            <div className="w-9 h-9 rounded-full flex items-center justify-center shrink-0" style={{ background: 'linear-gradient(135deg, #2226F7 0%, #FF3797 100%)' }}>
+            <div className="w-9 h-9 rounded-full bg-integrity flex items-center justify-center shrink-0">
               <span className="text-white text-sm font-bold">
                 {userName.charAt(0).toUpperCase()}
               </span>
